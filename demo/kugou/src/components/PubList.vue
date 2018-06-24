@@ -1,26 +1,25 @@
 <template>
-<section class="pub_list">
-  <ul class="pub_list__list">
-    <li class="pub_list__item " v-for="(item,index) in pub_list_data" :key="index">
-      <a href="#" class="pub_list__link">
-        <img class="pub_list__img" :src="item.img_url">
-          <slot :data="item"></slot>
-        <button class="pub_list__btn arrow arrow--right"></button>
-      </a>
-    </li>
-  </ul>
-</section>
+<ul class="pub_list">
+  <li class="pub_list__item " v-for="(item,index) in pubListData" :key="index">
+    <router-link :to="item.path" class="pub_list__link">
+      <img class="pub_list__img" :src="item.img_url">
+      <slot :data="item"></slot>
+      <button class="pub_list__btn arrow arrow--right"></button>
+    </router-link>
+  </li>
+</ul>
 </template>
 
 <script>
 export default {
   name: 'PubList',
-  props: ['pub_list_data','par_class']
+  props: ['pubListData']
 }
 </script>
 
 <style lang="less" scoped>
-.pub_list__list {
+.pub_list {
+  box-sizing: border-box;
   width: 100%;
   padding-left: 13px;
 }
@@ -43,12 +42,10 @@ export default {
   height: 97px;
 }
 
-.pub_list__text {
-  padding-left: 18px;
-}
-
 .pub_list__btn {
-  margin-right: 28px;
+  flex: 0 0 auto;
+
+  margin-right: 15px;
   margin-left: auto;
 }
 

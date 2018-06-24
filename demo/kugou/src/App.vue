@@ -1,12 +1,12 @@
 <template>
-<div id="app">
+<div id="app" class="app">
   <PubHeader></PubHeader>
-  <PubNav :nav="nav"></PubNav>
-  <router-view :new_songs="new_songs"
-  :rank_list="rank_list"
-  :songs_list="songs_list"
-  :singer_categories="singer_categories"
-  class="router"></router-view>
+  <router-view :navs="navs" :newSongs="newSongs" :rankList="rankList" :songList="songList"
+  :singerCategories="singerCategories"
+  :curRankInfo="curRankInfo"
+  :isRankInfoShow="isRankInfoShow"
+  @getRankInfo="getRankInfo"
+  class="app__cont"></router-view>
   <!-- <Player></Player> -->
 </div>
 </template>
@@ -23,16 +23,16 @@ export default {
     PubNav
   },
   created() {
-    this.getNewSongs()
+    this.getNewSong()
     this.getRank()
-    this.getSongsList()
+    this.getSongList()
     this.getSingerCategories()
   },
   data() {
     return {
-      nav: [{
+      navs: [{
           text: '新歌',
-          name: 'song',
+          name: 'new',
           active: true,
           link: '/'
         }, {
@@ -42,65 +42,101 @@ export default {
           link: '/rank/list'
         }, {
           text: '歌单',
-          name: 'plist',
+          name: 'song',
           active: false,
-          link: '/songs_list/index'
+          link: '/song/list'
         },
         {
           text: '歌手',
           name: 'singer',
           active: false,
-          link: '/singers/class'
+          link: '/singer/category'
         }
       ],
-      new_songs: [],
-      rank_list: [],
-      songs_list: [],
-      singer_categories:[]
+      newSongs: [],
+      rankList: [],
+      songList: [],
+      singerCategories: [],
+      rankInfo:[],
+      curRankInfo:{},
+      isRankInfoShow:false
+    }
+  },
+  provide(){
+    return {
+      closet:this.closet
     }
   },
   methods: {
-    getNewSongs() {
-      axios.get(api.new_songs).then(res => {
+    closet(selector, node) {
+      let targetNode = Array.from(document.querySelectorAll(selector))
+      let isFind = targetNode.find(ele => ele === node)
+      let isHtml = node.tagName.toLowerCase() === 'html'
+      while (!isFind && !isHtml) {
+        node = node.parentNode
+        isFind = targetNode.find(ele => ele === node)
+      }
+      return isFind
+    },
+    getNewSong() {
+      axios.get(api.newSong).then(res => {
         res.data.data.forEach(({
           filename
         }) => {
-          this.new_songs.push({
+          this.newSongs.push({
             filename
           })
         })
       })
     },
     getRank() {
-      axios.get(api.rank).then(res => {
+      axios.get(api.rankList).then(res => {
         res.data.rank.list.forEach(obj => {
           obj.img_url = obj.imgurl.replace(/\{size\}/, 400)
-          // obj.list_name = obj.rankname
-          this.rank_list.push(obj)
+          obj.path = '/rank/info/' + obj.rankid
+          this.rankList.push(obj)
         })
+        // console.log(JSON.stringify(this.rankList));
+
       })
     },
-    getSongsList() {
-      axios.get(api.songs_list).then(res => {
-        // console.log(res);
+    getRankInfo(rankId) {
+      let isExist=this.rankInfo.find(obj=>obj.info.rankid==rankId)
+      if (!isExist) {
+        axios.get(api.rankInfo + rankId).then(res => {
+          let curRankInfo={info:res.data.info,songs:res.data.songs}
+          Object.assign(this.curRankInfo,curRankInfo)
+          this.isRankInfoShow=true
+          this.rankInfo.push(curRankInfo)
+        })
+      }else {
+        Object.assign(this.curRankInfo,isExist)
+      }
+    },
+    getSongList() {
+      axios.get(api.songList).then(res => {
         res.data.plist.list.info.forEach(obj => {
           obj.img_url = obj.imgurl.replace(/\{size\}/, 400)
-          // obj.list_name = obj.specialname
-          this.songs_list.push(obj)
+          obj.path = '/song/list/' + obj.specialid
+          this.songList.push(obj)
         })
       })
+      // console.log(this.songList);
     },
-    getSingerCategories(){
-      axios.get(api.singer_categories).then(res => {
-        res.data.list.reduce((re,obj)=>{
-          let findCategories=re.find(o=>o.categories===obj.classname.substring(0,2))
+    getSingerCategories() {
+      axios.get(api.singerCategory).then(res => {
+        res.data.list.reduce((re, obj) => {
+          let findCategories = re.find(o => o.categories === obj.classname.substring(0, 2))
           if (findCategories) {
             findCategories.data.push(obj)
-          }else {
-            re.push({categories:obj.classname.substring(0,2),data:[obj]})
+          } else {
+            re.push({
+              categories: obj.classname.substring(0, 2),
+              data: [obj]
+            })
           }
           return re
-        },this.singer_categories)
+        }, this.singerCategories)
 
       })
 
@@ -109,22 +145,20 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  width: 100%;
-  height: 100%;
+<style lang="less" scoped>
+.app {
+  width: 100vw;
+  height: 100vh;
 
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: "Microsoft Yahei", "Avenir", Helvetica, Arial, sans-serif;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-.router {
+.app__cont {
   overflow-y: auto;
 
-  box-sizing: border-box;
-  height: calc(100% - 116px);
+  height: calc(100vh - 58px);
 }
 
 </style>

@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import NewSongs from '../components/new_songs/Index'
+import Main from '../components/Main'
+import NewSong from '../components/new/NewSong'
 import RankList from '../components/rank/RankList'
-import SongsList from '../components/songs/SongsList'
-import SingerCategories from '../components/singer/SingerCategories'
+import SongList from '../components/song/SongList'
+import SingerCategory from '../components/singer/SingerCategory'
+import RankInfo from '../components/rank/RankInfo'
 
 Vue.use(VueRouter)
 
@@ -11,23 +13,33 @@ export default new VueRouter({
   routes: [
     {
       path: '/',
-      // name: 'HelloWorld',
-      component: NewSongs
+      component: Main,
+      children: [
+        {
+          path: '/',
+          component: NewSong
+        },
+        {
+          path: 'rank/list',
+          component: RankList
+        },
+        {
+          path: 'song/list',
+          component: SongList
+        },
+        {
+          path: 'singer/category',
+          component: SingerCategory
+        }
+      ]
     },
     {
-      path: '/rank/list',
-      // name: 'Render',
-      component: RankList
+      path: '/rank/info/:id',
+      component: RankInfo
     },
     {
-      path: '/songs_list/index',
-      // name: 'Render',
-      component: SongsList
-    },
-    {
-      path: '/singers/class',
-      // name: 'Render',
-      component: SingerCategories
+      path: '/song/list/:id'
+      // component: SongList
     }
   ]
 })

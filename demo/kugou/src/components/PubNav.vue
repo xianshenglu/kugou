@@ -1,9 +1,7 @@
 <template>
   <nav class="nav">
     <ul class="nav__list">
-      <li :class="item.active?'active nav__item':'nav__item'"
-      v-for="(item,index) in nav" :key="index">
-        <!-- <a href="#" class="nav__link">{{item.text}}</a> -->
+      <li :class="item.active?'active nav__item':'nav__item'" v-for="(item,index) in navs" :key="index">
         <router-link  class="nav__link" :to="item.link" >{{item.text}}</router-link>
       </li>
     </ul>
@@ -13,7 +11,7 @@
 <script>
 export default {
   name:'PubNav',
-  props:['nav']
+  props:['navs']
 
 }
 </script>
