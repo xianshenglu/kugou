@@ -17,7 +17,9 @@
     "axios": "^0.18.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
-    "postcss-px-to-viewport": "0.0.3",
+    "postcss-pixel-to-viewport": "^1.0.2",
+    "postcss-plugin-pxtoviewport": "0.0.5",
+    "postcss-pxtorem": "^4.0.1",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.16"
   },
@@ -38,13 +40,31 @@
   "postcss": {
     "plugins": {
       "autoprefixer": {},
-      "postcss-px-to-viewport": {
+      "postcss-pixel-to-viewport": {
         "viewportWidth": 375,
-        "viewportHeight": 667,
-        "unitPrecision": 3,
-        "viewportUnit": "vw",
+        "viewportUnit": "vmin",
+        "propertyBlacklist": [
+          "font",
+          "font-size",
+          "letter-spacing"
+        ],
         "minPixelValue": 2,
+        "enableConvertComment": "on",
+        "disableConvertComment": "off",
         "mediaQuery": false
+      },
+      "postcss-pxtorem": {
+        "rootValue": 16,
+        "unitPrecision": 5,
+        "propList": [
+          "font",
+          "font-size",
+          "letter-spacing"
+        ],
+        "selectorBlackList": [],
+        "replace": false,
+        "mediaQuery": false,
+        "minPixelValue": 0
       }
     }
   },

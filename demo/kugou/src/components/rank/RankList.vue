@@ -1,7 +1,7 @@
 <template>
 <section class="rank_list" @click="getRankInfo">
-  <PubList :pubListData="rankList">
-    <div class="rank_list__info" slot-scope="props">{{props.data.rankname}}</div>
+  <PubList :pubList="pubList">
+    <div class="rank_list__info" slot-scope="props" slot="cont">{{props.data.title}}</div>
   </PubList>
 </section>
 </template>
@@ -11,6 +11,19 @@ import PubList from '../PubList'
 export default {
   name: 'RankList',
   props: ['rankList'],
+  data(){
+    return {
+      pubList:this.$props.rankList.map(({
+        imgurl,
+        rankid,
+        rankname
+      }) => ({
+        img_url: imgurl.replace(/\{size\}/, 400),
+        path: '/rank/info/' + rankid,
+        title:rankname
+      }))
+    }
+  },
   components: {
     PubList
   },
@@ -32,5 +45,4 @@ export default {
 .rank_list__info {
   padding-left: 18px;
 }
-
 </style>

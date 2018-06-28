@@ -1,9 +1,9 @@
 <template>
 <ul class="pub_list">
-  <li class="pub_list__item " v-for="(item,index) in pubListData" :key="index">
+  <li class="pub_list__item " v-for="(item,index) in pubList" :key="index">
     <router-link :to="item.path" class="pub_list__link">
       <img class="pub_list__img" :src="item.img_url">
-      <slot :data="item"></slot>
+      <slot :data="item" name="cont"></slot>
       <button class="pub_list__btn arrow arrow--right"></button>
     </router-link>
   </li>
@@ -13,7 +13,7 @@
 <script>
 export default {
   name: 'PubList',
-  props: ['pubListData']
+  props: ['pubList']
 }
 </script>
 
@@ -48,5 +48,4 @@ export default {
   margin-right: 15px;
   margin-left: auto;
 }
-
 </style>

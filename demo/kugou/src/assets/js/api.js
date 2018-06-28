@@ -4,7 +4,7 @@ export default {
   rankList: '/proxy_api/rank/list&json=true',
   rankInfo: '/proxy_api/rank/info/?page=1&json=true&rankid=',
   songList: '/proxy_api/plist/index&json=true',
-  songListInfo: '/proxy_api/plist/list/125032?json=true',
+  songListInfo: '/proxy_api/plist/list/songListId?json=true',
   singerCategory: '/proxy_api/singer/class&json=true',
   singer_song: '/proxy_api/singer/list/88?json=true',
   singer_info: '/proxy_api/singer/info/3060&json=true',

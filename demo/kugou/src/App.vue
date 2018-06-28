@@ -1,12 +1,8 @@
 <template>
 <div id="app" class="app">
   <PubHeader></PubHeader>
-  <router-view :navs="navs" :newSongs="newSongs" :rankList="rankList" :songList="songList"
-  :singerCategories="singerCategories"
-  :curRankInfo="curRankInfo"
-  :isRankInfoShow="isRankInfoShow"
-  @getRankInfo="getRankInfo"
-  class="app__cont"></router-view>
+  <router-view :navs="navs" :newSongs="newSongs" :rankList="rankList" :songList="songList" :singerCategories="singerCategories" :isRankInfoShow="isRankInfoShow" :curRankInfo="curRankInfo" @getRankInfo="getRankInfo" @destroyCurRankInfo="destroyCurRankInfo"
+    :isSongListInfoShow="isSongListInfoShow" :curSongListInfo="curSongListInfo" @getSongListInfo="getSongListInfo" @destroyCurSongListInfo="destroyCurSongListInfo" class="app__cont"></router-view>
   <!-- <Player></Player> -->
 </div>
 </template>
@@ -57,14 +53,18 @@ export default {
       rankList: [],
       songList: [],
       singerCategories: [],
-      rankInfo:[],
-      curRankInfo:{},
-      isRankInfoShow:false
+      rankInfo: [],
+      curRankInfo: {},
+      isRankInfoShow: false,
+      songListInfo: [],
+      curSongListInfo: {},
+      isSongListInfoShow: false
     }
   },
-  provide(){
+  computed: {},
+  provide() {
     return {
-      closet:this.closet
+      closet: this.closet
     }
   },
   methods: {
@@ -92,36 +92,63 @@ export default {
     getRank() {
       axios.get(api.rankList).then(res => {
         res.data.rank.list.forEach(obj => {
-          obj.img_url = obj.imgurl.replace(/\{size\}/, 400)
-          obj.path = '/rank/info/' + obj.rankid
           this.rankList.push(obj)
         })
-        // console.log(JSON.stringify(this.rankList));
-
       })
     },
     getRankInfo(rankId) {
-      let isExist=this.rankInfo.find(obj=>obj.info.rankid==rankId)
+      let isExist = this.rankInfo.find(obj => obj.info.rankid == rankId)
       if (!isExist) {
         axios.get(api.rankInfo + rankId).then(res => {
-          let curRankInfo={info:res.data.info,songs:res.data.songs}
-          Object.assign(this.curRankInfo,curRankInfo)
-          this.isRankInfoShow=true
+          let curRankInfo = {
+            info: res.data.info,
+            songs: res.data.songs
+          }
           this.rankInfo.push(curRankInfo)
+          Object.assign(this.curRankInfo, curRankInfo)
+          this.isRankInfoShow = true
+        }).catch(er => {
+          alert(er)
         })
-      }else {
-        Object.assign(this.curRankInfo,isExist)
+      } else {
+        Object.assign(this.curRankInfo, isExist)
+        this.isRankInfoShow = true
       }
+    },
+    destroyCurRankInfo() {
+      this.isRankInfoShow = false
     },
     getSongList() {
       axios.get(api.songList).then(res => {
         res.data.plist.list.info.forEach(obj => {
-          obj.img_url = obj.imgurl.replace(/\{size\}/, 400)
-          obj.path = '/song/list/' + obj.specialid
           this.songList.push(obj)
         })
       })
-      // console.log(this.songList);
+    },
+    getSongListInfo(songListId) {
+      let isExist = this.songListInfo.find(obj => obj.info.list.specialid == songListId)
+      if (!isExist) {
+        axios.get(api.songListInfo.replace(/songListId?/i, songListId)).then(({
+          data
+        }) => {
+          let curSongListInfo = {
+            info: data.info,
+            songs: data.list
+          }
+          Object.assign(this.curSongListInfo, curSongListInfo)
+          this.songListInfo.push(curSongListInfo)
+          this.isSongListInfoShow = true
+        }).catch(er => {
+          alert(er)
+        })
+      } else {
+        Object.assign(this.curSongListInfo,isExist)
+        this.isSongListInfoShow = true
+      }
+      // console.log(JSON.stringify(this.songListInfo))
+    },
+    destroyCurSongListInfo() {
+      this.isSongListInfoShow = false
     },
     getSingerCategories() {
       axios.get(api.singerCategory).then(res => {
@@ -149,16 +176,13 @@ export default {
 .app {
   width: 100vw;
   height: 100vh;
-
-  font-family: "Microsoft Yahei", "Avenir", Helvetica, Arial, sans-serif;
-
+  font-family: 'Microsoft Yahei', 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .app__cont {
   overflow-y: auto;
-
   height: calc(100vh - 58px);
 }
-
 </style>

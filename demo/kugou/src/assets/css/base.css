@@ -23,3 +23,39 @@ body {
   border-bottom: none;
   border-left: none;
 }
+.more_btn {
+  position: relative;
+
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+
+  border: 2px solid #bbb;
+  border-radius: 50%;
+}
+.more_btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: block;
+
+  width: 8px;
+  height: 8px;
+
+  transform: translate(-50%, -65%) rotate(45deg);
+}
+.more_btn.down::before {
+  transform: translate(-50%, -65%) rotate(45deg);
+
+  border-right: 2px solid #bbb;
+  border-bottom: 2px solid #bbb;
+}
+.more_btn.up::before {
+  transform: translate(-50%, -35%) rotate(45deg);
+
+  border: none;
+  border-top: 2px solid #bbb;
+  border-left: 2px solid #bbb;
+}

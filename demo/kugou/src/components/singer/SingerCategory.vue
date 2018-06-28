@@ -21,10 +21,10 @@ export default {
 <style lang="less" scoped>
 .singer_category__list {
   width: 347px;
-  margin: 18px auto 19px;
+  margin: 18px auto;
 
   border: 1px solid #e4e4e4;
-  border-bottom: none;
+  // border-bottom: none;
   border-radius: 6px;
   background-color: #fbfbfb;
 
@@ -34,6 +34,11 @@ export default {
   height: 50px;
 
   border-bottom: 1px solid #e4e4e4;
+}
+.singer_category__item:last-child {
+  /*如果用另一种思路，设置 .singer_category__list 的 border-bottom ，
+  在 iPhone6/7/8 就会失败，待测试*/
+  border-bottom: none;
 }
 .singer_category__link {
   display: block;
@@ -51,5 +56,4 @@ export default {
   margin-right: 15px;
   margin-left: auto;
 }
-
 </style>

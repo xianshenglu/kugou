@@ -1,7 +1,7 @@
 <template>
 <ul class="pub_music__list">
   <li class="pub_music__item" v-for="(item,index) in musicList" :key="index">
-    <slot :data="index"></slot>
+    <slot :data="index" name="index"></slot>
     <div class="pub_music__name">{{item.filename}}</div>
     <button class="pub_music__download">
         <svg class="icon" aria-hidden="true">
@@ -21,7 +21,7 @@ export default {
 
 <style lang="less" scoped>
 .pub_music__list {
-  padding-left: 13px;
+  padding-left: 19px;
 }
 
 .pub_music__item {
@@ -36,16 +36,15 @@ export default {
 }
 
 .pub_music__name {
-  width: calc(100% - 45px);
+  width: calc(100% - 48px);
 
   font-size: 18px;
 }
 
 .pub_music__download {
   box-sizing: content-box;
-  width: 21px;
+  width: 23px;
   height: 100%;
-  padding: 0 12px;
+  padding: 0 13px;
 }
-
 </style>

@@ -27,6 +27,22 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 - [Kugou-api](https://github.com/ecitlm/Kugou-api)
 
+## Related Plugins
+
+- [postcss-pixel-to-viewport](https://github.com/meltifa/postcss-pixel-to-viewport)
+
+For attributes except `font-size` and related properties. For more, see _package.json_.
+
+- [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem)
+
+Just for `font-size` and related properties. For more, see _package.json_.
+
+- http-proxy-middleware
+
+Used in development mode because kugou-api doesn't support `jsonp` or `cors`. For more, see _vue.config.js_.
+
+Since @/vue-cli has already installed this plugin, we just need to alter _vue.config.js_.
+
 ## Reference
 
 - [vue-demo-kugou](https://github.com/lavyun/vue-demo-kugou)

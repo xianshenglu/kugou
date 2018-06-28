@@ -38,7 +38,7 @@
 .header__back {
   width: 16px;
   height: 16px;
-
+  border-width: 2.2px;
   border-color: #fff;
 }
 .header__search-btn {
@@ -49,5 +49,4 @@
 
   font-size: 27px;
 }
-
 </style>
