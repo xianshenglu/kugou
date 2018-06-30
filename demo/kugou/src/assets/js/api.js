@@ -6,7 +6,7 @@ export default {
   songList: '/proxy_api/plist/index&json=true',
   songListInfo: '/proxy_api/plist/list/songListId?json=true',
   singerCategory: '/proxy_api/singer/class&json=true',
-  singer_song: '/proxy_api/singer/list/88?json=true',
+  singerCategoryInfo: '/proxy_api/singer/list/singerCategoryInfoId?json=true',
   singer_info: '/proxy_api/singer/info/3060&json=true',
   song_info: '/proxy_api/app/i/getSongInfo.php?cmd=playInfo&hash=',
   song_info_lyric: 'http://www.kugou.com/yy/index.php?r=play/getdata&hash=',

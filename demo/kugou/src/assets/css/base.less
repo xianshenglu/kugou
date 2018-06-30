@@ -1,3 +1,4 @@
+@borderTheme: #e5e5e5;
 html,
 body {
   width: 100%;
@@ -9,7 +10,7 @@ body {
   width: 14px;
   height: 14px;
 
-  border: 2px solid #e4e4e4;
+  border: 2px solid @borderTheme;
 }
 .arrow--left {
   transform: rotate(-45deg);
@@ -30,7 +31,7 @@ body {
   width: 24px;
   height: 24px;
 
-  border: 2px solid #bbb;
+  border: 2px solid @borderTheme;
   border-radius: 50%;
 }
 .more_btn::before {
@@ -44,18 +45,28 @@ body {
   width: 8px;
   height: 8px;
 
-  transform: translate(-50%, -65%) rotate(45deg);
+  border-width: inherit;
+  border-style: none;
+  border-color: inherit;
 }
 .more_btn.down::before {
   transform: translate(-50%, -65%) rotate(45deg);
 
-  border-right: 2px solid #bbb;
-  border-bottom: 2px solid #bbb;
+  border-right-style: inherit;
+  border-bottom-style: inherit;
 }
 .more_btn.up::before {
   transform: translate(-50%, -35%) rotate(45deg);
 
-  border: none;
-  border-top: 2px solid #bbb;
-  border-left: 2px solid #bbb;
+  border-top-style: solid;
+  border-left-style: solid;
+}
+.main_box_shadow {
+  box-shadow: 0 2px 5px 0 @borderTheme;
+}
+.main_border {
+  border: 1px solid @borderTheme;
+}
+.main_border_bottom {
+  border-bottom: 1px solid @borderTheme;
 }

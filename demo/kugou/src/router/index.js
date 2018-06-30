@@ -7,6 +7,7 @@ import SongList from '../components/song/SongList'
 import SingerCategory from '../components/singer/SingerCategory'
 import RankInfo from '../components/rank/RankInfo'
 import SongListInfo from '../components/song/SongListInfo'
+import SingerCategoryInfo from '../components/singer/SingerCategoryInfo'
 
 Vue.use(VueRouter)
 
@@ -41,6 +42,10 @@ export default new VueRouter({
     {
       path: '/song/list/:id',
       component: SongListInfo
+    },
+    {
+      path: '/singer/list/:id',
+      component: SingerCategoryInfo
     }
   ]
 })

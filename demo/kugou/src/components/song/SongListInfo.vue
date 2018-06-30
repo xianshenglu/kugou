@@ -1,13 +1,13 @@
 <template>
-<section class="song_list_info" v-if="isSongListInfoShow">
-  <PubModuleHead :moduleHeadInfo="getModuleHeadInfo()">
-    <div slot="moduleDes" class="song_list_info__intro">
-      <p class="song_list_info__text">{{getModuleHeadInfo().intro}}</p>
-      <button class="more_btn down"></button>
-    </div>
-  </PubModuleHead>
-  <PubMusicList :musicList="getMusicList()"></PubMusicList>
-</section>
+  <section class="song_list_info" v-if="isSongListInfoShow">
+    <PubModuleHead :moduleHeadInfo="getModuleHeadInfo()">
+      <div slot="moduleDes" class="song_list_info__intro main_box_shadow">
+        <p class="song_list_info__text">{{getModuleHeadInfo().intro}}</p>
+        <button class="more_btn down" @click="showMore"></button>
+      </div>
+    </PubModuleHead>
+    <PubMusicList :musicList="getMusicList()"></PubMusicList>
+  </section>
 </template>
 
 <script>
@@ -15,21 +15,21 @@ import PubModuleHead from '../PubModuleHead'
 import PubMusicList from '../PubMusicList'
 export default {
   name: 'SongListInfo',
-  props: ['curSongListInfo', 'isSongListInfoShow'],
+  props: ['curSongListInfo','isSongListInfoShow'],
   components: {
     PubModuleHead,
     PubMusicList
   },
   data() {
     return {
-      getModuleHeadInfo(){
+      getModuleHeadInfo() {
         return {
-          headImg:this.$props.curSongListInfo.info.list.imgurl.replace(/\{\s*size\s*\}/, 400),
-          title:this.$props.curSongListInfo.info.list.specialname,
-          intro:this.$props.curSongListInfo.info.list.intro,
+          headImg: this.$props.curSongListInfo.info.list.imgurl.replace(/\{\s*size\s*\}/, 400),
+          title: this.$props.curSongListInfo.info.list.specialname,
+          intro: this.$props.curSongListInfo.info.list.intro,
         }
       },
-      getMusicList(){
+      getMusicList() {
         return this.$props.curSongListInfo.songs.list.info
       }
     }
@@ -37,6 +37,8 @@ export default {
   created() {
     let songListId = this.$route.path.split('/').pop()
     let isDataReady = this.$props.curSongListInfo.info && this.$props.curSongListInfo.info.list.specialid === songListId
+    console.log('isDataReady',isDataReady)
+
     if (!isDataReady) {
       this.$emit('getSongListInfo', songListId)
     }
@@ -44,6 +46,21 @@ export default {
   destroyed() {
     //数据异步更新，没有被刷新，手动销毁数据，数据准备好了之后，再渲染
     this.$emit('destroyCurSongListInfo')
+  },
+  inject: ['closet'],
+  methods: {
+    showMore() {
+      let targetClassList = event.target.classList
+      let isDown = targetClassList.contains('down')
+      let songListInfoIntro = this.closet('.song_list_info__intro', event.target)
+
+      if (isDown) {
+        targetClassList.replace('down', 'up')
+      } else {
+        targetClassList.replace('up', 'down')
+      }
+      songListInfoIntro.classList.toggle('show_more', isDown)
+    }
   }
 }
 </script>
@@ -58,10 +75,12 @@ export default {
   height: 41px;
   padding: 5px 0 5px 19px;
 
-  box-shadow: 0 3px 4px 0 #eee;
-
   font-size: 18px;
   line-height: 1.8;
+}
+
+.song_list_info__intro.show_more {
+  height: auto;
 }
 
 .more_btn {
@@ -70,10 +89,18 @@ export default {
   width: 24px;
   height: 24px;
   margin: auto 12px;
+
+  border-width: 2px;
+  border-color:#bbb;
 }
+
 .more_btn::before {
   width: 8px;
   height: 8px;
+
+  border-width: inherit;
 }
+
+
 
 </style>

@@ -1,17 +1,17 @@
 <template>
-<div id="app" class="app">
-  <PubHeader></PubHeader>
-  <router-view :navs="navs" :newSongs="newSongs" :rankList="rankList" :songList="songList" :singerCategories="singerCategories" :isRankInfoShow="isRankInfoShow" :curRankInfo="curRankInfo" @getRankInfo="getRankInfo" @destroyCurRankInfo="destroyCurRankInfo"
-    :isSongListInfoShow="isSongListInfoShow" :curSongListInfo="curSongListInfo" @getSongListInfo="getSongListInfo" @destroyCurSongListInfo="destroyCurSongListInfo" class="app__cont"></router-view>
-  <!-- <Player></Player> -->
-</div>
+  <div id="app" class="app">
+    <PubHeader></PubHeader>
+    <router-view class="app__cont" :navs="navs" :newSongs="newSongs" :rankList="rankList" :songList="songList" :singerCategories="singerCategories" :isRankInfoShow="isRankInfoShow" :curRankInfo="curRankInfo" @updateCurRankInfo="updateCurRankInfo" @getRankInfo="getRankInfo" @destroyCurRankInfo="destroyCurRankInfo" :isSongListInfoShow="isSongListInfoShow" :curSongListInfo="curSongListInfo" @updateCurSongListInfo="updateCurSongListInfo" @getSongListInfo="getSongListInfo" @destroyCurSongListInfo="destroyCurSongListInfo" :isSingerCategoryInfoShow="isSingerCategoryInfoShow" :curSingerCategoryInfo="curSingerCategoryInfo" @updateCurSingerCategoryInfo="updateCurSingerCategoryInfo" @getSingerCategoryInfo="getSingerCategoryInfo" @destroyCurSingerCategoryInfo="destroyCurSingerCategoryInfo"></router-view>
+
+    <!-- <Player></Player> -->
+  </div>
 </template>
 
 <script>
-import PubHeader from './components/PubHeader'
+import PubHeader from '@/components/PubHeader'
 import PubNav from './components/PubNav'
 import axios from 'axios'
-import api from './assets/js/api.js'
+import api from '@/assets/js/api.js'
 export default {
   name: 'App',
   components: {
@@ -31,12 +31,14 @@ export default {
           name: 'new',
           active: true,
           link: '/'
-        }, {
+        },
+        {
           text: '排行',
           name: 'rank',
           active: false,
           link: '/rank/list'
-        }, {
+        },
+        {
           text: '歌单',
           name: 'song',
           active: false,
@@ -58,17 +60,19 @@ export default {
       isRankInfoShow: false,
       songListInfo: [],
       curSongListInfo: {},
-      isSongListInfoShow: false
+      isSongListInfoShow: false,
+      isSingerCategoryInfoShow: false,
+      singerCategoryInfo:[],
+      curSingerCategoryInfo:{}
     }
   },
-  computed: {},
   provide() {
     return {
       closet: this.closet
     }
   },
   methods: {
-    closet(selector, node) {
+     closet(selector, node) {
       let targetNode = Array.from(document.querySelectorAll(selector))
       let isFind = targetNode.find(ele => ele === node)
       let isHtml = node.tagName.toLowerCase() === 'html'
@@ -79,8 +83,10 @@ export default {
       return isFind
     },
     getNewSong() {
-      axios.get(api.newSong).then(res => {
-        res.data.data.forEach(({
+      axios.get(api.newSong).then(({
+        data
+      }) => {
+        data.data.forEach(({
           filename
         }) => {
           this.newSongs.push({
@@ -90,16 +96,21 @@ export default {
       })
     },
     getRank() {
-      axios.get(api.rankList).then(res => {
-        res.data.rank.list.forEach(obj => {
+      axios.get(api.rankList).then(({
+        data
+      }) => {
+        data.rank.list.forEach(obj => {
+          obj.imgUrl = obj.imgurl.replace(/\{size\}/, 400)
+          obj.path = '/rank/info/' + obj.rankid
+          obj.title = obj.rankname
           this.rankList.push(obj)
         })
       })
     },
     getRankInfo(rankId) {
-      let isExist = this.rankInfo.find(obj => obj.info.rankid == rankId)
-      if (!isExist) {
-        axios.get(api.rankInfo + rankId).then(res => {
+      axios
+        .get(api.rankInfo + rankId)
+        .then(res => {
           let curRankInfo = {
             info: res.data.info,
             songs: res.data.songs
@@ -107,10 +118,15 @@ export default {
           this.rankInfo.push(curRankInfo)
           Object.assign(this.curRankInfo, curRankInfo)
           this.isRankInfoShow = true
-        }).catch(er => {
+        })
+        .catch(er => {
           alert(er)
         })
-      } else {
+
+    },
+    updateCurRankInfo(rankId) {
+      let isExist = this.rankInfo.find(obj => obj.info.rankid == rankId)
+      if (isExist) {
         Object.assign(this.curRankInfo, isExist)
         this.isRankInfoShow = true
       }
@@ -119,16 +135,22 @@ export default {
       this.isRankInfoShow = false
     },
     getSongList() {
-      axios.get(api.songList).then(res => {
-        res.data.plist.list.info.forEach(obj => {
+      axios.get(api.songList).then(({
+        data
+      }) => {
+        data.plist.list.info.forEach(obj => {
+          obj.imgUrl = obj.imgurl.replace(/\{size\}/, 400)
+          obj.path = '/song/list/' + obj.specialid
+          obj.title = obj.specialname
+          obj.popularity = obj.playcount
           this.songList.push(obj)
         })
       })
     },
     getSongListInfo(songListId) {
-      let isExist = this.songListInfo.find(obj => obj.info.list.specialid == songListId)
-      if (!isExist) {
-        axios.get(api.songListInfo.replace(/songListId?/i, songListId)).then(({
+      axios
+        .get(api.songListInfo.replace(/songListId?/i, songListId))
+        .then(({
           data
         }) => {
           let curSongListInfo = {
@@ -138,35 +160,78 @@ export default {
           Object.assign(this.curSongListInfo, curSongListInfo)
           this.songListInfo.push(curSongListInfo)
           this.isSongListInfoShow = true
-        }).catch(er => {
+        })
+        .catch(er => {
           alert(er)
         })
-      } else {
-        Object.assign(this.curSongListInfo,isExist)
+    },
+    updateCurSongListInfo(songListId) {
+      let isExist = this.songListInfo.find(
+        obj => obj.info.list.specialid == songListId
+      )
+      if (isExist) {
+        Object.assign(this.curSongListInfo, isExist)
         this.isSongListInfoShow = true
       }
-      // console.log(JSON.stringify(this.songListInfo))
     },
     destroyCurSongListInfo() {
       this.isSongListInfoShow = false
     },
     getSingerCategories() {
-      axios.get(api.singerCategory).then(res => {
-        res.data.list.reduce((re, obj) => {
-          let findCategories = re.find(o => o.categories === obj.classname.substring(0, 2))
+      axios.get(api.singerCategory).then(({
+        data
+      }) => {
+        data.list.reduce((re, obj) => {
+          obj.path = '/singer/list/' + obj.classid
+          let findCategories = re.find(
+            o => o.category === obj.classname.substring(0, 2)
+          )
           if (findCategories) {
             findCategories.data.push(obj)
           } else {
             re.push({
-              categories: obj.classname.substring(0, 2),
+              category: obj.classname.substring(0, 2),
               data: [obj]
             })
           }
           return re
         }, this.singerCategories)
-
       })
-
+    },
+    getSingerCategoryInfo(singerCategoryInfoId) {
+      axios
+        .get(api.singerCategoryInfo.replace(/singerCategoryInfoId?/i, singerCategoryInfoId))
+        .then(({
+          data
+        }) => {
+          let curSingerCategoryInfo = {
+            info: {id: data.classid,name:data.classname,count:data.singers.total},
+            data: data.singers.list.info
+          }
+          data.singers.list.info.forEach(obj=>{
+            obj.id=obj.singerid
+            obj.name=obj.singername
+            obj.imgUrl=obj.imgurl.replace(/\{size\}/,400)
+          })
+          Object.assign(this.curSingerCategoryInfo, curSingerCategoryInfo)
+          this.singerCategoryInfo.push(curSingerCategoryInfo)
+          this.isSingerCategoryInfoShow = true
+        })
+        .catch(er => {
+          alert(er)
+        })
+    },
+    updateCurSingerCategoryInfo(singerCategoryInfoId){
+       let isExist = this.singerCategoryInfo.find(
+        obj => obj.id == singerCategoryInfoId
+      )
+      if (isExist) {
+        Object.assign(this.curSingerCategoryInfo, isExist)
+        this.isSingerCategoryInfoShow = true
+      }
+    },
+    destroyCurSingerCategoryInfo() {
+      this.isSingerCategoryInfoShow = false
     }
   }
 }
@@ -176,13 +241,17 @@ export default {
 .app {
   width: 100vw;
   height: 100vh;
-  font-family: 'Microsoft Yahei', 'Avenir', Helvetica, Arial, sans-serif;
+
+  font-family: "Microsoft Yahei", "Avenir", Helvetica, Arial, sans-serif;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .app__cont {
   overflow-y: auto;
+
   height: calc(100vh - 58px);
 }
+
 </style>

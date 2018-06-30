@@ -2,7 +2,7 @@
 <ul class="pub_list">
   <li class="pub_list__item " v-for="(item,index) in pubList" :key="index">
     <router-link :to="item.path" class="pub_list__link">
-      <img class="pub_list__img" :src="item.img_url">
+      <img class="pub_list__img" :src="item.imgUrl">
       <slot :data="item" name="cont"></slot>
       <button class="pub_list__btn arrow arrow--right"></button>
     </router-link>
@@ -48,4 +48,5 @@ export default {
   margin-right: 15px;
   margin-left: auto;
 }
+
 </style>

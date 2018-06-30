@@ -43,7 +43,6 @@ export default {
     }
 
   },
-
   created() {
     let rankId = this.$route.path.split('/').pop()
     let isDataReady = this.$props.curRankInfo.info && this.$props.curRankInfo.info.rankid === rankId
@@ -66,15 +65,18 @@ export default {
 <style lang="less" scoped>
 .rank_info__update_time {
   align-self: flex-end;
+
   width: 100%;
   height: 50px;
   padding-left: 16px;
+
   background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.6) 5%,
-    rgba(107, 107, 107, 0.1) 90%,
-    rgba(255, 255, 255, 0)
+  to top,
+  rgba(0, 0, 0, 0.6) 5%,
+  rgba(107, 107, 107, 0.1) 90%,
+  rgba(255, 255, 255, 0)
   );
+
   font-size: 15px;
   line-height: 2.3;
 }
@@ -83,9 +85,12 @@ export default {
   width: 27px;
   height: 19px;
   margin-right: 10px;
+
   text-align: center;
+
   color: #999;
   border-radius: 9px;
+
   font-size: 13px;
   line-height: 19px;
 }
@@ -104,4 +109,5 @@ export default {
   color: #fff;
   background-color: #f8b300;
 }
+
 </style>
