@@ -1,15 +1,16 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Main from '../components/Main'
-import NewSong from '../components/new/NewSong'
-import RankList from '../components/rank/RankList'
-import SongList from '../components/song/SongList'
-import SingerCategory from '../components/singer/SingerCategory'
-import RankInfo from '../components/rank/RankInfo'
-import SongListInfo from '../components/song/SongListInfo'
-import SingerCategoryInfo from '../components/singer/SingerCategoryInfo'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Main from '../components/Main';
+import NewSong from '../components/new/NewSong';
+import RankList from '../components/rank/RankList';
+import SongList from '../components/song/SongList';
+import SingerCategory from '../components/singer/SingerCategory';
+import RankInfo from '../components/rank/RankInfo';
+import SongListInfo from '../components/song/SongListInfo';
+import SingerCategoryInfo from '../components/singer/SingerCategoryInfo';
+import SingerInfo from '../components/singer/SingerInfo';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 export default new VueRouter({
   routes: [
@@ -46,6 +47,10 @@ export default new VueRouter({
     {
       path: '/singer/list/:id',
       component: SingerCategoryInfo
+    },
+    {
+      path: '/singer/info/:id',
+      component: SingerInfo
     }
   ]
-})
+});

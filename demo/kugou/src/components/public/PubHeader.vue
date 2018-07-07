@@ -1,8 +1,8 @@
 <template>
   <header class="header">
-    <button class="header__back arrow arrow--left"></button>
-    <img class="header__logo" src="../assets/images/logo.png">
-    <button class="header__search-btn">
+    <button class="header__back arrow arrow--left" @click="goBack"></button>
+    <img class="header__logo" src="@/assets/images/logo.png">
+    <button class="header__search_btn" @search="search">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-search"></use>
       </svg>
@@ -12,7 +12,15 @@
 
 <script>
   export default {
-    name:'PubHeader'
+    name:'PubHeader',
+    methods:{
+      goBack(){
+        history.go(-1)
+      },
+      search(){
+
+      }
+    }
   }
 </script>
 
@@ -41,7 +49,7 @@
   border-width: 2.2px;
   border-color: #fff;
 }
-.header__search-btn {
+.header__search_btn {
   width: 27px;
   height: 27px;
 

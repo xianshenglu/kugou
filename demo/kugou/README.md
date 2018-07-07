@@ -5,6 +5,10 @@
 <!-- 1.  Set scroll when number of items is too much
 2.  Fit fore mobile using flex -->
 
+## Hint
+
+This demo is mainly for Chinese to see.
+
 ## Build Setup
 
 ```bash
@@ -37,12 +41,14 @@ For attributes except `font-size` and related properties. For more, see _package
 
 Just for `font-size` and related properties. For more, see _package.json_.
 
-- http-proxy-middleware
+- [JsonBird](https://github.com/xCss/JsonBird)
 
-Used in development mode because kugou-api doesn't support `jsonp` or `cors`. For more, see _vue.config.js_.
+Used because kugou-api doesn't support `jsonp` or `cors`.
 
-Since @/vue-cli has already installed this plugin, we just need to alter _vue.config.js_.
+Related pulugin [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) works only in development mode and have to write _vue.config.js_. Also, @/vue-cli has already installed this plugin, you just need to alter _vue.config.js_ if you want to use this instead of [JsonBird](https://github.com/xCss/JsonBird).
 
 ## Reference
 
 - [vue-demo-kugou](https://github.com/lavyun/vue-demo-kugou)
+
+- [kugou-mobile](http://m.kugou.com/)

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import PubList from '../PubList'
+import PubList from '../public/PubList'
 export default {
   name: 'SongList',
   props: ['songList'],

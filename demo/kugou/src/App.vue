@@ -1,15 +1,14 @@
 <template>
   <div id="app" class="app">
     <PubHeader></PubHeader>
-    <router-view class="app__cont" :navs="navs" :newSongs="newSongs" :rankList="rankList" :songList="songList" :singerCategories="singerCategories" :isRankInfoShow="isRankInfoShow" :curRankInfo="curRankInfo" @updateCurRankInfo="updateCurRankInfo" @getRankInfo="getRankInfo" @destroyCurRankInfo="destroyCurRankInfo" :isSongListInfoShow="isSongListInfoShow" :curSongListInfo="curSongListInfo" @updateCurSongListInfo="updateCurSongListInfo" @getSongListInfo="getSongListInfo" @destroyCurSongListInfo="destroyCurSongListInfo" :isSingerCategoryInfoShow="isSingerCategoryInfoShow" :curSingerCategoryInfo="curSingerCategoryInfo" @updateCurSingerCategoryInfo="updateCurSingerCategoryInfo" @getSingerCategoryInfo="getSingerCategoryInfo" @destroyCurSingerCategoryInfo="destroyCurSingerCategoryInfo"></router-view>
-
+    <router-view class="app__cont" :navs="navs" :newSongs="newSongs" :rankList="rankList" :songList="songList" :singerCategories="singerCategories" :isRankInfoShow="isRankInfoShow" :curRankInfo="curRankInfo" @updateCurRankInfo="updateCurRankInfo" @getRankInfo="getRankInfo" @destroyCurRankInfo="destroyCurRankInfo" :isSongListInfoShow="isSongListInfoShow" :curSongListInfo="curSongListInfo" @updateCurSongListInfo="updateCurSongListInfo" @getSongListInfo="getSongListInfo" @destroyCurSongListInfo="destroyCurSongListInfo" :isSingerCategoryInfoShow="isSingerCategoryInfoShow" :curSingerCategoryInfo="curSingerCategoryInfo" @updateCurSingerCategoryInfo="updateCurSingerCategoryInfo" @getSingerCategoryInfo="getSingerCategoryInfo" @destroyCurSingerCategoryInfo="destroyCurSingerCategoryInfo" :isSingerInfoShow="isSingerInfoShow" :curSingerInfo="curSingerInfo" @updateCurSingerInfo="updateCurSingerInfo" @getSingerInfo="getSingerInfo" @destroyCurSingerInfo="destroyCurSingerInfo"></router-view>
     <!-- <Player></Player> -->
   </div>
 </template>
 
 <script>
-import PubHeader from '@/components/PubHeader'
-import PubNav from './components/PubNav'
+import PubHeader from '@/components/public/PubHeader'
+import PubNav from './components/public/PubNav'
 import axios from 'axios'
 import api from '@/assets/js/api.js'
 export default {
@@ -61,9 +60,12 @@ export default {
       songListInfo: [],
       curSongListInfo: {},
       isSongListInfoShow: false,
-      isSingerCategoryInfoShow: false,
       singerCategoryInfo:[],
-      curSingerCategoryInfo:{}
+      curSingerCategoryInfo:{},
+      isSingerCategoryInfoShow: false,
+      singerInfo:[],
+      curSingerInfo:{},
+      isSingerInfoShow:false
     }
   },
   provide() {
@@ -72,6 +74,10 @@ export default {
     }
   },
   methods: {
+    // goBack(){
+    //   console.log(1)
+    //   alert(1)
+    // },
      closet(selector, node) {
       let targetNode = Array.from(document.querySelectorAll(selector))
       let isFind = targetNode.find(ele => ele === node)
@@ -83,6 +89,7 @@ export default {
       return isFind
     },
     getNewSong() {
+
       axios.get(api.newSong).then(({
         data
       }) => {
@@ -212,6 +219,7 @@ export default {
             obj.id=obj.singerid
             obj.name=obj.singername
             obj.imgUrl=obj.imgurl.replace(/\{size\}/,400)
+            obj.path='/singer/info/'+obj.id
           })
           Object.assign(this.curSingerCategoryInfo, curSingerCategoryInfo)
           this.singerCategoryInfo.push(curSingerCategoryInfo)
@@ -232,6 +240,48 @@ export default {
     },
     destroyCurSingerCategoryInfo() {
       this.isSingerCategoryInfoShow = false
+    },
+    getSingerInfo(singerId){
+       axios
+        .get(api.singerInfo.replace(/singerId?/i, singerId))
+        .then(({
+          data
+        }) => {
+
+          let curSingerInfo = {
+            info: {
+              id: data.info.singerid,
+              name:data.info.singername,
+              count:data.info.songcount,
+              albumcount:data.info.albumcount,
+              imgUrl:data.info.imgurl.replace(/\{size\}/,400),
+              intro:data.info.intro
+              },
+            data: data.songs.list
+          }
+         data.songs.list.forEach(obj=>{
+            obj.name=obj.filename
+            // obj.path='/singer/info/'+obj.id
+          })
+          Object.assign(this.curSingerInfo, curSingerInfo)
+          this.singerInfo.push(curSingerInfo)
+          this.isSingerInfoShow = true
+        })
+        .catch(er => {
+          alert(er)
+        })
+    },
+    updateCurSingerInfo(singerId){
+      let isExist = this.singerInfo.find(
+        obj => obj.id == singerId
+      )
+      if (isExist) {
+        Object.assign(this.curSingerInfo, isExist)
+        this.isSingerInfoShow = true
+      }
+    },
+    destroyCurSingerInfo(){
+        this.isSingerInfoShow = false
     }
   }
 }

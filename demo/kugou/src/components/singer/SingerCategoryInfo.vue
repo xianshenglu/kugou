@@ -1,12 +1,12 @@
 <template>
-  <section class="singer_category_info" v-if="isSingerCategoryInfoShow">
+  <section class="singer_category_info" v-if="isSingerCategoryInfoShow" @click="updateCurSingerCategoryInfo">
     <h4 class="singer_category_info__title main_box_shadow">{{curSingerCategoryInfo.info.name}}</h4>
     <ul class="singer_category_info__list">
       <li class="singer_category_info__item main_border_bottom" v-for="(item,index) in curSingerCategoryInfo.data" :key="index">
-        <a href="" class="singer_category_info__link">
+        <router-link :to="item.path" class="singer_category_info__link">
           <img :src="item.imgUrl" class="singer_category_info__img">
           <div class="singer_category_info__name">{{item.name}}</div>
-        </a>
+        </router-link>
       </li>
     </ul>
   </section>
@@ -18,7 +18,6 @@ export default {
   props: ['curSingerCategoryInfo','isSingerCategoryInfoShow'],
   created() {
     let singerCategoryInfoId = this.$route.path.split('/').pop()
-    // console.log(singerCategoryInfoId, this.$props.curSingerCategoryInfo.info)
     let isDataReady = this.$props.curSingerCategoryInfo.info && this.$props.curSingerCategoryInfo.info.id === singerCategoryInfoId
     if (!isDataReady) {
       this.$emit('getSingerCategoryInfo', singerCategoryInfoId)
@@ -28,6 +27,13 @@ export default {
     //数据异步更新，没有被刷新，手动销毁数据，数据准备好了之后，再渲染
     this.$emit('destroyCurSingerCategoryInfo')
   },
+  inject:['closet'],
+  methods:{
+    updateCurSingerCategoryInfo(){
+      let singerId = this.closet('[href]', event.target).href.split('/').pop()
+      this.$emit('updateCurSingerCategoryInfo',singerId)
+    }
+  }
 }
 </script>
 
@@ -68,6 +74,10 @@ export default {
   height: 61px;
   margin: 0 18px 0 13px;
 }
+
+
+
+
 
 
 

@@ -1,31 +1,30 @@
 <template>
   <section class="song_list_info" v-if="isSongListInfoShow">
     <PubModuleHead :moduleHeadInfo="getModuleHeadInfo()">
-      <div slot="moduleDes" class="song_list_info__intro main_box_shadow">
-        <p class="song_list_info__text">{{getModuleHeadInfo().intro}}</p>
-        <button class="more_btn down" @click="showMore"></button>
-      </div>
+      <PubModuleDes slot="moduleDes" :description="getModuleHeadInfo().intro"></PubModuleDes>
     </PubModuleHead>
     <PubMusicList :musicList="getMusicList()"></PubMusicList>
   </section>
 </template>
 
 <script>
-import PubModuleHead from '../PubModuleHead'
-import PubMusicList from '../PubMusicList'
+import PubModuleHead from '../public/PubModuleHead'
+import PubModuleDes from '../public/PubModuleDes'
+import PubMusicList from '../public/PubMusicList'
 export default {
   name: 'SongListInfo',
   props: ['curSongListInfo','isSongListInfoShow'],
   components: {
     PubModuleHead,
-    PubMusicList
+    PubMusicList,
+    PubModuleDes
   },
   data() {
     return {
       getModuleHeadInfo() {
         return {
-          headImg: this.$props.curSongListInfo.info.list.imgurl.replace(/\{\s*size\s*\}/, 400),
-          title: this.$props.curSongListInfo.info.list.specialname,
+          imgUrl: this.$props.curSongListInfo.info.list.imgurl.replace(/\{\s*size\s*\}/, 400),
+          name: this.$props.curSongListInfo.info.list.specialname,
           intro: this.$props.curSongListInfo.info.list.intro,
         }
       },
@@ -37,7 +36,7 @@ export default {
   created() {
     let songListId = this.$route.path.split('/').pop()
     let isDataReady = this.$props.curSongListInfo.info && this.$props.curSongListInfo.info.list.specialid === songListId
-    console.log('isDataReady',isDataReady)
+    // console.log('isDataReady',isDataReady)
 
     if (!isDataReady) {
       this.$emit('getSongListInfo', songListId)
@@ -46,61 +45,9 @@ export default {
   destroyed() {
     //数据异步更新，没有被刷新，手动销毁数据，数据准备好了之后，再渲染
     this.$emit('destroyCurSongListInfo')
-  },
-  inject: ['closet'],
-  methods: {
-    showMore() {
-      let targetClassList = event.target.classList
-      let isDown = targetClassList.contains('down')
-      let songListInfoIntro = this.closet('.song_list_info__intro', event.target)
-
-      if (isDown) {
-        targetClassList.replace('down', 'up')
-      } else {
-        targetClassList.replace('up', 'down')
-      }
-      songListInfoIntro.classList.toggle('show_more', isDown)
-    }
   }
 }
 </script>
 
 <style lang="less" scoped>
-.song_list_info__intro {
-  display: flex;
-  overflow: hidden;
-  align-items: flex-start;
-
-  box-sizing: border-box;
-  height: 41px;
-  padding: 5px 0 5px 19px;
-
-  font-size: 18px;
-  line-height: 1.8;
-}
-
-.song_list_info__intro.show_more {
-  height: auto;
-}
-
-.more_btn {
-  flex: 0 0 auto;
-
-  width: 24px;
-  height: 24px;
-  margin: auto 12px;
-
-  border-width: 2px;
-  border-color:#bbb;
-}
-
-.more_btn::before {
-  width: 8px;
-  height: 8px;
-
-  border-width: inherit;
-}
-
-
-
 </style>

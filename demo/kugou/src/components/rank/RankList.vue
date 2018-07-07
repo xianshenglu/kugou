@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import PubList from '../PubList'
+import PubList from '../public/PubList'
 export default {
   name: 'RankList',
   props: ['rankList'],

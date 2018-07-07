@@ -1,20 +1,19 @@
 <template>
-<section class="rank_info" v-if="isRankInfoShow">
-  <PubModuleHead :moduleHeadInfo="getModuleHeadInfo()">
-    <time class="rank_info__update_time" slot="moduleUpdateTime">
-        {{msg}}
-        {{formatDate()}}
-    </time>
-  </PubModuleHead>
-  <PubMusicList :musicList="getMusicList()">
-    <div :class="'rank_info__index '+'rank_info__index'+(props.data+1)" slot-scope="props" slot="index">{{props.data+1}}</div>
-  </PubMusicList>
-</section>
+  <section class="rank_info" v-if="isRankInfoShow">
+    <PubModuleHead :moduleHeadInfo="getModuleHeadInfo()">
+      <time class="rank_info__update_time" slot="moduleUpdateTime">
+        {{msg}} {{formatDate()}}
+      </time>
+    </PubModuleHead>
+    <PubMusicList :musicList="getMusicList()">
+      <div :class="'rank_info__index '+'rank_info__index'+(props.data+1)" slot-scope="props" slot="index">{{props.data+1}}</div>
+    </PubMusicList>
+  </section>
 </template>
 
 <script>
-import PubModuleHead from '../PubModuleHead'
-import PubMusicList from '../PubMusicList'
+import PubModuleHead from '../public/PubModuleHead'
+import PubMusicList from '../public/PubMusicList'
 export default {
   name: 'RankInfo',
   props: ['curRankInfo', 'isRankInfoShow'],
@@ -33,8 +32,8 @@ export default {
         //不用函数的话，直接用对象，在还没开始渲染的时候，就会求值，因为异步的数据还没到，导致下面值不对
         //异步的数据到了，这边的数据变了也不会立马更新，会等到下一次点击
         return {
-          headImg: this.$props.curRankInfo.info.banner7url.replace(/\{\s*size\s*\}/, 400),
-          headTitle: this.$props.curRankInfo.info.rankname
+          imgUrl: this.$props.curRankInfo.info.banner7url.replace(/\{\s*size\s*\}/, 400),
+          name: this.$props.curRankInfo.info.rankname
         }
       },
       getMusicList(){
@@ -109,5 +108,7 @@ export default {
   color: #fff;
   background-color: #f8b300;
 }
+
+
 
 </style>
