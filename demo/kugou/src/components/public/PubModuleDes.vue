@@ -1,7 +1,7 @@
 <template>
-  <div class="module_info__intro main_box_shadow" @click="showMore">
+  <div class="module_info__intro main_box_shadow">
     <p class="module_info__text">{{description}}</p>
-    <button class="more_btn down"></button>
+    <button class="more_btn down" @click="showMore"></button>
   </div>
 </template>
 
@@ -12,14 +12,17 @@
     inject: ['closet'],
     methods: {
       showMore() {
+
         let targetClassList = event.target.classList
         let isDown = targetClassList.contains('down')
         let songListInfoIntro = this.closet('.module_info__intro', event.target)
 
         if (isDown) {
-          targetClassList.replace('down', 'up')
+          targetClassList.remove('down')
+          targetClassList.add('up')
         } else {
-          targetClassList.replace('up', 'down')
+          targetClassList.remove('up')
+          targetClassList.add('down')
         }
         songListInfoIntro.classList.toggle('show_more', isDown)
       }
