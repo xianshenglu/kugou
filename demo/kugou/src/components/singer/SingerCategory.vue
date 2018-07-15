@@ -16,10 +16,6 @@ export default {
   name: 'SingerCategory',
   props: ['singerCategories'],
   inject:['closet'],
-  created() {
-    console.log(this.$props.singerCategories);
-
-  },
   methods:{
     updateCurSingerCategoryInfo(){
       let singerId=this.closet('[href]',event.target).href.split('/').pop()
@@ -70,6 +66,9 @@ export default {
   margin-right: 15px;
   margin-left: auto;
 }
+
+
+
 
 
 

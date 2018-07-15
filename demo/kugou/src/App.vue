@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
     <PubHeader></PubHeader>
-    <router-view class="app__cont" :navs="navs" :newSongs="newSongs" :rankList="rankList" :songList="songList" :singerCategories="singerCategories" :isRankInfoShow="isRankInfoShow" :curRankInfo="curRankInfo" @updateCurRankInfo="updateCurRankInfo" @getRankInfo="getRankInfo" @destroyCurRankInfo="destroyCurRankInfo" :isSongListInfoShow="isSongListInfoShow" :curSongListInfo="curSongListInfo" @updateCurSongListInfo="updateCurSongListInfo" @getSongListInfo="getSongListInfo" @destroyCurSongListInfo="destroyCurSongListInfo" :isSingerCategoryInfoShow="isSingerCategoryInfoShow" :curSingerCategoryInfo="curSingerCategoryInfo" @updateCurSingerCategoryInfo="updateCurSingerCategoryInfo" @getSingerCategoryInfo="getSingerCategoryInfo" @destroyCurSingerCategoryInfo="destroyCurSingerCategoryInfo" :isSingerInfoShow="isSingerInfoShow" :curSingerInfo="curSingerInfo" @updateCurSingerInfo="updateCurSingerInfo" @getSingerInfo="getSingerInfo" @destroyCurSingerInfo="destroyCurSingerInfo"></router-view>
+    <router-view class="app__cont" :navs="navs" :newSongs="newSongs" :rankList="rankList" :songList="songList" :singerCategories="singerCategories" :isCurRankInfoShow="isCurRankInfoShow" :curRankInfo="curRankInfo" @updateCurRankInfo="updateCurRankInfo" @getCurRankInfo="getCurRankInfo" @destroyCurRankInfo="destroyCurRankInfo" :isCurSongListInfoShow="isCurSongListInfoShow" :curSongListInfo="curSongListInfo" @updateCurSongListInfo="updateCurSongListInfo" @getCurSongListInfo="getCurSongListInfo" @destroyCurSongListInfo="destroyCurSongListInfo" :isCurSingerCategoryInfoShow="isCurSingerCategoryInfoShow" :curSingerCategoryInfo="curSingerCategoryInfo" @updateCurSingerCategoryInfo="updateCurSingerCategoryInfo" @getCurSingerCategoryInfo="getCurSingerCategoryInfo" @destroyCurSingerCategoryInfo="destroyCurSingerCategoryInfo" :isCurSingerInfoShow="isCurSingerInfoShow" :curSingerInfo="curSingerInfo" @updateCurSingerInfo="updateCurSingerInfo" @getSingerInfo="getSingerInfo" @destroyCurSingerInfo="destroyCurSingerInfo" :searchRecArr="searchRecArr" :isSearchRecShow="isSearchRecShow" :curSearchRes="curSearchRes" :isCurSearchResShow="isCurSearchResShow"></router-view>
     <!-- <Player></Player> -->
   </div>
 </template>
@@ -22,6 +22,7 @@ export default {
     this.getRank()
     this.getSongList()
     this.getSingerCategories()
+    this.getSearchRec()
   },
   data() {
     return {
@@ -56,16 +57,21 @@ export default {
       singerCategories: [],
       rankInfo: [],
       curRankInfo: {},
-      isRankInfoShow: false,
+      isCurRankInfoShow: false,
       songListInfo: [],
       curSongListInfo: {},
-      isSongListInfoShow: false,
+      isCurSongListInfoShow: false,
       singerCategoryInfo:[],
       curSingerCategoryInfo:{},
-      isSingerCategoryInfoShow: false,
+      isCurSingerCategoryInfoShow: false,
       singerInfo:[],
       curSingerInfo:{},
-      isSingerInfoShow:false
+      isCurSingerInfoShow:false,
+      searchRecArr:[],
+      isSearchRecShow:true,
+      searchResArr:[],
+      curSearchRes:{},
+      isCurSearchResShow:false
     }
   },
   provide() {
@@ -74,11 +80,7 @@ export default {
     }
   },
   methods: {
-    // goBack(){
-    //   console.log(1)
-    //   alert(1)
-    // },
-     closet(selector, node) {
+    closet(selector, node) {
       let targetNode = Array.from(document.querySelectorAll(selector))
       let isFind = targetNode.find(ele => ele === node)
       let isHtml = node.tagName.toLowerCase() === 'html'
@@ -114,7 +116,7 @@ export default {
         })
       })
     },
-    getRankInfo(rankId) {
+    getCurRankInfo(rankId) {
       axios
         .get(api.rankInfo + rankId)
         .then(res => {
@@ -124,7 +126,7 @@ export default {
           }
           this.rankInfo.push(curRankInfo)
           Object.assign(this.curRankInfo, curRankInfo)
-          this.isRankInfoShow = true
+          this.isCurRankInfoShow = true
         })
         .catch(er => {
           alert(er)
@@ -135,11 +137,11 @@ export default {
       let isExist = this.rankInfo.find(obj => obj.info.rankid == rankId)
       if (isExist) {
         Object.assign(this.curRankInfo, isExist)
-        this.isRankInfoShow = true
+        this.isCurRankInfoShow = true
       }
     },
     destroyCurRankInfo() {
-      this.isRankInfoShow = false
+      this.isCurRankInfoShow = false
     },
     getSongList() {
       axios.get(api.songList).then(({
@@ -154,7 +156,7 @@ export default {
         })
       })
     },
-    getSongListInfo(songListId) {
+    getCurSongListInfo(songListId) {
       axios
         .get(api.songListInfo.replace(/songListId?/i, songListId))
         .then(({
@@ -166,7 +168,7 @@ export default {
           }
           Object.assign(this.curSongListInfo, curSongListInfo)
           this.songListInfo.push(curSongListInfo)
-          this.isSongListInfoShow = true
+          this.isCurSongListInfoShow = true
         })
         .catch(er => {
           alert(er)
@@ -178,11 +180,11 @@ export default {
       )
       if (isExist) {
         Object.assign(this.curSongListInfo, isExist)
-        this.isSongListInfoShow = true
+        this.isCurSongListInfoShow = true
       }
     },
     destroyCurSongListInfo() {
-      this.isSongListInfoShow = false
+      this.isCurSongListInfoShow = false
     },
     getSingerCategories() {
       axios.get(api.singerCategory).then(({
@@ -205,7 +207,7 @@ export default {
         }, this.singerCategories)
       })
     },
-    getSingerCategoryInfo(singerCategoryInfoId) {
+    getCurSingerCategoryInfo(singerCategoryInfoId) {
       axios
         .get(api.singerCategoryInfo.replace(/singerCategoryInfoId?/i, singerCategoryInfoId))
         .then(({
@@ -223,7 +225,7 @@ export default {
           })
           Object.assign(this.curSingerCategoryInfo, curSingerCategoryInfo)
           this.singerCategoryInfo.push(curSingerCategoryInfo)
-          this.isSingerCategoryInfoShow = true
+          this.isCurSingerCategoryInfoShow = true
         })
         .catch(er => {
           alert(er)
@@ -235,11 +237,11 @@ export default {
       )
       if (isExist) {
         Object.assign(this.curSingerCategoryInfo, isExist)
-        this.isSingerCategoryInfoShow = true
+        this.isCurSingerCategoryInfoShow = true
       }
     },
     destroyCurSingerCategoryInfo() {
-      this.isSingerCategoryInfoShow = false
+      this.isCurSingerCategoryInfoShow = false
     },
     getSingerInfo(singerId){
        axios
@@ -265,7 +267,7 @@ export default {
           })
           Object.assign(this.curSingerInfo, curSingerInfo)
           this.singerInfo.push(curSingerInfo)
-          this.isSingerInfoShow = true
+          this.isCurSingerInfoShow = true
         })
         .catch(er => {
           alert(er)
@@ -277,11 +279,20 @@ export default {
       )
       if (isExist) {
         Object.assign(this.curSingerInfo, isExist)
-        this.isSingerInfoShow = true
+        this.isCurSingerInfoShow = true
       }
     },
     destroyCurSingerInfo(){
-        this.isSingerInfoShow = false
+        this.isCurSingerInfoShow = false
+    },
+    getSearchRec(){
+      axios.get(api.hotSearch).then(({data})=>{
+        data.data.info.forEach(obj=>{
+          this.searchRecArr.push(obj)
+        })
+      }).catch(err=>{
+        alert(err)
+      })
     }
   }
 }

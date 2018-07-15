@@ -1,13 +1,13 @@
 <template>
-<ul class="pub_list">
-  <li class="pub_list__item " v-for="(item,index) in pubList" :key="index">
-    <router-link :to="item.path" class="pub_list__link">
-      <img class="pub_list__img" :src="item.imgUrl">
-      <slot :data="item" name="cont"></slot>
-      <button class="pub_list__btn arrow arrow--right"></button>
-    </router-link>
-  </li>
-</ul>
+  <ul class="pub_list">
+    <li class="pub_list__item main_border_bottom" v-for="(item,index) in pubList" :key="index">
+      <router-link :to="item.path" class="pub_list__link">
+        <img class="pub_list__img" :src="item.imgUrl">
+        <slot :data="item" name="cont"></slot>
+        <button class="pub_list__btn arrow arrow--right"></button>
+      </router-link>
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -27,7 +27,7 @@ export default {
 .pub_list__item {
   height: 123px;
 
-  border-bottom: 1px solid #eee;
+  border-color: #eee;
 }
 
 .pub_list__link {
@@ -48,5 +48,7 @@ export default {
   margin-right: 15px;
   margin-left: auto;
 }
+
+
 
 </style>

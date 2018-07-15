@@ -1,5 +1,5 @@
 <template>
-  <section class="song_list_info" v-if="isSongListInfoShow">
+  <section class="song_list_info" v-if="isCurSongListInfoShow">
     <PubModuleHead :moduleHeadInfo="getModuleHeadInfo()">
       <PubModuleDes slot="moduleDes" :description="getModuleHeadInfo().intro"></PubModuleDes>
     </PubModuleHead>
@@ -13,7 +13,7 @@ import PubModuleDes from '../public/PubModuleDes'
 import PubMusicList from '../public/PubMusicList'
 export default {
   name: 'SongListInfo',
-  props: ['curSongListInfo','isSongListInfoShow'],
+  props: ['curSongListInfo','isCurSongListInfoShow'],
   components: {
     PubModuleHead,
     PubMusicList,
@@ -35,11 +35,8 @@ export default {
   },
   created() {
     let songListId = this.$route.path.split('/').pop()
-    let isDataReady = this.$props.curSongListInfo.info && this.$props.curSongListInfo.info.list.specialid === songListId
-    // console.log('isDataReady',isDataReady)
-
-    if (!isDataReady) {
-      this.$emit('getSongListInfo', songListId)
+    if(!this.$props.isCurSongListInfoShow){
+      this.$emit('getCurSongListInfo', songListId)
     }
   },
   destroyed() {

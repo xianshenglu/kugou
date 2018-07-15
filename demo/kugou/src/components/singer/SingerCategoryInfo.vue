@@ -1,6 +1,6 @@
 <template>
-  <section class="singer_category_info" v-if="isSingerCategoryInfoShow" @click="updateCurSingerCategoryInfo">
-    <h4 class="singer_category_info__title main_box_shadow">{{curSingerCategoryInfo.info.name}}</h4>
+  <section class="singer_category_info" v-if="isCurSingerCategoryInfoShow" @click="updateCurSingerCategoryInfo">
+    <PubModuleTitle :title="curSingerCategoryInfo.info.name"></PubModuleTitle>
     <ul class="singer_category_info__list">
       <li class="singer_category_info__item main_border_bottom" v-for="(item,index) in curSingerCategoryInfo.data" :key="index">
         <router-link :to="item.path" class="singer_category_info__link">
@@ -13,14 +13,18 @@
 </template>
 
 <script>
+import PubModuleTitle from '../public/PubModuleTitle'
+
 export default {
   name: 'SingerCategoryInfo',
-  props: ['curSingerCategoryInfo','isSingerCategoryInfoShow'],
+  props: ['curSingerCategoryInfo','isCurSingerCategoryInfoShow'],
+  components:{
+    PubModuleTitle
+  },
   created() {
     let singerCategoryInfoId = this.$route.path.split('/').pop()
-    let isDataReady = this.$props.curSingerCategoryInfo.info && this.$props.curSingerCategoryInfo.info.id === singerCategoryInfoId
-    if (!isDataReady) {
-      this.$emit('getSingerCategoryInfo', singerCategoryInfoId)
+    if(!this.$props.isCurSingerCategoryInfoShow){
+      this.$emit('getCurSingerCategoryInfo', singerCategoryInfoId)
     }
   },
   destroyed() {
@@ -74,6 +78,19 @@ export default {
   height: 61px;
   margin: 0 18px 0 13px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

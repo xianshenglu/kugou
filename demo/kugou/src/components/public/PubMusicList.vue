@@ -1,15 +1,15 @@
 <template>
-<ul class="pub_music__list">
-  <li class="pub_music__item" v-for="(item,index) in musicList" :key="index">
-    <slot :data="index" name="index"></slot>
-    <div class="pub_music__name">{{item.filename}}</div>
-    <button class="pub_music__download">
+  <ul class="pub_music__list">
+    <li class="pub_music__item main_border_bottom" v-for="(item,index) in musicList" :key="index">
+      <slot :data="index" name="index"></slot>
+      <div class="pub_music__name">{{item.filename}}</div>
+      <button class="pub_music__download">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-download"></use>
         </svg>
-    </button>
-  </li>
-</ul>
+      </button>
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -32,7 +32,7 @@ export default {
   width: 100%;
   height: 72px;
 
-  border-bottom: 1px solid #eee;
+  border-color: #eee;
 }
 
 .pub_music__name {
@@ -47,4 +47,5 @@ export default {
   height: 100%;
   padding: 0 13px;
 }
+
 </style>

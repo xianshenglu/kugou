@@ -1,7 +1,7 @@
 <template>
   <main class="main">
     <PubNav :navs="navs"></PubNav>
-    <router-view :newSongs="newSongs" :rankList="rankList" :songList="songList" :singerCategories="singerCategories" class="main__cont" @getRankInfo="getRankInfo"></router-view>
+    <router-view :newSongs="newSongs" :rankList="rankList" :songList="songList" :singerCategories="singerCategories" class="main__cont" @getCurRankInfo="getCurRankInfo"></router-view>
   </main>
 </template>
 
@@ -14,8 +14,8 @@ export default {
     PubNav
   },
   methods: {
-    getRankInfo(event) {
-      this.$emit('getRankInfo', event)
+    getCurRankInfo(event) {
+      this.$emit('getCurRankInfo', event)
     }
   }
 }

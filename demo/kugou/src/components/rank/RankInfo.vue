@@ -1,5 +1,5 @@
 <template>
-  <section class="rank_info" v-if="isRankInfoShow">
+  <section class="rank_info" v-if="isCurRankInfoShow">
     <PubModuleHead :moduleHeadInfo="getModuleHeadInfo()">
       <time class="rank_info__update_time" slot="moduleUpdateTime">
         {{msg}} {{formatDate()}}
@@ -16,7 +16,7 @@ import PubModuleHead from '../public/PubModuleHead'
 import PubMusicList from '../public/PubMusicList'
 export default {
   name: 'RankInfo',
-  props: ['curRankInfo', 'isRankInfoShow'],
+  props: ['curRankInfo', 'isCurRankInfoShow'],
   components: {
     PubModuleHead,
     PubMusicList
@@ -44,10 +44,8 @@ export default {
   },
   created() {
     let rankId = this.$route.path.split('/').pop()
-    let isDataReady = this.$props.curRankInfo.info && this.$props.curRankInfo.info.rankid === rankId
-    // console.log('cre',isDataReady)
-    if (!isDataReady) {
-      this.$emit('getRankInfo', rankId)
+    if(!this.$props.isCurRankInfoShow){
+      this.$emit('getCurRankInfo', rankId)
     }
   },
   updated() {
@@ -108,6 +106,9 @@ export default {
   color: #fff;
   background-color: #f8b300;
 }
+
+
+
 
 
 

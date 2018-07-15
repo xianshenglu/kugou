@@ -20,7 +20,10 @@ export default {
 @themeColor: #2ca2f9;
 
 .nav {
-  box-shadow: 0 1px 3px 0 #eee;
+  position: relative;
+  z-index: 1;
+
+  box-shadow: 0 3px 3px 0 #eee;
 }
 .nav__list {
   display: flex;
@@ -51,5 +54,8 @@ export default {
   width: 100%;
   height: 100%;
 }
+
+
+
 
 </style>

@@ -2,11 +2,11 @@
   <header class="header">
     <button class="header__back arrow arrow--left" @click="goBack"></button>
     <img class="header__logo" src="@/assets/images/logo.png">
-    <button class="header__search_btn" @search="search">
+    <router-link class="header__search_btn" to="/search/index">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-search"></use>
       </svg>
-    </button>
+    </router-link>
   </header>
 </template>
 
@@ -16,9 +16,6 @@
     methods:{
       goBack(){
         history.go(-1)
-      },
-      search(){
-
       }
     }
   }
@@ -46,10 +43,13 @@
 .header__back {
   width: 16px;
   height: 16px;
+
   border-width: 2.2px;
   border-color: #fff;
 }
 .header__search_btn {
+  display: block;
+
   width: 27px;
   height: 27px;
 
@@ -57,4 +57,7 @@
 
   font-size: 27px;
 }
+
+
+
 </style>
