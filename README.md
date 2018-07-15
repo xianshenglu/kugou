@@ -12,4 +12,6 @@ Listed from easy to hard:
 
 - [resume](https://github.com/xianshenglu/xianshenglu.github.io)
 
-  ![resume](https://xianshenglu.github.io/home/dist/static/img/to-do-mvc.4764404.gif)
+  ![resume](https://xianshenglu.github.io/home/src/assets/images/homepage.gif)
+
+- [kugou-music](https://xianshenglu.github.io/vue/demo/kugou/dist/index.html)
