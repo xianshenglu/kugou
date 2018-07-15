@@ -9,6 +9,7 @@ import RankInfo from '../components/rank/RankInfo';
 import SongListInfo from '../components/song/SongListInfo';
 import SingerCategoryInfo from '../components/singer/SingerCategoryInfo';
 import SingerInfo from '../components/singer/SingerInfo';
+import Search from '../components/search/Search';
 
 Vue.use(VueRouter);
 
@@ -51,6 +52,10 @@ export default new VueRouter({
     {
       path: '/singer/info/:id',
       component: SingerInfo
+    },
+    {
+      path: '/search/index',
+      component: Search
     }
   ]
 });
