@@ -15,8 +15,8 @@ let api = {
   song_info_lyric: 'http://www.kugou.com/yy/index.php?r=play/getdata&hash=',
   hotSearch:
     'http://mobilecdn.kugou.com/api/v3/search/hot?format=json&plat=0&count=30',
-  search_result:
-    'http://mobilecdn.kugou.com/api/v3/search/song?format=json&keyword=%E7%8E%8B%E5%8A%9B%E5%AE%8F&page=1&pagesize=20&showtype=1'
+  searchResult:
+    'http://mobilecdn.kugou.com/api/v3/search/song?format=json&page=1&pagesize=20&showtype=1&keyword='
 };
 
 Reflect.ownKeys(api).forEach(key => {
