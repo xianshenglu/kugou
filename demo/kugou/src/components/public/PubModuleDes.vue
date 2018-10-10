@@ -6,28 +6,26 @@
 </template>
 
 <script>
-  export default {
-    name:'PubModuleDes',
-    props:['description'],
-    inject: ['closet'],
-    methods: {
-      showMore() {
+export default {
+  name: 'PubModuleDes',
+  props: ['description'],
+  methods: {
+    showMore() {
+      let targetClassList = event.target.classList
+      let isDown = targetClassList.contains('down')
+      let songListInfoIntro = utils.closest('.module_info__intro', event.target)
 
-        let targetClassList = event.target.classList
-        let isDown = targetClassList.contains('down')
-        let songListInfoIntro = this.closet('.module_info__intro', event.target)
-
-        if (isDown) {
-          targetClassList.remove('down')
-          targetClassList.add('up')
-        } else {
-          targetClassList.remove('up')
-          targetClassList.add('down')
-        }
-        songListInfoIntro.classList.toggle('show_more', isDown)
+      if (isDown) {
+        targetClassList.remove('down')
+        targetClassList.add('up')
+      } else {
+        targetClassList.remove('up')
+        targetClassList.add('down')
       }
+      songListInfoIntro.classList.toggle('show_more', isDown)
     }
   }
+}
 </script>
 
 <style scoped lang="less">

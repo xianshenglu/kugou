@@ -17,13 +17,13 @@ import PubModuleTitle from '../public/PubModuleTitle'
 
 export default {
   name: 'SingerCategoryInfo',
-  props: ['curSingerCategoryInfo','isCurSingerCategoryInfoShow'],
-  components:{
+  props: ['curSingerCategoryInfo', 'isCurSingerCategoryInfoShow'],
+  components: {
     PubModuleTitle
   },
   created() {
     let singerCategoryInfoId = this.$route.path.split('/').pop()
-    if(!this.$props.isCurSingerCategoryInfoShow){
+    if (!this.$props.isCurSingerCategoryInfoShow) {
       this.$emit('getCurSingerCategoryInfo', singerCategoryInfoId)
     }
   },
@@ -31,11 +31,13 @@ export default {
     //数据异步更新，没有被刷新，手动销毁数据，数据准备好了之后，再渲染
     this.$emit('destroyCurSingerCategoryInfo')
   },
-  inject:['closet'],
-  methods:{
-    updateCurSingerCategoryInfo(){
-      let singerId = this.closet('[href]', event.target).href.split('/').pop()
-      this.$emit('updateCurSingerCategoryInfo',singerId)
+  methods: {
+    updateCurSingerCategoryInfo() {
+      let singerId = utils
+        .closest('[href]', event.target)
+        .href.split('/')
+        .pop()
+      this.$emit('updateCurSingerCategoryInfo', singerId)
     }
   }
 }

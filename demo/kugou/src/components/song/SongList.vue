@@ -22,11 +22,13 @@ export default {
   components: {
     PubList
   },
-  inject:['closet'],
-  methods:{
-    updateCurSongListInfo(){
-      let songListId = this.closet('[href]', event.target).href.split('/').pop()
-      this.$emit('updateCurSongListInfo',songListId)
+  methods: {
+    updateCurSongListInfo() {
+      let songListId = utils
+        .closest('[href]', event.target)
+        .href.split('/')
+        .pop()
+      this.$emit('updateCurSongListInfo', songListId)
     }
   }
 }

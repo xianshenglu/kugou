@@ -15,11 +15,13 @@
 export default {
   name: 'SingerCategory',
   props: ['singerCategories'],
-  inject:['closet'],
-  methods:{
-    updateCurSingerCategoryInfo(){
-      let singerId=this.closet('[href]',event.target).href.split('/').pop()
-      this.$emit('updateCurSingerCategoryInfo',singerId)
+  methods: {
+    updateCurSingerCategoryInfo() {
+      let singerId = utils
+        .closest('[href]', event.target)
+        .href.split('/')
+        .pop()
+      this.$emit('updateCurSingerCategoryInfo', singerId)
     }
   }
 }

@@ -14,11 +14,13 @@ export default {
   components: {
     PubList
   },
-  inject:['closet'],
   methods: {
-    updateCurRankInfo(event){
-      let rankId = this.closet('[href]', event.target).href.split('/').pop()
-      this.$emit('updateCurRankInfo',rankId)
+    updateCurRankInfo(event) {
+      let rankId = utils
+        .closest('[href]', event.target)
+        .href.split('/')
+        .pop()
+      this.$emit('updateCurRankInfo', rankId)
     }
   }
 }
