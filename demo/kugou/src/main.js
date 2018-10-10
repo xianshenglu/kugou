@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index.js'
-import '../src/assets/js/mobileLayout.js'
+// import '../src/assets/js/mobileLayout.js'
 import './assets/css/reset.css'
 import './assets/css/base.less'
 import './assets/css/iconfont.css'
