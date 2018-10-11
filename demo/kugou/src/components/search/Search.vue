@@ -1,36 +1,38 @@
 <template>
   <section class="search">
     <PubModuleTitle :title="title"></PubModuleTitle>
-    <form action="#" class="search__form">
+    <form  class="search__form">
       <input type="text" :placeholder="placeholder" class="search__input" :value.sync="keyword" @input="keyword=arguments[0].target.value.trim()">
       <button :class="isSearchBtnActive?'search__btn search__btn--active':'search__btn'" type="button" @click="getSearchRes">{{title}}</button>
     </form>
     <div class="search__rec" v-if="isSearchRecShow">
       <h6 class="search__type">{{searchType}}</h6>
       <ul class="search__list">
-        <li class="search__item main_border_bottom" v-for="(item,index) in searchRecArr" :key="index">{{item.keyword}}</li>
+        <li class="search__item main_border_bottom" v-for="(item,index) in searchRecArr" :key="index" @click="getTargetList(item.keyword)">{{item.keyword}}</li>
       </ul>
     </div>
     <div class="search__res" v-if="isCurSearchResShow">
-      <div class="search__count"></div>
+      <div class="search__count">共有{{curSearchRes.info.length}}条结果</div>
+      <PubMusicList :musicList="curSearchRes.info" class="search__res-list"></PubMusicList>
     </div>
   </section>
 </template>
 
 <script>
 import PubModuleTitle from '../public/PubModuleTitle'
+import PubMusicList from '../public/PubMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
 export default {
   name: 'Search',
   props: [
     'searchRecArr',
-    'isSearchRecShow',
-    'curSearchRes',
-    'isCurSearchResShow'
+
+
   ],
   components: {
-    PubModuleTitle
+    PubModuleTitle,
+    PubMusicList
   },
   data() {
     return {
@@ -38,8 +40,15 @@ export default {
       searchType: '最近热门',
       placeholder: '歌手/歌名/拼音',
       keyword: '',
-      isSearchBtnActive: true
+      isSearchBtnActive: true,
+      isSearchRecShow:true,
+      curSearchRes: {},
+      isCurSearchResShow:false  ,
+
     }
+  },
+  created() {
+    this.$emit('getSearchRec')
   },
   methods: {
     getSearchRes() {
@@ -48,8 +57,14 @@ export default {
       }
       let url = api.searchResult + encodeURIComponent(this.keyword)
       axios.get(url).then(res => {
-        console.log(res)
+        this.curSearchRes = res.data.data
+        this.isCurSearchResShow = true
+        this.isSearchRecShow=false
       })
+    },
+    getTargetList(val) {
+      this.keyword = val
+      this.getSearchRes()
     }
   }
 }
@@ -118,36 +133,17 @@ export default {
   font-size: 20px;
   line-height: 64px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.search__count {
+  color:#5d5d5d;
+  line-height:28px;
+  padding-left:16px;
+  width:100%;
+  box-sizing:border-box;
+  font-size:14px;
+  background-color:#e6e6e6;
+}
+.search__res-list {
+  // height:calc(1);
+  overflow-y:scroll;
+}
 </style>
