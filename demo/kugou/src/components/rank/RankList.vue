@@ -1,5 +1,5 @@
 <template>
-  <section class="rank_list" @click="updateCurRankInfo">
+  <section class="rank_list">
     <PubList :pubList="rankList">
       <div class="rank_list__info" slot-scope="props" slot="cont">{{props.data.title}}</div>
     </PubList>
@@ -8,20 +8,33 @@
 
 <script>
 import PubList from '../public/PubList'
+import axios from 'axios'
+import api from '../../assets/js/api.js'
+
 export default {
   name: 'RankList',
-  props: ['rankList'],
   components: {
     PubList
   },
-  methods: {
-    updateCurRankInfo(event) {
-      let rankId = utils
-        .closest('[href]', event.target)
-        .href.split('/')
-        .pop()
-      this.$emit('updateCurRankInfo', rankId)
+  data(){
+    return {
+      rankList:[]
     }
+  },
+  created(){
+    this.getRank()
+  },
+  methods: {
+    getRank() {
+      axios.get(api.rankList).then(({ data }) => {
+        data.rank.list.forEach(obj => {
+          obj.imgUrl = obj.imgurl.replace(/\{size\}/, 400)
+          obj.path = '/rank/info/' + obj.rankid
+          obj.title = obj.rankname
+          this.rankList.push(obj)
+        })
+      })
+    },
   }
 }
 </script>

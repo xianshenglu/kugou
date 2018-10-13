@@ -1,9 +1,9 @@
 <template>
   <section class="search">
     <PubModuleTitle :title="title"></PubModuleTitle>
-    <form  class="search__form">
-      <input type="text" :placeholder="placeholder" class="search__input" :value.sync="keyword" @input="keyword=arguments[0].target.value.trim()">
-      <button :class="isSearchBtnActive?'search__btn search__btn--active':'search__btn'" type="button" @click="getSearchRes">{{title}}</button>
+    <form class="search__form">
+      <input type="text" :placeholder="placeholder" class="search__input" :value.sync="keyword" @input="keyword=arguments[0].target.value.trim()" @keyup.enter="getSearchRes">
+      <button :class="isSearchResShow?'search__btn search__btn--active':'search__btn'" type="button" @click="getSearchRes">{{title}}</button>
     </form>
     <div class="search__rec" v-if="isSearchRecShow">
       <h6 class="search__type">{{searchType}}</h6>
@@ -11,9 +11,9 @@
         <li class="search__item main_border_bottom" v-for="(item,index) in searchRecArr" :key="index" @click="getTargetList(item.keyword)">{{item.keyword}}</li>
       </ul>
     </div>
-    <div class="search__res" v-if="isCurSearchResShow">
-      <div class="search__count">共有{{curSearchRes.info.length}}条结果</div>
-      <PubMusicList :musicList="curSearchRes.info" class="search__res-list"></PubMusicList>
+    <div class="search__res" v-if="isSearchResShow">
+      <div class="search__count">共有{{searchRes.info.length}}条结果</div>
+      <PubMusicList :musicList="searchRes.info" class="search__res-list"></PubMusicList>
     </div>
   </section>
 </template>
@@ -25,11 +25,6 @@ import axios from 'axios'
 import api from '../../assets/js/api.js'
 export default {
   name: 'Search',
-  props: [
-    'searchRecArr',
-
-
-  ],
   components: {
     PubModuleTitle,
     PubMusicList
@@ -40,26 +35,38 @@ export default {
       searchType: '最近热门',
       placeholder: '歌手/歌名/拼音',
       keyword: '',
+      searchRecArr: [],
       isSearchBtnActive: true,
-      isSearchRecShow:true,
-      curSearchRes: {},
-      isCurSearchResShow:false  ,
-
+      isSearchRecShow: true,
+      searchRes: {},
+      isSearchResShow: false
     }
   },
   created() {
-    this.$emit('getSearchRec')
+    this.getSearchRec()
   },
   methods: {
+    getSearchRec() {
+      axios
+        .get(api.hotSearch)
+        .then(({ data }) => {
+          data.data.info.forEach(obj => {
+            this.searchRecArr.push(obj)
+          })
+        })
+        .catch(err => {
+          alert(err)
+        })
+    },
     getSearchRes() {
       if (this.keyword === '') {
         return
       }
       let url = api.searchResult + encodeURIComponent(this.keyword)
       axios.get(url).then(res => {
-        this.curSearchRes = res.data.data
-        this.isCurSearchResShow = true
-        this.isSearchRecShow=false
+        this.searchRes = res.data.data
+        this.isSearchResShow = true
+        this.isSearchRecShow = false
       })
     },
     getTargetList(val) {
@@ -92,10 +99,7 @@ export default {
 
   border-radius: 5px;
 }
-.search__btn--active {
-  color: @white;
-  background: @theme-color;
-}
+
 .search__input {
   width:277px;
   margin-right: 10px;
@@ -110,9 +114,9 @@ export default {
   color:@white-to-black;
   background-color:@light-2-white;
 }
-.search__btn.active {
+.search__btn--active {
   color: @white;
-  background-color:@theme-color;
+  background: @theme-color;
 }
 .search__type {
   height: 51px;

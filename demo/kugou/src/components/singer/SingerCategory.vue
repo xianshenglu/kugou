@@ -1,5 +1,5 @@
 <template>
-  <section class="singer_category" @click="updateCurSingerCategoryInfo">
+  <section class="singer_category" >
     <ul class="singer_category__list main_border" v-for="(list,list_index) in singerCategories" :key="list_index">
       <li class="singer_category__item main_border_bottom" v-for="(item,index) in list.data" :key="'1'+index">
         <router-link :to="item.path" class="singer_category__link">
@@ -12,16 +12,38 @@
 </template>
 
 <script>
+import axios from 'axios'
+import api from '../../assets/js/api.js'
+
 export default {
   name: 'SingerCategory',
-  props: ['singerCategories'],
+  data(){
+    return {
+       singerCategories: [],
+    }
+  },
+  created(){
+    this.getSingerCategories()
+  },
   methods: {
-    updateCurSingerCategoryInfo() {
-      let singerId = utils
-        .closest('[href]', event.target)
-        .href.split('/')
-        .pop()
-      this.$emit('updateCurSingerCategoryInfo', singerId)
+    getSingerCategories() {
+      axios.get(api.singerCategory).then(({ data }) => {
+        data.list.reduce((re, obj) => {
+          obj.path = '/singer/list/' + obj.classid
+          let findCategories = re.find(
+            o => o.category === obj.classname.substring(0, 2)
+          )
+          if (findCategories) {
+            findCategories.data.push(obj)
+          } else {
+            re.push({
+              category: obj.classname.substring(0, 2),
+              data: [obj]
+            })
+          }
+          return re
+        }, this.singerCategories)
+      })
     }
   }
 }

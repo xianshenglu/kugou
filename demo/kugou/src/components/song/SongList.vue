@@ -1,5 +1,5 @@
 <template>
-  <section class="song_list" @click="updateCurSongListInfo">
+  <section class="song_list">
     <PubList :pubList="songList">
       <div class="song_list__info" slot-scope="props" slot="cont">
         <div class="song_list__title">{{props.data.title}}</div>
@@ -16,20 +16,34 @@
 
 <script>
 import PubList from '../public/PubList'
+import axios from 'axios'
+import api from '../../assets/js/api.js'
+
 export default {
   name: 'SongList',
-  props: ['songList'],
   components: {
     PubList
   },
-  methods: {
-    updateCurSongListInfo() {
-      let songListId = utils
-        .closest('[href]', event.target)
-        .href.split('/')
-        .pop()
-      this.$emit('updateCurSongListInfo', songListId)
+  data(){
+    return {
+      songList:[]
     }
+  },
+  created(){
+    this.getSongList()
+  },
+  methods: {
+getSongList() {
+      axios.get(api.songList).then(({ data }) => {
+        data.plist.list.info.forEach(obj => {
+          obj.imgUrl = obj.imgurl.replace(/\{size\}/, 400)
+          obj.path = '/song/list/' + obj.specialid
+          obj.title = obj.specialname
+          obj.popularity = obj.playcount
+          this.songList.push(obj)
+        })
+      })
+    },
   }
 }
 </script>

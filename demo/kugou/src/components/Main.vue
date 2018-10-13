@@ -1,7 +1,7 @@
 <template>
   <main class="main">
     <PubNav :navs="navs"></PubNav>
-    <router-view :newSongs="newSongs" :rankList="rankList" :songList="songList" :singerCategories="singerCategories" class="main__cont" @getCurRankInfo="getCurRankInfo"></router-view>
+    <router-view class="main__cont"></router-view>
   </main>
 </template>
 
@@ -9,7 +9,7 @@
 import PubNav from './public/PubNav'
 export default {
   name: 'Main',
-  props: ['navs', "newSongs", "rankList", "songList", "singerCategories"],
+  props: ['navs', "rankList", "songList", "singerCategories"],
   components: {
     PubNav
   },

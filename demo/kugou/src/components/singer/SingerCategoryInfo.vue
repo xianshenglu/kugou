@@ -1,8 +1,8 @@
 <template>
-  <section class="singer_category_info" v-if="isCurSingerCategoryInfoShow" @click="updateCurSingerCategoryInfo">
-    <PubModuleTitle :title="curSingerCategoryInfo.info.name"></PubModuleTitle>
+  <section class="singer_category_info" v-if="isSingerCategoryInfoShow">
+    <PubModuleTitle :title="singerCategoryInfo.info.name"></PubModuleTitle>
     <ul class="singer_category_info__list">
-      <li class="singer_category_info__item main_border_bottom" v-for="(item,index) in curSingerCategoryInfo.data" :key="index">
+      <li class="singer_category_info__item main_border_bottom" v-for="(item,index) in singerCategoryInfo.data" :key="index">
         <router-link :to="item.path" class="singer_category_info__link">
           <img :src="item.imgUrl" class="singer_category_info__img">
           <div class="singer_category_info__name">{{item.name}}</div>
@@ -14,30 +14,57 @@
 
 <script>
 import PubModuleTitle from '../public/PubModuleTitle'
+import axios from 'axios'
+import api from '../../assets/js/api.js'
 
 export default {
   name: 'SingerCategoryInfo',
-  props: ['curSingerCategoryInfo', 'isCurSingerCategoryInfoShow'],
   components: {
     PubModuleTitle
   },
+  data(){
+
+     return {
+       singerCategoryInfo: {},
+      isSingerCategoryInfoShow: false,
+     }
+  },
   created() {
     let singerCategoryInfoId = this.$route.path.split('/').pop()
-    if (!this.$props.isCurSingerCategoryInfoShow) {
-      this.$emit('getCurSingerCategoryInfo', singerCategoryInfoId)
-    }
+      this.getSingerCategoryInfo(singerCategoryInfoId)
   },
-  destroyed() {
-    //数据异步更新，没有被刷新，手动销毁数据，数据准备好了之后，再渲染
-    this.$emit('destroyCurSingerCategoryInfo')
-  },
+
   methods: {
-    updateCurSingerCategoryInfo() {
-      let singerId = utils
-        .closest('[href]', event.target)
-        .href.split('/')
-        .pop()
-      this.$emit('updateCurSingerCategoryInfo', singerId)
+    getSingerCategoryInfo(singerCategoryInfoId) {
+      axios
+        .get(
+          api.singerCategoryInfo.replace(
+            /singerCategoryInfoId?/i,
+            singerCategoryInfoId
+          )
+        )
+        .then(({ data }) => {
+          let singerCategoryInfo = {
+            info: {
+              id: data.classid,
+              name: data.classname,
+              count: data.singers.total
+            },
+            data: data.singers.list.info
+          }
+          data.singers.list.info.forEach(obj => {
+            obj.id = obj.singerid
+            obj.name = obj.singername
+            obj.imgUrl = obj.imgurl.replace(/\{size\}/, 400)
+            obj.path = '/singer/info/' + obj.id
+          })
+          Object.assign(this.singerCategoryInfo, singerCategoryInfo)
+          this.singerCategoryInfo=singerCategoryInfo
+          this.isSingerCategoryInfoShow = true
+        })
+        .catch(er => {
+          alert(er)
+        })
     }
   }
 }
@@ -80,30 +107,4 @@ export default {
   height: 61px;
   margin: 0 18px 0 13px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </style>

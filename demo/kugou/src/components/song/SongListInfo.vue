@@ -1,5 +1,5 @@
 <template>
-  <section class="song_list_info" v-if="isCurSongListInfoShow">
+  <section class="song_list_info" v-if="isSongListInfoShow">
     <PubModuleHead :moduleHeadInfo="getModuleHeadInfo()">
       <PubModuleDes slot="moduleDes" :description="getModuleHeadInfo().intro"></PubModuleDes>
     </PubModuleHead>
@@ -11,9 +11,11 @@
 import PubModuleHead from '../public/PubModuleHead'
 import PubModuleDes from '../public/PubModuleDes'
 import PubMusicList from '../public/PubMusicList'
+import axios from 'axios'
+import api from '../../assets/js/api.js'
+
 export default {
   name: 'SongListInfo',
-  props: ['curSongListInfo','isCurSongListInfoShow'],
   components: {
     PubModuleHead,
     PubMusicList,
@@ -21,27 +23,41 @@ export default {
   },
   data() {
     return {
+       songListInfo: {},
+      isSongListInfoShow: false,
       getModuleHeadInfo() {
         return {
-          imgUrl: this.$props.curSongListInfo.info.list.imgurl.replace(/\{\s*size\s*\}/, 400),
-          name: this.$props.curSongListInfo.info.list.specialname,
-          intro: this.$props.curSongListInfo.info.list.intro,
+          imgUrl: this.songListInfo.info.list.imgurl.replace(/\{\s*size\s*\}/, 400),
+          name: this.songListInfo.info.list.specialname,
+          intro: this.songListInfo.info.list.intro,
         }
       },
       getMusicList() {
-        return this.$props.curSongListInfo.songs.list.info
+        return this.songListInfo.songs.list.info
       }
     }
   },
   created() {
     let songListId = this.$route.path.split('/').pop()
-    if(!this.$props.isCurSongListInfoShow){
-      this.$emit('getCurSongListInfo', songListId)
+      this.getSongListInfo(songListId)
+  }
+  ,methods:{
+
+     getSongListInfo(songListId) {
+      axios
+        .get(api.songListInfo.replace(/songListId?/i, songListId))
+        .then(({ data }) => {
+          let songListInfo = {
+            info: data.info,
+            songs: data.list
+          }
+          this.songListInfo=songListInfo
+          this.isSongListInfoShow = true
+        })
+        .catch(er => {
+          alert(er)
+        })
     }
-  },
-  destroyed() {
-    //数据异步更新，没有被刷新，手动销毁数据，数据准备好了之后，再渲染
-    this.$emit('destroyCurSongListInfo')
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <section class="rank_info" v-if="isCurRankInfoShow">
+  <section class="rank_info" v-if="isRankInfoShow">
     <PubModuleHead :moduleHeadInfo="getModuleHeadInfo()">
       <time class="rank_info__update_time" slot="moduleUpdateTime">
         {{msg}} {{formatDate()}}
@@ -14,48 +14,62 @@
 <script>
 import PubModuleHead from '../public/PubModuleHead'
 import PubMusicList from '../public/PubMusicList'
+import axios from 'axios'
+import api from '../../assets/js/api.js'
+
 export default {
   name: 'RankInfo',
-  props: ['curRankInfo', 'isCurRankInfoShow'],
   components: {
     PubModuleHead,
     PubMusicList
   },
   data() {
     return {
+      rankInfo: {},
+      isRankInfoShow: false,
       msg: '上次更新时间 : ',
       formatDate() {
-        let date = new Date(this.$props.curRankInfo.songs.timestamp * 1000)
-        return date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0')
+        let date = new Date(this.rankInfo.songs.timestamp * 1000)
+        return (
+          date.getFullYear() +
+          '-' +
+          String(date.getMonth() + 1).padStart(2, '0') +
+          '-' +
+          String(date.getDate()).padStart(2, '0')
+        )
       },
       getModuleHeadInfo() {
-        //不用函数的话，直接用对象，在还没开始渲染的时候，就会求值，因为异步的数据还没到，导致下面值不对
-        //异步的数据到了，这边的数据变了也不会立马更新，会等到下一次点击
         return {
-          imgUrl: this.$props.curRankInfo.info.banner7url.replace(/\{\s*size\s*\}/, 400),
-          name: this.$props.curRankInfo.info.rankname
+          imgUrl: this.rankInfo.info.banner7url.replace(/\{\s*size\s*\}/, 400),
+          name: this.rankInfo.info.rankname
         }
       },
-      getMusicList(){
-        return this.$props.curRankInfo.songs.list
+      getMusicList() {
+        return this.rankInfo.songs.list
       }
     }
-
   },
   created() {
     let rankId = this.$route.path.split('/').pop()
-    if(!this.$props.isCurRankInfoShow){
-      this.$emit('getCurRankInfo', rankId)
+    this.getRankInfo(rankId)
+  },
+  methods: {
+    getRankInfo(rankId) {
+      axios
+        .get(api.rankInfo + rankId)
+        .then(res => {
+          let rankInfo = {
+            info: res.data.info,
+            songs: res.data.songs
+          }
+          this.rankInfo = rankInfo
+          this.isRankInfoShow = true
+        })
+        .catch(er => {
+          alert(er)
+        })
     }
-  },
-  updated() {
-    // console.log('updated')
-  },
-  destroyed() {
-    //数据异步更新，页面没有被刷新，直接用了上一次的数据
-    //所以这里手动销毁数据，数据准备好了之后，再渲染
-    this.$emit('destroyCurRankInfo')
-  },
+  }
 }
 </script>
 
@@ -106,10 +120,4 @@ export default {
   color: #fff;
   background-color: #f8b300;
 }
-
-
-
-
-
-
 </style>
