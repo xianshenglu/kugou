@@ -45,19 +45,18 @@ body {
   width: 8px;
   height: 8px;
 
+  transform: translate(-50%, -65%) rotate(45deg);
+
   border-width: inherit;
   border-style: none;
   border-color: inherit;
+  border-right-style: solid;
+  border-bottom-style: solid;
 }
-.more_btn.down::before {
-  transform: translate(-50%, -65%) rotate(45deg);
-
-  border-right-style: inherit;
-  border-bottom-style: inherit;
-}
-.more_btn.up::before {
+.more_btn--up::before {
   transform: translate(-50%, -35%) rotate(45deg);
 
+  border-style: none;
   border-top-style: solid;
   border-left-style: solid;
 }

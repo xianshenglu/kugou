@@ -1,7 +1,7 @@
 <template>
-  <div class="module_info__intro main_box_shadow">
+  <div :class="showMore?'module_info__intro main_box_shadow show_more':'module_info__intro main_box_shadow'">
     <p class="module_info__text">{{description}}</p>
-    <button class="more_btn down" @click="showMore"></button>
+    <button :class="showMore?'more_btn more_btn--up':'more_btn'" @click="showMore=!showMore"></button>
   </div>
 </template>
 
@@ -9,22 +9,12 @@
 export default {
   name: 'PubModuleDes',
   props: ['description'],
-  methods: {
-    showMore() {
-      let targetClassList = event.target.classList
-      let isDown = targetClassList.contains('down')
-      let songListInfoIntro = utils.closest('.module_info__intro', event.target)
-
-      if (isDown) {
-        targetClassList.remove('down')
-        targetClassList.add('up')
-      } else {
-        targetClassList.remove('up')
-        targetClassList.add('down')
-      }
-      songListInfoIntro.classList.toggle('show_more', isDown)
+  data() {
+    return {
+      showMore: false
     }
-  }
+  },
+  methods: {}
 }
 </script>
 
@@ -63,4 +53,6 @@ export default {
 
   border-width: inherit;
 }
+
+
 </style>
