@@ -13,21 +13,19 @@ import api from '../../assets/js/api.js'
 
 export default {
   name: 'NewSong',
-  data(){
+  data() {
     return {
-      newSongs:[]
+      newSongs: []
     }
   },
-  created(){
+  created() {
     this.getNewSong()
   },
-  methods:{
+  methods: {
     getNewSong() {
       axios.get(api.newSong).then(({ data }) => {
-        data.data.forEach(({ filename }) => {
-          this.newSongs.push({
-            filename
-          })
+        data.data.forEach(music => {
+          this.newSongs.push(music)
         })
       })
     }

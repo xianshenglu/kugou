@@ -9,15 +9,11 @@
 import PubNav from './public/PubNav'
 export default {
   name: 'Main',
-  props: ['navs', "rankList", "songList", "singerCategories"],
+  props: ['navs'],
   components: {
     PubNav
   },
-  methods: {
-    getCurRankInfo(event) {
-      this.$emit('getCurRankInfo', event)
-    }
-  }
+  methods: {}
 }
 </script>
 
