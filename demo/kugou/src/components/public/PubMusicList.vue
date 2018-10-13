@@ -2,7 +2,7 @@
   <ul class="pub_music__list">
     <li class="pub_music__item main_border_bottom" v-for="(item,index) in musicList" :key="index">
       <slot :data="index" name="index"></slot>
-      <div class="pub_music__name">{{item.filename}}</div>
+      <div class="pub_music__name" @click="wantPlay(item)">{{item.filename}}</div>
       <button class="pub_music__download">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-download"></use>
@@ -15,7 +15,12 @@
 <script>
 export default {
   name: 'PubMusicList',
-  props: ['musicList']
+  props: ['musicList'],
+  methods: {
+    wantPlay(music) {
+      this.$store.commit('wantPlay', music)
+    }
+  }
 }
 </script>
 
@@ -47,5 +52,4 @@ export default {
   height: 100%;
   padding: 0 13px;
 }
-
 </style>

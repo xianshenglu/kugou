@@ -2,22 +2,29 @@
   <div id="app" class="app">
     <PubHeader></PubHeader>
     <router-view class="app__cont" :navs="navs"></router-view>
-    <!-- <Player></Player> -->
+    <Player v-if="music"></Player>
   </div>
 </template>
 
 <script>
 import PubHeader from '@/components/public/PubHeader'
 import PubNav from './components/public/PubNav'
+import Player from './components/player/Player'
 import 'xsl-js-utils/dist/main.js'
 
 export default {
   name: 'App',
   components: {
     PubHeader,
-    PubNav
+    PubNav,
+    Player
   },
   created() {},
+  computed: {
+    music() {
+      return this.$store.state.music
+    }
+  },
   data() {
     return {
       navs: [
@@ -47,8 +54,7 @@ export default {
         }
       ]
     }
-  },
-  methods: {}
+  }
 }
 </script>
 
@@ -56,7 +62,7 @@ export default {
 .app {
   width: 100vw;
   height: 100vh;
-
+  position: relative;
   font-family: "Microsoft Yahei", "Avenir", Helvetica, Arial, sans-serif;
 
   -webkit-font-smoothing: antialiased;
