@@ -40,6 +40,7 @@ export default {
 .pub_list__img {
   width: 97px;
   height: 97px;
+  flex: 0 0 auto;
 }
 
 .pub_list__btn {
