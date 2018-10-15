@@ -45,7 +45,7 @@
       "autoprefixer": {},
       "postcss-pixel-to-viewport": {
         "viewportWidth": 375,
-        "viewportUnit": "vmin",
+        "viewportUnit": "vw",
         "propertyBlacklist": [
           "font",
           "font-size",
