@@ -1,7 +1,7 @@
 <template>
   <section class="search">
     <PubModuleTitle :title="title"></PubModuleTitle>
-    <form class="search__form">
+    <form class="search__form" @submit.prevent>
       <input type="text" :placeholder="placeholder" class="search__input" :value.sync="keyword" @input="keyword=arguments[0].target.value.trim()" @keyup.enter="getSearchRes">
       <button :class="isSearchResShow?'search__btn search__btn--active':'search__btn'" type="button" @click="getSearchRes">{{title}}</button>
     </form>
