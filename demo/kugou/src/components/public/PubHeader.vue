@@ -1,7 +1,9 @@
 <template>
   <header class="header">
     <button class="header__back arrow arrow--left" @click="goBack"></button>
-    <img class="header__logo" src="@/assets/images/logo.png">
+    <router-link to="/">
+      <img class=" header__logo" src="@/assets/images/logo.png">
+    </router-link>
     <router-link class="header__search_btn" to="/search/index">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-search"></use>
@@ -11,14 +13,14 @@
 </template>
 
 <script>
-  export default {
-    name:'PubHeader',
-    methods:{
-      goBack(){
-        history.go(-1)
-      }
+export default {
+  name: 'PubHeader',
+  methods: {
+    goBack() {
+      history.go(-1)
     }
   }
+}
 </script>
 
 <style lang="less" scoped>
