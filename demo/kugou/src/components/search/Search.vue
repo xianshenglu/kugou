@@ -36,7 +36,6 @@ export default {
       placeholder: '歌手/歌名/拼音',
       keyword: '',
       searchRecArr: [],
-      isSearchBtnActive: true,
       isSearchRecShow: true,
       searchRes: {},
       isSearchResShow: false
@@ -65,8 +64,8 @@ export default {
       let url = api.searchResult + encodeURIComponent(this.keyword)
       axios.get(url).then(res => {
         this.searchRes = res.data.data
-        this.isSearchResShow = true
         this.isSearchRecShow = false
+        this.isSearchResShow = true
       })
     },
     getTargetList(val) {
