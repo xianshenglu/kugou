@@ -9,7 +9,10 @@ export default new Vuex.Store({
     music: undefined,
     song: {},
     audioEl: {},
-    isPlaying: false
+    isPlaying: false,
+    device: {
+      vMax: Math.max(window.innerHeight, window.innerWidth)
+    }
   },
   mutations: {
     findAudioEl (state, el) {
