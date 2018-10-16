@@ -39,8 +39,17 @@ export default {
       isPlaying: state => state.isPlaying,
       song: state => state.song,
       music: state => state.music,
-      audioEl: state => state.audioEl
+      audioEl: state => state.audioEl,
+      vMax: state => state.device.vMax
     })
+  },
+  beforeCreate() {
+    window.onresize = () => {
+      this.isPlayerMin = window.innerHeight > this.vMax * 0.8
+    }
+  },
+  destroyed() {
+    window.onresize = null
   },
   mounted() {
     this.$store.commit('findAudioEl', this.$refs.audioEl)
