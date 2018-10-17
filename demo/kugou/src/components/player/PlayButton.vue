@@ -1,9 +1,9 @@
 <template>
-  <button class="is_playing" @click="togglePlay">
-    <svg class="icon" aria-hidden="true" v-show="isPlaying">
+  <button class="play" @touchstart="togglePlay">
+    <svg class="icon play__pause" aria-hidden="true" v-show="isPlaying">
       <use xlink:href="#icon-pause"></use>
     </svg>
-    <svg class="icon" aria-hidden="true" v-show="!isPlaying">
+    <svg class="icon play__play" aria-hidden="true" v-show="!isPlaying">
       <use xlink:href="#icon-play"></use>
     </svg>
   </button>
@@ -19,16 +19,18 @@ export default {
   },
   methods: {
     togglePlay() {
-      if (this.$store.state.isPlaying) {
-        this.$store.commit('pause')
-      } else {
-        this.$store.commit('play')
-      }
+      this.$store.commit('togglePlay')
     }
   }
 }
 </script>
 
 <style scoped>
-
+.play__play {
+  transform: translate(1px,-2px);
+}
+.play__pause{
+  font-size: 1.2em;
+  transform: translate(-2px,-4px);
+}
 </style>

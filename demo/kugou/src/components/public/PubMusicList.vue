@@ -18,7 +18,10 @@ export default {
   props: ['musicList'],
   methods: {
     wantPlay(music) {
-      this.$store.commit('wantPlay', music)
+      this.$store.commit('wantPlay', {
+        music,
+        musicList: this.$props.musicList
+      })
     }
   }
 }

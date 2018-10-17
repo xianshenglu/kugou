@@ -27,7 +27,7 @@ export default {
     },
     singerImg() {
       if (!this.song.imgUrl) {
-        console.log(this.song, this.song.imgUrl)
+        // console.log(this.song, this.song.imgUrl)
         return
       }
       return this.song.imgUrl.replace(/\{\s*size\s*\}/, 400)
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     play() {
-      this.$store.commit('play')
+      this.$store.commit('togglePlay')
     }
   }
 }
