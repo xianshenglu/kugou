@@ -7,7 +7,7 @@ Vue.use(Vuex)
 let store = new Vuex.Store({
   state: {
     musicList: [],
-    music: undefined,
+    music: null,
     song: {},
     audioEl: {},
     isPlaying: false,
