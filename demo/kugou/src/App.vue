@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="app">
+  <div id="app" class="app" ref="app">
     <PubHeader></PubHeader>
     <router-view class="app__cont" :navs="navs"></router-view>
     <Player v-if="music"></Player>
@@ -19,10 +19,15 @@ export default {
     PubNav,
     Player
   },
-  created() {},
+  created() {
+    this.$refs.app.style.height = this.vMax + 'px'
+  },
   computed: {
     music() {
       return this.$store.state.music
+    },
+    vMax() {
+      return this.$store.state.device.vMax
     }
   },
   data() {
@@ -64,7 +69,7 @@ export default {
   height: 100vh;
   position: relative;
   font-family: "Microsoft Yahei", "Avenir", Helvetica, Arial, sans-serif;
-
+  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
