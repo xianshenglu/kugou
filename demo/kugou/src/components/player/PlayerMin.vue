@@ -47,7 +47,7 @@ export default {
   width: 68px;
   height: 68px;
   margin: 0 10px 0 4px;
-
+  border-radius: 5px;
 }
 .player__song_info {
   width: 158px;

@@ -48,6 +48,7 @@ export default {
 
   border-width: 2.2px;
   border-color: #fff;
+  transform: rotate(-45deg) translateY(-2px);
 }
 .header__search_btn {
   display: block;
@@ -55,7 +56,7 @@ export default {
   width: 27px;
   height: 27px;
 
-  transform: translate(1px, -1px);
+  transform: translate(1px, -3px);
 
   font-size: 27px;
 }
