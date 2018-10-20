@@ -1,6 +1,6 @@
 <template>
   <section>
-    <Slider></Slider>
+    <Slider :data="slider"></Slider>
     <PubMusicList :musicList="newSongs"></PubMusicList>
   </section>
 </template>
@@ -15,7 +15,8 @@ export default {
   name: 'NewSong',
   data() {
     return {
-      newSongs: []
+      newSongs: [],
+      slider: []
     }
   },
   created() {
@@ -24,9 +25,8 @@ export default {
   methods: {
     getNewSong() {
       axios.get(api.newSong).then(({ data }) => {
-        data.data.forEach(music => {
-          this.newSongs.push(music)
-        })
+        this.newSongs = data.data
+        this.slider = data.banner
       })
     }
   },
