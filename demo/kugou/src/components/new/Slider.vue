@@ -1,6 +1,6 @@
 <template>
   <section class="slider">
-    <swiper :options="swiperOptions" ref="mySwiper" class="slider__body">
+    <swiper :options="swiperOptions" ref="mySwiper" class="slider__body" @imagesReady="imagesReady">
       <swiper-slide v-for="(item,index) in data" :key="index">
         <a :href="item.extra.tourl" class="slider__link">
           <img :src="item.imgurl" :alt="item.title" class="slider__img">
@@ -25,13 +25,22 @@ export default {
     return {
       swiperOptions: {
         autoplay: {
-          delay: 2000
+          delay: 3000
         },
         pagination: {
           el: '.swiper-pagination',
           type: 'bullets',
           clickable: true,
           hideOnClick: false
+        },
+        on: {
+          imagesReady: function() {
+            console.log('imagesReady') //this doesn't work!
+            // this.swiper.autoplay.start()
+          },
+          init: function() {
+            console.log('initialized.') // this works
+          }
         }
       }
     }
@@ -39,6 +48,12 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
+    }
+  },
+  methods: {
+    imagesReady() {
+      //doesn't work to
+      console.log('imagesReady')
     }
   }
 }
@@ -49,7 +64,7 @@ export default {
 .slider {
   width: 100%;
   height: 154px;
-  padding-top: 6px;
+  padding-top: 3px;
   box-sizing: border-box;
   position: relative;
 }
