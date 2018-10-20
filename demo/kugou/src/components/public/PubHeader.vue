@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@themeColor: #2ca2f9;
+@import (reference) '../../assets/css/constant.less';
 .header {
   display: flex;
   align-items: center;
@@ -35,7 +35,7 @@ export default {
   padding: 0 12px;
 
   color: #fff;
-  background: @themeColor;
+  background: @theme-color;
 }
 .header__logo {
   width: 131px;
