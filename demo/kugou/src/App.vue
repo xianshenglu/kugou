@@ -65,8 +65,8 @@ export default {
 
 <style lang="less" scoped>
 .app {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: relative;
   font-family: "Microsoft Yahei", "Avenir", Helvetica, Arial, sans-serif;
   box-sizing: border-box;

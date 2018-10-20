@@ -47,14 +47,16 @@ export default {
     this.getSearchRec()
   },
   mounted() {
-    let search = document.getElementsByClassName('search')[0]
-    window.search = search
+    let search__cont = document.getElementsByClassName('search__cont')[0]
+    window.search__cont = search__cont
     //! bug with qq browser
-    window.addEventListener('touchmove', function() {
-      if (search.scrollTop) {
-        console.log('touchmove', search.scrollTop)
+    let listener = function() {
+      if (search__cont.scrollTop) {
+        console.log(event.type, search__cont.scrollTop)
       }
-    })
+    }
+    window.addEventListener('touchstart', listener)
+    window.addEventListener('touchmove', listener)
   },
   methods: {
     getSearchRec() {

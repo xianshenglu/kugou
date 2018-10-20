@@ -27,7 +27,6 @@ export default {
     },
     singerImg() {
       if (!this.song.imgUrl) {
-        // console.log(this.song, this.song.imgUrl)
         return
       }
       return this.song.imgUrl.replace(/\{\s*size\s*\}/, 400)
