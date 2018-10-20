@@ -1,19 +1,21 @@
 <template>
   <section class="search">
-    <PubModuleTitle :title="title"></PubModuleTitle>
-    <form class="search__form" @submit.prevent>
-      <input type="text" :placeholder="placeholder" class="search__input" :value.sync="keyword" @input="keyword=arguments[0].target.value.trim()" @keyup.enter="getSearchRes">
-      <button :class="isSearchResShow?'search__btn search__btn--active':'search__btn'" type="button" @click="getSearchRes">{{title}}</button>
-    </form>
-    <div class="search__rec" v-if="isSearchRecShow">
-      <h6 class="search__type">{{searchType}}</h6>
-      <ul class="search__list">
-        <li class="search__item main_border_bottom" v-for="(item,index) in searchRecArr" :key="index" @click="getTargetList(item.keyword)">{{item.keyword}}</li>
-      </ul>
-    </div>
-    <div class="search__res" v-if="isSearchResShow">
-      <div class="search__count">共有{{searchRes.info.length}}条结果</div>
-      <PubMusicList :musicList="searchRes.info" class="search__res-list"></PubMusicList>
+    <PubModuleTitle :title="title" class="search__title"></PubModuleTitle>
+    <div class="search__cont">
+      <form class="search__form" @submit.prevent>
+        <input type="text" :placeholder="placeholder" class="search__input" :value.sync="keyword" @input="keyword=arguments[0].target.value.trim()" @keyup.enter="getSearchRes">
+        <button :class="isSearchResShow?'search__btn search__btn--active':'search__btn'" type="button" @click="getSearchRes">{{title}}</button>
+      </form>
+      <div class="search__rec" v-if="isSearchRecShow">
+        <h6 class="search__type">{{searchType}}</h6>
+        <ul class="search__list">
+          <li class="search__item main_border_bottom" v-for="(item,index) in searchRecArr" :key="index" @click="getTargetList(item.keyword)">{{item.keyword}}</li>
+        </ul>
+      </div>
+      <div class="search__res" v-if="isSearchResShow">
+        <div class="search__count">共有{{searchRes.info.length}}条结果</div>
+        <PubMusicList :musicList="searchRes.info" class="search__res-list"></PubMusicList>
+      </div>
     </div>
   </section>
 </template>
@@ -43,6 +45,16 @@ export default {
   },
   created() {
     this.getSearchRec()
+  },
+  mounted() {
+    let search = document.getElementsByClassName('search')[0]
+    window.search = search
+    //! bug with qq browser
+    window.addEventListener('touchmove', function() {
+      if (search.scrollTop) {
+        console.log('touchmove', search.scrollTop)
+      }
+    })
   },
   methods: {
     getSearchRec() {
@@ -80,15 +92,18 @@ export default {
 @import (reference) "../../assets/css/constant.less";
 .search {
   box-sizing: border-box;
-  height: calc(100% - 58px);
-  padding-top:54px;
 
   font-size: 18px;
 }
+.search__cont {
+  height: calc(100% - 54px);
+  box-sizing: border-box;
+  overflow: scroll;
+}
 .search__form {
-  height: 37px;
+  height: 63px;
   padding: 13px;
-
+  box-sizing: border-box;
   background-color: @light-1-white;
 }
 .search__input,

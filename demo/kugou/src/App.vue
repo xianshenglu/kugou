@@ -19,7 +19,7 @@ export default {
     PubNav,
     Player
   },
-  created() {
+  mounted() {
     this.$refs.app.style.height = this.vMax + 'px'
   },
   computed: {
@@ -77,7 +77,7 @@ export default {
 .app__cont {
   overflow-y: auto;
 
-  height: calc(100vh - 58px);
+  height: calc(100% - 58px);
 }
 
 </style>

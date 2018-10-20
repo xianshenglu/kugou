@@ -22,16 +22,15 @@ export default {
   components: {
     PubModuleTitle
   },
-  data(){
-
-     return {
-       singerCategoryInfo: {},
-      isSingerCategoryInfoShow: false,
-     }
+  data() {
+    return {
+      singerCategoryInfo: {},
+      isSingerCategoryInfoShow: false
+    }
   },
   created() {
     let singerCategoryInfoId = this.$route.path.split('/').pop()
-      this.getSingerCategoryInfo(singerCategoryInfoId)
+    this.getSingerCategoryInfo(singerCategoryInfoId)
   },
 
   methods: {
@@ -59,7 +58,7 @@ export default {
             obj.path = '/singer/info/' + obj.id
           })
           Object.assign(this.singerCategoryInfo, singerCategoryInfo)
-          this.singerCategoryInfo=singerCategoryInfo
+          this.singerCategoryInfo = singerCategoryInfo
           this.isSingerCategoryInfoShow = true
         })
         .catch(er => {
@@ -74,22 +73,10 @@ export default {
 .singer_category_info {
   font-size: 19px;
 }
-.singer_category_info__title {
-  position: fixed;
-  top: 58px;
-
-  width: 100%;
-  height: 54px;
-
-  text-align: center;
-
-  background-color: #fff;
-
-  line-height: 54px;
-}
 .singer_category_info__list {
   height: calc(100% - 54px);
-  padding-top: 54px;
+  box-sizing: border-box;
+  overflow: scroll;
 }
 .singer_category_info__item {
   height: 88px;

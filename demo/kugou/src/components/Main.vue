@@ -22,7 +22,7 @@ export default {
   overflow-y: auto;
 
   box-sizing: border-box;
-  height: calc(100vh - 116px);
+  height: calc(100% - 58px);
 }
 
 </style>

@@ -4,27 +4,21 @@
 
 <script>
 export default {
-  name:'PubModuleTitle',
-  props:['title']
+  name: 'PubModuleTitle',
+  props: ['title']
 }
 </script>
 
 <style scoped lang="less">
 .module_title {
-  position: fixed;
-  top: 58px;
-
   width: 100%;
   height: 54px;
-
+  position: relative;
+  z-index: 1;
   text-align: center;
 
   background-color: #fff;
 
   line-height: 54px;
 }
-
-
-
-
 </style>
