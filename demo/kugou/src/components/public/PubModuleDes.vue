@@ -19,6 +19,7 @@ export default {
 </script>
 
 <style scoped lang="less">
+@import (reference) '../../assets/css/constant.less';
 .module_info__intro {
   display: flex;
   overflow: hidden;
@@ -44,7 +45,7 @@ export default {
   margin: auto 12px;
 
   border-width: 2px;
-  border-color:#bbb;
+  border-color:@light-3-white;
 }
 
 .more_btn::before {

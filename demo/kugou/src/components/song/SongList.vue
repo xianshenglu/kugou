@@ -24,16 +24,16 @@ export default {
   components: {
     PubList
   },
-  data(){
+  data() {
     return {
-      songList:[]
+      songList: []
     }
   },
-  created(){
+  created() {
     this.getSongList()
   },
   methods: {
-getSongList() {
+    getSongList() {
       axios.get(api.songList).then(({ data }) => {
         data.plist.list.info.forEach(obj => {
           obj.imgUrl = obj.imgurl.replace(/\{size\}/, 400)
@@ -43,12 +43,13 @@ getSongList() {
           this.songList.push(obj)
         })
       })
-    },
+    }
   }
 }
 </script>
 
 <style lang="less" scoped>
+@import (reference) '../../assets/css/constant.less';
 .song_list__info {
   height: 97px;
   margin-right: 10px;
@@ -71,7 +72,7 @@ getSongList() {
 }
 
 .song_list__popularity {
-  color: #9b9b9b;
+  color: @white-to-black;
 
   font-size: 15px;
 }

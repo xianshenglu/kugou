@@ -10,6 +10,7 @@ export default {
 </script>
 
 <style scoped lang="less">
+@import (reference) '../../assets/css/constant.less';
 .module_title {
   width: 100%;
   height: 54px;
@@ -17,7 +18,7 @@ export default {
   z-index: 1;
   text-align: center;
 
-  background-color: #fff;
+  background-color: @white;
 
   line-height: 54px;
 }

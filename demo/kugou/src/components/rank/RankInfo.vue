@@ -74,6 +74,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import (reference) '../../assets/css/constant.less';
 .rank_info__update_time {
   align-self: flex-end;
 
@@ -99,7 +100,7 @@ export default {
 
   text-align: center;
 
-  color: #999;
+  color: @white-to-black;
   border-radius: 9px;
 
   font-size: 13px;
@@ -107,17 +108,17 @@ export default {
 }
 
 .rank_info__index1 {
-  color: #fff;
-  background-color: #e80000;
+  color: @white;
+  background-color:@red ;
 }
 
 .rank_info__index2 {
-  color: #fff;
-  background-color: #ff7200;
+  color: @white;
+  background-color: @orange;
 }
 
 .rank_info__index3 {
-  color: #fff;
-  background-color: #f8b300;
+  color: @white;
+  background-color: @yellow;
 }
 </style>

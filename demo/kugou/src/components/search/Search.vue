@@ -148,22 +148,19 @@ export default {
   height: 64px;
   margin-left: 16px;
 
-  border-color:@light-3-white;
-
   font-size: 20px;
   line-height: 64px;
 }
 .search__count {
-  color:#5d5d5d;
+  color:@white-to-black;
   line-height:28px;
   padding-left:16px;
   width:100%;
   box-sizing:border-box;
   font-size:14px;
-  background-color:#e6e6e6;
+  background-color:@light-2-white;
 }
 .search__res-list {
-  // height:calc(1);
   overflow-y:scroll;
 }
 </style>

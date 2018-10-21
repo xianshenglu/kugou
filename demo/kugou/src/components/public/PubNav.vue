@@ -22,7 +22,7 @@ export default {
   box-sizing: border-box;
   width: 100%;
   padding: 0 13px;
-  box-shadow: 0 3px 3px 0 #eee;
+  box-shadow: 0 3px 3px 0 @light-3-white;
 }
 .nav__link {
   flex: 1 0 auto;

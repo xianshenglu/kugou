@@ -1,5 +1,5 @@
 <template>
-  <section class="singer_category" >
+  <section class="singer_category">
     <ul class="singer_category__list main_border" v-for="(list,list_index) in singerCategories" :key="list_index">
       <li class="singer_category__item main_border_bottom" v-for="(item,index) in list.data" :key="'1'+index">
         <router-link :to="item.path" class="singer_category__link">
@@ -17,12 +17,12 @@ import api from '../../assets/js/api.js'
 
 export default {
   name: 'SingerCategory',
-  data(){
+  data() {
     return {
-       singerCategories: [],
+      singerCategories: []
     }
   },
-  created(){
+  created() {
     this.getSingerCategories()
   },
   methods: {
@@ -50,6 +50,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import (reference) '../../assets/css/constant.less';
 .singer_category__list {
   width: 347px;
   margin: 18px auto;
@@ -57,7 +58,7 @@ export default {
 // border-bottom: none;
 
   border-radius: 6px;
-  background-color: #fbfbfb;
+  background-color: @white;
 
   font-size: 18px;
 }

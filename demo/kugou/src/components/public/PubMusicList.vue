@@ -28,6 +28,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import (reference) '../../assets/css/constant.less';
 .pub_music__list {
   padding-left: 19px;
 }
@@ -40,7 +41,6 @@ export default {
   width: 100%;
   height: 72px;
 
-  border-color: #eee;
 }
 
 .pub_music__name {

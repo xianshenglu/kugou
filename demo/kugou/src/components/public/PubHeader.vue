@@ -34,7 +34,7 @@ export default {
   height: 58px;
   padding: 0 12px;
 
-  color: #fff;
+  color: @white;
   background: @theme-color;
 }
 .header__logo {
@@ -47,7 +47,7 @@ export default {
   height: 16px;
 
   border-width: 2.2px;
-  border-color: #fff;
+  border-color: @white;
   transform: rotate(-45deg) translateY(-2px);
 }
 .header__search_btn {

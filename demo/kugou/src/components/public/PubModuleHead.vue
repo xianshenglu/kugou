@@ -11,17 +11,18 @@
 <script>
 export default {
   name: 'PubModuleHead',
-  props: ["moduleHeadInfo"]
+  props: ['moduleHeadInfo']
 }
 </script>
 
 <style lang="less" scoped>
+@import (reference) '../../assets/css/constant.less';
 .module__head {
   display: flex;
 
   height: 225px;
 
-  color: #fff;
+  color: @white;
   background-position: center center;
   background-size: cover;
 }

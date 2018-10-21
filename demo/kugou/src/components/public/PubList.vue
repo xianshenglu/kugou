@@ -26,8 +26,6 @@ export default {
 
 .pub_list__item {
   height: 123px;
-
-  border-color: #eee;
 }
 
 .pub_list__link {
