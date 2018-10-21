@@ -10,7 +10,6 @@
 import PubHeader from '@/components/public/PubHeader'
 import PubNav from './components/public/PubNav'
 import Player from './components/player/Player'
-import 'xsl-js-utils/dist/main.js'
 
 export default {
   name: 'App',

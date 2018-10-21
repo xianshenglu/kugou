@@ -16,9 +16,11 @@
 import PubModuleTitle from '../public/PubModuleTitle'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
+import utilsMixin from '../../assets/js/utilsMixin.js'
 
 export default {
   name: 'SingerCategoryInfo',
+  mixins: [utilsMixin],
   components: {
     PubModuleTitle
   },
@@ -54,7 +56,7 @@ export default {
           data.singers.list.info.forEach(obj => {
             obj.id = obj.singerid
             obj.name = obj.singername
-            obj.imgUrl = obj.imgurl.replace(/\{size\}/, 400)
+            obj.imgUrl = this.replaceImgUrlSize(obj.imgurl)
             obj.path = '/singer/info/' + obj.id
           })
           Object.assign(this.singerCategoryInfo, singerCategoryInfo)

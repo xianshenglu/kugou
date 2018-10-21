@@ -10,8 +10,10 @@
 import PlayerMin from './PlayerMin'
 import PlayerMax from './PlayerMax'
 import { mapState } from 'vuex'
+import utilsMixin from '../../assets/js/utilsMixin.js'
 export default {
   name: 'Player',
+  mixins: [utilsMixin],
   components: {
     PlayerMin,
     PlayerMax
@@ -29,7 +31,7 @@ export default {
       if (!this.song.imgUrl) {
         return
       }
-      return this.song.imgUrl.replace(/\{\s*size\s*\}/, 400)
+      return this.replaceImgUrlSize(this.song.imgUrl)
     },
     songName() {
       return this.music.filename.split(/\s+-\s+/)[1]

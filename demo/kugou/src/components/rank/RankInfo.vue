@@ -16,9 +16,11 @@ import PubModuleHead from '../public/PubModuleHead'
 import PubMusicList from '../public/PubMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
+import utilsMixin from '../../assets/js/utilsMixin.js'
 
 export default {
   name: 'RankInfo',
+  mixins: [utilsMixin],
   components: {
     PubModuleHead,
     PubMusicList
@@ -40,7 +42,7 @@ export default {
       },
       getModuleHeadInfo() {
         return {
-          imgUrl: this.rankInfo.info.banner7url.replace(/\{\s*size\s*\}/, 400),
+          imgUrl: this.replaceImgUrlSize(this.rankInfo.info.banner7url),
           name: this.rankInfo.info.rankname
         }
       },

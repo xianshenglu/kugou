@@ -10,31 +10,33 @@
 import PubList from '../public/PubList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
+import utilsMixin from '../../assets/js/utilsMixin.js'
 
 export default {
   name: 'RankList',
+  mixins: [utilsMixin],
   components: {
     PubList
   },
-  data(){
+  data() {
     return {
-      rankList:[]
+      rankList: []
     }
   },
-  created(){
+  created() {
     this.getRank()
   },
   methods: {
     getRank() {
       axios.get(api.rankList).then(({ data }) => {
         data.rank.list.forEach(obj => {
-          obj.imgUrl = obj.imgurl.replace(/\{size\}/, 400)
+          obj.imgUrl = this.replaceImgUrlSize(obj.imgurl)
           obj.path = '/rank/info/' + obj.rankid
           obj.title = obj.rankname
           this.rankList.push(obj)
         })
       })
-    },
+    }
   }
 }
 </script>

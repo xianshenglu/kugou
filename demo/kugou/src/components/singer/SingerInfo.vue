@@ -13,30 +13,33 @@ import PubModuleDes from '../public/PubModuleDes'
 import PubMusicList from '../public/PubMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
+import utilsMixin from '../../assets/js/utilsMixin.js'
+
 export default {
-  name:'SingerInfo',
-  components:{
+  name: 'SingerInfo',
+  mixins: [utilsMixin],
+  components: {
     PubModuleHead,
     PubMusicList,
     PubModuleDes
   },
-  data:function() {
+  data: function() {
     return {
       singerInfo: {},
       isSingerInfoShow: false,
-      getModuleHeadInfo(){
+      getModuleHeadInfo() {
         return this.singerInfo.info
       },
-      getMusicList(){
+      getMusicList() {
         return this.singerInfo.data
-       },
+      }
     }
   },
   created() {
     let singerId = this.$route.path.split('/').pop()
-      this.getSingerInfo(singerId)
+    this.getSingerInfo(singerId)
   },
-  methods:{
+  methods: {
     getSingerInfo(singerId) {
       axios
         .get(api.singerInfo.replace(/singerId?/i, singerId))
@@ -47,7 +50,7 @@ export default {
               name: data.info.singername,
               count: data.info.songcount,
               albumcount: data.info.albumcount,
-              imgUrl: data.info.imgurl.replace(/\{size\}/, 400),
+              imgUrl: this.replaceImgUrlSize(data.info.imgurl),
               intro: data.info.intro
             },
             data: data.songs.list
@@ -57,7 +60,7 @@ export default {
             // obj.path='/singer/info/'+obj.id
           })
           Object.assign(this.singerInfo, singerInfo)
-          this.singerInfo=singerInfo
+          this.singerInfo = singerInfo
           this.isSingerInfoShow = true
         })
         .catch(er => {
@@ -65,7 +68,6 @@ export default {
         })
     }
   }
-
 }
 </script>
 

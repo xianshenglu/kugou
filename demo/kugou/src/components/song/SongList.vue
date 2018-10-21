@@ -18,9 +18,11 @@
 import PubList from '../public/PubList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
+import utilsMixin from '../../assets/js/utilsMixin.js'
 
 export default {
   name: 'SongList',
+  mixins: [utilsMixin],
   components: {
     PubList
   },
@@ -36,7 +38,7 @@ export default {
     getSongList() {
       axios.get(api.songList).then(({ data }) => {
         data.plist.list.info.forEach(obj => {
-          obj.imgUrl = obj.imgurl.replace(/\{size\}/, 400)
+          obj.imgUrl = this.replaceImgUrlSize(obj.imgurl)
           obj.path = '/song/list/' + obj.specialid
           obj.title = obj.specialname
           obj.popularity = obj.playcount

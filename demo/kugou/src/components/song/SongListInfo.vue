@@ -13,9 +13,11 @@ import PubModuleDes from '../public/PubModuleDes'
 import PubMusicList from '../public/PubMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
+import utilsMixin from '../../assets/js/utilsMixin.js'
 
 export default {
   name: 'SongListInfo',
+  mixins: [utilsMixin],
   components: {
     PubModuleHead,
     PubMusicList,
@@ -23,13 +25,14 @@ export default {
   },
   data() {
     return {
-       songListInfo: {},
+      songListInfo: {},
       isSongListInfoShow: false,
       getModuleHeadInfo() {
+        let data = this.songListInfo.info.list
         return {
-          imgUrl: this.songListInfo.info.list.imgurl.replace(/\{\s*size\s*\}/, 400),
-          name: this.songListInfo.info.list.specialname,
-          intro: this.songListInfo.info.list.intro,
+          imgUrl: this.replaceImgUrlSize(data.imgurl),
+          name: data.specialname,
+          intro: data.intro
         }
       },
       getMusicList() {
@@ -39,11 +42,10 @@ export default {
   },
   created() {
     let songListId = this.$route.path.split('/').pop()
-      this.getSongListInfo(songListId)
-  }
-  ,methods:{
-
-     getSongListInfo(songListId) {
+    this.getSongListInfo(songListId)
+  },
+  methods: {
+    getSongListInfo(songListId) {
       axios
         .get(api.songListInfo.replace(/songListId?/i, songListId))
         .then(({ data }) => {
@@ -51,7 +53,7 @@ export default {
             info: data.info,
             songs: data.list
           }
-          this.songListInfo=songListInfo
+          this.songListInfo = songListInfo
           this.isSongListInfoShow = true
         })
         .catch(er => {
