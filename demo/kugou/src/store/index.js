@@ -12,6 +12,7 @@ let store = new Vuex.Store({
     audioEl: {},
     isPlaying: false,
     device: {
+      vh: document.documentElement.clientHeight,
       vMax: Math.max(document.documentElement.clientHeight, document.documentElement.clientWidth)
     }
   },

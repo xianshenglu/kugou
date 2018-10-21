@@ -1,10 +1,10 @@
 <template>
   <section class="singer_category_info" v-if="isSingerCategoryInfoShow">
     <PubModuleTitle :title="singerCategoryInfo.info.name"></PubModuleTitle>
-    <ul class="singer_category_info__list">
+    <ul class="singer_category_info__list" @scroll="loadImgLazy">
       <li class="singer_category_info__item main_border_bottom" v-for="(item,index) in singerCategoryInfo.data" :key="index">
         <router-link :to="item.path" class="singer_category_info__link">
-          <img :src="item.imgUrl" class="singer_category_info__img">
+          <img class="singer_category_info__img" ref="lazyImages" src="../../assets/images/default.png" :data-src="item.imgUrl" :data-is-loaded="isLoaded">
           <div class="singer_category_info__name">{{item.name}}</div>
         </router-link>
       </li>
@@ -34,7 +34,11 @@ export default {
     let singerCategoryInfoId = this.$route.path.split('/').pop()
     this.getSingerCategoryInfo(singerCategoryInfoId)
   },
-
+  mounted() {
+    this.$watch('isSingerCategoryInfoShow', function() {
+      this.loadImgLazy()
+    })
+  },
   methods: {
     getSingerCategoryInfo(singerCategoryInfoId) {
       axios

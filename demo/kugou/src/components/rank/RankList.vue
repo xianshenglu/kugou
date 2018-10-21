@@ -1,6 +1,6 @@
 <template>
   <section class="rank_list">
-    <PubList :pubList="rankList">
+    <PubList :pubList="rankList" v-if="rankList.length!==0">
       <div class="rank_list__info" slot-scope="props" slot="cont">{{props.data.title}}</div>
     </PubList>
   </section>

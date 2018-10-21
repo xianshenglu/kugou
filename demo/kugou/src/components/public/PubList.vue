@@ -1,8 +1,8 @@
 <template>
-  <ul class="pub_list">
+  <ul class="pub_list" @scroll="loadImgLazy">
     <li class="pub_list__item main_border_bottom" v-for="(item,index) in pubList" :key="index">
       <router-link :to="item.path" class="pub_list__link">
-        <img class="pub_list__img" :src="item.imgUrl">
+        <img class="pub_list__img" ref="lazyImages" src="../../assets/images/default.png" :data-src="item.imgUrl" :data-is-loaded="isLoaded">
         <slot :data="item" name="cont"></slot>
         <button class="pub_list__btn arrow arrow--right"></button>
       </router-link>
@@ -11,9 +11,14 @@
 </template>
 
 <script>
+import utilsMixin from '../../assets/js/utilsMixin.js'
 export default {
   name: 'PubList',
-  props: ['pubList']
+  mixins: [utilsMixin],
+  props: ['pubList'],
+  mounted() {
+    this.loadImgLazy()
+  }
 }
 </script>
 
@@ -22,6 +27,9 @@ export default {
   box-sizing: border-box;
   width: 100%;
   padding-left: 13px;
+  height: 100%;
+  //todo integrate with parentNode
+  overflow: scroll;
 }
 
 .pub_list__item {
