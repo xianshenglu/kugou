@@ -1,6 +1,6 @@
 <template>
   <section class="slider">
-    <swiper :options="swiperOptions" ref="mySwiper" class="slider__body" @imagesReady="imagesReady">
+    <swiper :options="swiperOptions" ref="mySwiper" class="slider__body">
       <swiper-slide v-for="(item,index) in data" :key="index">
         <a :href="item.extra.tourl" class="slider__link">
           <img :src="item.imgurl" :alt="item.title" class="slider__img">
@@ -25,7 +25,9 @@ export default {
     return {
       swiperOptions: {
         autoplay: {
-          delay: 3000
+          delay: 3000,
+          stopOnLastSlide: true,
+          disableOnInteraction: false
         },
         pagination: {
           el: '.swiper-pagination',
@@ -35,25 +37,19 @@ export default {
         },
         on: {
           imagesReady: function() {
-            console.log('imagesReady') //this doesn't work!
-            // this.swiper.autoplay.start()
+            this.autoplay.start()
           },
-          init: function() {
-            console.log('initialized.') // this works
+          slideChangeTransitionEnd: function() {
+            if (this.isEnd) {
+              this.autoplay.stop()
+              this.slideTo(0, 0)
+              setTimeout(() => {
+                this.autoplay.start()
+              }, this.params.autoplay.delay)
+            }
           }
         }
       }
-    }
-  },
-  computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper
-    }
-  },
-  methods: {
-    imagesReady() {
-      //doesn't work to
-      console.log('imagesReady')
     }
   }
 }
@@ -90,6 +86,9 @@ export default {
   width: 10px;
   height: 10px;
   margin: 4px;
+}
+/deep/ .swiper-pagination-bullet:last-child {
+  display: none;
 }
 /deep/ .swiper-pagination-bullet-active {
   opacity: 1;
