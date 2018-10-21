@@ -42,18 +42,23 @@ export default {
 
   width: 24px;
   height: 24px;
-  margin: auto 12px;
-
+  margin: auto;
+  margin-top: 3.5px;
+  margin-right: 12px;
+  box-sizing: border-box;
+  border-radius: 50%;
   border-width: 2px;
   border-color:@light-3-white;
+}
+
+.more_btn--up {
+  margin-bottom: auto;
 }
 
 .more_btn::before {
   width: 8px;
   height: 8px;
-
+  box-sizing: border-box;
   border-width: inherit;
 }
-
-
 </style>

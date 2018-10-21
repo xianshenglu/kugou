@@ -30,22 +30,22 @@ body {
   box-sizing: border-box;
   width: 24px;
   height: 24px;
-
   border: 2px solid @light-3-white;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .more_btn::before {
+  flex: 0 0 auto;
   content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
 
   display: block;
 
-  width: 8px;
-  height: 8px;
-
-  transform: translate(-50%, -65%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  transform: translate(0%, -15%) rotate(45deg);
 
   border-width: inherit;
   border-style: none;
@@ -54,7 +54,7 @@ body {
   border-bottom-style: solid;
 }
 .more_btn--up::before {
-  transform: translate(-50%, -35%) rotate(45deg);
+  transform: translate(0%, 15%) rotate(45deg);
 
   border-style: none;
   border-top-style: solid;
