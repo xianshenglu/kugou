@@ -1,6 +1,6 @@
 <template>
   <section>
-    <Slider :data="slider"></Slider>
+    <Slider :data="sliderData" v-if="sliderData.length"></Slider>
     <PubMusicList :musicList="newSongs"></PubMusicList>
   </section>
 </template>
@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       newSongs: [],
-      slider: []
+      sliderData: []
     }
   },
   created() {
@@ -26,7 +26,9 @@ export default {
     getNewSong() {
       axios.get(api.newSong).then(({ data }) => {
         this.newSongs = data.data
-        this.slider = data.banner
+        let banners = data.banner
+        banners.push(banners.slice(0, 1)[0])
+        this.sliderData = banners
       })
     }
   },
