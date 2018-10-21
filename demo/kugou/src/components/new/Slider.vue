@@ -42,10 +42,13 @@ export default {
           slideChangeTransitionEnd: function() {
             if (this.isEnd) {
               this.autoplay.stop()
-              this.slideTo(0, 0)
+              //! avoid blink in chrome, change to the same picture after render
               setTimeout(() => {
-                this.autoplay.start()
-              }, this.params.autoplay.delay)
+                this.slideTo(0, 0)
+                setTimeout(() => {
+                  this.autoplay.start()
+                }, this.params.autoplay.delay)
+              })
             }
           }
         }
