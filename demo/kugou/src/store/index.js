@@ -31,13 +31,13 @@ let store = new Vuex.Store({
         state.song = res.data
       })
     },
-    togglePlay (state) {
-      if (state.isPlaying) {
-        state.audioEl.pause()
-        state.isPlaying = false
-      } else {
+    togglePlay (state, status = !state.isPlaying) {
+      if (status) {
         state.audioEl.play()
         state.isPlaying = true
+      } else {
+        state.audioEl.pause()
+        state.isPlaying = false
       }
     },
     next (state) {

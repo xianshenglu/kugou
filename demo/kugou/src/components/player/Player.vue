@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     play() {
-      this.$store.commit('togglePlay')
+      this.$store.commit('togglePlay', true)
     }
   }
 }
