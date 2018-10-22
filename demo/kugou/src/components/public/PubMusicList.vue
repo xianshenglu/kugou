@@ -39,8 +39,8 @@ export default {
 
   box-sizing: border-box;
   width: 100%;
-  height: 72px;
-
+  min-height: 72px;
+  height: auto;
 }
 
 .pub_music__name {
