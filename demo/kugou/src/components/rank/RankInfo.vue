@@ -1,11 +1,11 @@
 <template>
   <section class="rank_info" v-if="isRankInfoShow">
-    <PubModuleHead :moduleHeadInfo="getModuleHeadInfo()">
+    <PubModuleHead :module-head-info="getModuleHeadInfo()">
       <time class="rank_info__update_time" slot="moduleUpdateTime">
         {{msg}} {{formatDate()}}
       </time>
     </PubModuleHead>
-    <PubMusicList :musicList="getMusicList()">
+    <PubMusicList :music-list="getMusicList()">
       <div :class="'rank_info__index '+'rank_info__index'+(props.data+1)" slot-scope="props" slot="index">{{props.data+1}}</div>
     </PubMusicList>
   </section>

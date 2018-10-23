@@ -1,7 +1,7 @@
 <template>
   <section>
-    <Slider :data="sliderData" v-if="sliderData.length"></Slider>
-    <PubMusicList :musicList="newSongs"></PubMusicList>
+    <Slider :data="sliderData"></Slider>
+    <PubMusicList :music-list="newSongs"></PubMusicList>
   </section>
 </template>
 

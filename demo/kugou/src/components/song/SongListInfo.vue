@@ -1,9 +1,9 @@
 <template>
   <section class="song_list_info" v-if="isSongListInfoShow">
-    <PubModuleHead :moduleHeadInfo="getModuleHeadInfo()">
+    <PubModuleHead :module-head-info="getModuleHeadInfo()">
       <PubModuleDes slot="moduleDes" :description="getModuleHeadInfo().intro"></PubModuleDes>
     </PubModuleHead>
-    <PubMusicList :musicList="getMusicList()"></PubMusicList>
+    <PubMusicList :music-list="getMusicList()"></PubMusicList>
   </section>
 </template>
 

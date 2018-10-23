@@ -1,6 +1,6 @@
 <template>
   <section class="song_list">
-    <PubList :pubList="songList" v-if="songList.length!==0">
+    <PubList :pub-list="songList" v-if="songList.length!==0">
       <div class="song_list__info" slot-scope="props" slot="cont">
         <div class="song_list__title">{{props.data.title}}</div>
         <div class="song_list__star">

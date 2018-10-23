@@ -1,7 +1,7 @@
 <template>
   <section class="player-box">
     <audio :src="song.url" class="hidden" ref="audioEl" @canplay="play"></audio>
-    <PlayerMin v-if="isPlayerMin" :songName="songName" :singerName="singerName" :singerImg="singerImg" :isPlaying="isPlaying"></PlayerMin>
+    <PlayerMin v-if="isPlayerMin" :song-name="songName" :singer-name="singerName" :singer-img="singerImg" :is-playing="isPlaying"></PlayerMin>
     <PlayerMax v-else></PlayerMax>
   </section>
 </template>

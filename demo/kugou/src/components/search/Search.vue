@@ -14,7 +14,7 @@
       </div>
       <div class="search__res" v-if="isSearchResShow">
         <div class="search__count">共有{{searchRes.info.length}}条结果</div>
-        <PubMusicList :musicList="searchRes.info" class="search__res-list"></PubMusicList>
+        <PubMusicList :music-list="searchRes.info" class="search__res-list"></PubMusicList>
       </div>
     </div>
   </section>
