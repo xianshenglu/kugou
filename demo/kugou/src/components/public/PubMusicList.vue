@@ -40,6 +40,7 @@ export default {
   box-sizing: border-box;
   width: 100%;
   min-height: 72px;
+  padding: 10px 0;
   height: auto;
 }
 
