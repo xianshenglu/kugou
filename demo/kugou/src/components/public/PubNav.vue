@@ -12,21 +12,24 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) '../../assets/css/constant.less';
+@import (reference) "../../assets/css/constant.less";
 
 .nav {
   position: relative;
   z-index: 1;
+
   display: flex;
 
   box-sizing: border-box;
   width: 100%;
   padding: 0 13px;
-  box-shadow: 0 3px 3px 0 @light-3-white;
+
+  box-shadow: 0 3px 3px 0 @light-2-white;
 }
 .nav__link {
-  flex: 1 0 auto;
   display: block;
+  flex: 1 0 auto;
+
   box-sizing: border-box;
   height: 58px;
 
@@ -40,4 +43,5 @@ export default {
 .nav__link--active {
   border-bottom-color: @theme-color;
 }
+
 </style>
