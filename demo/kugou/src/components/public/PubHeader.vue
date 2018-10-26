@@ -30,8 +30,6 @@ export default {
   align-items: center;
   justify-content: space-between;
 
-  box-sizing: border-box;
-  height: 58px;
   padding: 0 12px;
 
   color: @white;

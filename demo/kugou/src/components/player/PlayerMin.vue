@@ -30,61 +30,62 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import (reference) '../../assets/css/constant';
+@import (reference) "../../assets/css/constant";
 .player {
-  position: absolute;
-  z-index: 1;
-  bottom:0;
   display: flex;
-  width: 100%;
-  height: 75px;
   align-items: center;
 
-  box-sizing: border-box;
   background: @almost-black;
 }
 .player__singer_img {
   width: 68px;
   height: 68px;
   margin: 0 10px 0 4px;
+
   border-radius: 5px;
 }
 .player__song_info {
+  display: flex;
+  overflow: hidden;
+  flex-flow: column;
+
+  box-sizing: border-box;
   width: 158px;
   height: 42px;
-  box-sizing: border-box;
-  display: flex;
-  flex-flow: column;
-  overflow: hidden;
 }
 .player__singer_name,
-.player__song_name  {
- white-space: nowrap;
+.player__song_name {
+  white-space: nowrap;
 }
 .player__singer_name {
-  font-size: 12px;
   color: @white-to-black;
+
+  font-size: 12px;
 }
 
 .player__song_name {
-  line-height: 1.7;
-  font-size: 15px;
   color: @white;
+
+  font-size: 15px;
+  line-height: 1.7;
 }
 .player__buttons {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
   width: 150px;
   margin: 10px auto;
 }
-.player__btn_prev ,.play__btn_next{
+.player__btn_prev,
+.play__btn_next {
   font-size: 42px;
 }
 .player__btn_status {
   width: 32px;
   height: 32px;
-  font-size: 30px;
 
+  font-size: 30px;
 }
+
 </style>

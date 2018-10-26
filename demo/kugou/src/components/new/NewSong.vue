@@ -1,7 +1,7 @@
 <template>
-  <section>
-    <Slider :data="sliderData"></Slider>
-    <PubMusicList :music-list="newSongs"></PubMusicList>
+  <section class="new_song">
+    <Slider :data="sliderData" class="new_song__slider"></Slider>
+    <PubMusicList :music-list="newSongs" class="new_song__music_list"></PubMusicList>
   </section>
 </template>
 
@@ -40,5 +40,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+.new_song__slider {
+  width: 100%;
+  height: 154px;
+  box-sizing: border-box;
+}
 </style>

@@ -24,12 +24,7 @@ export default {
 
 <style lang="less" scoped>
 .pub_list {
-  box-sizing: border-box;
-  width: 100%;
   padding-left: 13px;
-  height: 100%;
-  //todo integrate with parentNode
-  overflow: scroll;
 }
 
 .pub_list__item {
@@ -44,9 +39,10 @@ export default {
 }
 
 .pub_list__img {
+  flex: 0 0 auto;
+
   width: 97px;
   height: 97px;
-  flex: 0 0 auto;
 }
 
 .pub_list__btn {
@@ -55,6 +51,7 @@ export default {
   margin-right: 15px;
   margin-left: auto;
 }
+
 
 
 

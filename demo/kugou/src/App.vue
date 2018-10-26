@@ -1,8 +1,8 @@
 <template>
   <div id="app" class="app" ref="app">
-    <PubHeader></PubHeader>
+    <PubHeader class="app__header"></PubHeader>
     <router-view class="app__cont" :navs="navs"></router-view>
-    <Player v-if="music"></Player>
+    <Player v-if="music" class="app__player"></Player>
   </div>
 </template>
 
@@ -72,11 +72,17 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.app__header {
+  height: 58px;
+  width: 100%;
+  box-sizing: border-box;
+}
 
 .app__cont {
   overflow-y: auto;
-
+  width: 100%;
   height: calc(100% - 58px);
+
 }
 
 </style>

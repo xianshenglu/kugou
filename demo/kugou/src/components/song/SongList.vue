@@ -1,6 +1,6 @@
 <template>
   <section class="song_list">
-    <PubList :pub-list="songList" v-if="songList.length!==0">
+    <PubList :pub-list="songList" v-if="songList.length!==0" class="song_list__cont">
       <div class="song_list__info" slot-scope="props" slot="cont">
         <div class="song_list__title">{{props.data.title}}</div>
         <div class="song_list__star">
@@ -51,7 +51,14 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) '../../assets/css/constant.less';
+@import (reference) "../../assets/css/constant.less";
+.song_list__cont {
+  overflow: scroll;
+
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
 .song_list__info {
   height: 97px;
   margin-right: 10px;

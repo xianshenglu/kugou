@@ -1,8 +1,8 @@
 <template>
-  <section class="player-box">
+  <section :class="isPlayerMin?'player_box player_box--min':'player_box player_box--max'">
     <audio :src="song.url" class="hidden" ref="audioEl" @canplay="play"></audio>
-    <PlayerMin v-if="isPlayerMin" :song-name="songName" :singer-name="singerName" :singer-img="singerImg" :is-playing="isPlaying"></PlayerMin>
-    <PlayerMax v-else></PlayerMax>
+    <PlayerMin v-if="isPlayerMin" class="player_box__player" :song-name="songName" :singer-name="singerName" :singer-img="singerImg" :is-playing="isPlaying"></PlayerMin>
+    <PlayerMax v-else class="player_box__player"></PlayerMax>
   </section>
 </template>
 
@@ -64,4 +64,27 @@ export default {
 </script>
 
 <style scoped lang="less">
+.player_box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+}
+.player_box--min {
+  height: 75px;
+}
+.player_box--max {
+  height: 100%;
+}
+.player_box__player {
+  position: absolute;
+  z-index: 1;
+  bottom:0;
+
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
 </style>

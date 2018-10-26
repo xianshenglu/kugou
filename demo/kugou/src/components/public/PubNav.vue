@@ -16,29 +16,24 @@ export default {
 
 .nav {
   position: relative;
-  z-index: 1;
 
   display: flex;
 
-  box-sizing: border-box;
-  width: 100%;
   padding: 0 13px;
-
-  box-shadow: 0 3px 3px 0 @light-2-white;
 }
 .nav__link {
   display: block;
   flex: 1 0 auto;
 
   box-sizing: border-box;
-  height: 58px;
+  height: 100%;
 
   text-align: center;
 
   border-bottom: 4px solid transparent;
 
   font-size: 21px;
-  line-height: 56px;
+  line-height: inherit;
 }
 .nav__link--active {
   border-bottom-color: @theme-color;

@@ -61,10 +61,7 @@ export default {
 <style scoped lang="less">
 @import (reference) '../../assets/css/constant.less';
 .slider {
-  width: 100%;
-  height: 154px;
-  padding-top: 3px;
-  box-sizing: border-box;
+  padding-top: 5px;
   position: relative;
 }
 .slider__body {
