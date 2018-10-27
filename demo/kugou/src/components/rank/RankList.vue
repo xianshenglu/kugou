@@ -1,6 +1,6 @@
 <template>
   <section class="rank_list">
-    <PubList :pub-list="rankList" v-if="rankList.length!==0" class="rank_list__cont">
+    <PubList :pub-list="rankList" class="rank_list__cont">
       <div class="rank_list__info" slot-scope="props" slot="cont">{{props.data.title}}</div>
     </PubList>
   </section>
@@ -49,11 +49,12 @@ export default {
   overflow: scroll;
 
   box-sizing: border-box;
+
   width: 100%;
+
   height: 100%;
 }
 .rank_list__info {
   padding-left: 18px;
 }
-
 </style>

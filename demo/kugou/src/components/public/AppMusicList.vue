@@ -15,7 +15,14 @@
 <script>
 export default {
   name: 'AppMusicList',
-  props: ['musicList'],
+  props: {
+    musicList: {
+      type: Array,
+      default() {
+        return []
+      }
+    }
+  },
   methods: {
     wantPlay(music) {
       this.$store.commit('wantPlay', {
@@ -28,7 +35,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) "../../assets/css/constant.less";
+@import (reference) '../../assets/css/constant.less';
 .music_list {
   padding-left: 19px;
 }
@@ -56,6 +63,4 @@ export default {
   height: 100%;
   padding: 0 13px;
 }
-
-
 </style>

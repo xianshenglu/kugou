@@ -1,18 +1,31 @@
 <template>
   <nav class="nav">
-    <router-link class="nav__link" v-for="(item,index) in navs" :key="index" :to="item.link" exact-active-class="nav__link--active">{{item.text}}</router-link>
+    <router-link
+      class="nav__link"
+      v-for="(item,index) in navs"
+      :key="index"
+      :to="item.link"
+      exact-active-class="nav__link--active"
+    >{{item.text}}</router-link>
   </nav>
 </template>
 
 <script>
 export default {
   name: 'AppNav',
-  props: ['navs']
+  props: {
+    navs: {
+      type: Array,
+      default() {
+        return []
+      }
+    }
+  }
 }
 </script>
 
 <style lang="less" scoped>
-@import (reference) "../../assets/css/constant.less";
+@import (reference) '../../assets/css/constant.less';
 
 .nav {
   position: relative;
@@ -38,6 +51,4 @@ export default {
 .nav__link--active {
   border-bottom-color: @theme-color;
 }
-
-
 </style>

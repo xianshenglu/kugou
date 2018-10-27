@@ -1,10 +1,20 @@
 <template>
-  <section class="singer_category_info" v-if="isSingerCategoryInfoShow">
-    <PubModuleTitle :title="singerCategoryInfo.info.name" />
+  <section class="singer_category_info">
+    <PubModuleTitle :title="singerCategoryInfo.info.name"/>
     <ul class="singer_category_info__list" @scroll="$_xsl__loadImgLazy">
-      <li class="singer_category_info__item main_border_bottom" v-for="(item,index) in singerCategoryInfo.data" :key="index">
+      <li
+        class="singer_category_info__item main_border_bottom"
+        v-for="(item,index) in singerCategoryInfo.data"
+        :key="index"
+      >
         <router-link :to="item.path" class="singer_category_info__link">
-          <img class="singer_category_info__img" ref="lazyImages" src="../../assets/images/default.png" :data-src="item.imgUrl" :data-is-loaded="isLoaded">
+          <img
+            class="singer_category_info__img"
+            ref="lazyImages"
+            src="../../assets/images/default.png"
+            :data-src="item.imgUrl"
+            :data-is-loaded="isLoaded"
+          >
           <div class="singer_category_info__name">{{item.name}}</div>
         </router-link>
       </li>
@@ -26,18 +36,22 @@ export default {
   },
   data() {
     return {
-      singerCategoryInfo: {},
-      isSingerCategoryInfoShow: false
+      singerCategoryInfo: {
+        info: {},
+        data: {}
+      }
+    }
+  },
+  watch: {
+    'singerCategoryInfo.data.length': function() {
+      this.$nextTick(function() {
+        this.$_xsl__loadImgLazy()
+      })
     }
   },
   created() {
     let singerCategoryInfoId = this.$route.path.split('/').pop()
     this.getSingerCategoryInfo(singerCategoryInfoId)
-  },
-  mounted() {
-    this.$watch('isSingerCategoryInfoShow', function() {
-      this.$_xsl__loadImgLazy()
-    })
   },
   methods: {
     getSingerCategoryInfo(singerCategoryInfoId) {
@@ -65,7 +79,6 @@ export default {
           })
           Object.assign(this.singerCategoryInfo, singerCategoryInfo)
           this.singerCategoryInfo = singerCategoryInfo
-          this.isSingerCategoryInfoShow = true
         })
         .catch(er => {
           alert(er)
@@ -101,6 +114,4 @@ export default {
   height: 61px;
   margin: 0 18px 0 13px;
 }
-
-
 </style>

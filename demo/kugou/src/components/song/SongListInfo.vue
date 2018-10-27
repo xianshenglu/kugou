@@ -1,9 +1,9 @@
 <template>
-  <section class="song_list_info" v-if="isSongListInfoShow">
-    <PubModuleHead :module-head-info="getModuleHeadInfo()">
-      <PubModuleDes slot="moduleDes" :description="getModuleHeadInfo().intro" />
+  <section class="song_list_info">
+    <PubModuleHead :module-head-info="getModuleHeadInfo">
+      <PubModuleDes slot="moduleDes" :description="getModuleHeadInfo.intro"/>
     </PubModuleHead>
-    <AppMusicList :music-list="getMusicList()" />
+    <AppMusicList :music-list="getMusicList"/>
   </section>
 </template>
 
@@ -25,19 +25,29 @@ export default {
   },
   data() {
     return {
-      songListInfo: {},
-      isSongListInfoShow: false,
-      getModuleHeadInfo() {
-        let data = this.songListInfo.info.list
-        return {
-          imgUrl: this.$_xsl__replaceImgUrlSize(data.imgurl),
-          name: data.specialname,
-          intro: data.intro
+      songListInfo: {
+        info: {
+          list: {}
+        },
+        songs: {
+          list: {
+            info: []
+          }
         }
-      },
-      getMusicList() {
-        return this.songListInfo.songs.list.info
       }
+    }
+  },
+  computed: {
+    getModuleHeadInfo() {
+      let data = this.songListInfo.info.list
+      return {
+        imgUrl: this.$_xsl__replaceImgUrlSize(data.imgurl),
+        name: data.specialname,
+        intro: data.intro
+      }
+    },
+    getMusicList() {
+      return this.songListInfo.songs.list.info
     }
   },
   created() {
@@ -54,7 +64,6 @@ export default {
             songs: data.list
           }
           this.songListInfo = songListInfo
-          this.isSongListInfoShow = true
         })
         .catch(er => {
           alert(er)

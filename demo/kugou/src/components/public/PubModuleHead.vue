@@ -11,7 +11,14 @@
 <script>
 export default {
   name: 'PubModuleHead',
-  props: ['moduleHeadInfo']
+  props: {
+    moduleHeadInfo: {
+      type: Object,
+      default() {
+        return {}
+      }
+    }
+  }
 }
 </script>
 
@@ -39,14 +46,13 @@ export default {
   text-align: center;
 
   background: linear-gradient(
-  to bottom,
-  rgba(0, 0, 0, 0.6) 5%,
-  rgba(107, 107, 107, 0.1) 90%,
-  rgba(255, 255, 255, 0)
+    to bottom,
+    rgba(0, 0, 0, 0.6) 5%,
+    rgba(107, 107, 107, 0.1) 90%,
+    rgba(255, 255, 255, 0)
   );
 
   font-size: 18px;
   line-height: 54px;
 }
-
 </style>

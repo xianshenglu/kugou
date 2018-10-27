@@ -1,9 +1,9 @@
 <template>
-  <section class="singer_info" v-if="isSingerInfoShow">
-    <PubModuleHead :module-head-info="getModuleHeadInfo()">
-      <PubModuleDes slot="moduleDes" :description="getModuleHeadInfo().intro" />
+  <section class="singer_info">
+    <PubModuleHead :module-head-info="getModuleHeadInfo">
+      <PubModuleDes slot="moduleDes" :description="getModuleHeadInfo.intro"/>
     </PubModuleHead>
-    <AppMusicList :music-list="getMusicList()" />
+    <AppMusicList :music-list="getMusicList"/>
   </section>
 </template>
 
@@ -25,14 +25,18 @@ export default {
   },
   data: function() {
     return {
-      singerInfo: {},
-      isSingerInfoShow: false,
-      getModuleHeadInfo() {
-        return this.singerInfo.info
-      },
-      getMusicList() {
-        return this.singerInfo.data
+      singerInfo: {
+        info: {},
+        data: []
       }
+    }
+  },
+  computed: {
+    getModuleHeadInfo() {
+      return this.singerInfo.info
+    },
+    getMusicList() {
+      return this.singerInfo.data
     }
   },
   created() {
@@ -61,7 +65,6 @@ export default {
           })
           Object.assign(this.singerInfo, singerInfo)
           this.singerInfo = singerInfo
-          this.isSingerInfoShow = true
         })
         .catch(er => {
           alert(er)

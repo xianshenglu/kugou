@@ -2,7 +2,13 @@
   <ul class="list" @scroll="$_xsl__loadImgLazy">
     <li class="list__item main_border_bottom" v-for="(item,index) in pubList" :key="index">
       <router-link :to="item.path" class="list__link">
-        <img class="list__img" ref="lazyImages" src="../../assets/images/default.png" :data-src="item.imgUrl" :data-is-loaded="isLoaded">
+        <img
+          class="list__img lazy_image"
+          ref="lazyImages"
+          src="../../assets/images/default.png"
+          :data-src="item.imgUrl"
+          :data-is-loaded="isLoaded"
+        >
         <slot :data="item" name="cont"></slot>
         <button class="list__btn arrow arrow--right"></button>
       </router-link>
@@ -15,9 +21,20 @@ import mixin from '../../mixins/index.js'
 export default {
   name: 'PubList',
   mixins: [mixin],
-  props: ['pubList'],
-  mounted() {
-    this.$_xsl__loadImgLazy()
+  props: {
+    pubList: {
+      type: Array,
+      default() {
+        return []
+      }
+    }
+  },
+  watch: {
+    'pubList.length': function() {
+      this.$nextTick(function() {
+        this.$_xsl__loadImgLazy(this.$refs.lazyImages)
+      })
+    }
   }
 }
 </script>
@@ -33,6 +50,7 @@ export default {
 
 .list__link {
   display: flex;
+
   align-items: center;
 
   height: 100%;
@@ -42,21 +60,14 @@ export default {
   flex: 0 0 auto;
 
   width: 97px;
+
   height: 97px;
 }
 
 .list__btn {
   flex: 0 0 auto;
 
-  margin-right: 15px;
   margin-left: auto;
+  margin-right: 15px;
 }
-
-
-
-
-
-
-
-
 </style>

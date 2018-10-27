@@ -1,12 +1,14 @@
 <template>
-  <section class="rank_info" v-if="isRankInfoShow">
-    <PubModuleHead :module-head-info="getModuleHeadInfo()">
-      <time class="rank_info__update_time" slot="moduleUpdateTime">
-        {{msg}} {{formatDate()}}
-      </time>
+  <section class="rank_info">
+    <PubModuleHead :module-head-info="getModuleHeadInfo">
+      <time class="rank_info__update_time" slot="moduleUpdateTime">{{msg}} {{formatDate}}</time>
     </PubModuleHead>
-    <appMusicList :music-list="getMusicList()">
-      <div :class="'rank_info__index '+'rank_info__index'+(props.data+1)" slot-scope="props" slot="index">{{props.data+1}}</div>
+    <appMusicList :music-list="getMusicList">
+      <div
+        :class="'rank_info__index '+'rank_info__index'+(props.data+1)"
+        slot-scope="props"
+        slot="index"
+      >{{props.data+1}}</div>
     </appMusicList>
   </section>
 </template>
@@ -27,28 +29,35 @@ export default {
   },
   data() {
     return {
-      rankInfo: {},
-      isRankInfoShow: false,
-      msg: '上次更新时间 : ',
-      formatDate() {
-        let date = new Date(this.rankInfo.songs.timestamp * 1000)
-        return (
-          date.getFullYear() +
-          '-' +
-          String(date.getMonth() + 1).padStart(2, '0') +
-          '-' +
-          String(date.getDate()).padStart(2, '0')
-        )
-      },
-      getModuleHeadInfo() {
-        return {
-          imgUrl: this.$_xsl__replaceImgUrlSize(this.rankInfo.info.banner7url),
-          name: this.rankInfo.info.rankname
+      rankInfo: {
+        info: {},
+        songs: {
+          timestamp: Date.now(),
+          list: []
         }
       },
-      getMusicList() {
-        return this.rankInfo.songs.list
+      msg: '上次更新时间 : '
+    }
+  },
+  computed: {
+    getModuleHeadInfo() {
+      return {
+        imgUrl: this.$_xsl__replaceImgUrlSize(this.rankInfo.info.banner7url),
+        name: this.rankInfo.info.rankname
       }
+    },
+    getMusicList() {
+      return this.rankInfo.songs.list
+    },
+    formatDate() {
+      let date = new Date(this.rankInfo.songs.timestamp * 1000)
+      return (
+        date.getFullYear() +
+        '-' +
+        String(date.getMonth() + 1).padStart(2, '0') +
+        '-' +
+        String(date.getDate()).padStart(2, '0')
+      )
     }
   },
   created() {
@@ -65,7 +74,6 @@ export default {
             songs: res.data.songs
           }
           this.rankInfo = rankInfo
-          this.isRankInfoShow = true
         })
         .catch(er => {
           alert(er)
@@ -76,7 +84,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) "../../assets/css/constant.less";
+@import (reference) '../../assets/css/constant.less';
 .rank_info__update_time {
   align-self: flex-end;
 
@@ -85,10 +93,10 @@ export default {
   padding-left: 16px;
 
   background: linear-gradient(
-  to top,
-  rgba(0, 0, 0, 0.6) 5%,
-  rgba(107, 107, 107, 0.1) 90%,
-  rgba(255, 255, 255, 0)
+    to top,
+    rgba(0, 0, 0, 0.6) 5%,
+    rgba(107, 107, 107, 0.1) 90%,
+    rgba(255, 255, 255, 0)
   );
 
   font-size: 15px;
@@ -111,7 +119,7 @@ export default {
 
 .rank_info__index1 {
   color: @white;
-  background-color:@red ;
+  background-color: @red;
 }
 
 .rank_info__index2 {
@@ -123,5 +131,4 @@ export default {
   color: @white;
   background-color: @yellow;
 }
-
 </style>

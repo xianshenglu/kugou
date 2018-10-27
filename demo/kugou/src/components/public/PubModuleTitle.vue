@@ -5,7 +5,14 @@
 <script>
 export default {
   name: 'PubModuleTitle',
-  props: ['title']
+  props: {
+    title: {
+      type: String,
+      default() {
+        return ''
+      }
+    }
+  }
 }
 </script>
 

@@ -1,5 +1,7 @@
 <template>
-  <div :class="showMore?'module_info__intro main_box_shadow show_more':'module_info__intro main_box_shadow'">
+  <div
+    :class="showMore?'module_info__intro main_box_shadow show_more':'module_info__intro main_box_shadow'"
+  >
     <p class="module_info__text">{{description}}</p>
     <button :class="showMore?'more_btn more_btn--up':'more_btn'" @click="showMore=!showMore"></button>
   </div>
@@ -8,7 +10,14 @@
 <script>
 export default {
   name: 'PubModuleDes',
-  props: ['description'],
+  props: {
+    description: {
+      type: String,
+      default() {
+        return ''
+      }
+    }
+  },
   data() {
     return {
       showMore: false
@@ -48,7 +57,7 @@ export default {
   box-sizing: border-box;
   border-radius: 50%;
   border-width: 2px;
-  border-color:@light-3-white;
+  border-color: @light-3-white;
 }
 
 .more_btn--up {
