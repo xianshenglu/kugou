@@ -38,6 +38,8 @@ export default {
   background: @almost-black;
 }
 .player__singer_img {
+  flex: 0 0 auto;
+
   width: 68px;
   height: 68px;
   margin: 0 10px 0 4px;
