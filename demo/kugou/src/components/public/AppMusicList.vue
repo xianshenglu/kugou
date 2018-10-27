@@ -1,9 +1,9 @@
 <template>
-  <ul class="pub_music__list">
-    <li class="pub_music__item main_border_bottom" v-for="(item,index) in musicList" :key="index">
+  <ul class="music_list">
+    <li class="music_list__item main_border_bottom" v-for="(item,index) in musicList" :key="index">
       <slot :data="index" name="index"></slot>
-      <div class="pub_music__name" @click="wantPlay(item)">{{item.filename}}</div>
-      <button class="pub_music__download">
+      <div class="music_list__name" @click="wantPlay(item)">{{item.filename}}</div>
+      <button class="music_list__download">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-download"></use>
         </svg>
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'PubMusicList',
+  name: 'AppMusicList',
   props: ['musicList'],
   methods: {
     wantPlay(music) {
@@ -28,32 +28,34 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) '../../assets/css/constant.less';
-.pub_music__list {
+@import (reference) "../../assets/css/constant.less";
+.music_list {
   padding-left: 19px;
 }
 
-.pub_music__item {
+.music_list__item {
   display: flex;
   align-items: center;
 
   box-sizing: border-box;
   width: 100%;
+  height: auto;
   min-height: 72px;
   padding: 10px 0;
-  height: auto;
 }
 
-.pub_music__name {
+.music_list__name {
   width: calc(100% - 48px);
 
   font-size: 18px;
 }
 
-.pub_music__download {
+.music_list__download {
   box-sizing: content-box;
   width: 23px;
   height: 100%;
   padding: 0 13px;
 }
+
+
 </style>

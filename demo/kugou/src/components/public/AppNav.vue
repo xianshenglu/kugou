@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'PubNav',
+  name: 'AppNav',
   props: ['navs']
 }
 </script>
@@ -38,5 +38,6 @@ export default {
 .nav__link--active {
   border-bottom-color: @theme-color;
 }
+
 
 </style>

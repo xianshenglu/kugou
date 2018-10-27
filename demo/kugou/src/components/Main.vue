@@ -1,17 +1,17 @@
 <template>
   <main class="main">
-    <PubNav :navs="navs" class="main__nav"></PubNav>
+    <AppNav :navs="navs" class="main__nav" />
     <router-view class="main__cont"></router-view>
   </main>
 </template>
 
 <script>
-import PubNav from './public/PubNav'
+import AppNav from './public/AppNav'
 export default {
   name: 'Main',
   props: ['navs'],
   components: {
-    PubNav
+    AppNav
   },
   methods: {}
 }
@@ -34,6 +34,8 @@ export default {
   box-sizing: border-box;
   height: calc(100% - 58px);
 }
+
+
 
 
 </style>

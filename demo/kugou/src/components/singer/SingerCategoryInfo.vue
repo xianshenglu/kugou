@@ -1,7 +1,7 @@
 <template>
   <section class="singer_category_info" v-if="isSingerCategoryInfoShow">
-    <PubModuleTitle :title="singerCategoryInfo.info.name"></PubModuleTitle>
-    <ul class="singer_category_info__list" @scroll="loadImgLazy">
+    <PubModuleTitle :title="singerCategoryInfo.info.name" />
+    <ul class="singer_category_info__list" @scroll="$_xsl__loadImgLazy">
       <li class="singer_category_info__item main_border_bottom" v-for="(item,index) in singerCategoryInfo.data" :key="index">
         <router-link :to="item.path" class="singer_category_info__link">
           <img class="singer_category_info__img" ref="lazyImages" src="../../assets/images/default.png" :data-src="item.imgUrl" :data-is-loaded="isLoaded">
@@ -16,11 +16,11 @@
 import PubModuleTitle from '../public/PubModuleTitle'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
-import utilsMixin from '../../assets/js/utilsMixin.js'
+import mixin from '../../mixins/index.js'
 
 export default {
   name: 'SingerCategoryInfo',
-  mixins: [utilsMixin],
+  mixins: [mixin],
   components: {
     PubModuleTitle
   },
@@ -36,7 +36,7 @@ export default {
   },
   mounted() {
     this.$watch('isSingerCategoryInfoShow', function() {
-      this.loadImgLazy()
+      this.$_xsl__loadImgLazy()
     })
   },
   methods: {
@@ -60,7 +60,7 @@ export default {
           data.singers.list.info.forEach(obj => {
             obj.id = obj.singerid
             obj.name = obj.singername
-            obj.imgUrl = this.replaceImgUrlSize(obj.imgurl)
+            obj.imgUrl = this.$_xsl__replaceImgUrlSize(obj.imgurl)
             obj.path = '/singer/info/' + obj.id
           })
           Object.assign(this.singerCategoryInfo, singerCategoryInfo)
@@ -80,9 +80,10 @@ export default {
   font-size: 19px;
 }
 .singer_category_info__list {
-  height: calc(100% - 54px);
-  box-sizing: border-box;
   overflow: scroll;
+
+  box-sizing: border-box;
+  height: calc(100% - 54px);
 }
 .singer_category_info__item {
   height: 88px;
@@ -100,4 +101,6 @@ export default {
   height: 61px;
   margin: 0 18px 0 13px;
 }
+
+
 </style>

@@ -1,12 +1,12 @@
 <template>
   <section class="new_song">
-    <Slider :data="sliderData" class="new_song__slider"></Slider>
-    <PubMusicList :music-list="newSongs" class="new_song__music_list"></PubMusicList>
+    <Slider :data="sliderData" class="new_song__slider" />
+    <AppMusicList :music-list="newSongs" class="new_song__music_list" />
   </section>
 </template>
 
 <script>
-import PubMusicList from '../public/PubMusicList'
+import AppMusicList from '../public/AppMusicList'
 import Slider from './Slider.vue'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
@@ -33,7 +33,7 @@ export default {
     }
   },
   components: {
-    PubMusicList,
+    AppMusicList,
     Slider
   }
 }
@@ -41,8 +41,10 @@ export default {
 
 <style lang="less" scoped>
 .new_song__slider {
+  box-sizing: border-box;
   width: 100%;
   height: 154px;
-  box-sizing: border-box;
 }
+
+
 </style>

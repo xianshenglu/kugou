@@ -5,25 +5,25 @@
         {{msg}} {{formatDate()}}
       </time>
     </PubModuleHead>
-    <PubMusicList :music-list="getMusicList()">
+    <appMusicList :music-list="getMusicList()">
       <div :class="'rank_info__index '+'rank_info__index'+(props.data+1)" slot-scope="props" slot="index">{{props.data+1}}</div>
-    </PubMusicList>
+    </appMusicList>
   </section>
 </template>
 
 <script>
 import PubModuleHead from '../public/PubModuleHead'
-import PubMusicList from '../public/PubMusicList'
+import AppMusicList from '../public/AppMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
-import utilsMixin from '../../assets/js/utilsMixin.js'
+import mixin from '../../mixins/index.js'
 
 export default {
   name: 'RankInfo',
-  mixins: [utilsMixin],
+  mixins: [mixin],
   components: {
     PubModuleHead,
-    PubMusicList
+    AppMusicList
   },
   data() {
     return {
@@ -42,7 +42,7 @@ export default {
       },
       getModuleHeadInfo() {
         return {
-          imgUrl: this.replaceImgUrlSize(this.rankInfo.info.banner7url),
+          imgUrl: this.$_xsl__replaceImgUrlSize(this.rankInfo.info.banner7url),
           name: this.rankInfo.info.rankname
         }
       },
@@ -76,7 +76,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) '../../assets/css/constant.less';
+@import (reference) "../../assets/css/constant.less";
 .rank_info__update_time {
   align-self: flex-end;
 
@@ -123,4 +123,5 @@ export default {
   color: @white;
   background-color: @yellow;
 }
+
 </style>

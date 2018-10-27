@@ -6,9 +6,9 @@
       <div class="player__singer_name">{{singerName}}</div>
     </div>
     <div class="player__buttons">
-      <PrevButton class="player__btn_prev"></PrevButton>
-      <PlayButton class="player__btn_status"></PlayButton>
-      <NextButton class="play__btn_next"></NextButton>
+      <PrevButton class="player__btn_prev" />
+      <PlayButton class="player__btn_status" />
+      <NextButton class="play__btn_next" />
     </div>
   </section>
 </template>
@@ -89,6 +89,7 @@ export default {
 
   font-size: 30px;
 }
+
 
 
 </style>

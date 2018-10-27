@@ -1,6 +1,6 @@
 <template>
   <section class="search">
-    <PubModuleTitle :title="title" class="search__title"></PubModuleTitle>
+    <PubModuleTitle :title="title" class="search__title" />
     <div class="search__cont">
       <form class="search__form" @submit.prevent>
         <input type="text" :placeholder="placeholder" class="search__input" :value.sync="keyword" @input="keyword=arguments[0].target.value.trim()" @keyup.enter="getSearchRes">
@@ -14,7 +14,7 @@
       </div>
       <div class="search__res" v-if="isSearchResShow">
         <div class="search__count">共有{{searchRes.info.length}}条结果</div>
-        <PubMusicList :music-list="searchRes.info" class="search__res-list"></PubMusicList>
+        <AppMusicList :music-list="searchRes.info" class="search__res-list" />
       </div>
     </div>
   </section>
@@ -22,14 +22,14 @@
 
 <script>
 import PubModuleTitle from '../public/PubModuleTitle'
-import PubMusicList from '../public/PubMusicList'
+import AppMusicList from '../public/AppMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
 export default {
   name: 'Search',
   components: {
     PubModuleTitle,
-    PubMusicList
+    AppMusicList
   },
   data() {
     return {
@@ -98,14 +98,16 @@ export default {
   font-size: 18px;
 }
 .search__cont {
-  height: calc(100% - 54px);
-  box-sizing: border-box;
   overflow: scroll;
+
+  box-sizing: border-box;
+  height: calc(100% - 54px);
 }
 .search__form {
+  box-sizing: border-box;
   height: 63px;
   padding: 13px;
-  box-sizing: border-box;
+
   background-color: @light-1-white;
 }
 .search__input,
@@ -152,15 +154,18 @@ export default {
   line-height: 64px;
 }
 .search__count {
-  color:@white-to-black;
-  line-height:28px;
-  padding-left:16px;
-  width:100%;
   box-sizing:border-box;
-  font-size:14px;
+  width:100%;
+  padding-left:16px;
+
+  color:@white-to-black;
   background-color:@light-2-white;
+
+  font-size:14px;
+  line-height:28px;
 }
 .search__res-list {
   overflow-y:scroll;
 }
+
 </style>

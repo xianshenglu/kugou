@@ -1,56 +1,60 @@
 <template>
-  <ul class="pub_list" @scroll="loadImgLazy">
-    <li class="pub_list__item main_border_bottom" v-for="(item,index) in pubList" :key="index">
-      <router-link :to="item.path" class="pub_list__link">
-        <img class="pub_list__img" ref="lazyImages" src="../../assets/images/default.png" :data-src="item.imgUrl" :data-is-loaded="isLoaded">
+  <ul class="list" @scroll="$_xsl__loadImgLazy">
+    <li class="list__item main_border_bottom" v-for="(item,index) in pubList" :key="index">
+      <router-link :to="item.path" class="list__link">
+        <img class="list__img" ref="lazyImages" src="../../assets/images/default.png" :data-src="item.imgUrl" :data-is-loaded="isLoaded">
         <slot :data="item" name="cont"></slot>
-        <button class="pub_list__btn arrow arrow--right"></button>
+        <button class="list__btn arrow arrow--right"></button>
       </router-link>
     </li>
   </ul>
 </template>
 
 <script>
-import utilsMixin from '../../assets/js/utilsMixin.js'
+import mixin from '../../mixins/index.js'
 export default {
   name: 'PubList',
-  mixins: [utilsMixin],
+  mixins: [mixin],
   props: ['pubList'],
   mounted() {
-    this.loadImgLazy()
+    this.$_xsl__loadImgLazy()
   }
 }
 </script>
 
 <style lang="less" scoped>
-.pub_list {
+.list {
   padding-left: 13px;
 }
 
-.pub_list__item {
+.list__item {
   height: 123px;
 }
 
-.pub_list__link {
+.list__link {
   display: flex;
   align-items: center;
 
   height: 100%;
 }
 
-.pub_list__img {
+.list__img {
   flex: 0 0 auto;
 
   width: 97px;
   height: 97px;
 }
 
-.pub_list__btn {
+.list__btn {
   flex: 0 0 auto;
 
   margin-right: 15px;
   margin-left: auto;
 }
+
+
+
+
 
 
 

@@ -1,9 +1,5 @@
-const utils = {
-  replaceImgUrlSize (str, size = this.imgSize) {
-    return str.replace(/\{\s*size\s*\}/, size)
-  }
-}
-const utilsMixin = {
+import utils from '../assets/js/utils'
+export default {
   data () {
     return {
       imgSize: 400,
@@ -12,7 +8,10 @@ const utilsMixin = {
   },
   methods: {
     ...utils,
-    loadImgLazy () {
+    $_xsl__replaceImgUrlSize (str, size = this.imgSize) {
+      return str.replace(/\{\s*size\s*\}/, size)
+    },
+    $_xsl__loadImgLazy () {
       let unloadedImages = this.$refs.lazyImages.filter(
         img => !img.dataset.isLoaded
       )
@@ -26,4 +25,3 @@ const utilsMixin = {
     }
   }
 }
-export default utilsMixin

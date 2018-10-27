@@ -1,21 +1,21 @@
 <template>
   <div id="app" class="app" ref="app">
-    <PubHeader class="app__header"></PubHeader>
+    <AppHeader class="app__header" />
     <router-view class="app__cont" :navs="navs"></router-view>
-    <Player v-if="music" class="app__player"></Player>
+    <Player v-if="music" class="app__player" />
   </div>
 </template>
 
 <script>
-import PubHeader from '@/components/public/PubHeader'
-import PubNav from './components/public/PubNav'
+import AppHeader from '@/components/public/AppHeader'
+import AppNav from './components/public/AppNav'
 import Player from './components/player/Player'
 
 export default {
   name: 'App',
   components: {
-    PubHeader,
-    PubNav,
+    AppHeader,
+    AppNav,
     Player
   },
   mounted() {

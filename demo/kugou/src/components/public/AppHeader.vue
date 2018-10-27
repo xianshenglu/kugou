@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'PubHeader',
+  name: 'AppHeader',
   methods: {
     goBack() {
       history.go(-1)
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) '../../assets/css/constant.less';
+@import (reference) "../../assets/css/constant.less";
 .header {
   display: flex;
   align-items: center;
@@ -44,9 +44,10 @@ export default {
   width: 16px;
   height: 16px;
 
+  transform: rotate(-45deg) translateY(-2px);
+
   border-width: 2.2px;
   border-color: @white;
-  transform: rotate(-45deg) translateY(-2px);
 }
 .header__search_btn {
   display: block;
@@ -58,6 +59,7 @@ export default {
 
   font-size: 27px;
 }
+
 
 
 

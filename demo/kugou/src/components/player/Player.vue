@@ -1,8 +1,8 @@
 <template>
   <section :class="isPlayerMed?'player_box player_box--med':'player_box player_box--max'">
     <audio :src="song.url" class="hidden" ref="audioEl" @canplay="play"></audio>
-    <PlayerMed v-if="isPlayerMed" class="player_box__player" :song-name="songName" :singer-name="singerName" :singer-img="singerImg" :is-playing="isPlaying"></PlayerMed>
-    <PlayerMax v-else class="player_box__player"></PlayerMax>
+    <PlayerMed v-if="isPlayerMed" class="player_box__player" :song-name="songName" :singer-name="singerName" :singer-img="singerImg" :is-playing="isPlaying" />
+    <PlayerMax v-else class="player_box__player" />
   </section>
 </template>
 
@@ -10,10 +10,11 @@
 import PlayerMed from './PlayerMed'
 import PlayerMax from './PlayerMax'
 import { mapState } from 'vuex'
-import utilsMixin from '../../assets/js/utilsMixin.js'
+import mixin from '../../mixins/index.js'
+
 export default {
   name: 'Player',
-  mixins: [utilsMixin],
+  mixins: [mixin],
   components: {
     PlayerMed,
     PlayerMax
@@ -31,7 +32,7 @@ export default {
       if (!this.song.imgUrl) {
         return
       }
-      return this.replaceImgUrlSize(this.song.imgUrl)
+      return this.$_xsl__replaceImgUrlSize(this.song.imgUrl)
     },
     songName() {
       return this.music.filename.split(/\s+-\s+/)[1]
@@ -86,6 +87,9 @@ export default {
   width: 100%;
   height: 100%;
 }
+
+
+
 
 
 

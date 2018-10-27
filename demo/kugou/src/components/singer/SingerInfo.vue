@@ -1,26 +1,26 @@
 <template>
   <section class="singer_info" v-if="isSingerInfoShow">
     <PubModuleHead :module-head-info="getModuleHeadInfo()">
-      <PubModuleDes slot="moduleDes" :description="getModuleHeadInfo().intro"></PubModuleDes>
+      <PubModuleDes slot="moduleDes" :description="getModuleHeadInfo().intro" />
     </PubModuleHead>
-    <PubMusicList :music-list="getMusicList()"></PubMusicList>
+    <AppMusicList :music-list="getMusicList()" />
   </section>
 </template>
 
 <script>
 import PubModuleHead from '../public/PubModuleHead'
 import PubModuleDes from '../public/PubModuleDes'
-import PubMusicList from '../public/PubMusicList'
+import AppMusicList from '../public/AppMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
-import utilsMixin from '../../assets/js/utilsMixin.js'
+import mixin from '../../mixins/index.js'
 
 export default {
   name: 'SingerInfo',
-  mixins: [utilsMixin],
+  mixins: [mixin],
   components: {
     PubModuleHead,
-    PubMusicList,
+    AppMusicList,
     PubModuleDes
   },
   data: function() {
@@ -50,7 +50,7 @@ export default {
               name: data.info.singername,
               count: data.info.songcount,
               albumcount: data.info.albumcount,
-              imgUrl: this.replaceImgUrlSize(data.info.imgurl),
+              imgUrl: this.$_xsl__replaceImgUrlSize(data.info.imgurl),
               intro: data.info.intro
             },
             data: data.songs.list
