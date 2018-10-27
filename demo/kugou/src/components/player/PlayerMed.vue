@@ -19,7 +19,7 @@ import PlayButton from './PlayButton'
 import NextButton from './NextButton'
 import PrevButton from './PrevButton'
 export default {
-  name: 'PlayerMin',
+  name: 'PlayerMed',
   props: ['songName', 'singerName', 'singerImg'],
   components: {
     PlayButton,
@@ -89,5 +89,6 @@ export default {
 
   font-size: 30px;
 }
+
 
 </style>

@@ -82,7 +82,5 @@ export default {
   overflow-y: auto;
   width: 100%;
   height: calc(100% - 58px);
-
 }
-
 </style>

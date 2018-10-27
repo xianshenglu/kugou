@@ -1,13 +1,13 @@
 <template>
-  <section :class="isPlayerMin?'player_box player_box--min':'player_box player_box--max'">
+  <section :class="isPlayerMed?'player_box player_box--med':'player_box player_box--max'">
     <audio :src="song.url" class="hidden" ref="audioEl" @canplay="play"></audio>
-    <PlayerMin v-if="isPlayerMin" class="player_box__player" :song-name="songName" :singer-name="singerName" :singer-img="singerImg" :is-playing="isPlaying"></PlayerMin>
+    <PlayerMed v-if="isPlayerMed" class="player_box__player" :song-name="songName" :singer-name="singerName" :singer-img="singerImg" :is-playing="isPlaying"></PlayerMed>
     <PlayerMax v-else class="player_box__player"></PlayerMax>
   </section>
 </template>
 
 <script>
-import PlayerMin from './PlayerMin'
+import PlayerMed from './PlayerMed'
 import PlayerMax from './PlayerMax'
 import { mapState } from 'vuex'
 import utilsMixin from '../../assets/js/utilsMixin.js'
@@ -15,12 +15,12 @@ export default {
   name: 'Player',
   mixins: [utilsMixin],
   components: {
-    PlayerMin,
+    PlayerMed,
     PlayerMax
   },
   data() {
     return {
-      isPlayerMin: true
+      isPlayerMed: true
     }
   },
   computed: {
@@ -46,7 +46,7 @@ export default {
   },
   beforeCreate() {
     window.onresize = () => {
-      this.isPlayerMin = window.innerHeight > this.vMax * 0.8
+      this.isPlayerMed = window.innerHeight > this.vMax * 0.8
     }
   },
   destroyed() {
@@ -71,7 +71,7 @@ export default {
 
   width: 100%;
 }
-.player_box--min {
+.player_box--med {
   height: 75px;
 }
 .player_box--max {
@@ -86,5 +86,7 @@ export default {
   width: 100%;
   height: 100%;
 }
+
+
 
 </style>
