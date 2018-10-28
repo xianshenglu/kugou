@@ -3,13 +3,13 @@
     <PubModuleHead :module-head-info="getModuleHeadInfo">
       <time class="rank_info__update_time" slot="moduleUpdateTime">{{msg}} {{formatDate}}</time>
     </PubModuleHead>
-    <appMusicList :music-list="getMusicList">
+    <AppMusicList :music-list="getMusicList">
       <div
         :class="'rank_info__index '+'rank_info__index'+(props.data+1)"
         slot-scope="props"
         slot="index"
       >{{props.data+1}}</div>
-    </appMusicList>
+    </AppMusicList>
   </section>
 </template>
 

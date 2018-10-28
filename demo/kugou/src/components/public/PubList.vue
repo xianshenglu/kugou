@@ -29,12 +29,9 @@ export default {
       }
     }
   },
-  watch: {
-    'pubList.length': function() {
-      this.$nextTick(function() {
-        this.$_xsl__loadImgLazy(this.$refs.lazyImages)
-      })
-    }
+  mounted() {
+    let lazyImages = this.$refs.lazyImages
+    this.$_xsl__detectToLoadImgLazy(lazyImages, this.$el, '.lazy_image')
   }
 }
 </script>

@@ -9,7 +9,7 @@
       >
         <router-link :to="item.path" class="singer_list_info__link">
           <img
-            class="singer_list_info__img"
+            class="singer_list_info__img lazy_image"
             ref="lazyImages"
             src="../../assets/images/default.png"
             :data-src="item.imgUrl"
@@ -48,6 +48,10 @@ export default {
   created() {
     let singerListInfoId = this.$route.path.split('/').pop()
     this.getSingerListInfo(singerListInfoId)
+  },
+  mounted() {
+    let lazyImages = this.$refs.lazyImages
+    this.$_xsl__detectToLoadImgLazy(lazyImages, this.$el, '.lazy_image')
   },
   methods: {
     getSingerListInfo(singerListInfoId) {
