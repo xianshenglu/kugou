@@ -1,5 +1,5 @@
 //doc: https://github.com/xCss/JsonBird
-let proxyUrl = 'https://bird.ioliu.cn/v1?url=';
+let proxyUrl = 'https://bird.ioliu.cn/v1?url='
 let baseApiHost = 'http://m.kugou.com'
 let api = {
   newSong: baseApiHost + '/?json=true',
@@ -8,8 +8,7 @@ let api = {
   songList: baseApiHost + '/plist/index&json=true',
   songListInfo: baseApiHost + '/plist/list/songListId?json=true',
   singerCategory: baseApiHost + '/singer/class&json=true',
-  singerCategoryInfo:
-    baseApiHost + '/singer/list/singerCategoryInfoId?json=true',
+  singerListInfo: baseApiHost + '/singer/list/singerListInfoId?json=true',
   singerInfo: baseApiHost + '/singer/info/singerId&json=true',
   song_info: baseApiHost + '/app/i/getSongInfo.php?cmd=playInfo&hash=',
   song_info_lyric: 'http://www.kugou.com/yy/index.php?r=play/getdata&hash=',
@@ -17,9 +16,9 @@ let api = {
     'http://mobilecdn.kugou.com/api/v3/search/hot?format=json&plat=0&count=30',
   searchResult:
     'http://mobilecdn.kugou.com/api/v3/search/song?format=json&page=1&pagesize=20&showtype=1&keyword='
-};
+}
 
 Reflect.ownKeys(api).forEach(key => {
-  api[key] = proxyUrl + api[key];
-});
-export default api;
+  api[key] = proxyUrl + api[key]
+})
+export default api

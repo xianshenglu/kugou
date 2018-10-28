@@ -30,7 +30,10 @@ export default {
         }
       })
     },
-    $_xsl__loadImgLazy(els = this.$refs.lazyImages) {
+    $_xsl__loadImgLazy(els) {
+      if (!Array.isArray(els)) {
+        return
+      }
       let unloadedImages = els.filter(img => !img.dataset.isLoaded)
       unloadedImages.forEach(img => {
         let top = img.getBoundingClientRect().top

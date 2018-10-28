@@ -1,21 +1,21 @@
 <template>
-  <section class="singer_category_info">
-    <PubModuleTitle :title="singerCategoryInfo.info.name"/>
-    <ul class="singer_category_info__list" @scroll="$_xsl__loadImgLazy($refs.lazyImages)">
+  <section class="singer_list_info">
+    <PubModuleTitle :title="singerListInfo.info.name"/>
+    <ul class="singer_list_info__list" @scroll="$_xsl__loadImgLazy($refs.lazyImages)">
       <li
-        class="singer_category_info__item main_border_bottom"
-        v-for="(item,index) in singerCategoryInfo.data"
+        class="singer_list_info__item main_border_bottom"
+        v-for="(item,index) in singerListInfo.data"
         :key="index"
       >
-        <router-link :to="item.path" class="singer_category_info__link">
+        <router-link :to="item.path" class="singer_list_info__link">
           <img
-            class="singer_category_info__img"
+            class="singer_list_info__img"
             ref="lazyImages"
             src="../../assets/images/default.png"
             :data-src="item.imgUrl"
             :data-is-loaded="isLoaded"
           >
-          <div class="singer_category_info__name">{{item.name}}</div>
+          <div class="singer_list_info__name">{{item.name}}</div>
         </router-link>
       </li>
     </ul>
@@ -29,41 +29,36 @@ import api from '../../assets/js/api.js'
 import mixin from '../../mixins/index.js'
 
 export default {
-  name: 'SingerCategoryInfo',
+  name: 'SingerListInfo',
   mixins: [mixin],
   components: {
     PubModuleTitle
   },
   data() {
     return {
-      singerCategoryInfo: {
+      singerListInfo: {
         info: {},
-        data: {}
+        data: []
       }
     }
   },
   watch: {
-    'singerCategoryInfo.data.length': function() {
+    'singerListInfo.data.length': function() {
       this.$nextTick(function() {
-        this.$_xsl__loadImgLazy()
+        this.$_xsl__loadImgLazy(this.$refs.lazyImages)
       })
     }
   },
   created() {
-    let singerCategoryInfoId = this.$route.path.split('/').pop()
-    this.getSingerCategoryInfo(singerCategoryInfoId)
+    let singerListInfoId = this.$route.path.split('/').pop()
+    this.getSingerListInfo(singerListInfoId)
   },
   methods: {
-    getSingerCategoryInfo(singerCategoryInfoId) {
+    getSingerListInfo(singerListInfoId) {
       axios
-        .get(
-          api.singerCategoryInfo.replace(
-            /singerCategoryInfoId?/i,
-            singerCategoryInfoId
-          )
-        )
+        .get(api.singerListInfo.replace(/singerListInfoId?/i, singerListInfoId))
         .then(({ data }) => {
-          let singerCategoryInfo = {
+          let singerListInfo = {
             info: {
               id: data.classid,
               name: data.classname,
@@ -77,8 +72,8 @@ export default {
             obj.imgUrl = this.$_xsl__replaceImgUrlSize(obj.imgurl)
             obj.path = '/singer/info/' + obj.id
           })
-          Object.assign(this.singerCategoryInfo, singerCategoryInfo)
-          this.singerCategoryInfo = singerCategoryInfo
+          Object.assign(this.singerListInfo, singerListInfo)
+          this.singerListInfo = singerListInfo
         })
         .catch(er => {
           alert(er)
@@ -89,25 +84,25 @@ export default {
 </script>
 
 <style scoped lang="less">
-.singer_category_info {
+.singer_list_info {
   font-size: 19px;
 }
-.singer_category_info__list {
+.singer_list_info__list {
   overflow: scroll;
 
   box-sizing: border-box;
   height: calc(100% - 54px);
 }
-.singer_category_info__item {
+.singer_list_info__item {
   height: 88px;
 }
-.singer_category_info__link {
+.singer_list_info__link {
   display: flex;
   align-items: center;
 
   height: 100%;
 }
-.singer_category_info__img {
+.singer_list_info__img {
   display: block;
 
   width: 61px;
