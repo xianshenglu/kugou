@@ -1,7 +1,7 @@
 <template>
   <section class="singer_category_info">
     <PubModuleTitle :title="singerCategoryInfo.info.name"/>
-    <ul class="singer_category_info__list" @scroll="$_xsl__loadImgLazy">
+    <ul class="singer_category_info__list" @scroll="$_xsl__loadImgLazy($refs.lazyImages)">
       <li
         class="singer_category_info__item main_border_bottom"
         v-for="(item,index) in singerCategoryInfo.data"

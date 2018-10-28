@@ -1,5 +1,5 @@
 <template>
-  <ul class="list" @scroll="$_xsl__loadImgLazy">
+  <ul class="list" @scroll="$_xsl__loadImgLazy($refs.lazyImages)">
     <li class="list__item main_border_bottom" v-for="(item,index) in pubList" :key="index">
       <router-link :to="item.path" class="list__link">
         <img
