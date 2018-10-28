@@ -8,6 +8,7 @@ import './assets/css/base.less'
 import './assets/css/iconfont.css'
 
 Vue.config.productionTip = false
+Vue.prototype.window = window
 
 new Vue({
   router,
