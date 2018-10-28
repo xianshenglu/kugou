@@ -1,7 +1,15 @@
 <template>
   <section class="singer_category">
-    <ul class="singer_category__list main_border" v-for="(list,list_index) in singerCategories" :key="list_index">
-      <li class="singer_category__item main_border_bottom" v-for="(item,index) in list.data" :key="'1'+index">
+    <ul
+      class="singer_category__list main_border"
+      v-for="(list,list_index) in singerCategories"
+      :key="list_index"
+    >
+      <li
+        class="singer_category__item main_border_bottom"
+        v-for="(item,index) in list.data"
+        :key="'1'+index"
+      >
         <router-link :to="item.path" class="singer_category__link">
           <div class="singer_category__title">{{item.classname}}</div>
           <button class="singer_category_btn arrow arrow--right"></button>
@@ -14,13 +22,12 @@
 <script>
 import axios from 'axios'
 import api from '../../assets/js/api.js'
+import { mapState } from 'vuex'
 
 export default {
   name: 'SingerCategory',
-  data() {
-    return {
-      singerCategories: []
-    }
+  computed: {
+    ...mapState('singer', ['singerCategories'])
   },
   created() {
     this.getSingerCategories()
@@ -28,7 +35,7 @@ export default {
   methods: {
     getSingerCategories() {
       axios.get(api.singerCategory).then(({ data }) => {
-        data.list.reduce((re, obj) => {
+        let singerCategories = data.list.reduce((re, obj) => {
           obj.path = '/singer/list/' + obj.classid
           let findCategories = re.find(
             o => o.category === obj.classname.substring(0, 2)
@@ -42,7 +49,11 @@ export default {
             })
           }
           return re
-        }, this.singerCategories)
+        }, [])
+        this.$store.commit('replaceProperty', {
+          paths: 'singer.singerCategories',
+          data: singerCategories
+        })
       })
     }
   }
@@ -55,7 +66,7 @@ export default {
   width: 347px;
   margin: 18px auto;
 
-// border-bottom: none;
+  // border-bottom: none;
 
   border-radius: 6px;
   background-color: @white;
@@ -91,12 +102,4 @@ export default {
   margin-right: 15px;
   margin-left: auto;
 }
-
-
-
-
-
-
-
-
 </style>

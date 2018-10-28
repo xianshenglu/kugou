@@ -1,8 +1,8 @@
 <template>
   <div id="app" class="app" ref="app">
-    <AppHeader class="app__header" />
+    <AppHeader class="app__header"/>
     <router-view class="app__cont" :navs="navs"></router-view>
-    <Player v-if="music" class="app__player" />
+    <Player v-if="music" class="app__player"/>
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     music() {
-      return this.$store.state.music
+      return this.$store.state.player.music
     },
     vMax() {
       return this.$store.state.device.vMax

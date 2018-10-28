@@ -27,6 +27,7 @@ import PubModuleTitle from '../public/PubModuleTitle'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
 import mixin from '../../mixins/index.js'
+import { mapState } from 'vuex'
 
 export default {
   name: 'SingerListInfo',
@@ -34,13 +35,8 @@ export default {
   components: {
     PubModuleTitle
   },
-  data() {
-    return {
-      singerListInfo: {
-        info: {},
-        data: []
-      }
-    }
+  computed: {
+    ...mapState('singer', ['singerListInfo'])
   },
   watch: {
     'singerListInfo.data.length': function() {
@@ -73,7 +69,10 @@ export default {
             obj.path = '/singer/info/' + obj.id
           })
           Object.assign(this.singerListInfo, singerListInfo)
-          this.singerListInfo = singerListInfo
+          this.$store.commit('replaceProperty', {
+            paths: 'singer.singerListInfo',
+            data: singerListInfo
+          })
         })
         .catch(er => {
           alert(er)

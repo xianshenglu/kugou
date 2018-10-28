@@ -1,8 +1,15 @@
 <template>
   <section :class="isPlayerMed?'player_box player_box--med':'player_box player_box--max'">
     <audio :src="song.url" class="hidden" ref="audioEl" @canplay="play"></audio>
-    <PlayerMed v-if="isPlayerMed" class="player_box__player" :song-name="songName" :singer-name="singerName" :singer-img="singerImg" :is-playing="isPlaying" />
-    <PlayerMax v-else class="player_box__player" />
+    <PlayerMed
+      v-if="isPlayerMed"
+      class="player_box__player"
+      :song-name="songName"
+      :singer-name="singerName"
+      :singer-img="singerImg"
+      :is-playing="isPlaying"
+    />
+    <PlayerMax v-else class="player_box__player"/>
   </section>
 </template>
 
@@ -37,12 +44,14 @@ export default {
     songName() {
       return this.music.filename.split(/\s+-\s+/)[1]
     },
-    ...mapState({
+    ...mapState('player', {
       isPlaying: state => state.isPlaying,
       song: state => state.song,
       music: state => state.music,
-      audioEl: state => state.audioEl,
-      vMax: state => state.device.vMax
+      audioEl: state => state.audioEl
+    }),
+    ...mapState('device', {
+      vMax: state => state.vMax
     })
   },
   beforeCreate() {
@@ -54,11 +63,11 @@ export default {
     window.onresize = null
   },
   mounted() {
-    this.$store.commit('findAudioEl', this.$refs.audioEl)
+    this.$store.commit('player/findAudioEl', this.$refs.audioEl)
   },
   methods: {
     play() {
-      this.$store.commit('togglePlay', true)
+      this.$store.commit('player/togglePlay', true)
     }
   }
 }
@@ -81,16 +90,10 @@ export default {
 .player_box__player {
   position: absolute;
   z-index: 1;
-  bottom:0;
+  bottom: 0;
 
   box-sizing: border-box;
   width: 100%;
   height: 100%;
 }
-
-
-
-
-
-
 </style>

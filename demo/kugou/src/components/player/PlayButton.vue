@@ -14,12 +14,12 @@ export default {
   name: 'PlayButton',
   computed: {
     isPlaying() {
-      return this.$store.state.isPlaying
+      return this.$store.state.player.isPlaying
     }
   },
   methods: {
     togglePlay() {
-      this.$store.commit('togglePlay')
+      this.$store.commit('player/togglePlay', undefined, { root: true })
     }
   }
 }
@@ -27,10 +27,10 @@ export default {
 
 <style scoped>
 .play__play {
-  transform: translate(1px,-2px);
+  transform: translate(1px, -2px);
 }
-.play__pause{
+.play__pause {
   font-size: 1.2em;
-  transform: translate(-2px,-4px);
+  transform: translate(-2px, -4px);
 }
 </style>

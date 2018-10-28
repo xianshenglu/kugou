@@ -1,7 +1,7 @@
 <template>
   <section class="new_song">
-    <Slider :data="sliderData" class="new_song__slider" />
-    <AppMusicList :music-list="newSongs" class="new_song__music_list" />
+    <Slider :data="sliderData" class="new_song__slider"/>
+    <AppMusicList :music-list="newSongs" class="new_song__music_list"/>
   </section>
 </template>
 
@@ -10,14 +10,12 @@ import AppMusicList from '../public/AppMusicList'
 import Slider from './Slider.vue'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
+import { mapState } from 'vuex'
 
 export default {
   name: 'NewSong',
-  data() {
-    return {
-      newSongs: [],
-      sliderData: []
-    }
+  computed: {
+    ...mapState('newSong', ['newSongs', 'sliderData'])
   },
   created() {
     this.getNewSong()
@@ -25,10 +23,15 @@ export default {
   methods: {
     getNewSong() {
       axios.get(api.newSong).then(({ data }) => {
-        this.newSongs = data.data
+        this.$store.commit('replaceProperty', {
+          paths: 'newSong.newSongs',
+          data: data.data
+        })
         let banners = data.banner
-        banners.push(banners.slice(0, 1)[0])
-        this.sliderData = banners
+        this.$store.commit('replaceProperty', {
+          paths: 'newSong.sliderData',
+          data: [...banners, banners[0]]
+        })
       })
     }
   },
@@ -45,6 +48,4 @@ export default {
   width: 100%;
   height: 154px;
 }
-
-
 </style>

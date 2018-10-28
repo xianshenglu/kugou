@@ -19,7 +19,7 @@ import AppMusicList from '../public/AppMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
 import mixin from '../../mixins/index.js'
-
+import { mapState } from 'vuex'
 export default {
   name: 'RankInfo',
   mixins: [mixin],
@@ -29,17 +29,11 @@ export default {
   },
   data() {
     return {
-      rankInfo: {
-        info: {},
-        songs: {
-          timestamp: Date.now(),
-          list: []
-        }
-      },
-      msg: '上次更新时间 : '
+      msg: '上次更新时间'
     }
   },
   computed: {
+    ...mapState('rank', ['rankInfo']),
     getModuleHeadInfo() {
       return {
         imgUrl: this.$_xsl__replaceImgUrlSize(this.rankInfo.info.banner7url),
@@ -73,7 +67,10 @@ export default {
             info: res.data.info,
             songs: res.data.songs
           }
-          this.rankInfo = rankInfo
+          this.$store.commit('replaceProperty', {
+            paths: 'rank.rankInfo',
+            data: rankInfo
+          })
         })
         .catch(er => {
           alert(er)

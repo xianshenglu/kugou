@@ -11,6 +11,7 @@ import PubList from '../public/PubList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
 import mixin from '../../mixins/index.js'
+import { mapState } from 'vuex'
 
 export default {
   name: 'RankList',
@@ -18,10 +19,8 @@ export default {
   components: {
     PubList
   },
-  data() {
-    return {
-      rankList: []
-    }
+  computed: {
+    ...mapState('rank', ['rankList'])
   },
   created() {
     this.getRank()
@@ -33,7 +32,10 @@ export default {
           obj.imgUrl = this.$_xsl__replaceImgUrlSize(obj.imgurl)
           obj.path = '/rank/info/' + obj.rankid
           obj.title = obj.rankname
-          this.rankList.push(obj)
+        })
+        this.$store.commit('replaceProperty', {
+          paths: 'rank.rankList',
+          data: data.rank.list
         })
       })
     }

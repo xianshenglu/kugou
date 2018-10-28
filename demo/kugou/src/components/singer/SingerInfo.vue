@@ -14,6 +14,7 @@ import AppMusicList from '../public/AppMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
 import mixin from '../../mixins/index.js'
+import { mapState } from 'vuex'
 
 export default {
   name: 'SingerInfo',
@@ -23,15 +24,8 @@ export default {
     AppMusicList,
     PubModuleDes
   },
-  data: function() {
-    return {
-      singerInfo: {
-        info: {},
-        data: []
-      }
-    }
-  },
   computed: {
+    ...mapState('singer', ['singerInfo']),
     getModuleHeadInfo() {
       return this.singerInfo.info
     },
@@ -64,7 +58,10 @@ export default {
             // obj.path='/singer/info/'+obj.id
           })
           Object.assign(this.singerInfo, singerInfo)
-          this.singerInfo = singerInfo
+          this.$store.commit('replaceProperty', {
+            paths: 'singer.singerInfo',
+            data: singerInfo
+          })
         })
         .catch(er => {
           alert(er)

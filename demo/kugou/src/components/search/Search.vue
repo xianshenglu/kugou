@@ -42,6 +42,8 @@ import AppMusicList from '../public/AppMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api'
 import bus from '../../assets/js/bus'
+import { mapState } from 'vuex'
+
 export default {
   name: 'Search',
   components: {
@@ -54,11 +56,12 @@ export default {
       searchType: '最近热门',
       placeholder: '歌手/歌名/拼音',
       keyword: '',
-      searchRecArr: [],
       isSearchRecShow: true,
-      searchRes: {},
       isSearchResShow: false
     }
+  },
+  computed: {
+    ...mapState('search', ['searchRecArr', 'searchRes'])
   },
   created() {
     this.getSearchRec()
@@ -76,6 +79,7 @@ export default {
     window.addEventListener('touchmove', listener)
     bus.$on('searchBtnClicked', () => {
       if (this.$refs.searchCont) {
+        //todo smooth scroll
         this.$refs.searchCont.scrollTop = 0
       }
     })
@@ -85,8 +89,9 @@ export default {
       axios
         .get(api.hotSearch)
         .then(({ data }) => {
-          data.data.info.forEach(obj => {
-            this.searchRecArr.push(obj)
+          this.$store.commit('replaceProperty', {
+            paths: 'search.searchRecArr',
+            data: data.data.info
           })
         })
         .catch(err => {
@@ -99,7 +104,10 @@ export default {
       }
       let url = api.searchResult + encodeURIComponent(this.keyword)
       axios.get(url).then(res => {
-        this.searchRes = res.data.data
+        this.$store.commit('replaceProperty', {
+          paths: 'search.searchRes',
+          data: res.data.data
+        })
         this.isSearchRecShow = false
         this.isSearchResShow = true
       })

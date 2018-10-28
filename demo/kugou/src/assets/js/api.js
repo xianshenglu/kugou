@@ -10,8 +10,8 @@ let api = {
   singerCategory: baseApiHost + '/singer/class&json=true',
   singerListInfo: baseApiHost + '/singer/list/singerListInfoId?json=true',
   singerInfo: baseApiHost + '/singer/info/singerId&json=true',
-  song_info: baseApiHost + '/app/i/getSongInfo.php?cmd=playInfo&hash=',
-  song_info_lyric: 'http://www.kugou.com/yy/index.php?r=play/getdata&hash=',
+  songInfo: baseApiHost + '/app/i/getSongInfo.php?cmd=playInfo&hash=',
+  songInfoLyric: 'http://www.kugou.com/yy/index.php?r=play/getdata&hash=',
   hotSearch:
     'http://mobilecdn.kugou.com/api/v3/search/hot?format=json&plat=0&count=30',
   searchResult:

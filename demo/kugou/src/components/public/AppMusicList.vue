@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     wantPlay(music) {
-      this.$store.commit('wantPlay', {
+      this.$store.commit('player/wantPlay', {
         music,
         musicList: this.$props.musicList
       })

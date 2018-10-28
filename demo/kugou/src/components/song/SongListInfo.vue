@@ -14,6 +14,7 @@ import AppMusicList from '../public/AppMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
 import mixin from '../../mixins/index.js'
+import { mapState } from 'vuex'
 
 export default {
   name: 'SongListInfo',
@@ -24,20 +25,10 @@ export default {
     PubModuleDes
   },
   data() {
-    return {
-      songListInfo: {
-        info: {
-          list: {}
-        },
-        songs: {
-          list: {
-            info: []
-          }
-        }
-      }
-    }
+    return {}
   },
   computed: {
+    ...mapState('song', ['songListInfo']),
     getModuleHeadInfo() {
       let data = this.songListInfo.info.list
       return {
@@ -63,7 +54,10 @@ export default {
             info: data.info,
             songs: data.list
           }
-          this.songListInfo = songListInfo
+          this.$store.commit('replaceProperty', {
+            paths: 'song.songListInfo',
+            data: songListInfo
+          })
         })
         .catch(er => {
           alert(er)
