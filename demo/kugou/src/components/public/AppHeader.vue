@@ -2,9 +2,13 @@
   <header class="header">
     <button class="header__back arrow arrow--left" @click="goBack"></button>
     <router-link to="/">
-      <img class=" header__logo" src="@/assets/images/logo.png">
+      <img class="header__logo" src="@/assets/images/logo.png">
     </router-link>
-    <router-link class="header__search_btn" to="/search/index">
+    <router-link
+      class="header__search_btn"
+      to="/search/index"
+      @click.native="bus.$emit('searchBtnClicked')"
+    >
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-search"></use>
       </svg>
@@ -13,8 +17,14 @@
 </template>
 
 <script>
+import bus from '../../assets/js/bus.js'
 export default {
   name: 'AppHeader',
+  data() {
+    return {
+      bus: bus
+    }
+  },
   methods: {
     goBack() {
       history.go(-1)
@@ -24,7 +34,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) "../../assets/css/constant.less";
+@import (reference) '../../assets/css/constant.less';
 .header {
   display: flex;
   align-items: center;
@@ -59,8 +69,4 @@ export default {
 
   font-size: 27px;
 }
-
-
-
-
 </style>

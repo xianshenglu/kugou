@@ -1,20 +1,36 @@
 <template>
   <section class="search">
-    <PubModuleTitle :title="title" class="search__title" />
-    <div class="search__cont">
+    <PubModuleTitle :title="title" class="search__title"/>
+    <div class="search__cont" ref="searchCont">
       <form class="search__form" @submit.prevent>
-        <input type="text" :placeholder="placeholder" class="search__input" :value.sync="keyword" @input="keyword=arguments[0].target.value.trim()" @keyup.enter="getSearchRes">
-        <button :class="isSearchResShow?'search__btn search__btn--active':'search__btn'" type="button" @click="getSearchRes">{{title}}</button>
+        <input
+          type="text"
+          :placeholder="placeholder"
+          class="search__input"
+          :value.sync="keyword"
+          @input="keyword=arguments[0].target.value.trim()"
+          @keyup.enter="getSearchRes"
+        >
+        <button
+          :class="isSearchResShow?'search__btn search__btn--active':'search__btn'"
+          type="button"
+          @click="getSearchRes"
+        >{{title}}</button>
       </form>
       <div class="search__rec" v-if="isSearchRecShow">
         <h6 class="search__type">{{searchType}}</h6>
         <ul class="search__list">
-          <li class="search__item main_border_bottom" v-for="(item,index) in searchRecArr" :key="index" @click="getTargetList(item.keyword)">{{item.keyword}}</li>
+          <li
+            class="search__item main_border_bottom"
+            v-for="(item,index) in searchRecArr"
+            :key="index"
+            @click="getTargetList(item.keyword)"
+          >{{item.keyword}}</li>
         </ul>
       </div>
       <div class="search__res" v-if="isSearchResShow">
         <div class="search__count">共有{{searchRes.info.length}}条结果</div>
-        <AppMusicList :music-list="searchRes.info" class="search__res-list" />
+        <AppMusicList :music-list="searchRes.info" class="search__res-list"/>
       </div>
     </div>
   </section>
@@ -24,7 +40,8 @@
 import PubModuleTitle from '../public/PubModuleTitle'
 import AppMusicList from '../public/AppMusicList'
 import axios from 'axios'
-import api from '../../assets/js/api.js'
+import api from '../../assets/js/api'
+import bus from '../../assets/js/bus'
 export default {
   name: 'Search',
   components: {
@@ -57,6 +74,11 @@ export default {
     }
     window.addEventListener('touchstart', listener)
     window.addEventListener('touchmove', listener)
+    bus.$on('searchBtnClicked', () => {
+      if (this.$refs.searchCont) {
+        this.$refs.searchCont.scrollTop = 0
+      }
+    })
   },
   methods: {
     getSearchRec() {
@@ -91,7 +113,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import (reference) "../../assets/css/constant.less";
+@import (reference) '../../assets/css/constant.less';
 .search {
   box-sizing: border-box;
 
@@ -119,7 +141,7 @@ export default {
 }
 
 .search__input {
-  width:277px;
+  width: 277px;
   margin-right: 10px;
   padding: 7px 1px 7px 31px;
 
@@ -129,8 +151,8 @@ export default {
 .search__btn {
   width: 60px;
 
-  color:@white-to-black;
-  background-color:@light-2-white;
+  color: @white-to-black;
+  background-color: @light-2-white;
 }
 .search__btn--active {
   color: @white;
@@ -140,7 +162,7 @@ export default {
   height: 51px;
   padding-left: 16px;
 
-  color:@theme-color;
+  color: @theme-color;
   border-bottom: 1px solid @light-3-white;
 
   font-size: 16px;
@@ -154,18 +176,17 @@ export default {
   line-height: 64px;
 }
 .search__count {
-  box-sizing:border-box;
-  width:100%;
-  padding-left:16px;
+  box-sizing: border-box;
+  width: 100%;
+  padding-left: 16px;
 
-  color:@white-to-black;
-  background-color:@light-2-white;
+  color: @white-to-black;
+  background-color: @light-2-white;
 
-  font-size:14px;
-  line-height:28px;
+  font-size: 14px;
+  line-height: 28px;
 }
 .search__res-list {
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
-
 </style>
