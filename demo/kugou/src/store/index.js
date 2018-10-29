@@ -20,12 +20,7 @@ let store = new Vuex.Store({
   },
   mutations: {
     replaceProperty(state, { paths, data }) {
-      if (
-        Object.prototype.toString
-          .call('s')
-          .slice(-7, -1)
-          .toLowerCase() !== 'string'
-      ) {
+      if (typeof paths !== 'string') {
         return
       }
       paths = paths.split('.')
