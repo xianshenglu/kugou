@@ -1,6 +1,6 @@
 <template>
   <main class="main">
-    <AppNav :navs="navs" class="main__nav" />
+    <AppNav :navs="navs" class="main__nav"/>
     <router-view class="main__cont"></router-view>
   </main>
 </template>
@@ -18,7 +18,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) "../assets/css/constant.less";
+@import (reference) '../assets/css/constant.less';
 .main__nav {
   z-index: 1;
 
@@ -34,8 +34,4 @@ export default {
   box-sizing: border-box;
   height: calc(100% - 58px);
 }
-
-
-
-
 </style>

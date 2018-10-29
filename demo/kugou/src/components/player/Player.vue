@@ -9,7 +9,14 @@
       :singer-img="singerImg"
       :is-playing="isPlaying"
     />
-    <PlayerMax v-else class="player_box__player"/>
+    <PlayerMax
+      v-else
+      class="player_box__player"
+      :song-name="songName"
+      :singer-name="singerName"
+      :singer-img="singerImg"
+      :is-playing="isPlaying"
+    />
   </section>
 </template>
 
@@ -28,7 +35,7 @@ export default {
   },
   data() {
     return {
-      isPlayerMed: true
+      isPlayerMed: false
     }
   },
   computed: {
