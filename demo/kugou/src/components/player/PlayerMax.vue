@@ -7,7 +7,11 @@
     <img :src="singerImg" class="player__singer_img">
     <div class="player__lyrics"></div>
     <div class="player__progress"></div>
-    <div class="player__buttons"></div>
+    <div class="player__buttons">
+      <PrevButton class="player__btn_prev"/>
+      <PlayButton class="player__btn_status"/>
+      <NextButton class="play__btn_next"/>
+    </div>
     <button class="player__download"></button>
   </section>
 </template>
@@ -16,6 +20,7 @@
 import PlayButton from './PlayButton'
 import NextButton from './NextButton'
 import PrevButton from './PrevButton'
+import { mapState } from 'vuex'
 export default {
   name: 'PlayerMax',
   props: ['songName', 'singerName', 'singerImg'],
@@ -23,7 +28,19 @@ export default {
     PlayButton,
     NextButton,
     PrevButton
-  }
+  },
+  computed: {
+    ...mapState('player', {
+      isPlaying: state => state.isPlaying,
+      song: state => state.song,
+      music: state => state.music,
+      audioEl: state => state.audioEl
+    })
+  },
+  mounted() {
+    window.song = this.song
+  },
+  methods: {}
 }
 </script>
 
@@ -63,6 +80,27 @@ export default {
 }
 .player__buttons {
   height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.player__btn_prev,
+.play__btn_next,
+.player__btn_status {
+  border-radius: 50%;
+  border: 2px solid @white;
+  margin: 0 16px;
+}
+.player__btn_prev,
+.play__btn_next {
+  width: 42px;
+  height: 42px;
+  font-size: 16px;
+}
+.player__btn_status {
+  width: 58px;
+  height: 58px;
+  font-size: 20px;
 }
 .player__download {
   margin-top: 19px auto 0;
