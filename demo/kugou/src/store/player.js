@@ -10,6 +10,7 @@ const player = {
     musicList: [],
     music: null,
     song: {},
+    lyrics: {},
     audioEl: {},
     isPlaying: false
   },
@@ -23,8 +24,15 @@ const player = {
     wantPlay(state, { music, musicList = state.musicList }) {
       state.music = music
       state.musicList = musicList
-      axios.get(api.songInfo + music.hash).then(res => {
-        state.song = res.data
+      axios.get(api.songInfoLyric + music.hash).then(res => {
+        store.commit('replaceProperty', {
+          paths: 'player.lyrics',
+          data: res.data.data.lyrics
+        })
+        store.commit('replaceProperty', {
+          paths: 'player.song',
+          data: res.data.data
+        })
       })
     },
     togglePlay(state, status = !state.isPlaying) {
@@ -46,6 +54,7 @@ const player = {
       index = index === 0 ? state.musicList.length : index
       store.commit('player/wantPlay', { music: state.musicList[index - 1] })
     }
-  }
+  },
+  actions: {}
 }
 export default player
