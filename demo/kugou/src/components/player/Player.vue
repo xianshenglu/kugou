@@ -1,6 +1,6 @@
 <template>
   <section :class="isPlayerMed?'player_box player_box--med':'player_box player_box--max'">
-    <audio :src="song.url" class="hidden" ref="audioEl" @canplay="play"></audio>
+    <audio :src="song.play_url" class="hidden" ref="audioEl" @canplay="play"></audio>
     <PlayerMed
       v-if="isPlayerMed"
       class="player_box__player"
@@ -43,10 +43,10 @@ export default {
       return this.music.filename.split(/\s+-\s+/)[0]
     },
     singerImg() {
-      if (!this.song.imgUrl) {
+      if (!this.song.img) {
         return
       }
-      return this.$_xsl__replaceImgUrlSize(this.song.imgUrl)
+      return this.$_xsl__replaceImgUrlSize(this.song.img)
     },
     songName() {
       return this.music.filename.split(/\s+-\s+/)[1]
