@@ -11,12 +11,11 @@ export default {
   name: 'PrevButton',
   methods: {
     prev() {
-      this.$store.commit('prev')
+      this.$store.commit('player/prev')
     }
   }
 }
 </script>
 
 <style scoped>
-
 </style>

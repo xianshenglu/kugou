@@ -11,12 +11,11 @@ export default {
   name: 'nextButton',
   methods: {
     next() {
-      this.$store.commit('next')
+      this.$store.commit('player/next')
     }
   }
 }
 </script>
 
 <style scoped>
-
 </style>

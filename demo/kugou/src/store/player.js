@@ -1,5 +1,6 @@
 import axios from 'axios'
 import api from '../assets/js/api'
+import store from './index'
 const player = {
   namespaced: true,
   state: {
@@ -37,12 +38,12 @@ const player = {
     next(state) {
       let index = player.getters.curMusicIndex
       index = index === state.musicList.length - 1 ? -1 : index
-      player.commit('wantPlay', { music: state.musicList[index + 1] })
+      store.commit('player/wantPlay', { music: state.musicList[index + 1] })
     },
     prev(state) {
       let index = player.getters.curMusicIndex
       index = index === 0 ? state.musicList.length : index
-      player.commit('wantPlay', { music: state.musicList[index - 1] })
+      store.commit('player/wantPlay', { music: state.musicList[index - 1] })
     }
   }
 }
