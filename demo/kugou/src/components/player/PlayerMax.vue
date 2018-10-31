@@ -5,7 +5,13 @@
   >
     <h6 class="player__song_name">{{songName}}</h6>
     <img :src="singerImg" class="player__singer_img">
-    <div class="player__lyrics"></div>
+    <div class="player__lyrics">
+      <p
+        v-for="item in lyricsItems"
+        :key="item.time"
+        v-bind="attr('time-'+item.time)"
+      >{{ item.text }}</p>
+    </div>
     <div class="player__progress"></div>
     <div class="player__buttons">
       <PrevButton class="player__btn_prev"/>
@@ -20,7 +26,7 @@
 import PlayButton from './PlayButton'
 import NextButton from './NextButton'
 import PrevButton from './PrevButton'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 export default {
   name: 'PlayerMax',
   props: ['songName', 'singerName', 'singerImg'],
@@ -30,17 +36,19 @@ export default {
     PrevButton
   },
   computed: {
-    ...mapState('player', {
-      isPlaying: state => state.isPlaying,
-      song: state => state.song,
-      music: state => state.music,
-      audioEl: state => state.audioEl
-    })
+    ...mapState('player', ['isPlaying', 'song', 'audioEl']),
+    ...mapGetters('player', ['lyricsItems'])
   },
   mounted() {
-    window.song = this.song
+    window.lyricsItems = this.lyricsItems
   },
-  methods: {}
+  methods: {
+    attr(key, dataPrefix = 'data-') {
+      return {
+        [`${dataPrefix + key}`]: ''
+      }
+    }
+  }
 }
 </script>
 
@@ -71,6 +79,8 @@ export default {
 .player__lyrics {
   margin-top: 16px;
   height: 68px;
+  color: @light-3-white;
+  overflow: hidden;
 }
 .player__progress {
   height: 48px;

@@ -10,12 +10,27 @@ const player = {
     musicList: [],
     music: null,
     song: {},
-    lyrics: {},
+    lyrics: '',
     audioEl: {},
     isPlaying: false
   },
   getters: {
-    curMusicIndex: getCurMusicIndex
+    curMusicIndex: getCurMusicIndex,
+    lyricsItems: state => {
+      let lyricsArr = state.lyrics.split(/\n/)
+      lyricsArr.pop()
+      return lyricsArr.map(text => {
+        let arr = text.replace('[', '').split(']')
+        let time = arr[0]
+        let min = time.split(':')[0]
+        let sec = time.split(':')[1].split('.')[0]
+        let millisecond = time.split(':')[1].split('.')[1]
+        return {
+          time: min * 60 * 1000 + sec * 1000 + millisecond,
+          text: arr[1].trim().replace(/(男[:：]\s*)|(女[:：]\s*)/, '')
+        }
+      })
+    }
   },
   mutations: {
     findAudioEl(state, el) {
