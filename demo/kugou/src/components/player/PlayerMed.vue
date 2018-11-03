@@ -6,36 +6,38 @@
       <div class="player__singer_name">{{singerName}}</div>
     </div>
     <div class="player__buttons">
-      <PrevButton class="player__btn_prev" />
-      <PlayButton class="player__btn_status" />
-      <NextButton class="play__btn_next" />
+      <PrevButton class="player__btn_prev"/>
+      <PlayButton class="player__btn_status"/>
+      <NextButton class="play__btn_next"/>
     </div>
   </section>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import PlayButton from './PlayButton'
 import NextButton from './NextButton'
 import PrevButton from './PrevButton'
 export default {
   name: 'PlayerMed',
-  props: ['songName', 'singerName', 'singerImg'],
   components: {
     PlayButton,
     NextButton,
     PrevButton
+  },
+  computed: {
+    ...mapGetters('player', ['songName', 'singerName', 'singerImg'])
   }
 }
 </script>
 
 <style scoped lang="less">
-@import (reference) "../../assets/css/constant";
+@import (reference) '../../assets/css/constant';
 .player {
   display: flex;
   align-items: center;
 
-  background: @almost-black;
+  background: @black90p;
 }
 .player__singer_img {
   flex: 0 0 auto;
@@ -89,7 +91,4 @@ export default {
 
   font-size: 30px;
 }
-
-
-
 </style>

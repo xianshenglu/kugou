@@ -41,9 +41,7 @@ export default {
   },
   destroyed() {
     window.onresize = null
-  },
-  mounted() {},
-  methods: {}
+  }
 }
 </script>
 
