@@ -79,16 +79,13 @@ export default {
   justify-content: space-between;
 
   width: 150px;
-  margin: 10px auto;
+  margin: auto 10px;
 }
 .player__btn_prev,
-.play__btn_next {
-  font-size: 42px;
-}
+.play__btn_next,
 .player__btn_status {
-  width: 32px;
-  height: 32px;
-
-  font-size: 30px;
+  width: 28px;
+  height: 28px;
+  font-size: 20px;
 }
 </style>

@@ -26,11 +26,4 @@ export default {
 </script>
 
 <style scoped>
-.play__play {
-  transform: translate(1px, -2px);
-}
-.play__pause {
-  font-size: 1.2em;
-  transform: translate(-2px, -4px);
-}
 </style>
