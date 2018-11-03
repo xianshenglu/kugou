@@ -1,22 +1,7 @@
 <template>
   <section :class="isPlayerMed?'player_box player_box--med':'player_box player_box--max'">
-    <audio :src="song.play_url" class="hidden" ref="audioEl" @canplay="play"></audio>
-    <PlayerMed
-      v-if="isPlayerMed"
-      class="player_box__player"
-      :song-name="songName"
-      :singer-name="singerName"
-      :singer-img="singerImg"
-      :is-playing="isPlaying"
-    />
-    <PlayerMax
-      v-else
-      class="player_box__player"
-      :song-name="songName"
-      :singer-name="singerName"
-      :singer-img="singerImg"
-      :is-playing="isPlaying"
-    />
+    <PlayerMed v-if="isPlayerShow" v-show="isPlayerMed" class="player_box__player"/>
+    <PlayerMax v-if="isPlayerShow" v-show="!isPlayerMed" class="player_box__player"/>
   </section>
 </template>
 
@@ -39,27 +24,15 @@ export default {
     }
   },
   computed: {
-    singerName() {
-      return this.music.filename.split(/\s+-\s+/)[0]
-    },
-    singerImg() {
-      if (!this.song.img) {
-        return
-      }
-      return this.$_xsl__replaceImgUrlSize(this.song.img)
-    },
-    songName() {
-      return this.music.filename.split(/\s+-\s+/)[1]
-    },
     ...mapState('player', {
-      isPlaying: state => state.isPlaying,
-      song: state => state.song,
-      music: state => state.music,
-      audioEl: state => state.audioEl
+      isPlaying: 'isPlaying',
+      song: 'song',
+      lyrics: 'lyrics',
+      music: 'music',
+      audioEl: 'audioEl',
+      isPlayerShow: 'isShow'
     }),
-    ...mapState('device', {
-      vMax: state => state.vMax
-    })
+    ...mapState('device', ['vMax'])
   },
   beforeCreate() {
     window.onresize = () => {
@@ -69,14 +42,8 @@ export default {
   destroyed() {
     window.onresize = null
   },
-  mounted() {
-    this.$store.commit('player/findAudioEl', this.$refs.audioEl)
-  },
-  methods: {
-    play() {
-      this.$store.commit('player/togglePlay', true)
-    }
-  }
+  mounted() {},
+  methods: {}
 }
 </script>
 

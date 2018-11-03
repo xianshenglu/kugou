@@ -2,7 +2,8 @@
   <div id="app" class="app" ref="app">
     <AppHeader class="app__header"/>
     <router-view class="app__cont" :navs="navs"></router-view>
-    <Player v-if="music" class="app__player"/>
+    <audio :src="song.play_url" class="hidden" ref="audioEl" loop @canplay="togglePlay(true)"></audio>
+    <Player v-show="isPlayerShow" class="app__player"/>
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import AppHeader from '@/components/public/AppHeader'
 import AppNav from './components/public/AppNav'
 import Player from './components/player/Player'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'App',
@@ -20,14 +22,17 @@ export default {
   },
   mounted() {
     this.$refs.app.style.height = this.vMax + 'px'
+    this.findAudioEl(this.$refs.audioEl)
   },
   computed: {
-    music() {
-      return this.$store.state.player.music
-    },
-    vMax() {
-      return this.$store.state.device.vMax
-    }
+    ...mapState('player', {
+      isPlayerShow: 'isShow',
+      music: 'music',
+      song: 'song'
+    }),
+    ...mapState('device', {
+      vMax: 'vMax'
+    })
   },
   data() {
     return {
@@ -58,6 +63,12 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    ...mapMutations('player', {
+      findAudioEl: 'findAudioEl',
+      togglePlay: 'togglePlay'
+    })
   }
 }
 </script>

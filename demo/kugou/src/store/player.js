@@ -1,5 +1,6 @@
 import axios from 'axios'
 import api from '../assets/js/api'
+import utils from '../assets/js/utils'
 import store from './index'
 function getCurMusicIndex(state) {
   return state.musicList.findIndex(music => music === state.music)
@@ -8,15 +9,31 @@ const player = {
   namespaced: true,
   state: {
     musicList: [],
-    music: null,
+    music: {
+      filename: ''
+    },
     song: {},
     lyrics: '',
     audioEl: {},
-    isPlaying: false
+    isPlaying: false,
+    isShow: false
   },
   getters: {
     curMusicIndex: getCurMusicIndex,
-    lyricsItems: state => {
+    singerImg(state) {
+      if (!state.song.img) {
+        return
+      }
+      return utils.$_xsl__replaceImgUrlSize(state.song.img, 400)
+    },
+    singerName(state) {
+      //use music because song have to get by ajax.
+      return state.music.filename.split(/\s+-\s+/)[0]
+    },
+    songName(state) {
+      return state.music.filename.split(/\s+-\s+/)[1]
+    },
+    lyricItems: state => {
       let lyricsArr = state.lyrics.split(/\n/)
       lyricsArr.pop()
       return lyricsArr.map(text => {
@@ -26,7 +43,7 @@ const player = {
         let sec = time.split(':')[1].split('.')[0]
         let millisecond = time.split(':')[1].split('.')[1]
         return {
-          time: min * 60 * 1000 + sec * 1000 + millisecond,
+          time: min * 60 * 1000 + sec * 1000 + Number(millisecond),
           text: arr[1].trim().replace(/(男[:：]\s*)|(女[:：]\s*)/, '')
         }
       })
@@ -37,6 +54,7 @@ const player = {
       state.audioEl = el
     },
     wantPlay(state, { music, musicList = state.musicList }) {
+      state.isShow = true
       state.music = music
       state.musicList = musicList
       axios.get(api.songInfoLyric + music.hash).then(res => {
