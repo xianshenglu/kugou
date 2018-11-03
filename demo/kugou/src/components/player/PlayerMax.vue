@@ -8,14 +8,14 @@
     <div class="player__lyrics">
       <p
         v-for="(item,index) in lyricItems"
-        :key="item.time"
-        :ref="item.time"
-        v-bind="vBindAttr('time-'+item.time)"
+        :key="item.millisecond"
+        :ref="item.millisecond"
+        v-bind="vBindAttr('millisecond-'+item.millisecond)"
         :class="index===prevLyricIndex+1?'player__lyrics_text player__lyrics_text--active ':'player__lyrics_text'"
       >{{ item.text }}</p>
     </div>
     <div class="player__progress">
-      <PlayerProgress :current-time="currentTime"></PlayerProgress>
+      <PlayerProgress/>
     </div>
     <div class="player__buttons">
       <PrevButton class="player__btn_prev"/>
@@ -44,8 +44,7 @@ export default {
   mixins: [mixin],
   data() {
     return {
-      prevLyricIndex: 0,
-      currentTime: 0
+      prevLyricIndex: 0
     }
   },
   computed: {
@@ -56,8 +55,8 @@ export default {
       'singerName',
       'singerImg'
     ]),
-    lyricTimes() {
-      return this.lyricItems.map(o => o.time)
+    lyricMillisecond() {
+      return this.lyricItems.map(o => o.millisecond)
     }
   },
   mounted() {
@@ -68,19 +67,17 @@ export default {
   },
   methods: {
     timeUpdateCb(event) {
-      let target = event.target
-      let currentTime = Math.floor(target.currentTime * 1000)
-      let nextLyricIndex = this.lyricTimes.findIndex(
-        time => time > currentTime * 1.005
+      let curMillisecond = Math.floor(event.target.currentTime * 1000)
+      let nextLyricIndex = this.lyricMillisecond.findIndex(
+        time => time > curMillisecond * 1.005
       )
       let prevLyricIndex = nextLyricIndex > 1 ? nextLyricIndex - 2 : 0
       let isRefAvailable =
-        this.$refs && this.$refs[this.lyricTimes[prevLyricIndex]]
+        this.$refs && this.$refs[this.lyricMillisecond[prevLyricIndex]]
       if (isRefAvailable) {
-        this.$refs[this.lyricTimes[prevLyricIndex]][0].scrollIntoView()
+        this.$refs[this.lyricMillisecond[prevLyricIndex]][0].scrollIntoView()
       }
       this.prevLyricIndex = prevLyricIndex
-      this.currentTime = currentTime
     }
   }
 }

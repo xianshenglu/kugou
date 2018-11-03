@@ -43,7 +43,7 @@ const player = {
         let sec = time.split(':')[1].split('.')[0]
         let millisecond = time.split(':')[1].split('.')[1]
         return {
-          time: min * 60 * 1000 + sec * 1000 + Number(millisecond),
+          millisecond: min * 60 * 1000 + sec * 1000 + Number(millisecond),
           text: arr[1].trim().replace(/(男[:：]\s*)|(女[:：]\s*)/, '')
         }
       })
