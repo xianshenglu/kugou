@@ -1,8 +1,5 @@
 <template>
-  <section
-    class="player"
-    :style="'background-image:'+`linear-gradient(to right,rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(${singerImg});`"
-  >
+  <section class="player" :style="playerBgImg()">
     <h6 class="player__song_name">{{songName}}</h6>
     <img :src="singerImg" class="player__singer_img">
     <div class="player__lyrics">
@@ -66,6 +63,11 @@ export default {
     this.audioEl.removeEventListener('timeupdate', this.timeUpdateCb)
   },
   methods: {
+    playerBgImg() {
+      return `background-image:linear-gradient(to right,rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(${
+        this.singerImg
+      });`
+    },
     timeUpdateCb(event) {
       let curMillisecond = Math.floor(event.target.currentTime * 1000)
       let nextLyricIndex = this.lyricMillisecond.findIndex(
