@@ -20,7 +20,7 @@ export default {
       loadProgress: 0,
       isTouching: false,
       touchStartX: 0,
-      progressBarRect: {}
+      progressBarRect: null
     }
   },
   computed: {
@@ -39,7 +39,6 @@ export default {
     }
   },
   mounted() {
-    this.progressBarRect = this.$refs.progressBar.getBoundingClientRect()
     this.audioEl.addEventListener('progress', this.progressCb)
     this.audioEl.addEventListener('timeupdate', this.timeUpdateCb)
   },
@@ -68,6 +67,9 @@ export default {
     setCurTime(event) {
       this.isTouching = true
       let clientX = event.touches[0].clientX
+      if (!this.progressBarRect) {
+        this.progressBarRect = this.$refs.progressBar.getBoundingClientRect()
+      }
       let currentTime = this.calcCurTime(clientX, this.progressBarRect.left, 0)
       this.currentTime = currentTime
       this.touchStartX = clientX
@@ -98,6 +100,8 @@ export default {
           currentTime = this.currentTime + this.audioEl.duration * percent
           break
       }
+      console.log(end, start, this.progressBarRect)
+
       if (currentTime < 0) {
         currentTime = 0
       } else if (currentTime > this.audioEl.duration) {
