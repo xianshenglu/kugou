@@ -7,12 +7,16 @@
     <img :src="singerImg" class="player__singer_img">
     <div class="player__lyrics">
       <p
-        v-for="item in lyricsItems"
+        v-for="(item,index) in lyricItems"
         :key="item.time"
-        v-bind="attr('time-'+item.time)"
+        :ref="item.time"
+        v-bind="vBindAttr('time-'+item.time)"
+        :class="index===prevLyricIndex+1?'player__lyrics_text player__lyrics_text--active ':'player__lyrics_text'"
       >{{ item.text }}</p>
     </div>
-    <div class="player__progress"></div>
+    <div class="player__progress">
+      <PlayerProgress :current-time="currentTime"></PlayerProgress>
+    </div>
     <div class="player__buttons">
       <PrevButton class="player__btn_prev"/>
       <PlayButton class="player__btn_status"/>
@@ -26,27 +30,57 @@
 import PlayButton from './PlayButton'
 import NextButton from './NextButton'
 import PrevButton from './PrevButton'
+import PlayerProgress from './PlayerProgress'
 import { mapState, mapGetters } from 'vuex'
+import mixin from '../../mixins/index.js'
 export default {
   name: 'PlayerMax',
-  props: ['songName', 'singerName', 'singerImg'],
   components: {
     PlayButton,
     NextButton,
-    PrevButton
+    PrevButton,
+    PlayerProgress
+  },
+  mixins: [mixin],
+  data() {
+    return {
+      prevLyricIndex: 0,
+      currentTime: 0
+    }
   },
   computed: {
-    ...mapState('player', ['isPlaying', 'song', 'audioEl']),
-    ...mapGetters('player', ['lyricsItems'])
+    ...mapState('player', ['audioEl']),
+    ...mapGetters('player', [
+      'lyricItems',
+      'songName',
+      'singerName',
+      'singerImg'
+    ]),
+    lyricTimes() {
+      return this.lyricItems.map(o => o.time)
+    }
   },
   mounted() {
-    window.lyricsItems = this.lyricsItems
+    this.audioEl.addEventListener('timeupdate', this.timeUpdateCb)
+  },
+  destroyed() {
+    this.audioEl.removeEventListener('timeupdate', this.timeUpdateCb)
   },
   methods: {
-    attr(key, dataPrefix = 'data-') {
-      return {
-        [`${dataPrefix + key}`]: ''
+    timeUpdateCb(event) {
+      let target = event.target
+      let currentTime = Math.floor(target.currentTime * 1000)
+      let nextLyricIndex = this.lyricTimes.findIndex(
+        time => time > currentTime * 1.005
+      )
+      let prevLyricIndex = nextLyricIndex > 1 ? nextLyricIndex - 2 : 0
+      let isRefAvailable =
+        this.$refs && this.$refs[this.lyricTimes[prevLyricIndex]]
+      if (isRefAvailable) {
+        this.$refs[this.lyricTimes[prevLyricIndex]][0].scrollIntoView()
       }
+      this.prevLyricIndex = prevLyricIndex
+      this.currentTime = currentTime
     }
   }
 }
@@ -79,12 +113,11 @@ export default {
 .player__lyrics {
   margin-top: 16px;
   height: 68px;
-  color: @light-3-white;
-  overflow: hidden;
+  color: @white-3;
+  overflow: scroll;
 }
 .player__progress {
   height: 48px;
-  padding: 16px 13px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -116,5 +149,14 @@ export default {
   margin-top: 19px auto 0;
   height: 45px;
   width: 211px;
+}
+.player__lyrics {
+  text-align: center;
+}
+.player__lyrics_text {
+  line-height: 32px;
+}
+.player__lyrics_text--active {
+  color: @lemon;
 }
 </style>
