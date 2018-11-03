@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
 import bus from '../../assets/js/bus.js'
 export default {
   name: 'AppHeader',
@@ -25,8 +26,16 @@ export default {
       bus: bus
     }
   },
+  computed: {
+    ...mapState('player', ['curPlayerId'])
+  },
   methods: {
+    ...mapMutations('player', ['togglePlayers']),
     goBack() {
+      if (this.curPlayerId === 1) {
+        this.togglePlayers(1)
+        return
+      }
       history.go(-1)
     }
   }

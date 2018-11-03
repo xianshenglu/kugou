@@ -15,6 +15,7 @@ const player = {
     song: {},
     lyrics: '',
     audioEl: {},
+    curPlayerId: 0,
     isPlaying: false,
     isShow: false
   },
@@ -86,6 +87,16 @@ const player = {
       let index = getCurMusicIndex(state)
       index = index === 0 ? state.musicList.length : index
       store.commit('player/wantPlay', { music: state.musicList[index - 1] })
+    },
+    togglePlayers(state, from) {
+      switch (from) {
+        case 0:
+          state.curPlayerId = 1
+          break
+        case 1:
+          state.curPlayerId = 0
+          break
+      }
     }
   },
   actions: {}

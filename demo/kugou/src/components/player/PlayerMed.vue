@@ -1,7 +1,7 @@
 <template>
   <section class="player">
-    <img :src="singerImg" alt="" class="player__singer_img">
-    <div class="player__song_info">
+    <img :src="singerImg" alt="" class="player__singer_img" @click="togglePlayers(0)">
+    <div class="player__song_info" @click="togglePlayers(0)">
       <div class="player__song_name">{{songName}}</div>
       <div class="player__singer_name">{{singerName}}</div>
     </div>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import PlayButton from './PlayButton'
 import NextButton from './NextButton'
 import PrevButton from './PrevButton'
@@ -27,6 +27,9 @@ export default {
   },
   computed: {
     ...mapGetters('player', ['songName', 'singerName', 'singerImg'])
+  },
+  methods: {
+    ...mapMutations('player', ['togglePlayers'])
   }
 }
 </script>

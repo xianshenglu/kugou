@@ -1,7 +1,7 @@
 <template>
-  <section :class="isPlayerMed?'player_box player_box--med':'player_box player_box--max'">
-    <PlayerMed v-if="isPlayerShow" v-show="isPlayerMed" class="player_box__player"/>
-    <PlayerMax v-if="isPlayerShow" v-show="!isPlayerMed" class="player_box__player"/>
+  <section :class="curPlayerId===0?'player_box player_box--med':'player_box player_box--max'">
+    <PlayerMed v-if="isPlayerShow" v-show="curPlayerId===0" class="player_box__player"/>
+    <PlayerMax v-if="isPlayerShow" v-show="curPlayerId===1" class="player_box__player"/>
   </section>
 </template>
 
@@ -18,11 +18,6 @@ export default {
     PlayerMed,
     PlayerMax
   },
-  data() {
-    return {
-      isPlayerMed: false
-    }
-  },
   computed: {
     ...mapState('player', {
       isPlaying: 'isPlaying',
@@ -30,7 +25,8 @@ export default {
       lyrics: 'lyrics',
       music: 'music',
       audioEl: 'audioEl',
-      isPlayerShow: 'isShow'
+      isPlayerShow: 'isShow',
+      curPlayerId: 'curPlayerId'
     }),
     ...mapState('device', ['vMax'])
   },
