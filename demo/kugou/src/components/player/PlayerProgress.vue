@@ -1,46 +1,51 @@
 <template>
-  <div class="player_progress">
-    <div class="player_progress__song_cur_time">{{milliToMin(currentTime)}}</div>
-    <div
-      class="player_progress__progress_bar"
-      :style="`background-image:linear-gradient(to right, #2ca2f9 ${currentProgress}%, transparent ${currentProgress}%),linear-gradient(to right, #6c6b70 ${loadProgress}%, transparent ${loadProgress}%)`"
-    >
+  <div class="player_progress" @touchstart="setCurTime">
+    <div class="player_progress__song_cur_time">{{secondToMin(currentTime)}}</div>
+    <div class="player_progress__progress_bar" ref="progressBar" :style="progressBarStyle">
       <div class="player_progress__progress_bar_pointer" :style="`left:${currentProgress}%;`"></div>
     </div>
-    <div class="player_progress__song_duration">{{milliToMin(audioEl.duration*1000)}}</div>
+    <div class="player_progress__song_duration">{{secondToMin(audioEl.duration)}}</div>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import mixin from '../../mixins/index.js'
 export default {
   name: 'PlayerProgress',
   mixins: [mixin],
   data() {
     return {
-      loadProgress: 0
-    }
-  },
-  props: {
-    currentTime: {
-      type: Number,
-      default() {
-        return 0
-      }
+      currentTime: 0,
+      loadProgress: 0,
+      isTouching: false,
+      touchStartX: 0,
+      progressBarRect: {}
     }
   },
   computed: {
     ...mapState('player', ['song', 'audioEl']),
     currentProgress() {
-      return Math.floor((100 * this.currentTime) / this.song.timelength)
+      return Math.floor((100 * this.currentTime) / this.audioEl.duration)
+    },
+    progressBarStyle() {
+      return `background-image:linear-gradient(to right, #2ca2f9 ${
+        this.currentProgress
+      }%, transparent ${
+        this.currentProgress
+      }%),linear-gradient(to right, #6c6b70 ${
+        this.loadProgress
+      }%, transparent ${this.loadProgress}%)`
     }
   },
   mounted() {
+    this.progressBarRect = this.$refs.progressBar.getBoundingClientRect()
     this.audioEl.addEventListener('progress', this.progressCb)
+    this.audioEl.addEventListener('timeupdate', this.timeUpdateCb)
   },
   destroyed() {
     this.audioEl.removeEventListener('progress', this.progressCb)
+    this.audioEl.addEventListener('timeupdate', this.timeUpdateCb)
   },
   methods: {
     progressCb() {
@@ -53,6 +58,52 @@ export default {
         (100 * this.audioEl.buffered.end(bufferedLength - 1)) /
           this.audioEl.duration
       )
+    },
+    timeUpdateCb(event) {
+      if (this.isTouching) {
+        return
+      }
+      this.currentTime = event.target.currentTime
+    },
+    setCurTime(event) {
+      this.isTouching = true
+      let clientX = event.touches[0].clientX
+      let currentTime = this.calcCurTime(clientX, this.progressBarRect.left, 0)
+      this.currentTime = currentTime
+      this.touchStartX = clientX
+      window.addEventListener('touchmove', this.setCurTimeOnMove)
+      window.addEventListener('touchend', this.touchEndCb)
+    },
+    setCurTimeOnMove(event) {
+      let clientX = event.touches[0].clientX
+      let currentTime = this.calcCurTime(clientX, this.touchStartX, 1)
+      this.currentTime = currentTime
+      this.touchStartX = clientX
+    },
+    touchEndCb() {
+      this.isTouching = false
+      this.audioEl.currentTime = this.currentTime
+      window.removeEventListener('touchmove', this.setCurTimeOnMove)
+      window.removeEventListener('touchend', this.touchEndCb)
+    },
+    calcCurTime(end, start, type) {
+      let offsetX = end - start
+      let percent = offsetX / this.progressBarRect.width
+      let currentTime
+      switch (type) {
+        case 0:
+          currentTime = this.audioEl.duration * percent
+          break
+        case 1:
+          currentTime = this.currentTime + this.audioEl.duration * percent
+          break
+      }
+      if (currentTime < 0) {
+        currentTime = 0
+      } else if (currentTime > this.audioEl.duration) {
+        currentTime = this.audioEl.duration
+      }
+      return currentTime
     }
   }
 }
