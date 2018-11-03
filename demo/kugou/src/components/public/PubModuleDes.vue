@@ -57,7 +57,7 @@ export default {
   box-sizing: border-box;
   border-radius: 50%;
   border-width: 2px;
-  border-color: @light-3-white;
+  border-color: @white-3;
 }
 
 .more_btn--up {

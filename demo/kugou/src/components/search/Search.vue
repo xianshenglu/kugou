@@ -138,7 +138,7 @@ export default {
   height: 63px;
   padding: 13px;
 
-  background-color: @light-1-white;
+  background-color: @white-1;
 }
 .search__input,
 .search__btn {
@@ -153,25 +153,25 @@ export default {
   margin-right: 10px;
   padding: 7px 1px 7px 31px;
 
-  border: 1px solid @light-2-white;
+  border: 1px solid @white-2;
   background-color: @white;
 }
 .search__btn {
   width: 60px;
 
   color: @white-to-black;
-  background-color: @light-2-white;
+  background-color: @white-2;
 }
 .search__btn--active {
   color: @white;
-  background: @theme-color;
+  background: @theme;
 }
 .search__type {
   height: 51px;
   padding-left: 16px;
 
-  color: @theme-color;
-  border-bottom: 1px solid @light-3-white;
+  color: @theme;
+  border-bottom: 1px solid @white-3;
 
   font-size: 16px;
   line-height: 51px;
@@ -189,7 +189,7 @@ export default {
   padding-left: 16px;
 
   color: @white-to-black;
-  background-color: @light-2-white;
+  background-color: @white-2;
 
   font-size: 14px;
   line-height: 28px;

@@ -43,7 +43,7 @@ export default {
   padding: 0 12px;
 
   color: @white;
-  background: @theme-color;
+  background: @theme;
 }
 .header__logo {
   width: 131px;

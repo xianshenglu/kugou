@@ -24,7 +24,7 @@ export default {
 
   box-sizing: border-box;
 
-  box-shadow: 0 3px 3px 0 @light-2-white;
+  box-shadow: 0 3px 3px 0 @white-2;
 
   line-height: 58px;
 }

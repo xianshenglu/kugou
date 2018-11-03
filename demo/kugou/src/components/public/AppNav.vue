@@ -49,6 +49,6 @@ export default {
   line-height: inherit;
 }
 .nav__link--active {
-  border-bottom-color: @theme-color;
+  border-bottom-color: @theme;
 }
 </style>
