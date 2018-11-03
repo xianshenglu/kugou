@@ -15,3 +15,15 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+const defaultImg = require('./assets/images/default.png')
+window.addEventListener(
+  'error',
+  function(event) {
+    let target = event.target
+    if (target.tagName && target.tagName.toLowerCase() === 'img') {
+      target.src = defaultImg
+    }
+  },
+  true
+)
