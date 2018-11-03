@@ -8,8 +8,10 @@ export default {
   },
   methods: {
     ...utils,
-    $_xsl__replaceImgUrlSize(str = '', size = this.imgSize) {
-      return str.replace(/\{\s*size\s*\}/, size)
+    vBindAttr(key, dataPrefix = 'data-') {
+      return {
+        [`${dataPrefix + key}`]: ''
+      }
     },
     $_xsl__detectToLoadImgLazy(lazyImages, parentNode, refsSelector) {
       if (lazyImages && lazyImages.length !== 0) {
