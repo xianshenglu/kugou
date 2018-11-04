@@ -1,5 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+import store from '../store/index'
+import router from '../router/index'
+
 import Main from '../components/Main'
 import NewSong from '../components/new_song/NewSong'
 import RankList from '../components/rank/RankList'
@@ -10,6 +14,7 @@ import SongListInfo from '../components/song/SongListInfo'
 import SingerListInfo from '../components/singer/SingerListInfo'
 import SingerInfo from '../components/singer/SingerInfo'
 import Search from '../components/search/Search'
+import PlayerMax from '../components/player/PlayerMax'
 
 Vue.use(VueRouter)
 
@@ -56,6 +61,20 @@ export default new VueRouter({
     {
       path: '/search/index',
       component: Search
+    },
+    {
+      path: '/player/max',
+      component: PlayerMax
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  let toQuery = to.query
+  let musicHash = toQuery.musicHash
+  // console.log(to, from)
+  if (musicHash && !toQuery.fromPlayer) {
+    store.commit('player/wantPlay', { musicHash, path: to.path })
+  }
+  next()
 })

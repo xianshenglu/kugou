@@ -3,14 +3,14 @@
     <AppHeader class="app__header"/>
     <router-view class="app__cont" :navs="navs"></router-view>
     <audio :src="song.play_url" class="hidden" ref="audioEl" loop @canplay="togglePlay(true)"></audio>
-    <Player v-show="isPlayerShow" class="app__player"/>
+    <PlayerMed v-show="isPlayerMedShow" class="app__player--med"/>
   </div>
 </template>
 
 <script>
 import AppHeader from '@/components/public/AppHeader'
 import AppNav from './components/public/AppNav'
-import Player from './components/player/Player'
+import PlayerMed from './components/player/PlayerMed'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
@@ -18,21 +18,7 @@ export default {
   components: {
     AppHeader,
     AppNav,
-    Player
-  },
-  mounted() {
-    this.$refs.app.style.height = this.vMax + 'px'
-    this.findAudioEl(this.$refs.audioEl)
-  },
-  computed: {
-    ...mapState('player', {
-      isPlayerShow: 'isShow',
-      music: 'music',
-      song: 'song'
-    }),
-    ...mapState('device', {
-      vMax: 'vMax'
-    })
+    PlayerMed
   },
   data() {
     return {
@@ -64,10 +50,38 @@ export default {
       ]
     }
   },
+  beforeCreate() {
+    window.onresize = () => {
+      this.replaceProperty({
+        paths: 'player.isPlayerMedShow',
+        data: window.innerHeight > this.vMax * 0.8
+      })
+    }
+  },
+  destroyed() {
+    window.onresize = null
+  },
+  mounted() {
+    this.$refs.app.style.height = this.vMax + 'px'
+    this.findAudioEl(this.$refs.audioEl)
+  },
+  computed: {
+    ...mapState('player', {
+      isPlayerMedShow: 'isPlayerMedShow',
+      music: 'music',
+      song: 'song'
+    }),
+    ...mapState('device', {
+      vMax: 'vMax'
+    })
+  },
   methods: {
     ...mapMutations('player', {
       findAudioEl: 'findAudioEl',
       togglePlay: 'togglePlay'
+    }),
+    ...mapMutations({
+      replaceProperty: 'replaceProperty'
     })
   }
 }
@@ -94,7 +108,13 @@ export default {
   width: 100%;
   height: calc(100% - 58px);
 }
-.app__player {
+.app__player--med {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 75px;
   max-height: calc(100% - 58px);
 }
 </style>

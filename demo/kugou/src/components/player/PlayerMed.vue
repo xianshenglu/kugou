@@ -1,10 +1,15 @@
 <template>
   <section class="player">
-    <img :src="singerImg" alt="" class="player__singer_img" @click="togglePlayers(0)">
-    <div class="player__song_info" @click="togglePlayers(0)">
-      <div class="player__song_name">{{songName}}</div>
-      <div class="player__singer_name">{{singerName}}</div>
-    </div>
+    <router-link
+      :to="{path:'/player/max',query:{musicHash:song.hash,fromPlayer:true}}"
+      class="player__link"
+    >
+      <img :src="singerImg" alt="" class="player__singer_img">
+      <div class="player__song_info">
+        <div class="player__song_name">{{songName}}</div>
+        <div class="player__singer_name">{{singerName}}</div>
+      </div>
+    </router-link>
     <div class="player__buttons">
       <PrevButton class="player__btn_prev"/>
       <PlayButton class="player__btn_status"/>
@@ -14,7 +19,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 import PlayButton from './PlayButton'
 import NextButton from './NextButton'
 import PrevButton from './PrevButton'
@@ -26,6 +31,7 @@ export default {
     PrevButton
   },
   computed: {
+    ...mapState('player', ['song']),
     ...mapGetters('player', ['songName', 'singerName', 'singerImg'])
   },
   methods: {
@@ -36,10 +42,12 @@ export default {
 
 <style scoped lang="less">
 @import (reference) '../../assets/css/constant';
-.player {
+.player,
+.player__link {
   display: flex;
   align-items: center;
-
+}
+.player {
   background: @black90p;
 }
 .player__singer_img {
