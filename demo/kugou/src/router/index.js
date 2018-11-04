@@ -73,8 +73,8 @@ router.beforeEach((to, from, next) => {
   let toQuery = to.query
   let musicHash = toQuery.musicHash
   // console.log(to, from)
-  if (musicHash && !toQuery.fromPlayer) {
-    store.commit('player/wantPlay', { musicHash, path: to.path })
+  if (musicHash && !toQuery.fromPlayerMed) {
+    store.commit('player/wantPlay', { musicHash })
   }
   next()
 })

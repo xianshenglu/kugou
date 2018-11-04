@@ -19,7 +19,7 @@ import NextButton from './NextButton'
 import PrevButton from './PrevButton'
 import PlayerLyrics from './PlayerLyrics'
 import PlayerProgress from './PlayerProgress'
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'PlayerMax',
   components: {
@@ -37,6 +37,21 @@ export default {
         this.singerImg
       });`
     }
+  },
+  mounted() {
+    this.replaceProperty({
+      paths: 'player.isPlayerMedShow',
+      data: false
+    })
+  },
+  destroyed() {
+    this.replaceProperty({
+      paths: 'player.isPlayerMedShow',
+      data: true
+    })
+  },
+  methods: {
+    ...mapMutations(['replaceProperty'])
   }
 }
 </script>

@@ -49,8 +49,8 @@ const player = {
     findAudioEl(state, el) {
       state.audioEl = el
     },
-    wantPlay(state, { musicHash, musicList = state.musicList, path }) {
-      state.isPlayerMedShow = path !== '/player/max'
+    wantPlay(state, { musicHash, musicList = state.musicList }) {
+      state.isPlayerMedShow = true
       axios.get(api.songInfoLyric + musicHash).then(res => {
         let data = res.data.data
         state.musicList = musicList.length === 0 ? [data] : musicList
