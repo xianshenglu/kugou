@@ -89,7 +89,8 @@ export default {
   width: calc(100% - 120px);
   box-sizing: border-box;
   margin: 0 20px;
-  overflow: scroll;
+  overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
   color: @white;
   text-align: center;
