@@ -64,16 +64,15 @@ export default new VueRouter({
     },
     {
       path: '/player/max',
-      component: PlayerMax
+      component: PlayerMax,
+      name: 'PlayerMax'
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  let toQuery = to.query
-  let musicHash = toQuery.musicHash
-  // console.log(to, from)
-  if (musicHash && !toQuery.fromPlayerMed) {
+  let musicHash = to.query.musicHash
+  if (musicHash && !to.params.fromPlayerMed) {
     store.commit('player/wantPlay', { musicHash })
   }
   next()

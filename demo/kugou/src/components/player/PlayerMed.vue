@@ -1,7 +1,7 @@
 <template>
   <section class="player">
     <router-link
-      :to="{path:'/player/max',query:{musicHash:song.hash,fromPlayerMed:1}}"
+      :to="{name:'PlayerMax', params: { fromPlayerMed: 1},query:{musicHash:song.hash }}"
       class="player__link"
     >
       <img :src="singerImg" alt="" class="player__singer_img">
