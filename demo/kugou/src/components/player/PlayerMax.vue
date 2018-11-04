@@ -70,6 +70,11 @@ export default {
   height: 54px;
   line-height: 54px;
   font-size: 18px;
+  width: calc(100% - 120px);
+  box-sizing: border-box;
+  margin: 0 20px;
+  overflow: scroll;
+  white-space: nowrap;
   color: @white;
 }
 .player__singer_img {
