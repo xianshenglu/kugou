@@ -2,18 +2,8 @@
   <section class="player" :style="playerBgImg()">
     <h6 class="player__song_name">{{songName}}</h6>
     <img :src="singerImg" class="player__singer_img">
-    <div class="player__lyrics">
-      <p
-        v-for="(item,index) in lyricItems"
-        :key="item.millisecond"
-        :ref="item.millisecond"
-        v-bind="vBindAttr('millisecond-'+item.millisecond)"
-        :class="index===prevLyricIndex+1?'player__lyrics_text player__lyrics_text--active ':'player__lyrics_text'"
-      >{{ item.text }}</p>
-    </div>
-    <div class="player__progress">
-      <PlayerProgress/>
-    </div>
+    <PlayerLyrics class="player__lyrics"/>
+    <PlayerProgress class="player__progress"/>
     <div class="player__buttons">
       <PrevButton class="player__btn_prev"/>
       <PlayButton class="player__btn_status"/>
@@ -27,59 +17,27 @@
 import PlayButton from './PlayButton'
 import NextButton from './NextButton'
 import PrevButton from './PrevButton'
+import PlayerLyrics from './PlayerLyrics'
 import PlayerProgress from './PlayerProgress'
 import { mapState, mapGetters } from 'vuex'
-import mixin from '../../mixins/index.js'
 export default {
   name: 'PlayerMax',
   components: {
     PlayButton,
     NextButton,
     PrevButton,
+    PlayerLyrics,
     PlayerProgress
-  },
-  mixins: [mixin],
-  data() {
-    return {
-      prevLyricIndex: 0
-    }
   },
   computed: {
     ...mapState('player', ['audioEl']),
-    ...mapGetters('player', [
-      'lyricItems',
-      'songName',
-      'singerName',
-      'singerImg'
-    ]),
-    lyricMillisecond() {
-      return this.lyricItems.map(o => o.millisecond)
-    }
-  },
-  mounted() {
-    this.audioEl.addEventListener('timeupdate', this.timeUpdateCb)
-  },
-  destroyed() {
-    this.audioEl.removeEventListener('timeupdate', this.timeUpdateCb)
+    ...mapGetters('player', ['songName', 'singerName', 'singerImg'])
   },
   methods: {
     playerBgImg() {
       return `background-image:linear-gradient(to right,rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(${
         this.singerImg
       });`
-    },
-    timeUpdateCb(event) {
-      let curMillisecond = Math.floor(event.target.currentTime * 1000)
-      let nextLyricIndex = this.lyricMillisecond.findIndex(
-        time => time > curMillisecond * 1.005
-      )
-      let prevLyricIndex = nextLyricIndex > 1 ? nextLyricIndex - 2 : 0
-      let isRefAvailable =
-        this.$refs && this.$refs[this.lyricMillisecond[prevLyricIndex]]
-      if (isRefAvailable) {
-        this.$refs[this.lyricMillisecond[prevLyricIndex]][0].scrollIntoView()
-      }
-      this.prevLyricIndex = prevLyricIndex
     }
   }
 }
@@ -112,8 +70,6 @@ export default {
 .player__lyrics {
   margin-top: 16px;
   height: 68px;
-  color: @white-3;
-  overflow: scroll;
 }
 .player__progress {
   height: 48px;
@@ -148,14 +104,5 @@ export default {
   margin-top: 19px auto 0;
   height: 45px;
   width: 211px;
-}
-.player__lyrics {
-  text-align: center;
-}
-.player__lyrics_text {
-  line-height: 32px;
-}
-.player__lyrics_text--active {
-  color: @lemon;
 }
 </style>
