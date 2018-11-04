@@ -76,6 +76,7 @@ export default {
   overflow: scroll;
   white-space: nowrap;
   color: @white;
+  text-align: center;
 }
 .player__singer_img {
   margin-top: 26px;
