@@ -1,5 +1,5 @@
 <template>
-  <div class="player_lyric">
+  <div class="player_lyric" @touchstart="isTouching=true" @touchend="isTouching=false">
     <p
       v-for="(item,index) in lyricItems"
       :key="item.millisecond"
@@ -18,7 +18,8 @@ export default {
   mixins: [mixin],
   data() {
     return {
-      prevLyricIndex: 0
+      prevLyricIndex: 0,
+      isTouching: false
     }
   },
   computed: {
@@ -36,6 +37,9 @@ export default {
   },
   methods: {
     timeUpdateCb(event) {
+      if (this.isTouching) {
+        return
+      }
       let curMillisecond = Math.floor(event.target.currentTime * 1000)
       let nextLyricIndex = this.lyricMillisecond.findIndex(
         time => time > curMillisecond * 1.005
