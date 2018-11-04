@@ -70,15 +70,15 @@ export default {
         this.progressBarRect = this.$refs.progressBar.getBoundingClientRect()
       }
       let clientX = event.touches[0].clientX
-      this.touchStartX = clientX
       this.currentTime = this.calcCurTime(clientX, this.progressBarRect.left, 0)
+      this.touchStartX = clientX
       window.addEventListener('touchmove', this.setCurTimeOnMove)
       window.addEventListener('touchend', this.touchEndCb)
     },
     setCurTimeOnMove(event) {
       let clientX = event.touches[0].clientX
-      this.touchStartX = clientX
       this.currentTime = this.calcCurTime(clientX, this.touchStartX, 1)
+      this.touchStartX = clientX
     },
     touchEndCb() {
       this.isTouching = false
