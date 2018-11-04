@@ -3,7 +3,7 @@
     <AppHeader class="app__header"/>
     <router-view class="app__cont" :navs="navs"></router-view>
     <audio :src="song.play_url" class="hidden" ref="audioEl" loop @canplay="togglePlay(true)"></audio>
-    <PlayerMed v-show="isPlayerMedShow" class="app__player--med"/>
+    <PlayerMed v-show="isPlayerMedShow&&$route.path!=='/player/max'" class="app__player--med"/>
   </div>
 </template>
 
