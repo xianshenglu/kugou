@@ -30,7 +30,9 @@ export default {
     }
   },
   mounted() {
-    this.audioEl.addEventListener('timeupdate', this.timeUpdateCb)
+    this.$nextTick(() => {
+      this.audioEl.addEventListener('timeupdate', this.timeUpdateCb)
+    })
   },
   destroyed() {
     this.audioEl.removeEventListener('timeupdate', this.timeUpdateCb)

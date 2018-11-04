@@ -39,8 +39,10 @@ export default {
     }
   },
   mounted() {
-    this.audioEl.addEventListener('progress', this.progressCb)
-    this.audioEl.addEventListener('timeupdate', this.timeUpdateCb)
+    this.$nextTick(() => {
+      this.audioEl.addEventListener('progress', this.progressCb)
+      this.audioEl.addEventListener('timeupdate', this.timeUpdateCb)
+    })
   },
   destroyed() {
     this.audioEl.removeEventListener('progress', this.progressCb)
