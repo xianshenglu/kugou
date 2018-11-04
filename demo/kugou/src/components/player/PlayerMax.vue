@@ -1,5 +1,5 @@
 <template>
-  <section class="player" :style="playerBgImg()">
+  <section class="player" :style="playerBgImg">
     <h6 class="player__song_name">{{songName}}</h6>
     <img :src="singerImg" class="player__singer_img">
     <PlayerLyrics class="player__lyrics"/>
@@ -31,9 +31,7 @@ export default {
   },
   computed: {
     ...mapState('player', ['audioEl']),
-    ...mapGetters('player', ['songName', 'singerName', 'singerImg'])
-  },
-  methods: {
+    ...mapGetters('player', ['songName', 'singerName', 'singerImg']),
     playerBgImg() {
       return `background-image:linear-gradient(to right,rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(${
         this.singerImg
@@ -52,8 +50,6 @@ export default {
   display: flex;
   flex-flow: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
 }
 .player__song_name {
   height: 54px;
