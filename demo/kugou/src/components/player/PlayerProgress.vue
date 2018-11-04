@@ -70,16 +70,14 @@ export default {
       if (!this.progressBarRect) {
         this.progressBarRect = this.$refs.progressBar.getBoundingClientRect()
       }
-      let currentTime = this.calcCurTime(clientX, this.progressBarRect.left, 0)
-      this.currentTime = currentTime
+      this.currentTime = this.calcCurTime(clientX, this.progressBarRect.left, 0)
       this.touchStartX = clientX
       window.addEventListener('touchmove', this.setCurTimeOnMove)
       window.addEventListener('touchend', this.touchEndCb)
     },
     setCurTimeOnMove(event) {
       let clientX = event.touches[0].clientX
-      let currentTime = this.calcCurTime(clientX, this.touchStartX, 1)
-      this.currentTime = currentTime
+      this.currentTime = this.calcCurTime(clientX, this.touchStartX, 1)
       this.touchStartX = clientX
     },
     touchEndCb() {
@@ -100,8 +98,6 @@ export default {
           currentTime = this.currentTime + this.audioEl.duration * percent
           break
       }
-      console.log(end, start, this.progressBarRect)
-
       if (currentTime < 0) {
         currentTime = 0
       } else if (currentTime > this.audioEl.duration) {
