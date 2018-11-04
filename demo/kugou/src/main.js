@@ -16,13 +16,13 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
-const defaultImg = require('./assets/images/default.png')
+const errorBackUpImg = require('./assets/images/logo--sky_blue.png')
 window.addEventListener(
   'error',
   function(event) {
     let target = event.target
     if (target.tagName && target.tagName.toLowerCase() === 'img') {
-      target.src = defaultImg
+      target.src = errorBackUpImg
     }
   },
   true
