@@ -2,7 +2,7 @@
   <ul class="music_list">
     <li class="music_list__item main_border_bottom" v-for="(item,index) in musicList" :key="index">
       <slot :data="index" name="index"></slot>
-      <div class="music_list__name" @click="wantPlay(item)">{{item.filename}}</div>
+      <div class="music_list__name" @click="wantPlay(item.hash)">{{item.filename}}</div>
       <button class="music_list__download">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-download"></use>
@@ -24,9 +24,9 @@ export default {
     }
   },
   methods: {
-    wantPlay(music) {
+    wantPlay(musicHash) {
       this.$store.commit('player/wantPlay', {
-        music,
+        musicHash,
         musicList: this.$props.musicList
       })
     }

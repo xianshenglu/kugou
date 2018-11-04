@@ -3,21 +3,17 @@ import api from '../assets/js/api'
 import utils from '../assets/js/utils'
 import store from './index'
 function getCurMusicIndex(state) {
-  return state.musicList.findIndex(music => music === state.music)
+  return state.musicList.findIndex(music => music.hash === state.song.hash)
 }
 const player = {
   namespaced: true,
   state: {
     musicList: [],
-    music: {
-      filename: ''
-    },
     song: {},
     lyrics: '',
     audioEl: {},
-    curPlayerId: 0,
     isPlaying: false,
-    isShow: false
+    isPlayerMedShow: false
   },
   getters: {
     curMusicIndex: getCurMusicIndex,
@@ -28,11 +24,10 @@ const player = {
       return utils.$_xsl__replaceImgUrlSize(state.song.img, 400)
     },
     singerName(state) {
-      //use music because song have to get by ajax.
-      return state.music.filename.split(/\s+-\s+/)[0]
+      return state.song.author_name
     },
     songName(state) {
-      return state.music.filename.split(/\s+-\s+/)[1]
+      return state.song.song_name
     },
     lyricItems: state => {
       let lyricsArr = state.lyrics.split(/\n/)
@@ -54,18 +49,18 @@ const player = {
     findAudioEl(state, el) {
       state.audioEl = el
     },
-    wantPlay(state, { music, musicList = state.musicList }) {
-      state.isShow = true
-      state.music = music
-      state.musicList = musicList
-      axios.get(api.songInfoLyric + music.hash).then(res => {
+    wantPlay(state, { musicHash, musicList = state.musicList, path }) {
+      state.isPlayerMedShow = path !== '/player/max'
+      axios.get(api.songInfoLyric + musicHash).then(res => {
+        let data = res.data.data
+        state.musicList = musicList.length === 0 ? [data] : musicList
         store.commit('replaceProperty', {
           paths: 'player.lyrics',
-          data: res.data.data.lyrics
+          data: data.lyrics
         })
         store.commit('replaceProperty', {
           paths: 'player.song',
-          data: res.data.data
+          data: data
         })
       })
     },
@@ -80,13 +75,23 @@ const player = {
     },
     next(state) {
       let index = getCurMusicIndex(state)
+      if (index < 0) {
+        return
+      }
       index = index === state.musicList.length - 1 ? -1 : index
-      store.commit('player/wantPlay', { music: state.musicList[index + 1] })
+      store.commit('player/wantPlay', {
+        musicHash: state.musicList[index + 1].hash
+      })
     },
     prev(state) {
       let index = getCurMusicIndex(state)
+      if (index < 0) {
+        return
+      }
       index = index === 0 ? state.musicList.length : index
-      store.commit('player/wantPlay', { music: state.musicList[index - 1] })
+      store.commit('player/wantPlay', {
+        musicHash: state.musicList[index - 1].hash
+      })
     },
     togglePlayers(state, from) {
       switch (from) {
