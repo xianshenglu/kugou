@@ -88,9 +88,9 @@ export default {
   height: .calc_vh(54) [ @result];
   line-height: .calc_vh(54) [ @result];
   font-size: 18px;
-  width: calc(100% - 120px);
+  width: calc(100% - .calc_vh(120) [ @result]);
   box-sizing: border-box;
-  margin: 0 20px;
+  margin: 0 .calc_vh(120) [ @result];
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
@@ -104,8 +104,7 @@ export default {
   flex: 0 0 auto;
 }
 .player__lyrics {
-  margin-top: .calc_vh(12) [ @result];
-  padding: .calc_vh(2) [ @result] 0;
+  margin-top: .calc_vh(16) [ @result];
   height: .calc_vh(68) [ @result];
   line-height: .calc_vh(34) [ @result];
 }
@@ -124,19 +123,19 @@ export default {
 .play__btn_next,
 .player__btn_status {
   border-radius: 50%;
-  border: 2px solid @white;
-  margin: 0 16px;
+  border: .calc_vh(2) [ @result] solid @white;
+  margin: 0 .calc_vh(16) [ @result];
 }
 .player__btn_prev,
 .play__btn_next {
   width: .calc_vh(42) [ @result];
   height: .calc_vh(42) [ @result];
-  font-size: 16px;
+  font-size: .calc_vh(16) [ @result];
 }
 .player__btn_status {
   width: .calc_vh(58) [ @result];
   height: .calc_vh(58) [ @result];
-  font-size: 20px;
+  font-size: .calc_vh(20) [ @result];
 }
 .player__download {
   margin-top: .calc_vh(19) [ @result] auto 0;
