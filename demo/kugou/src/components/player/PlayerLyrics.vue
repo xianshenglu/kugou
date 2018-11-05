@@ -68,7 +68,7 @@ export default {
   text-align: center;
 }
 .player_lyric_text {
-  line-height: 32px;
+  line-height: inherit;
 }
 .player_lyric_text--active {
   color: @lemon;

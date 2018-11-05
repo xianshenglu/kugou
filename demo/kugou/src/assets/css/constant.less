@@ -12,3 +12,9 @@
 @orange: #ff7200;
 @yellow: #f8b300;
 @lemon :#d1c90e;
+
+@app_cont_h_dev: 609;
+@app_cont_h: ~'1rem - 100vw * 58 / 375';
+.calc_vh (@num) {
+  @result: calc((@app_cont_h) * @num / @app_cont_h_dev);
+}

@@ -82,9 +82,11 @@ export default {
   background: rgba(0, 0, 0, 0.6);
   height: 100%;
 }
+// layout with 1rem which is actual vh set by js.
+// Using vh would be wrong.
 .player__song_name {
-  height: 54px;
-  line-height: 54px;
+  height: .calc_vh(54) [ @result];
+  line-height: .calc_vh(54) [ @result];
   font-size: 18px;
   width: calc(100% - 120px);
   box-sizing: border-box;
@@ -96,22 +98,24 @@ export default {
   text-align: center;
 }
 .player__singer_img {
-  margin-top: 26px;
-  height: 193px;
-  width: 193px;
+  margin-top: .calc_vh(26) [ @result];
+  height: .calc_vh(193) [ @result];
+  width: .calc_vh(193) [ @result];
   flex: 0 0 auto;
 }
 .player__lyrics {
-  margin-top: 16px;
-  height: 68px;
+  margin-top: .calc_vh(12) [ @result];
+  padding: .calc_vh(2) [ @result] 0;
+  height: .calc_vh(68) [ @result];
+  line-height: .calc_vh(34) [ @result];
 }
 .player__progress {
-  height: 48px;
+  height: .calc_vh(48) [ @result];
   width: 100%;
   box-sizing: border-box;
 }
 .player__buttons {
-  height: 58px;
+  height: .calc_vh(58) [ @result];
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,18 +129,18 @@ export default {
 }
 .player__btn_prev,
 .play__btn_next {
-  width: 42px;
-  height: 42px;
+  width: .calc_vh(42) [ @result];
+  height: .calc_vh(42) [ @result];
   font-size: 16px;
 }
 .player__btn_status {
-  width: 58px;
-  height: 58px;
+  width: .calc_vh(58) [ @result];
+  height: .calc_vh(58) [ @result];
   font-size: 20px;
 }
 .player__download {
-  margin-top: 19px auto 0;
-  height: 45px;
-  width: 211px;
+  margin-top: .calc_vh(19) [ @result] auto 0;
+  height: .calc_vh(45) [ @result];
+  width: .calc_vh(211) [ @result];
 }
 </style>
