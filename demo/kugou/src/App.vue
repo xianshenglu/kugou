@@ -62,7 +62,7 @@ export default {
     window.onresize = null
   },
   mounted() {
-    this.$refs.app.style.height = this.vMax + 'px'
+    document.documentElement.style.fontSize = this.vMax + 'px'
     this.findAudioEl(this.$refs.audioEl)
   },
   computed: {
@@ -96,6 +96,7 @@ export default {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
 }
 .app__header {
   height: 58px;
