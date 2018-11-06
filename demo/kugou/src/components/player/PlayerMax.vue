@@ -132,6 +132,12 @@ export default {
   height: .calc_vh(42) [ @result];
   font-size: .calc_vh(16) [ @result];
 }
+.player__btn_prev /deep/ .icon {
+  transform: translate(0, 1px);
+}
+.play__btn_next /deep/ .icon {
+  transform: translate(1px, 1px);
+}
 .player__btn_status {
   width: .calc_vh(58) [ @result];
   height: .calc_vh(58) [ @result];
