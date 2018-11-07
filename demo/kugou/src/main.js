@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index.js'
 import store from './store/index.js'
+import './assets/js/globalEvent'
 // import '../src/assets/js/mobileLayout.js'
 import './assets/css/reset.css'
 import './assets/css/base.less'
@@ -15,15 +16,3 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
-
-const errorBackUpImg = require('./assets/images/logo--sky_blue.png')
-window.addEventListener(
-  'error',
-  function(event) {
-    let target = event.target
-    if (target.tagName && target.tagName.toLowerCase() === 'img') {
-      target.src = errorBackUpImg
-    }
-  },
-  true
-)

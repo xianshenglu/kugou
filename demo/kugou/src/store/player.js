@@ -13,7 +13,8 @@ const player = {
     lyrics: '',
     audioEl: {},
     isPlaying: false,
-    isPlayerMedShow: false
+    isPlayerMedShow: false,
+    isPlayerMedSmall: false
   },
   getters: {
     curMusicIndex: getCurMusicIndex,
@@ -51,6 +52,8 @@ const player = {
     },
     wantPlay(state, { musicHash, musicList = state.musicList }) {
       state.isPlayerMedShow = true
+      state.isPlayerMedSmall = false
+      //tdo move async to actions.
       axios.get(api.songInfoLyric + musicHash).then(res => {
         let data = res.data.data
         state.musicList = musicList.length === 0 ? [data] : musicList

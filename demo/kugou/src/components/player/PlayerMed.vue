@@ -4,7 +4,11 @@
       :to="{name:'PlayerMax', params: { fromPlayerMed: 1},query:{musicHash:song.hash }}"
       class="player__link"
     >
-      <img :src="singerImg" alt="" class="player__singer_img">
+      <img
+        :src="singerImg"
+        alt=""
+        :class="isPlayerMedSmall?'player__singer_img player__singer_img--player_min':'player__singer_img'"
+      >
       <div class="player__song_info">
         <div class="player__song_name">{{songName}}</div>
         <div class="player__singer_name">{{singerName}}</div>
@@ -31,7 +35,7 @@ export default {
     PrevButton
   },
   computed: {
-    ...mapState('player', ['song']),
+    ...mapState('player', ['song', 'isPlayerMedSmall']),
     ...mapGetters('player', ['songName', 'singerName', 'singerImg'])
   },
   methods: {
@@ -56,8 +60,12 @@ export default {
   width: 68px;
   height: 68px;
   margin: 0 10px 0 4px;
-
+  transition: border-radius 0.5s ease;
   border-radius: 5px;
+}
+.player__singer_img--player_min {
+  margin: 0;
+  border-radius: 50%;
 }
 .player__song_info {
   display: flex;

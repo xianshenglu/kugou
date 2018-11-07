@@ -50,6 +50,10 @@ export default {
       paths: 'player.isPlayerMedShow',
       data: true
     })
+    this.replaceProperty({
+      paths: 'player.isPlayerMedSmall',
+      data: false
+    })
   },
   methods: {
     ...mapMutations(['replaceProperty'])

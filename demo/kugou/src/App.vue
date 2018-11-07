@@ -3,7 +3,10 @@
     <AppHeader class="app__header"/>
     <router-view class="app__cont" :navs="navs"></router-view>
     <audio :src="song.play_url" class="hidden" ref="audioEl" loop @canplay="togglePlay(true)"></audio>
-    <PlayerMed v-show="isPlayerMedShow&&$route.path!=='/player/max'" class="app__player--med"/>
+    <PlayerMed
+      v-show="isPlayerMedShow&&$route.path!=='/player/max'"
+      :class="isPlayerMedSmall?'app__player app__player--min':'app__player app__player--med'"
+    />
   </div>
 </template>
 
@@ -50,17 +53,8 @@ export default {
       ]
     }
   },
-  beforeCreate() {
-    window.onresize = () => {
-      this.replaceProperty({
-        paths: 'player.isPlayerMedShow',
-        data: window.innerHeight > this.vMax * 0.8
-      })
-    }
-  },
-  destroyed() {
-    window.onresize = null
-  },
+  beforeCreate() {},
+  destroyed() {},
   mounted() {
     document.documentElement.style.fontSize = this.vMax + 'px'
     this.findAudioEl(this.$refs.audioEl)
@@ -68,6 +62,7 @@ export default {
   computed: {
     ...mapState('player', {
       isPlayerMedShow: 'isPlayerMedShow',
+      isPlayerMedSmall: 'isPlayerMedSmall',
       music: 'music',
       song: 'song'
     }),
@@ -109,13 +104,35 @@ export default {
   width: 100%;
   height: calc(100% - 58px);
 }
-.app__player--med {
+.app__player {
+  box-sizing: border-box;
+  height: 75px;
+  max-height: calc(100% - 58px);
   position: absolute;
   bottom: 0;
   left: 0;
-
+}
+.app__player--med {
   width: 100%;
-  height: 75px;
-  max-height: calc(100% - 58px);
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.app__player--min {
+  width: 68px;
+  height: 68px;
+  opacity: 0.5;
+  overflow: hidden;
+  background: transparent;
+  transition: all 0.5s ease;
+  animation: rotate 8s linear infinite 0.6s;
 }
 </style>
