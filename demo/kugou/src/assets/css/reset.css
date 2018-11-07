@@ -54,3 +54,7 @@ h5,
 h6 {
   font-weight: normal;
 }
+img[src=''],
+img:not([src]) {
+  opacity: 0;
+}
