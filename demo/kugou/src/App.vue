@@ -123,6 +123,6 @@ export default {
   overflow: hidden;
   background: transparent;
   transition: all 0.5s ease;
-  animation: rotate 20s linear infinite 0.6s reverse;
+  animation: rotate 8s linear infinite 0.6s reverse;
 }
 </style>
