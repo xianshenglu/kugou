@@ -3,7 +3,10 @@
     <div class="player__mask" :style="playerBgImg"></div>
     <div class="player__cont">
       <h6 class="player__song_name">{{songName}}</h6>
-      <img :src="singerImg" class="player__singer_img">
+      <img
+        :src="singerImg"
+        :class="isPlaying?'player__singer_img player__singer_img--active':'player__singer_img'"
+      >
       <PlayerLyrics class="player__lyrics"/>
       <PlayerProgress class="player__progress"/>
       <div class="player__buttons">
@@ -33,7 +36,7 @@ export default {
     PrevButton
   },
   computed: {
-    ...mapState('player', ['audioEl']),
+    ...mapState('player', ['audioEl', 'isPlaying']),
     ...mapGetters('player', ['songName', 'singerName', 'singerImg']),
     playerBgImg() {
       return `background-image:url(${this.singerImg});`
@@ -106,6 +109,12 @@ export default {
   height: .calc_vh(193) [ @result];
   width: .calc_vh(193) [ @result];
   flex: 0 0 auto;
+  border-radius: 50%;
+  animation: rotate 20s linear infinite reverse;
+  animation-play-state: paused;
+}
+.player__singer_img--active {
+  animation-play-state: running;
 }
 .player__lyrics {
   margin-top: .calc_vh(16) [ @result];
