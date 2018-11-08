@@ -26,12 +26,12 @@ export default {
 
   box-shadow: 0 3px 3px 0 @white-2;
 
-  line-height: 58px;
+  line-height: @nav_height;
 }
 .main__cont {
   overflow-y: auto;
 
   box-sizing: border-box;
-  height: calc(100% - 58px);
+  height: calc(100% - @nav_height);
 }
 </style>

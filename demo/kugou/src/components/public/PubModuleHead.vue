@@ -36,7 +36,7 @@ export default {
 
 .module__title {
   position: fixed;
-  top: 58px;
+  top: @header_height;
   left: 50%;
 
   width: 100%;
