@@ -113,7 +113,7 @@ export default {
 <style lang="less" scoped>
 @import (reference) '../../assets/css/constant.less';
 .player_progress {
-  padding: 16px 13px;
+  padding: 16px @padding_width;
   display: flex;
   justify-content: space-between;
   align-items: center;

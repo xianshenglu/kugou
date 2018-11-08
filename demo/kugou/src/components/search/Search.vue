@@ -136,7 +136,7 @@ export default {
 .search__form {
   box-sizing: border-box;
   height: 63px;
-  padding: 13px;
+  padding: @padding_width;
 
   background-color: @white-1;
 }

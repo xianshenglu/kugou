@@ -38,7 +38,7 @@ export default {
 
 <style lang="less" scoped>
 .list {
-  padding-left: 13px;
+  padding-left: @padding_width;
 }
 
 .list__item {

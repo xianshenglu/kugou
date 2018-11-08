@@ -61,6 +61,6 @@ export default {
   box-sizing: content-box;
   width: 23px;
   height: 100%;
-  padding: 0 13px;
+  padding: 0 @padding_width;
 }
 </style>

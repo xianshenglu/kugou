@@ -110,6 +110,6 @@ export default {
 
   width: 61px;
   height: 61px;
-  margin: 0 18px 0 13px;
+  margin: 0 18px 0 @padding_width;
 }
 </style>

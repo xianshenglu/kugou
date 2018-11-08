@@ -95,7 +95,7 @@ export default {
 .singer_category__title {
   display: block;
 
-  padding-left: 13px;
+  padding-left: @padding_width;
 }
 
 .singer_category_btn {
