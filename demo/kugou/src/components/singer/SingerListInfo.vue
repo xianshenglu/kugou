@@ -87,6 +87,7 @@ export default {
 </script>
 
 <style scoped lang="less">
+@import (reference) '../../assets/css/constant.less';
 .singer_list_info {
   font-size: 19px;
 }
