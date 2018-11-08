@@ -55,8 +55,6 @@
         "viewportWidth": 375,
         "viewportUnit": "vw",
         "propertyBlacklist": [
-          "font",
-          "font-size",
           "letter-spacing"
         ],
         "minPixelValue": 2,

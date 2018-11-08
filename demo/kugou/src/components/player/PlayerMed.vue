@@ -83,13 +83,12 @@ export default {
 .player__singer_name {
   color: @white-to-black;
 
-  font-size: 12px;
+  font-size: @font_size_small;
 }
 
 .player__song_name {
   color: @white;
-
-  font-size: 15px;
+  font-size: @font_size_med;
   line-height: 1.7;
 }
 .player__buttons {

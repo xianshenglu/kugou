@@ -38,7 +38,6 @@ export default {
   height: 41px;
   padding: 5px 0 5px 19px;
 
-  font-size: 18px;
   line-height: 1.8;
 }
 

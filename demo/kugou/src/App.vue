@@ -92,7 +92,7 @@ export default {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
+  font-size: @font_size_main;
   overflow: hidden;
 }
 .app__header {

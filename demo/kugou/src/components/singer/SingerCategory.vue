@@ -70,8 +70,6 @@ export default {
 
   border-radius: 6px;
   background-color: @white;
-
-  font-size: 18px;
 }
 
 .singer_category__item {

@@ -96,7 +96,7 @@ export default {
     rgba(255, 255, 255, 0)
   );
 
-  font-size: 15px;
+  font-size: @font_size_med;
   line-height: 2.3;
 }
 
@@ -110,7 +110,7 @@ export default {
   color: @white-to-black;
   border-radius: 9px;
 
-  font-size: 13px;
+  font-size: @font_size_small;
   line-height: 19px;
 }
 

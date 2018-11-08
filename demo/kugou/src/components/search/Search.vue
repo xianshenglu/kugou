@@ -124,8 +124,6 @@ export default {
 @import (reference) '../../assets/css/constant.less';
 .search {
   box-sizing: border-box;
-
-  font-size: 18px;
 }
 .search__cont {
   overflow: scroll;

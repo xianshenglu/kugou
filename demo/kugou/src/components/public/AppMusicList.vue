@@ -53,8 +53,6 @@ export default {
 
 .music_list__name {
   width: calc(100% - 48px);
-
-  font-size: 18px;
 }
 
 .music_list__download {

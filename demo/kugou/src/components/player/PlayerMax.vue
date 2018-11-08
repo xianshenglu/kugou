@@ -94,7 +94,6 @@ export default {
 .player__song_name {
   height: .calc_vh(54) [ @result];
   line-height: .calc_vh(54) [ @result];
-  font-size: 18px;
   width: calc(100% - .calc_vh(120) [ @result]);
   box-sizing: border-box;
   margin: 0 .calc_vh(120) [ @result];
@@ -103,6 +102,7 @@ export default {
   white-space: nowrap;
   color: @white;
   text-align: center;
+  font-size: inherit;
 }
 .player__singer_img {
   margin-top: .calc_vh(26) [ @result];
