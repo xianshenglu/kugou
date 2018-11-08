@@ -92,6 +92,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
+  overflow: hidden;
 }
 .app__header {
   height: 58px;
@@ -115,17 +116,6 @@ export default {
 .app__player--med {
   width: 100%;
 }
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(180deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 .app__player--min {
   width: 68px;
   height: 68px;
@@ -133,6 +123,6 @@ export default {
   overflow: hidden;
   background: transparent;
   transition: all 0.5s ease;
-  animation: rotate 8s linear infinite 0.6s;
+  animation: rotate 20s linear infinite 0.6s reverse;
 }
 </style>
