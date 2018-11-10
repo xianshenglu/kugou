@@ -72,6 +72,10 @@ export default {
             paths: 'rank.rankInfo',
             data: rankInfo
           })
+          this.replaceProperty({
+            paths: 'loading.isShow',
+            data: false
+          })
         })
         .catch(er => {
           alert(er)

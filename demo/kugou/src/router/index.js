@@ -29,15 +29,15 @@ export default new VueRouter({
           component: NewSong
         },
         {
-          path: 'rank/list',
+          path: '/rank/list',
           component: RankList
         },
         {
-          path: 'song/list',
+          path: '/song/list',
           component: SongList
         },
         {
-          path: 'singer/category',
+          path: '/singer/category',
           component: SingerCategory
         }
       ]
@@ -70,11 +70,23 @@ export default new VueRouter({
   ]
 })
 
+//todo these data should be loaded after current page data loaded. They won't request again unless user refresh pages.
+let staticLikePagesPath = router.options.routes[0].children.map(
+  child => child.path
+)
+staticLikePagesPath.push('/search/index')
+
 router.beforeEach((to, from, next) => {
   //play music if musicHash exist
   let musicHash = to.query.musicHash
   if (musicHash && !to.params.fromPlayerMed) {
     store.commit('player/wantPlay', { musicHash })
+  }
+  // window.router = router
+  // window.args = { to, from }
+  let noLoadingPagesPath = [...staticLikePagesPath, '/player/max']
+  if (!noLoadingPagesPath.includes(to.path)) {
+    store.commit('replaceProperty', { paths: 'loading.isShow', data: true })
   }
   next()
 })

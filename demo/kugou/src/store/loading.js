@@ -1,7 +1,7 @@
 const loading = {
   namespaced: true,
   state: {
-    isShow: true
+    isShow: false
   }
 }
 export default loading

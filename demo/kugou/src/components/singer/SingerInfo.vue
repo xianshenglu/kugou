@@ -63,6 +63,10 @@ export default {
             paths: 'singer.singerInfo',
             data: singerInfo
           })
+          this.replaceProperty({
+            paths: 'loading.isShow',
+            data: false
+          })
         })
         .catch(er => {
           alert(er)
