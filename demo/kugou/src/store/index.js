@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import device from './device'
+import loading from './loading'
 import player from './player'
 import rank from './rank'
 import singer from './singer'
@@ -11,6 +12,7 @@ Vue.use(Vuex)
 let store = new Vuex.Store({
   modules: {
     device,
+    loading,
     player,
     rank,
     singer,
