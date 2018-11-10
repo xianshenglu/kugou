@@ -19,7 +19,7 @@ import AppMusicList from '../public/AppMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
 import mixin from '../../mixins/index.js'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'RankInfo',
   mixins: [mixin],
@@ -59,6 +59,7 @@ export default {
     this.getRankInfo(rankId)
   },
   methods: {
+    ...mapMutations(['replaceProperty']),
     getRankInfo(rankId) {
       axios
         .get(api.rankInfo + rankId)
@@ -67,7 +68,7 @@ export default {
             info: res.data.info,
             songs: res.data.songs
           }
-          this.$store.commit('replaceProperty', {
+          this.replaceProperty({
             paths: 'rank.rankInfo',
             data: rankInfo
           })

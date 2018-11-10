@@ -14,7 +14,7 @@ import AppMusicList from '../public/AppMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
 import mixin from '../../mixins/index.js'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'SongListInfo',
@@ -46,6 +46,7 @@ export default {
     this.getSongListInfo(songListId)
   },
   methods: {
+    ...mapMutations(['replaceProperty']),
     getSongListInfo(songListId) {
       axios
         .get(api.songListInfo.replace(/songListId?/i, songListId))
@@ -54,7 +55,7 @@ export default {
             info: data.info,
             songs: data.list
           }
-          this.$store.commit('replaceProperty', {
+          this.replaceProperty({
             paths: 'song.songListInfo',
             data: songListInfo
           })

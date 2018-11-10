@@ -19,7 +19,7 @@ import PubList from '../public/PubList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
 import mixin from '../../mixins/index.js'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'SongList',
@@ -34,6 +34,7 @@ export default {
     this.getSongList()
   },
   methods: {
+    ...mapMutations(['replaceProperty']),
     getSongList() {
       axios.get(api.songList).then(({ data }) => {
         data.plist.list.info.forEach(obj => {
@@ -42,7 +43,7 @@ export default {
           obj.title = obj.specialname
           obj.popularity = obj.playcount
         })
-        this.$store.commit('replaceProperty', {
+        this.replaceProperty({
           paths: 'song.songList',
           data: data.plist.list.info
         })
