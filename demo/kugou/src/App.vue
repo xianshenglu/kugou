@@ -53,8 +53,6 @@ export default {
       ]
     }
   },
-  beforeCreate() {},
-  destroyed() {},
   mounted() {
     document.documentElement.style.fontSize = this.vMax + 'px'
     this.findAudioEl(this.$refs.audioEl)
@@ -74,9 +72,6 @@ export default {
     ...mapMutations('player', {
       findAudioEl: 'findAudioEl',
       togglePlay: 'togglePlay'
-    }),
-    ...mapMutations({
-      replaceProperty: 'replaceProperty'
     })
   }
 }

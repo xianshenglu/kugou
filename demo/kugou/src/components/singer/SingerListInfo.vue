@@ -27,7 +27,7 @@ import PubModuleTitle from '../public/PubModuleTitle'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
 import mixin from '../../mixins/index.js'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'SingerListInfo',
@@ -54,6 +54,7 @@ export default {
     this.$_xsl__detectToLoadImgLazy(lazyImages, this.$el, '.lazy_image')
   },
   methods: {
+    ...mapMutations(['replaceProperty']),
     getSingerListInfo(singerListInfoId) {
       axios
         .get(api.singerListInfo.replace(/singerListInfoId?/i, singerListInfoId))
@@ -73,7 +74,7 @@ export default {
             obj.path = '/singer/info/' + obj.id
           })
           Object.assign(this.singerListInfo, singerListInfo)
-          this.$store.commit('replaceProperty', {
+          this.replaceProperty({
             paths: 'singer.singerListInfo',
             data: singerListInfo
           })

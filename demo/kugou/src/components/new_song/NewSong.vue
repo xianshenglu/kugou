@@ -10,7 +10,7 @@ import AppMusicList from '../public/AppMusicList'
 import Slider from './Slider.vue'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'NewSong',
@@ -21,14 +21,15 @@ export default {
     this.getNewSong()
   },
   methods: {
+    ...mapMutations(['replaceProperty']),
     getNewSong() {
       axios.get(api.newSong).then(({ data }) => {
-        this.$store.commit('replaceProperty', {
+        this.replaceProperty({
           paths: 'newSong.newSongs',
           data: data.data
         })
         let banners = data.banner
-        this.$store.commit('replaceProperty', {
+        this.replaceProperty({
           paths: 'newSong.sliderData',
           data: [...banners, banners[0]]
         })

@@ -11,7 +11,7 @@ import PubList from '../public/PubList'
 import axios from 'axios'
 import api from '../../assets/js/api.js'
 import mixin from '../../mixins/index.js'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'RankList',
@@ -26,6 +26,7 @@ export default {
     this.getRank()
   },
   methods: {
+    ...mapMutations(['replaceProperty']),
     getRank() {
       axios.get(api.rankList).then(({ data }) => {
         data.rank.list.forEach(obj => {
@@ -33,7 +34,7 @@ export default {
           obj.path = '/rank/info/' + obj.rankid
           obj.title = obj.rankname
         })
-        this.$store.commit('replaceProperty', {
+        this.replaceProperty({
           paths: 'rank.rankList',
           data: data.rank.list
         })

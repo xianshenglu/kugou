@@ -42,7 +42,7 @@ import AppMusicList from '../public/AppMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api'
 import bus from '../../assets/js/bus'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'Search',
@@ -94,11 +94,12 @@ export default {
     })
   },
   methods: {
+    ...mapMutations(['replaceProperty']),
     getSearchRec() {
       axios
         .get(api.hotSearch)
         .then(({ data }) => {
-          this.$store.commit('replaceProperty', {
+          this.replaceProperty({
             paths: 'search.searchRecArr',
             data: data.data.info
           })
@@ -122,11 +123,11 @@ export default {
       }
       let url = api.searchResult + encodeURIComponent(this.keyword)
       axios.get(url).then(res => {
-        this.$store.commit('replaceProperty', {
+        this.replaceProperty({
           paths: 'search.searchRes',
           data: res.data.data
         })
-        this.$store.commit('replaceProperty', {
+        this.replaceProperty({
           paths: 'search.prevKeyword',
           data: this.keyword
         })

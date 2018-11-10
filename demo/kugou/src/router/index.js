@@ -71,6 +71,7 @@ export default new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  //play music if musicHash exist
   let musicHash = to.query.musicHash
   if (musicHash && !to.params.fromPlayerMed) {
     store.commit('player/wantPlay', { musicHash })

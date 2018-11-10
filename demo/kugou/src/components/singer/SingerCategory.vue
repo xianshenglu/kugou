@@ -22,7 +22,7 @@
 <script>
 import axios from 'axios'
 import api from '../../assets/js/api.js'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'SingerCategory',
@@ -33,6 +33,7 @@ export default {
     this.getSingerCategories()
   },
   methods: {
+    ...mapMutations(['replaceProperty']),
     getSingerCategories() {
       axios.get(api.singerCategory).then(({ data }) => {
         let singerCategories = data.list.reduce((re, obj) => {
@@ -50,7 +51,7 @@ export default {
           }
           return re
         }, [])
-        this.$store.commit('replaceProperty', {
+        this.replaceProperty({
           paths: 'singer.singerCategories',
           data: singerCategories
         })
