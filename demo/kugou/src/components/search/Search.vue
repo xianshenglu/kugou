@@ -1,6 +1,6 @@
 <template>
   <section class="search">
-    <PubModuleTitle :title="title" class="search__title"/>
+    <PubModuleTitle :title="title" class="search__title" @click="goBackToSearchRec"/>
     <div class="search__cont" ref="searchCont">
       <form class="search__form" @submit.prevent>
         <input
@@ -65,9 +65,11 @@ export default {
   },
   created() {
     let keyword = this.$route.query.keyword
-    let isKeywordString = typeof keyword === 'string'
-    if (isKeywordString || typeof this.prevKeyword === 'string') {
-      this.keyword = isKeywordString ? keyword : this.prevKeyword
+    let isKeywordValid = typeof keyword === 'string' && keyword !== ''
+    let isPrevKeywordValid =
+      typeof this.prevKeyword === 'string' && this.prevKeyword !== ''
+    if (isKeywordValid || isPrevKeywordValid) {
+      this.keyword = isKeywordValid ? keyword : this.prevKeyword
       this.getSearchRes()
     } else {
       this.getSearchRec()
@@ -100,6 +102,7 @@ export default {
             paths: 'search.searchRecArr',
             data: data.data.info
           })
+          this.isSearchResShow = false
           this.isSearchRecShow = true
         })
         .catch(err => {
@@ -134,6 +137,10 @@ export default {
     getTargetList(val) {
       this.keyword = val
       this.getSearchRes()
+    },
+    goBackToSearchRec() {
+      this.$router.push({ query: {} })
+      this.getSearchRec()
     }
   }
 }
