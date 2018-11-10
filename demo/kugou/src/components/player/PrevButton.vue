@@ -1,5 +1,5 @@
 <template>
-  <button class="player__btn_prev" @touchstart="prev">
+  <button class="player__btn_prev" @click="prev">
     <svg class="icon" aria-hidden="true">
       <use xlink:href="#icon-previous"></use>
     </svg>
