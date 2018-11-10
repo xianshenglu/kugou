@@ -37,8 +37,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import (reference) '../../assets/css/constant.less';
 .list {
-  padding-left: 13px;
+  padding-left: @padding_width;
 }
 
 .list__item {

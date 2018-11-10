@@ -1,8 +1,10 @@
 <template>
   <ul class="music_list">
     <li class="music_list__item main_border_bottom" v-for="(item,index) in musicList" :key="index">
-      <slot :data="index" name="index"></slot>
-      <div class="music_list__name" @click="wantPlay(item.hash)">{{item.filename}}</div>
+      <div class="music_list__info" @click="wantPlay(item.hash)">
+        <slot :data="index" name="index" class="music_list__index" @click="wantPlay(item.hash)"></slot>
+        <div class="music_list__name">{{item.filename}}</div>
+      </div>
       <button class="music_list__download">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-download"></use>
@@ -25,6 +27,8 @@ export default {
   },
   methods: {
     wantPlay(musicHash) {
+      console.log(event.type, Date.now())
+
       this.$store.commit('player/wantPlay', {
         musicHash,
         musicList: this.$props.musicList
@@ -51,16 +55,24 @@ export default {
   padding: 10px 0;
 }
 
+.music_list__info {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.music_list__index {
+  width: 48px;
+  flex: 0 0 auto;
+}
 .music_list__name {
   width: calc(100% - 48px);
-
-  font-size: 18px;
+  flex: 1 0 auto;
 }
 
 .music_list__download {
   box-sizing: content-box;
   width: 23px;
   height: 100%;
-  padding: 0 13px;
+  padding: 0 @padding_width;
 }
 </style>

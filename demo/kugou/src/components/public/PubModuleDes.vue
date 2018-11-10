@@ -38,7 +38,6 @@ export default {
   height: 41px;
   padding: 5px 0 5px 19px;
 
-  font-size: 18px;
   line-height: 1.8;
 }
 
@@ -51,9 +50,7 @@ export default {
 
   width: 24px;
   height: 24px;
-  margin: auto;
-  margin-top: 3.5px;
-  margin-right: 12px;
+  margin: 3.5px 9px 0;
   box-sizing: border-box;
   border-radius: 50%;
   border-width: 2px;

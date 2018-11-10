@@ -83,6 +83,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import (reference) './assets/css/constant.less';
 .app {
   width: 100%;
   height: 100%;
@@ -91,11 +92,11 @@ export default {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
+  font-size: @font_size_main;
   overflow: hidden;
 }
 .app__header {
-  height: 58px;
+  height: @header_height;
   width: 100%;
   box-sizing: border-box;
 }
@@ -103,12 +104,12 @@ export default {
 .app__cont {
   overflow-y: auto;
   width: 100%;
-  height: calc(100% - 58px);
+  height: calc(100% - @header_height);
 }
 .app__player {
   box-sizing: border-box;
   height: 75px;
-  max-height: calc(100% - 58px);
+  max-height: calc(100% - @header_height);
   position: absolute;
   bottom: 0;
   left: 0;

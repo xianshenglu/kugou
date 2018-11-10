@@ -1,5 +1,5 @@
 <template>
-  <div class="player_progress" @touchstart="setCurTime">
+  <div class="player_progress" @click="setCurTime">
     <div class="player_progress__song_cur_time">{{secondToMin(currentTime)}}</div>
     <div class="player_progress__progress_bar" ref="progressBar" :style="progressBarStyle">
       <div class="player_progress__progress_bar_pointer" :style="`left:${currentProgress}%;`"></div>
@@ -113,7 +113,8 @@ export default {
 <style lang="less" scoped>
 @import (reference) '../../assets/css/constant.less';
 .player_progress {
-  padding: 16px 13px;
+  font-size: @font_size_mini;
+  padding: 16px @padding_width;
   display: flex;
   justify-content: space-between;
   align-items: center;

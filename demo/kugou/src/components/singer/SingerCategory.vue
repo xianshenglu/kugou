@@ -70,8 +70,6 @@ export default {
 
   border-radius: 6px;
   background-color: @white;
-
-  font-size: 18px;
 }
 
 .singer_category__item {
@@ -95,7 +93,7 @@ export default {
 .singer_category__title {
   display: block;
 
-  padding-left: 13px;
+  padding-left: @padding_width;
 }
 
 .singer_category_btn {

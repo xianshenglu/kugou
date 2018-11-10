@@ -1,6 +1,6 @@
 <template>
   <section class="search">
-    <PubModuleTitle :title="title" class="search__title"/>
+    <PubModuleTitle :title="title" class="search__title" @click="goBackToSearchRec"/>
     <div class="search__cont" ref="searchCont">
       <form class="search__form" @submit.prevent>
         <input
@@ -56,15 +56,24 @@ export default {
       searchType: '最近热门',
       placeholder: '歌手/歌名/拼音',
       keyword: '',
-      isSearchRecShow: true,
+      isSearchRecShow: false,
       isSearchResShow: false
     }
   },
   computed: {
-    ...mapState('search', ['searchRecArr', 'searchRes'])
+    ...mapState('search', ['searchRecArr', 'searchRes', 'prevKeyword'])
   },
   created() {
-    this.getSearchRec()
+    let keyword = this.$route.query.keyword
+    let isKeywordValid = typeof keyword === 'string' && keyword !== ''
+    let isPrevKeywordValid =
+      typeof this.prevKeyword === 'string' && this.prevKeyword !== ''
+    if (isKeywordValid || isPrevKeywordValid) {
+      this.keyword = isKeywordValid ? keyword : this.prevKeyword
+      this.getSearchRes()
+    } else {
+      this.getSearchRec()
+    }
   },
   mounted() {
     let search__cont = document.getElementsByClassName('search__cont')[0]
@@ -93,6 +102,8 @@ export default {
             paths: 'search.searchRecArr',
             data: data.data.info
           })
+          this.isSearchResShow = false
+          this.isSearchRecShow = true
         })
         .catch(err => {
           alert(err)
@@ -102,11 +113,22 @@ export default {
       if (this.keyword === '') {
         return
       }
+      this.$router.push({ query: { keyword: this.keyword } })
+      window.vm = this
+      if (this.keyword === this.prevKeyword) {
+        this.isSearchRecShow = false
+        this.isSearchResShow = true
+        return
+      }
       let url = api.searchResult + encodeURIComponent(this.keyword)
       axios.get(url).then(res => {
         this.$store.commit('replaceProperty', {
           paths: 'search.searchRes',
           data: res.data.data
+        })
+        this.$store.commit('replaceProperty', {
+          paths: 'search.prevKeyword',
+          data: this.keyword
         })
         this.isSearchRecShow = false
         this.isSearchResShow = true
@@ -115,6 +137,10 @@ export default {
     getTargetList(val) {
       this.keyword = val
       this.getSearchRes()
+    },
+    goBackToSearchRec() {
+      this.$router.push({ query: {} })
+      this.getSearchRec()
     }
   }
 }
@@ -124,8 +150,6 @@ export default {
 @import (reference) '../../assets/css/constant.less';
 .search {
   box-sizing: border-box;
-
-  font-size: 18px;
 }
 .search__cont {
   overflow: scroll;
@@ -136,7 +160,7 @@ export default {
 .search__form {
   box-sizing: border-box;
   height: 63px;
-  padding: 13px;
+  padding: @padding_width;
 
   background-color: @white-1;
 }

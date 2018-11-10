@@ -63,6 +63,7 @@ export default {
 .player_lyric {
   color: @white-3;
   overflow: scroll;
+  font-size: @font_size_med;
 }
 .player_lyric {
   text-align: center;

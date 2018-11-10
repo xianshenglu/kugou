@@ -1,5 +1,5 @@
 <template>
-  <button class="next_button" @touchstart="next">
+  <button class="next_button" @click="next">
     <svg class="icon" aria-hidden="true">
       <use xlink:href="#icon-next"></use>
     </svg>

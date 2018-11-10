@@ -36,9 +36,9 @@ export default {
 
 .module__title {
   position: fixed;
-  top: 58px;
+  top: @header_height;
   left: 50%;
-
+  font-size: inherit;
   width: 100%;
   height: 54px;
 
@@ -52,7 +52,6 @@ export default {
     rgba(255, 255, 255, 0)
   );
 
-  font-size: 18px;
   line-height: 54px;
 }
 </style>

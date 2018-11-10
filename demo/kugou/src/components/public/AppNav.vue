@@ -32,7 +32,7 @@ export default {
 
   display: flex;
 
-  padding: 0 13px;
+  padding: 0 @padding_width;
 }
 .nav__link {
   display: block;

@@ -1,5 +1,5 @@
 <template>
-  <button class="play" @touchstart="togglePlay">
+  <button class="play" @click="togglePlay">
     <svg class="icon play__pause" aria-hidden="true" v-show="isPlaying">
       <use xlink:href="#icon-pause"></use>
     </svg>

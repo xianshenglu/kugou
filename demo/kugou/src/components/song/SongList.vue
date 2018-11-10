@@ -70,7 +70,6 @@ export default {
 .song_list__title {
   padding-top: 26px;
 
-  font-size: 18px;
   line-height: 27px;
 }
 
@@ -79,12 +78,12 @@ export default {
 
   vertical-align: baseline;
 
-  font-size: 13px;
+  font-size: @font_size_small;
 }
 
 .song_list__popularity {
   color: @white-to-black;
 
-  font-size: 15px;
+  font-size: @font_size_med;
 }
 </style>

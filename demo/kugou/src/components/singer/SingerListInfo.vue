@@ -87,6 +87,7 @@ export default {
 </script>
 
 <style scoped lang="less">
+@import (reference) '../../assets/css/constant.less';
 .singer_list_info {
   font-size: 19px;
 }
@@ -110,6 +111,6 @@ export default {
 
   width: 61px;
   height: 61px;
-  margin: 0 18px 0 13px;
+  margin: 0 18px 0 @padding_width;
 }
 </style>

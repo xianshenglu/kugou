@@ -4,7 +4,8 @@ const search = {
   namespaced: true,
   state: {
     searchRecArr: [],
-    searchRes: {}
+    searchRes: {},
+    prevKeyword: undefined
   }
 }
 export default search
