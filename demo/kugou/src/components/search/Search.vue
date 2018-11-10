@@ -56,15 +56,22 @@ export default {
       searchType: '最近热门',
       placeholder: '歌手/歌名/拼音',
       keyword: '',
-      isSearchRecShow: true,
+      isSearchRecShow: false,
       isSearchResShow: false
     }
   },
   computed: {
-    ...mapState('search', ['searchRecArr', 'searchRes'])
+    ...mapState('search', ['searchRecArr', 'searchRes', 'prevKeyword'])
   },
   created() {
-    this.getSearchRec()
+    let keyword = this.$route.query.keyword
+    let isKeywordString = typeof keyword === 'string'
+    if (isKeywordString || typeof this.prevKeyword === 'string') {
+      this.keyword = isKeywordString ? keyword : this.prevKeyword
+      this.getSearchRes()
+    } else {
+      this.getSearchRec()
+    }
   },
   mounted() {
     let search__cont = document.getElementsByClassName('search__cont')[0]
@@ -93,6 +100,7 @@ export default {
             paths: 'search.searchRecArr',
             data: data.data.info
           })
+          this.isSearchRecShow = true
         })
         .catch(err => {
           alert(err)
@@ -102,11 +110,22 @@ export default {
       if (this.keyword === '') {
         return
       }
+      this.$router.push({ query: { keyword: this.keyword } })
+      window.vm = this
+      if (this.keyword === this.prevKeyword) {
+        this.isSearchRecShow = false
+        this.isSearchResShow = true
+        return
+      }
       let url = api.searchResult + encodeURIComponent(this.keyword)
       axios.get(url).then(res => {
         this.$store.commit('replaceProperty', {
           paths: 'search.searchRes',
           data: res.data.data
+        })
+        this.$store.commit('replaceProperty', {
+          paths: 'search.prevKeyword',
+          data: this.keyword
         })
         this.isSearchRecShow = false
         this.isSearchResShow = true
