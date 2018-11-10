@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="app" ref="app">
+    <AppLoading/>
     <AppHeader class="app__header"/>
     <router-view class="app__cont" :navs="navs"></router-view>
     <audio :src="song.play_url" class="hidden" ref="audioEl" loop @canplay="togglePlay(true)"></audio>
@@ -13,12 +14,14 @@
 <script>
 import AppHeader from '@/components/public/AppHeader'
 import AppNav from './components/public/AppNav'
+import AppLoading from './components/public/AppLoading'
 import PlayerMed from './components/player/PlayerMed'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'App',
   components: {
+    AppLoading,
     AppHeader,
     AppNav,
     PlayerMed

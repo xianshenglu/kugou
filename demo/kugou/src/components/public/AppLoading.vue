@@ -9,7 +9,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  name: 'LoadingIcon',
+  name: 'AppLoading',
   computed: {
     ...mapState('loading', ['isShow'])
   }
