@@ -92,11 +92,11 @@ export default {
 // layout with 1rem which is actual vh set by js.
 // Using vh would be wrong.
 .player__song_name {
-  height: .calc_vh(54) [ @result];
-  line-height: .calc_vh(54) [ @result];
-  width: calc(100% - .calc_vh(120) [ @result]);
+  height: .calc_on_app_cont(54) [ @result];
+  line-height: .calc_on_app_cont(54) [ @result];
+  width: calc(100% - .calc_on_app_cont(120) [ @result]);
   box-sizing: border-box;
-  margin: 0 .calc_vh(120) [ @result];
+  margin: 0 .calc_on_app_cont(120) [ @result];
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
@@ -105,9 +105,9 @@ export default {
   font-size: inherit;
 }
 .player__singer_img {
-  margin-top: .calc_vh(26) [ @result];
-  height: .calc_vh(193) [ @result];
-  width: .calc_vh(193) [ @result];
+  margin-top: .calc_on_app_cont(26) [ @result];
+  height: .calc_on_app_cont(193) [ @result];
+  width: .calc_on_app_cont(193) [ @result];
   flex: 0 0 auto;
   border-radius: 50%;
   animation: rotate 20s linear infinite reverse;
@@ -117,17 +117,17 @@ export default {
   animation-play-state: running;
 }
 .player__lyrics {
-  margin-top: .calc_vh(16) [ @result];
-  height: .calc_vh(68) [ @result];
-  line-height: .calc_vh(34) [ @result];
+  margin-top: .calc_on_app_cont(16) [ @result];
+  height: .calc_on_app_cont(68) [ @result];
+  line-height: .calc_on_app_cont(34) [ @result];
 }
 .player__progress {
-  height: .calc_vh(48) [ @result];
+  height: .calc_on_app_cont(48) [ @result];
   width: 100%;
   box-sizing: border-box;
 }
 .player__buttons {
-  height: .calc_vh(58) [ @result];
+  height: .calc_on_app_cont(58) [ @result];
   display: flex;
   align-items: center;
   justify-content: center;
@@ -136,14 +136,14 @@ export default {
 .play__btn_next,
 .player__btn_status {
   border-radius: 50%;
-  border: .calc_vh(2) [ @result] solid @white;
-  margin: 0 .calc_vh(16) [ @result];
+  border: .calc_on_app_cont(2) [ @result] solid @white;
+  margin: 0 .calc_on_app_cont(16) [ @result];
 }
 .player__btn_prev,
 .play__btn_next {
-  width: .calc_vh(42) [ @result];
-  height: .calc_vh(42) [ @result];
-  font-size: .calc_vh(16) [ @result];
+  width: .calc_on_app_cont(42) [ @result];
+  height: .calc_on_app_cont(42) [ @result];
+  font-size: .calc_on_app_cont(16) [ @result];
 }
 .player__btn_prev /deep/ .icon {
   transform: translate(0, 1px);
@@ -152,13 +152,13 @@ export default {
   transform: translate(1px, 1px);
 }
 .player__btn_status {
-  width: .calc_vh(58) [ @result];
-  height: .calc_vh(58) [ @result];
-  font-size: .calc_vh(20) [ @result];
+  width: .calc_on_app_cont(58) [ @result];
+  height: .calc_on_app_cont(58) [ @result];
+  font-size: .calc_on_app_cont(20) [ @result];
 }
 .player__download {
-  margin-top: .calc_vh(19) [ @result] auto 0;
-  height: .calc_vh(45) [ @result];
-  width: .calc_vh(211) [ @result];
+  margin-top: .calc_on_app_cont(19) [ @result] auto 0;
+  height: .calc_on_app_cont(45) [ @result];
+  width: .calc_on_app_cont(211) [ @result];
 }
 </style>
