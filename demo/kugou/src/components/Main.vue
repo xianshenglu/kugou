@@ -27,7 +27,8 @@ export default {
 
   box-shadow: 0 3px 3px 0 @white-2;
 
-  line-height: @nav_height;
+  height: @nav_height;
+  line-height: 58px;
 }
 .main__cont {
   overflow-y: auto;
