@@ -1,5 +1,5 @@
 <template>
-  <div class="loading" v-show="isShow">
+  <div :class="isShow?'loading':'loading loading--fade_out'">
     <svg class="icon loading__svg" aria-hidden="true">
       <use xlink:href="#icon-loading"></use>
     </svg>
@@ -17,9 +17,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import (reference) '../../assets/css/constant.less';
 .loading {
   width: 100%;
-  height: 100%;
+  height: calc(100% - @header_height);
+  margin-top: @header_height;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,6 +29,10 @@ export default {
   position: fixed;
   z-index: 2;
   background-color: rgba(255, 255, 255, 0.8);
+}
+.loading--fade_out {
+  background-color: none;
+  animation: fade_out ease 0.5s forwards;
 }
 .loading__svg {
   animation: rotate 1s linear infinite reverse;
