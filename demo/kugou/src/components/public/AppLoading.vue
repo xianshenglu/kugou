@@ -31,8 +31,8 @@ export default {
   background-color: rgba(255, 255, 255, 0.8);
 }
 .loading--fade_out {
-  background-color: none;
-  animation: fade_out ease 0.5s forwards;
+  background-color: transparent;
+  animation: fade_out 0.5s ease 0.5s forwards;
 }
 .loading__svg {
   animation: rotate 1s linear infinite reverse;
