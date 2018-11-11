@@ -1,21 +1,21 @@
 <template>
-  <section class="singer_list_info">
-    <PubModuleTitle :title="singerListInfo.info.name"/>
-    <ul class="singer_list_info__list" @scroll="$_xsl__loadImgLazy($refs.lazyImages)">
+  <section class="singer_list">
+    <PubModuleTitle :title="singerList.info.name"/>
+    <ul class="singer_list__list" @scroll="$_xsl__loadImgLazy($refs.lazyImages)">
       <li
-        class="singer_list_info__item main_border_bottom"
-        v-for="(item,index) in singerListInfo.data"
+        class="singer_list__item main_border_bottom"
+        v-for="(item,index) in singerList.data"
         :key="index"
       >
-        <router-link :to="item.path" class="singer_list_info__link">
+        <router-link :to="item.path" class="singer_list__link">
           <img
-            class="singer_list_info__img lazy_image"
+            class="singer_list__img lazy_image"
             ref="lazyImages"
             src="../../assets/images/default.png"
             :data-src="item.imgUrl"
             :data-is-loaded="isLoaded"
           >
-          <div class="singer_list_info__name">{{item.name}}</div>
+          <div class="singer_list__name">{{item.name}}</div>
         </router-link>
       </li>
     </ul>
@@ -30,28 +30,21 @@ import mixin from '../../mixins/index.js'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
-  name: 'SingerListInfo',
+  name: 'SingerList',
   mixins: [mixin],
   components: {
     PubModuleTitle
   },
   computed: {
-    ...mapState('singer', ['singerListInfo']),
+    ...mapState('singer', ['singerList']),
     ...mapState('loading', {
       isLoadingShow: 'isShow'
     })
   },
-  watch: {
-    'singerListInfo.data.length': function() {
-      this.$nextTick(function() {
-        this.$_xsl__loadImgLazy(this.$refs.lazyImages)
-      })
-    }
-  },
   created() {
     if (this.isLoadingShow) {
-      let singerListInfoId = this.$route.path.split('/').pop()
-      this.getSingerListInfo(singerListInfoId)
+      let singerListId = this.$route.path.split('/').pop()
+      this.getSingerList(singerListId)
     }
   },
   mounted() {
@@ -60,11 +53,11 @@ export default {
   },
   methods: {
     ...mapMutations(['replaceProperty']),
-    getSingerListInfo(singerListInfoId) {
+    getSingerList(singerListId) {
       axios
-        .get(api.singerListInfo.replace(/singerListInfoId?/i, singerListInfoId))
+        .get(api.singerList.replace(/singerListId?/i, singerListId))
         .then(({ data }) => {
-          let singerListInfo = {
+          let singerList = {
             info: {
               id: data.classid,
               name: data.classname,
@@ -78,10 +71,10 @@ export default {
             obj.imgUrl = this.$_xsl__replaceImgUrlSize(obj.imgurl)
             obj.path = '/singer/info/' + obj.id
           })
-          Object.assign(this.singerListInfo, singerListInfo)
+          Object.assign(this.singerList, singerList)
           this.replaceProperty({
-            paths: 'singer.singerListInfo',
-            data: singerListInfo
+            paths: 'singer.singerList',
+            data: singerList
           })
           this.replaceProperty({
             paths: 'loading.isShow',
@@ -98,25 +91,25 @@ export default {
 
 <style scoped lang="less">
 @import (reference) '../../assets/css/constant.less';
-.singer_list_info {
+.singer_list {
   font-size: 19px;
 }
-.singer_list_info__list {
+.singer_list__list {
   overflow: scroll;
 
   box-sizing: border-box;
   height: calc(100% - 54px);
 }
-.singer_list_info__item {
+.singer_list__item {
   height: 88px;
 }
-.singer_list_info__link {
+.singer_list__link {
   display: flex;
   align-items: center;
 
   height: 100%;
 }
-.singer_list_info__img {
+.singer_list__img {
   display: block;
 
   width: 61px;

@@ -54,7 +54,7 @@ const player = {
       state.isPlayerMedShow = true
       state.isPlayerMedSmall = false
       //tdo move async to actions.
-      axios.get(api.songInfoLyric + musicHash).then(res => {
+      axios.get(api.songLyric + musicHash).then(res => {
         let data = res.data.data
         state.musicList = musicList.length === 0 ? [data] : musicList
         store.commit('replaceProperty', {

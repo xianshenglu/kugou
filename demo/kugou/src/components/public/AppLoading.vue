@@ -32,7 +32,7 @@ export default {
 }
 .loading--fade_out {
   background-color: transparent;
-  animation: fade_out 0.5s ease 0.5s forwards;
+  animation: fade_out 0.5s ease 0.3s forwards;
 }
 .loading__svg {
   animation: rotate 1s linear infinite reverse;

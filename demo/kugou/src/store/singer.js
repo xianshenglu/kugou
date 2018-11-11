@@ -8,7 +8,7 @@ const singer = {
       info: {},
       data: []
     },
-    singerListInfo: {
+    singerList: {
       info: {},
       data: []
     }

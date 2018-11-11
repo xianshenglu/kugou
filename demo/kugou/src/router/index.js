@@ -11,7 +11,7 @@ import SongList from '../components/song/SongList'
 import SingerCategory from '../components/singer/SingerCategory'
 import RankInfo from '../components/rank/RankInfo'
 import SongListInfo from '../components/song/SongListInfo'
-import SingerListInfo from '../components/singer/SingerListInfo'
+import SingerList from '../components/singer/SingerList'
 import SingerInfo from '../components/singer/SingerInfo'
 import Search from '../components/search/Search'
 import PlayerMax from '../components/player/PlayerMax'
@@ -52,7 +52,7 @@ export default new VueRouter({
     },
     {
       path: '/singer/list/:id',
-      component: SingerListInfo
+      component: SingerList
     },
     {
       path: '/singer/info/:id',
