@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import store from '../store/index'
-import router from '../router/index'
 
 import Main from '../components/Main'
 import NewSong from '../components/new_song/NewSong'
@@ -18,7 +17,7 @@ import PlayerMax from '../components/player/PlayerMax'
 
 Vue.use(VueRouter)
 
-export default new VueRouter({
+const router = new VueRouter({
   routes: [
     {
       path: '/',
@@ -74,7 +73,7 @@ export default new VueRouter({
 let staticLikePagesPath = router.options.routes[0].children.map(
   child => child.path
 )
-staticLikePagesPath.push('/search/index')
+router.staticLikePagesPath = [...staticLikePagesPath]
 
 router.beforeEach((to, from, next) => {
   //play music if musicHash exist
@@ -84,7 +83,11 @@ router.beforeEach((to, from, next) => {
   }
   // window.router = router
   // window.args = { to, from }
-  let noLoadingPagesPath = [...staticLikePagesPath, '/player/max']
+  let noLoadingPagesPath = [
+    ...router.staticLikePagesPath,
+    '/search/index',
+    '/player/max'
+  ]
   let isFromSingerInfoToList =
     from.path.startsWith('/singer/info/') && to.path.startsWith('/singer/list/')
   if (!noLoadingPagesPath.includes(to.path) && !isFromSingerInfoToList) {
@@ -92,3 +95,5 @@ router.beforeEach((to, from, next) => {
   }
   next()
 })
+
+export default router
