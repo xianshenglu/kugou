@@ -44,7 +44,9 @@ export default {
 .module_info__intro.show_more {
   height: auto;
 }
-
+.module_info__text {
+  margin-right: auto;
+}
 .more_btn {
   flex: 0 0 auto;
 
