@@ -18,7 +18,9 @@ export default {
     ...mapState('newSong', ['newSongs', 'sliderData'])
   },
   created() {
-    this.getNewSong()
+    if (this.newSongs.length === 0) {
+      this.getNewSong()
+    }
   },
   methods: {
     ...mapMutations(['replaceProperty']),

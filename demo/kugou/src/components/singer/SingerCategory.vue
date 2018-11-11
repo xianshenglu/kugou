@@ -34,7 +34,9 @@ export default {
     ...mapState('singer', ['singerCategories'])
   },
   created() {
-    this.getSingerCategories()
+    if (this.singerCategories.length === 0) {
+      this.getSingerCategories()
+    }
   },
   methods: {
     ...mapMutations(['replaceProperty']),

@@ -31,7 +31,9 @@ export default {
     ...mapState('song', ['songList'])
   },
   created() {
-    this.getSongList()
+    if (this.songList.length === 0) {
+      this.getSongList()
+    }
   },
   methods: {
     ...mapMutations(['replaceProperty']),

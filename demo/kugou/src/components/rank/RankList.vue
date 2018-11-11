@@ -23,7 +23,9 @@ export default {
     ...mapState('rank', ['rankList'])
   },
   created() {
-    this.getRank()
+    if (this.rankList.length === 0) {
+      this.getRank()
+    }
   },
   methods: {
     ...mapMutations(['replaceProperty']),

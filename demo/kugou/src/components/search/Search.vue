@@ -96,6 +96,11 @@ export default {
   methods: {
     ...mapMutations(['replaceProperty']),
     getSearchRec() {
+      if (this.searchRecArr.length !== 0) {
+        this.isSearchResShow = false
+        this.isSearchRecShow = true
+        return
+      }
       axios
         .get(api.hotSearch)
         .then(({ data }) => {
