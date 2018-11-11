@@ -1,5 +1,6 @@
 <template>
   <main class="main">
+    <!-- //todo add toggle between pages when user moves by hand. -->
     <AppNav :navs="navs" class="main__nav"/>
     <router-view class="main__cont"></router-view>
   </main>
