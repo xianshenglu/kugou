@@ -21,7 +21,7 @@
 
 <script>
 import axios from 'axios'
-import api from '../../assets/js/api.js'
+import api from '../../assets/js/api'
 import { mapState, mapMutations } from 'vuex'
 
 export default {

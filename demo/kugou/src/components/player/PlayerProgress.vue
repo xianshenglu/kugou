@@ -10,7 +10,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import mixin from '../../mixins/index.js'
+import mixin from '../../mixins/index'
 export default {
   name: 'PlayerProgress',
   mixins: [mixin],

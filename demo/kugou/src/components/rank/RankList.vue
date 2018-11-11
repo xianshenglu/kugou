@@ -9,8 +9,8 @@
 <script>
 import PubList from '../public/PubList'
 import axios from 'axios'
-import api from '../../assets/js/api.js'
-import mixin from '../../mixins/index.js'
+import api from '../../assets/js/api'
+import mixin from '../../mixins/index'
 import { mapState, mapMutations } from 'vuex'
 
 export default {

@@ -9,7 +9,7 @@
 import AppMusicList from '../public/AppMusicList'
 import Slider from './Slider.vue'
 import axios from 'axios'
-import api from '../../assets/js/api.js'
+import api from '../../assets/js/api'
 import { mapState, mapMutations } from 'vuex'
 
 export default {

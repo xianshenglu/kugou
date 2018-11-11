@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import mixin from '../../mixins/index.js'
+import mixin from '../../mixins/index'
 export default {
   name: 'PubList',
   mixins: [mixin],

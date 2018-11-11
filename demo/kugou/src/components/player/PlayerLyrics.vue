@@ -12,7 +12,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import mixin from '../../mixins/index.js'
+import mixin from '../../mixins/index'
 export default {
   name: 'PlayerLyrics',
   mixins: [mixin],
