@@ -5,7 +5,7 @@
         class="nav__link"
         v-for="(item,index) in navs"
         :key="index"
-        :to="item.link"
+        :to="item.path"
         exact-active-class="nav__link--active"
       >{{item.text}}</router-link>
     </nav>
@@ -16,12 +16,30 @@
 <script>
 export default {
   name: 'AppNav',
-  props: {
-    navs: {
-      type: Array,
-      default() {
-        return []
-      }
+  data() {
+    return {
+      navs: [
+        {
+          text: '新歌',
+          name: 'new',
+          path: '/'
+        },
+        {
+          text: '排行',
+          name: 'rank',
+          path: '/rank/list'
+        },
+        {
+          text: '歌单',
+          name: 'song',
+          path: '/song/list'
+        },
+        {
+          text: '歌手',
+          name: 'singer',
+          path: '/singer/category'
+        }
+      ]
     }
   },
   computed: {

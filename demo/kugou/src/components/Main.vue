@@ -1,6 +1,6 @@
 <template>
   <main class="main">
-    <AppNav :navs="navs" class="main__nav"/>
+    <AppNav class="main__nav"/>
     <router-view class="main__cont"></router-view>
   </main>
 </template>
@@ -9,7 +9,6 @@
 import AppNav from './public/AppNav'
 export default {
   name: 'Main',
-  props: ['navs'],
   components: {
     AppNav
   },

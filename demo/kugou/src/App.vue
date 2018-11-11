@@ -2,7 +2,7 @@
   <div id="app" class="app" ref="app">
     <AppLoading/>
     <AppHeader class="app__header"/>
-    <router-view class="app__cont" :navs="navs"></router-view>
+    <router-view class="app__cont"></router-view>
     <audio :src="song.play_url" class="hidden" ref="audioEl" loop @canplay="togglePlay(true)"></audio>
     <PlayerMed
       v-show="isPlayerMedShow&&$route.path!=='/player/max'"
@@ -25,36 +25,6 @@ export default {
     AppHeader,
     AppNav,
     PlayerMed
-  },
-  data() {
-    return {
-      navs: [
-        {
-          text: '新歌',
-          name: 'new',
-          active: true,
-          link: '/'
-        },
-        {
-          text: '排行',
-          name: 'rank',
-          active: false,
-          link: '/rank/list'
-        },
-        {
-          text: '歌单',
-          name: 'song',
-          active: false,
-          link: '/song/list'
-        },
-        {
-          text: '歌手',
-          name: 'singer',
-          active: false,
-          link: '/singer/category'
-        }
-      ]
-    }
   },
   mounted() {
     document.documentElement.style.fontSize = this.vMax + 'px'
