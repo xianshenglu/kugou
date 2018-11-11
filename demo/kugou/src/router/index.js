@@ -85,7 +85,9 @@ router.beforeEach((to, from, next) => {
   // window.router = router
   // window.args = { to, from }
   let noLoadingPagesPath = [...staticLikePagesPath, '/player/max']
-  if (!noLoadingPagesPath.includes(to.path)) {
+  let isFromSingerInfoToList =
+    from.path.startsWith('/singer/info/') && to.path.startsWith('/singer/list/')
+  if (!noLoadingPagesPath.includes(to.path) && !isFromSingerInfoToList) {
     store.commit('replaceProperty', { paths: 'loading.isShow', data: true })
   }
   next()

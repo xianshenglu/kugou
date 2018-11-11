@@ -36,7 +36,10 @@ export default {
     PubModuleTitle
   },
   computed: {
-    ...mapState('singer', ['singerListInfo'])
+    ...mapState('singer', ['singerListInfo']),
+    ...mapState('loading', {
+      isLoadingShow: 'isShow'
+    })
   },
   watch: {
     'singerListInfo.data.length': function() {
@@ -46,8 +49,10 @@ export default {
     }
   },
   created() {
-    let singerListInfoId = this.$route.path.split('/').pop()
-    this.getSingerListInfo(singerListInfoId)
+    if (this.isLoadingShow) {
+      let singerListInfoId = this.$route.path.split('/').pop()
+      this.getSingerListInfo(singerListInfoId)
+    }
   },
   mounted() {
     let lazyImages = this.$refs.lazyImages
