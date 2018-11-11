@@ -25,13 +25,14 @@
 <script>
 import PubModuleTitle from '../public/PubModuleTitle'
 import axios from 'axios'
-import api from '../../assets/js/api.js'
-import mixin from '../../mixins/index.js'
+import api from '../../assets/js/api'
+import mixin from '../../mixins/index'
+import loading from '../../mixins/loading'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'SingerList',
-  mixins: [mixin],
+  mixins: [mixin, loading],
   components: {
     PubModuleTitle
   },
@@ -75,10 +76,6 @@ export default {
           this.replaceProperty({
             paths: 'singer.singerList',
             data: singerList
-          })
-          this.replaceProperty({
-            paths: 'loading.isShow',
-            data: false
           })
         })
         .catch(er => {

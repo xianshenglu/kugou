@@ -17,12 +17,13 @@
 import PubModuleHead from '../public/PubModuleHead'
 import AppMusicList from '../public/AppMusicList'
 import axios from 'axios'
-import api from '../../assets/js/api.js'
-import mixin from '../../mixins/index.js'
+import api from '../../assets/js/api'
+import mixin from '../../mixins/index'
+import loading from '../../mixins/loading'
 import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'RankInfo',
-  mixins: [mixin],
+  mixins: [mixin, loading],
   components: {
     PubModuleHead,
     AppMusicList
@@ -71,10 +72,6 @@ export default {
           this.replaceProperty({
             paths: 'rank.rankInfo',
             data: rankInfo
-          })
-          this.replaceProperty({
-            paths: 'loading.isShow',
-            data: false
           })
         })
         .catch(er => {
