@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     activeIndex() {
-      return this.navs.findIndex(nav => nav.link === this.$route.path)
+      return this.navs.findIndex(nav => nav.path === this.$route.path)
     }
   }
 }
