@@ -1,6 +1,10 @@
 <template>
   <header class="header">
-    <button class="header__back arrow arrow--left" @click="goBack"></button>
+    <button class="header__back" @click="goBack">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-arrow-left"></use>
+      </svg>
+    </button>
     <router-link to="/">
       <img class="header__logo" src="@/assets/images/logo.png">
     </router-link>
@@ -60,13 +64,8 @@ export default {
   margin: auto;
 }
 .header__back {
-  width: 16px;
-  height: 16px;
-
-  transform: rotate(-45deg) translateY(-2px);
-
-  border-width: 2.2px;
-  border-color: @white;
+  font-size: 25px;
+  transform: translate(-2px, 2px);
 }
 .header__search_btn {
   display: block;

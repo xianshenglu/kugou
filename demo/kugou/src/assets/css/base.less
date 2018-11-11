@@ -6,60 +6,6 @@ body {
 
   color: @black-3;
 }
-.arrow {
-  width: 14px;
-  height: 14px;
-
-  border: 2px solid @white-3;
-}
-.arrow--left {
-  transform: rotate(-45deg);
-
-  border-right: none;
-  border-bottom: none;
-}
-.arrow--right {
-  transform: rotate(45deg);
-
-  border-bottom: none;
-  border-left: none;
-}
-.more_btn {
-  position: relative;
-
-  box-sizing: border-box;
-  width: 24px;
-  height: 24px;
-  border: 2px solid @white-3;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.more_btn::before {
-  flex: 0 0 auto;
-  content: '';
-
-  display: block;
-
-  width: 12px;
-  height: 12px;
-  box-sizing: border-box;
-  transform: translate(0%, -15%) rotate(45deg);
-
-  border-width: inherit;
-  border-style: none;
-  border-color: inherit;
-  border-right-style: solid;
-  border-bottom-style: solid;
-}
-.more_btn--up::before {
-  transform: translate(0%, 15%) rotate(45deg);
-
-  border-style: none;
-  border-top-style: solid;
-  border-left-style: solid;
-}
 .main_box_shadow {
   box-shadow: 0 2px 5px 0 @white-3;
 }

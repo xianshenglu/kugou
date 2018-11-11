@@ -12,7 +12,11 @@
       >
         <router-link :to="item.path" class="singer_category__link">
           <div class="singer_category__title">{{item.classname}}</div>
-          <button class="singer_category_btn arrow arrow--right"></button>
+          <button class="singer_category_btn">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-arrow-right"></use>
+            </svg>
+          </button>
         </router-link>
       </li>
     </ul>
@@ -98,6 +102,7 @@ export default {
 }
 
 .singer_category_btn {
+  font-size: 20px;
   margin-right: 15px;
   margin-left: auto;
 }

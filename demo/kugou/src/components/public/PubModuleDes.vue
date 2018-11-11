@@ -1,9 +1,18 @@
 <template>
   <div
-    :class="showMore?'module_info__intro main_box_shadow show_more':'module_info__intro main_box_shadow'"
+    :class="showMore?'module_info__intro module_info__intro--more main_box_shadow':'module_info__intro main_box_shadow'"
   >
     <p class="module_info__text">{{description}}</p>
-    <button :class="showMore?'more_btn more_btn--up':'more_btn'" @click="showMore=!showMore"></button>
+    <button class="module_info__button" v-show="showMore" @click="showMore=!showMore">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-circle-arrow-up"></use>
+      </svg>
+    </button>
+    <button class="module_info__button" v-show="!showMore" @click="showMore=!showMore">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-circle-arrow-down"></use>
+      </svg>
+    </button>
   </div>
 </template>
 
@@ -41,32 +50,18 @@ export default {
   line-height: 1.8;
 }
 
-.module_info__intro.show_more {
+.module_info__intro--more {
   height: auto;
 }
 .module_info__text {
   margin-right: auto;
 }
-.more_btn {
+.module_info__button {
+  font-size: 25px;
   flex: 0 0 auto;
-
   width: 24px;
   height: 24px;
-  margin: 3.5px 9px 0;
+  margin: 3.5px 10px 0 8px;
   box-sizing: border-box;
-  border-radius: 50%;
-  border-width: 2px;
-  border-color: @white-3;
-}
-
-.more_btn--up {
-  margin-bottom: auto;
-}
-
-.more_btn::before {
-  width: 8px;
-  height: 8px;
-  box-sizing: border-box;
-  border-width: inherit;
 }
 </style>

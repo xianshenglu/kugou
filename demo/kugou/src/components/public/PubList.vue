@@ -10,7 +10,11 @@
           :data-is-loaded="isLoaded"
         >
         <slot :data="item" name="cont"></slot>
-        <button class="list__btn arrow arrow--right"></button>
+        <button class="list__btn">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-arrow-right"></use>
+          </svg>
+        </button>
       </router-link>
     </li>
   </ul>
@@ -64,7 +68,7 @@ export default {
 
 .list__btn {
   flex: 0 0 auto;
-
+  font-size: 20px;
   margin-left: auto;
   margin-right: 15px;
 }
