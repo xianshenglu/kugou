@@ -1,6 +1,11 @@
 <template>
   <div id="app" class="app" ref="app">
     <AppLoading/>
+    <!-- //todo 1. add loop mode in PlayerMax -->
+    <!-- //todo 2. add musicList in PlayerMax -->
+    <!-- //todo 3. add download for download button when user is admin-->
+    <!-- //todo 4. add download, songInfo, comments in PlayerMax -->
+    <!-- //todo 5. add multiple split pages -->
     <AppHeader class="app__header"/>
     <router-view class="app__cont"></router-view>
     <audio :src="song.play_url" class="hidden" ref="audioEl" loop @canplay="togglePlay(true)"></audio>

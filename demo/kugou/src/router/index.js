@@ -81,8 +81,6 @@ router.beforeEach((to, from, next) => {
   if (musicHash && !to.params.fromPlayerMed) {
     store.commit('player/wantPlay', { musicHash })
   }
-  // window.router = router
-  // window.args = { to, from }
   let noLoadingPagesPath = [
     ...router.staticLikePagesPath,
     '/search/index',
