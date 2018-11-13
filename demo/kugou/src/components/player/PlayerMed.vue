@@ -5,7 +5,7 @@
       class="player__link"
     >
       <img
-        :src="singerImg?singerImg:'../../assets/images/logo--sky_blue.png'"
+        :src="singerImg?singerImg:'../../assets/images/logo--theme.png'"
         alt=""
         :class="isPlayerMedSmall?'player__singer_img player__singer_img--player_min':'player__singer_img'"
       >
