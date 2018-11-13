@@ -4,7 +4,7 @@
     <div class="player__cont">
       <h6 class="player__song_name">{{songName}}</h6>
       <img
-        :src="singerImg?singerImg:'../../assets/images/logo--sky_blue.png'"
+        :src="singerImg?singerImg:'../../assets/images/logo--theme.png'"
         :class="isPlaying?'player__singer_img player__singer_img--active':'player__singer_img'"
       >
       <PlayerLyrics class="player__lyrics"/>
@@ -36,10 +36,11 @@ export default {
     PrevButton
   },
   computed: {
+    ...mapState(['logo_theme']),
     ...mapState('player', ['audioEl', 'isPlaying']),
     ...mapGetters('player', ['songName', 'singerName', 'singerImg']),
     playerBgImg() {
-      return `background-image:url(${this.singerImg});`
+      return `background-image:url(${this.singerImg}),url(${this.logo_theme});`
     }
   },
   mounted() {
@@ -77,17 +78,17 @@ export default {
   width: 100%;
   height: 100%;
   display: block;
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-  background-position: center;
+  background-repeat: no-repeat, no-repeat;
+  background-size: auto 100%, auto 100%;
+  background-position: center, center;
   z-index: -1;
 }
 .player__cont {
   display: flex;
   flex-flow: column;
   align-items: center;
-  background: rgba(0, 0, 0, 0.6);
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 // layout with 1rem which is actual vh set by js.
 // Using vh would be wrong.

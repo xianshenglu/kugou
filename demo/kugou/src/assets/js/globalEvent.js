@@ -1,7 +1,7 @@
 import store from '../../store/index'
 import router from '../../router/index'
 
-const errorBackUpImg = require('../images/logo--sky_blue.png')
+const errorBackUpImg = require('../images/logo--theme.png')
 
 window.addEventListener('error', setImgBackupSrc, true)
 window.addEventListener('scroll', letPlayerMedSmall, true)

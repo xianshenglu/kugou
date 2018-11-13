@@ -8,6 +8,8 @@ import singer from './singer'
 import song from './song'
 import search from './search'
 import newSong from './newSong'
+
+import logo_theme from '../assets/images/logo--theme.png'
 Vue.use(Vuex)
 let store = new Vuex.Store({
   modules: {
@@ -19,6 +21,9 @@ let store = new Vuex.Store({
     song,
     newSong,
     search
+  },
+  state: {
+    logo_theme
   },
   mutations: {
     replaceProperty(state, { paths, data }) {
