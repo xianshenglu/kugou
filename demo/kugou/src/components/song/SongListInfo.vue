@@ -41,6 +41,8 @@ export default {
   },
   created() {
     let songListId = this.$route.path.split('/').pop()
+    this.setLoadingExcludeHeader()
+    this.startLoading()
     this.getSongListInfo(songListId)
   },
   methods: {
@@ -57,6 +59,7 @@ export default {
             paths: 'song.songListInfo',
             data: songListInfo
           })
+          this.stopLoading()
         })
         .catch(er => {
           alert(er)

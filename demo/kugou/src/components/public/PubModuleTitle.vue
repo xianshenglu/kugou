@@ -20,13 +20,13 @@ export default {
 @import (reference) '../../assets/css/constant.less';
 .module_title {
   width: 100%;
-  height: 54px;
+  height: @module_title_height;
   position: relative;
   z-index: 1;
   text-align: center;
 
   background-color: @white;
 
-  line-height: 54px;
+  line-height: @module_title_height;
 }
 </style>

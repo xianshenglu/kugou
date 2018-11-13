@@ -49,7 +49,9 @@ function toggleBetweenPages(event) {
     let isSlow = endTime - startTime > interval
     let isSlowMoveEnough = isSlow && offsetX > maxOffset
     let isFastMoveEnough = !isSlow && offsetX > minOffset
-    let staticLikePagesPath = router.staticLikePagesPath
+    let staticLikePagesPath = router.options.routes[0].children.map(
+      child => child.path
+    )
     let curRouteIndex = staticLikePagesPath.indexOf(router.currentRoute.path)
 
     if (curRouteIndex >= 0 && (isSlowMoveEnough || isFastMoveEnough)) {

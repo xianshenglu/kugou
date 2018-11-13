@@ -36,6 +36,8 @@ export default {
   },
   created() {
     let singerId = this.$route.path.split('/').pop()
+    this.setLoadingExcludeHeader()
+    this.startLoading()
     this.getSingerInfo(singerId)
   },
   methods: {
@@ -59,11 +61,11 @@ export default {
             obj.name = obj.filename
             // obj.path='/singer/info/'+obj.id
           })
-          Object.assign(this.singerInfo, singerInfo)
           this.replaceProperty({
             paths: 'singer.singerInfo',
             data: singerInfo
           })
+          this.stopLoading()
         })
         .catch(er => {
           alert(er)

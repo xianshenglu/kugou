@@ -11,14 +11,17 @@ import Slider from './Slider.vue'
 import axios from 'axios'
 import api from '../../assets/js/api'
 import { mapState, mapMutations } from 'vuex'
-
+import loading from '../../mixins/loading'
 export default {
   name: 'NewSong',
+  mixins: [loading],
   computed: {
     ...mapState('newSong', ['newSongs', 'sliderData'])
   },
   created() {
     if (this.newSongs.length === 0) {
+      this.setLoadingExcludeNav()
+      this.startLoading()
       this.getNewSong()
     }
   },
@@ -35,6 +38,7 @@ export default {
           paths: 'newSong.sliderData',
           data: [...banners, banners[0]]
         })
+        this.stopLoading()
       })
     }
   },

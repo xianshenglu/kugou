@@ -20,10 +20,11 @@ import axios from 'axios'
 import api from '../../assets/js/api'
 import mixin from '../../mixins/index'
 import { mapState, mapMutations } from 'vuex'
+import loading from '../../mixins/loading'
 
 export default {
   name: 'SongList',
-  mixins: [mixin],
+  mixins: [mixin, loading],
   components: {
     PubList
   },
@@ -32,6 +33,8 @@ export default {
   },
   created() {
     if (this.songList.length === 0) {
+      this.setLoadingExcludeNav()
+      this.startLoading()
       this.getSongList()
     }
   },
@@ -49,6 +52,7 @@ export default {
           paths: 'song.songList',
           data: data.plist.list.info
         })
+        this.stopLoading()
       })
     }
   }

@@ -69,12 +69,6 @@ const router = new VueRouter({
   ]
 })
 
-//todo these data should be loaded after current page data loaded. They won't request again unless user refresh pages.
-let staticLikePagesPath = router.options.routes[0].children.map(
-  child => child.path
-)
-router.staticLikePagesPath = [...staticLikePagesPath]
-
 router.beforeEach((to, from, next) => {
   //play music if musicHash exist
   let musicHash = to.query.musicHash
@@ -82,17 +76,8 @@ router.beforeEach((to, from, next) => {
     store.commit('player/wantPlay', { musicHash })
   }
   // window.router = router
-  // window.args = { to, from }
-  let noLoadingPagesPath = [
-    ...router.staticLikePagesPath,
-    '/search/index',
-    '/player/max'
-  ]
-  let isFromSingerInfoToList =
-    from.path.startsWith('/singer/info/') && to.path.startsWith('/singer/list/')
-  if (!noLoadingPagesPath.includes(to.path) && !isFromSingerInfoToList) {
-    store.commit('replaceProperty', { paths: 'loading.isShow', data: true })
-  }
+  store.commit('replaceProperty', { paths: 'loading.isShow', data: false })
+
   next()
 })
 
