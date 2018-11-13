@@ -40,7 +40,7 @@ export default {
   left: 50%;
   font-size: inherit;
   width: 100%;
-  height: 54px;
+  height: @module_title_height;
 
   transform: translateX(-50%);
   text-align: center;
@@ -52,6 +52,6 @@ export default {
     rgba(255, 255, 255, 0)
   );
 
-  line-height: 54px;
+  line-height: @module_title_height;
 }
 </style>

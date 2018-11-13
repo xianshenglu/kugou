@@ -43,10 +43,13 @@ export default {
     })
   },
   created() {
-    if (this.isLoadingShow) {
-      let singerListId = this.$route.path.split('/').pop()
-      this.getSingerList(singerListId)
-    }
+    let singerListId = this.$route.path.split('/').pop()
+    //todo
+    // if (!from.path.startsWith('/singer/info/')) {
+    this.setLoadingExcludeHeader()
+    this.startLoading()
+    // }
+    this.getSingerList(singerListId)
   },
   mounted() {
     let lazyImages = this.$refs.lazyImages
@@ -72,11 +75,11 @@ export default {
             obj.imgUrl = this.$_xsl__replaceImgUrlSize(obj.imgurl)
             obj.path = '/singer/info/' + obj.id
           })
-          Object.assign(this.singerList, singerList)
           this.replaceProperty({
             paths: 'singer.singerList',
             data: singerList
           })
+          this.stopLoading()
         })
         .catch(er => {
           alert(er)
@@ -95,7 +98,7 @@ export default {
   overflow: scroll;
 
   box-sizing: border-box;
-  height: calc(100% - 54px);
+  height: calc(100% - @module_title_height);
 }
 .singer_list__item {
   height: 88px;

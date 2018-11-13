@@ -27,14 +27,17 @@
 import axios from 'axios'
 import api from '../../assets/js/api'
 import { mapState, mapMutations } from 'vuex'
-
+import loading from '../../mixins/loading'
 export default {
   name: 'SingerCategory',
+  mixins: [loading],
   computed: {
     ...mapState('singer', ['singerCategories'])
   },
   created() {
     if (this.singerCategories.length === 0) {
+      this.setLoadingExcludeNav()
+      this.startLoading()
       this.getSingerCategories()
     }
   },
@@ -61,6 +64,7 @@ export default {
           paths: 'singer.singerCategories',
           data: singerCategories
         })
+        this.stopLoading()
       })
     }
   }

@@ -42,10 +42,12 @@ import AppMusicList from '../public/AppMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api'
 import bus from '../../assets/js/bus'
+import loading from '../../mixins/loading.js'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'Search',
+  mixins: [loading],
   components: {
     PubModuleTitle,
     AppMusicList
@@ -101,6 +103,8 @@ export default {
         this.isSearchRecShow = true
         return
       }
+      this.setLoadingExcludeSearchForm()
+      this.startLoading()
       axios
         .get(api.hotSearch)
         .then(({ data }) => {
@@ -108,6 +112,7 @@ export default {
             paths: 'search.searchRecArr',
             data: data.data.info
           })
+          this.stopLoading()
           this.isSearchResShow = false
           this.isSearchRecShow = true
         })
@@ -120,13 +125,14 @@ export default {
         return
       }
       this.$router.push({ query: { keyword: this.keyword } })
-      window.vm = this
       if (this.keyword === this.prevKeyword) {
         this.isSearchRecShow = false
         this.isSearchResShow = true
         return
       }
       let url = api.searchResult + encodeURIComponent(this.keyword)
+      this.setLoadingExcludeSearchForm()
+      this.startLoading()
       axios.get(url).then(res => {
         this.replaceProperty({
           paths: 'search.searchRes',
@@ -136,6 +142,7 @@ export default {
           paths: 'search.prevKeyword',
           data: this.keyword
         })
+        this.stopLoading()
         this.isSearchRecShow = false
         this.isSearchResShow = true
       })
@@ -161,11 +168,11 @@ export default {
   overflow: scroll;
 
   box-sizing: border-box;
-  height: calc(100% - 54px);
+  height: calc(100% - @module_title_height);
 }
 .search__form {
   box-sizing: border-box;
-  height: 63px;
+  height: @search_form_height;
   padding: @padding_width;
 
   background-color: @white-1;

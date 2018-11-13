@@ -75,8 +75,8 @@ router.beforeEach((to, from, next) => {
   if (musicHash && !to.params.fromPlayerMed) {
     store.commit('player/wantPlay', { musicHash })
   }
-
-  store.commit('replaceProperty', { paths: 'loading.isShow', data: true })
+  // window.router = router
+  store.commit('replaceProperty', { paths: 'loading.isShow', data: false })
 
   next()
 })

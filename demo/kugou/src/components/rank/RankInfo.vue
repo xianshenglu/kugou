@@ -19,8 +19,8 @@ import AppMusicList from '../public/AppMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api'
 import mixin from '../../mixins/index'
-import loading from '../../mixins/loading'
 import { mapState, mapMutations } from 'vuex'
+import loading from '../../mixins/loading'
 export default {
   name: 'RankInfo',
   mixins: [mixin, loading],
@@ -57,6 +57,8 @@ export default {
   },
   created() {
     let rankId = this.$route.path.split('/').pop()
+    this.setLoadingExcludeHeader()
+    this.startLoading()
     this.getRankInfo(rankId)
   },
   methods: {
@@ -73,6 +75,7 @@ export default {
             paths: 'rank.rankInfo',
             data: rankInfo
           })
+          this.stopLoading()
         })
         .catch(er => {
           alert(er)

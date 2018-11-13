@@ -12,10 +12,11 @@ import axios from 'axios'
 import api from '../../assets/js/api'
 import mixin from '../../mixins/index'
 import { mapState, mapMutations } from 'vuex'
+import loading from '../../mixins/loading'
 
 export default {
   name: 'RankList',
-  mixins: [mixin],
+  mixins: [mixin, loading],
   components: {
     PubList
   },
@@ -24,6 +25,8 @@ export default {
   },
   created() {
     if (this.rankList.length === 0) {
+      this.setLoadingExcludeNav()
+      this.startLoading()
       this.getRank()
     }
   },
@@ -40,6 +43,7 @@ export default {
           paths: 'rank.rankList',
           data: data.rank.list
         })
+        this.stopLoading()
       })
     }
   }
