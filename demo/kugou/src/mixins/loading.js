@@ -4,7 +4,6 @@ export default {
     this.stopLoading()
   },
   methods: {
-    //todo change loading size and turn on loading before ajax, turn off it after ajax.
     ...mapMutations(['replaceProperty']),
     startLoading() {
       this.replaceProperty({

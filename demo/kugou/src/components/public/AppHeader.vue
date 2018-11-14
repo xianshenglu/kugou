@@ -6,7 +6,7 @@
       </svg>
     </button>
     <router-link to="/">
-      <img class="header__logo" src="@/assets/images/logo.png">
+      <img class="header__logo" :src="logo__text">
     </router-link>
     <router-link
       class="header__search_btn"
@@ -31,6 +31,7 @@ export default {
     }
   },
   computed: {
+    ...mapState('images', ['logo__text']),
     ...mapState('player', ['curPlayerId'])
   },
   methods: {

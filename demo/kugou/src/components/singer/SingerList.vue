@@ -11,7 +11,7 @@
           <img
             class="singer_list__img lazy_image"
             ref="lazyImages"
-            src="../../assets/images/default.png"
+            :src="logo__grey"
             :data-src="item.imgUrl"
             :data-is-loaded="isLoaded"
           >
@@ -37,19 +37,20 @@ export default {
     PubModuleTitle
   },
   computed: {
+    ...mapState('images', ['logo__grey']),
     ...mapState('singer', ['singerList']),
     ...mapState('loading', {
       isLoadingShow: 'isShow'
     })
   },
   created() {
+    // todo add scrollRemember
     let singerListId = this.$route.path.split('/').pop()
-    //todo
-    // if (!from.path.startsWith('/singer/info/')) {
-    this.setLoadingExcludeHeader()
-    this.startLoading()
-    // }
-    this.getSingerList(singerListId)
+    if (Number(singerListId) !== this.singerList.info.id) {
+      this.setLoadingExcludeHeader()
+      this.startLoading()
+      this.getSingerList(singerListId)
+    }
   },
   mounted() {
     let lazyImages = this.$refs.lazyImages

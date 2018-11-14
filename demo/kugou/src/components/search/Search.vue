@@ -17,7 +17,7 @@
           @click="getSearchRes"
         >{{title}}</button>
       </form>
-      <div class="search__rec" v-if="isSearchRecShow">
+      <div class="search__rec" v-show="isSearchRecShow">
         <h6 class="search__type">{{searchType}}</h6>
         <ul class="search__list">
           <li
@@ -28,7 +28,7 @@
           >{{item.keyword}}</li>
         </ul>
       </div>
-      <div class="search__res" v-if="isSearchResShow">
+      <div class="search__res" v-show="isSearchResShow">
         <div class="search__count">共有{{searchRes.info.length}}条结果</div>
         <AppMusicList :music-list="searchRes.info" class="search__res-list"/>
       </div>

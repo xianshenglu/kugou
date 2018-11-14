@@ -5,7 +5,7 @@
         <img
           class="list__img lazy_image"
           ref="lazyImages"
-          src="../../assets/images/default.png"
+          :src="logo__grey"
           :data-src="item.imgUrl"
           :data-is-loaded="isLoaded"
         >
@@ -22,6 +22,7 @@
 
 <script>
 import mixin from '../../mixins/index'
+import { mapState } from 'vuex'
 export default {
   name: 'PubList',
   mixins: [mixin],
@@ -32,6 +33,9 @@ export default {
         return []
       }
     }
+  },
+  computed: {
+    ...mapState('images', ['logo__grey'])
   },
   mounted() {
     let lazyImages = this.$refs.lazyImages

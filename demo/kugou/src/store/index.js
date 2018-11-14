@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+
 import device from './device'
 import loading from './loading'
 import player from './player'
@@ -8,8 +9,8 @@ import singer from './singer'
 import song from './song'
 import search from './search'
 import newSong from './newSong'
+import images from './images'
 
-import logo_theme from '../assets/images/logo--theme.png'
 Vue.use(Vuex)
 let store = new Vuex.Store({
   modules: {
@@ -20,11 +21,10 @@ let store = new Vuex.Store({
     singer,
     song,
     newSong,
-    search
+    search,
+    images
   },
-  state: {
-    logo_theme
-  },
+
   mutations: {
     replaceProperty(state, { paths, data }) {
       if (typeof paths !== 'string') {
