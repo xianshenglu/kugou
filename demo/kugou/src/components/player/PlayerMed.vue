@@ -35,14 +35,9 @@ export default {
     PrevButton
   },
   computed: {
-    ...mapState('images', ['logo_theme']),
-    ...mapGetters('player', [
-      'songName',
-      'singerName',
-      'singerImg',
-      'song',
-      'isPlayerMedSmall'
-    ])
+    ...mapState('images', ['logo__theme']),
+    ...mapState('player', ['song', 'isPlayerMedSmall']),
+    ...mapGetters('player', ['songName', 'singerName', 'singerImg'])
   },
   methods: {
     ...mapMutations('player', ['togglePlayers'])

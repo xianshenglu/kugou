@@ -56,9 +56,7 @@ function toggleBetweenPages(event) {
       let nextRouteIndex = direction ? curRouteIndex + 1 : curRouteIndex - 1
       let nextRoutePath = staticLikePagesPath[nextRouteIndex]
       if (nextRoutePath === undefined) {
-        nextRoutePath = direction
-          ? staticLikePagesPath[0]
-          : staticLikePagesPath.slice().pop()
+        return
       }
       router.push(nextRoutePath)
     }
