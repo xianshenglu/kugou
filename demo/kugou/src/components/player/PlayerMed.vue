@@ -5,7 +5,7 @@
       class="player__link"
     >
       <img
-        :src="singerImg?singerImg:'../../assets/images/logo--theme.png'"
+        :src="singerImg?singerImg:logo__theme"
         alt=""
         :class="isPlayerMedSmall?'player__singer_img player__singer_img--player_min':'player__singer_img'"
       >
@@ -35,8 +35,14 @@ export default {
     PrevButton
   },
   computed: {
-    ...mapState('player', ['song', 'isPlayerMedSmall']),
-    ...mapGetters('player', ['songName', 'singerName', 'singerImg'])
+    ...mapState('images', ['logo_theme']),
+    ...mapGetters('player', [
+      'songName',
+      'singerName',
+      'singerImg',
+      'song',
+      'isPlayerMedSmall'
+    ])
   },
   methods: {
     ...mapMutations('player', ['togglePlayers'])

@@ -1,17 +1,15 @@
 import store from '../../store/index'
 import router from '../../router/index'
 
-const errorBackUpImg = require('../images/logo--theme.png')
-
-window.addEventListener('error', setImgBackupSrc, true)
+window.addEventListener('error', setBackupImg, true)
 window.addEventListener('scroll', letPlayerMedSmall, true)
 window.addEventListener('resize', hidePlayerMed, true)
 window.addEventListener('touchstart', toggleBetweenPages, true)
 
-function setImgBackupSrc(event) {
+function setBackupImg(event) {
   let target = event.target
   if (target.tagName && target.tagName.toLowerCase() === 'img') {
-    target.src = errorBackUpImg
+    target.src = store.state.images.logo__theme
   }
 }
 function letPlayerMedSmall() {

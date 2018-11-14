@@ -11,7 +11,7 @@
           <img
             class="singer_list__img lazy_image"
             ref="lazyImages"
-            src="../../assets/images/default.png"
+            :src="logo__grey"
             :data-src="item.imgUrl"
             :data-is-loaded="isLoaded"
           >
@@ -37,6 +37,7 @@ export default {
     PubModuleTitle
   },
   computed: {
+    ...mapState('images', ['logo__grey']),
     ...mapState('singer', ['singerList']),
     ...mapState('loading', {
       isLoadingShow: 'isShow'

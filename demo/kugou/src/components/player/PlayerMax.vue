@@ -4,7 +4,7 @@
     <div class="player__cont">
       <h6 class="player__song_name">{{songName}}</h6>
       <img
-        :src="singerImg?singerImg:'../../assets/images/logo--theme.png'"
+        :src="singerImg?singerImg:logo__theme"
         :class="isPlaying?'player__singer_img player__singer_img--active':'player__singer_img'"
       >
       <PlayerLyrics class="player__lyrics"/>
@@ -36,10 +36,11 @@ export default {
     PrevButton
   },
   computed: {
-    ...mapState(['logo_theme']),
+    ...mapState('images', ['logo_theme']),
     ...mapState('player', ['audioEl', 'isPlaying']),
     ...mapGetters('player', ['songName', 'singerName', 'singerImg']),
     playerBgImg() {
+      // todo choose a better backup image.
       return `background-image:url(${this.singerImg}),url(${this.logo_theme});`
     }
   },
