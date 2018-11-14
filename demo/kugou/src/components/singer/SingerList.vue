@@ -43,13 +43,13 @@ export default {
     })
   },
   created() {
+    // todo add scrollRemember
     let singerListId = this.$route.path.split('/').pop()
-    //todo
-    // if (!from.path.startsWith('/singer/info/')) {
-    this.setLoadingExcludeHeader()
-    this.startLoading()
-    // }
-    this.getSingerList(singerListId)
+    if (Number(singerListId) !== this.singerList.info.id) {
+      this.setLoadingExcludeHeader()
+      this.startLoading()
+      this.getSingerList(singerListId)
+    }
   },
   mounted() {
     let lazyImages = this.$refs.lazyImages
