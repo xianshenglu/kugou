@@ -36,12 +36,12 @@ export default {
     PrevButton
   },
   computed: {
-    ...mapState('images', ['logo_theme']),
+    ...mapState('images', ['logo__theme']),
     ...mapState('player', ['audioEl', 'isPlaying']),
     ...mapGetters('player', ['songName', 'singerName', 'singerImg']),
     playerBgImg() {
       // todo choose a better backup image.
-      return `background-image:url(${this.singerImg}),url(${this.logo_theme});`
+      return `background-image:url(${this.singerImg}),url(${this.logo__theme});`
     }
   },
   mounted() {
