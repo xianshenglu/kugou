@@ -15,3 +15,5 @@ Listed from easy to hard:
   ![resume](https://xianshenglu.github.io/home/src/assets/images/homepage.gif)
 
 - [kugou-music](https://xianshenglu.github.io/vue/demo/kugou/dist/index.html)
+
+![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou.gif)
