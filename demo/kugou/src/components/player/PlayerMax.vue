@@ -40,8 +40,9 @@ export default {
     ...mapState('player', ['audioEl', 'isPlaying', 'song']),
     ...mapGetters('player', ['songName', 'singerName', 'singerImg']),
     playerBgImg() {
-      // todo choose a better backup image.
-      return `background-image:url(${this.singerImg}),url(${this.logo__theme});`
+      return `background-image:url(${
+        this.singerImg
+      }),linear-gradient(to right, rgb(48, 67, 82), rgb(215, 210, 204));`
     }
   },
   watch: {
@@ -153,10 +154,10 @@ export default {
   font-size: .calc_on_app_cont(16) [ @result];
 }
 .player__btn_prev /deep/ .icon {
-  transform: translate(0, 1px);
+  transform: translate(0, 0px);
 }
 .play__btn_next /deep/ .icon {
-  transform: translate(1px, 1px);
+  transform: translate(1px, 0px);
 }
 .player__btn_status {
   width: .calc_on_app_cont(58) [ @result];
