@@ -16,4 +16,20 @@ Listed from easy to hard:
 
 - [kugou-music](https://xianshenglu.github.io/vue/demo/kugou/dist/index.html)
 
-  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou.gif)
+  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-1.jpg)
+
+  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-2.jpg)
+
+  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-3.jpg)
+
+  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-4.jpg)
+
+  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-5.jpg)
+
+  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-6.jpg)
+
+  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-7.jpg)
+
+  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-8.jpg)
+
+  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-9.jpg)
