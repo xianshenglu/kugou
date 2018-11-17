@@ -16,4 +16,4 @@ Listed from easy to hard:
 
 - [kugou-music](https://xianshenglu.github.io/vue/demo/kugou/dist/index.html)
 
-![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou.gif)
+  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou.gif)
