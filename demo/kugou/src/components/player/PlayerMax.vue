@@ -4,7 +4,7 @@
     <div class="player__cont">
       <h6 class="player__song_name">{{songName}}</h6>
       <img
-        :src="singerImg?singerImg:logo__theme"
+        :src="singerImg"
         :class="isPlaying?'player__singer_img player__singer_img--active':'player__singer_img'"
       >
       <PlayerLyrics class="player__lyrics"/>
