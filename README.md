@@ -16,20 +16,14 @@ Listed from easy to hard:
 
 - [kugou-music](https://xianshenglu.github.io/vue/demo/kugou/dist/index.html)
 
-  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-1.jpg)
-
-  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-2.jpg)
-
-  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-3.jpg)
-
-  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-4.jpg)
-
-  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-5.jpg)
-
-  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-6.jpg)
-
-  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-7.jpg)
-
-  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-8.jpg)
-
-  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-9.jpg)
+  <div style="display:flex;justify-content:space-between;align-items: center;flex-flow:row wrap;margin-top:20px;">
+    <img src="https://xianshenglu.github.io/vue/demo/img-displayed/kugou-1.jpg" style="width:30%;margin-bottom:20px;flex:0 0 auto;">
+    <img src="https://xianshenglu.github.io/vue/demo/img-displayed/kugou-2.jpg" style="width:30%;margin-bottom:20px;flex:0 0 auto;">
+    <img src="https://xianshenglu.github.io/vue/demo/img-displayed/kugou-3.jpg" style="width:30%;margin-bottom:20px;flex:0 0 auto;">
+    <img src="https://xianshenglu.github.io/vue/demo/img-displayed/kugou-4.jpg" style="width:30%;margin-bottom:20px;flex:0 0 auto;">
+    <img src="https://xianshenglu.github.io/vue/demo/img-displayed/kugou-5.jpg" style="width:30%;margin-bottom:20px;flex:0 0 auto;">
+    <img src="https://xianshenglu.github.io/vue/demo/img-displayed/kugou-6.jpg" style="width:30%;margin-bottom:20px;flex:0 0 auto;">
+    <img src="https://xianshenglu.github.io/vue/demo/img-displayed/kugou-7.jpg" style="width:30%;margin-bottom:20px;flex:0 0 auto;">
+    <img src="https://xianshenglu.github.io/vue/demo/img-displayed/kugou-8.jpg" style="width:30%;margin-bottom:20px;flex:0 0 auto;">
+    <img src="https://xianshenglu.github.io/vue/demo/img-displayed/kugou-9.jpg" style="width:30%;margin-bottom:20px;flex:0 0 auto;">
+  </div>
