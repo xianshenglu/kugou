@@ -22,8 +22,6 @@ Listed from easy to hard:
 
   ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-3.jpg)
 
-  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-4.jpg)
-
   ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-5.jpg)
 
   ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-6.jpg)
