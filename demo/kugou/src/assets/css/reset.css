@@ -13,6 +13,7 @@ h4,
 h5,
 h6,
 p,
+a,
 header,
 main,
 section,
@@ -25,6 +26,8 @@ button,
 label {
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
 }
 li {
   list-style-type: none;
