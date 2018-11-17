@@ -37,11 +37,16 @@ export default {
   },
   computed: {
     ...mapState('images', ['logo__theme']),
-    ...mapState('player', ['audioEl', 'isPlaying']),
+    ...mapState('player', ['audioEl', 'isPlaying', 'song']),
     ...mapGetters('player', ['songName', 'singerName', 'singerImg']),
     playerBgImg() {
       // todo choose a better backup image.
       return `background-image:url(${this.singerImg}),url(${this.logo__theme});`
+    }
+  },
+  watch: {
+    'song.hash': function(newHash) {
+      this.$router.push({ query: { musicHash: newHash } })
     }
   },
   mounted() {
