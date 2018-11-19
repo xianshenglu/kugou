@@ -20,4 +20,4 @@ Listed from easy to hard:
 
 - [multi-cascader-ant-design-vue](https://xianshenglu.github.io/vue/demo/multi-cascader-ant-design-vue/dist/index.html)
 
-  ![multi-cascader-ant-design-vue](https://xianshenglu.github.io/home/src/assets/images/multi-cascader-ant-design-vue.gif)
+  ![multi-cascader-ant-design-vue](https://xianshenglu.github.io/vue/demo/img-displayed/multi-cascader-ant-design-vue.gif)
