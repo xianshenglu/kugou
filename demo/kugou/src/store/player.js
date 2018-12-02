@@ -53,7 +53,7 @@ const player = {
     wantPlay(state, { musicHash, musicList = state.musicList }) {
       state.isPlayerMedShow = true
       state.isPlayerMedSmall = false
-      //tdo move async to actions.
+      //todo move async to actions.
       axios.get(api.songLyric + musicHash).then(res => {
         let data = res.data.data
         state.musicList = musicList.length === 0 ? [data] : musicList
@@ -69,8 +69,17 @@ const player = {
     },
     togglePlay(state, status = !state.isPlaying) {
       if (status) {
-        state.audioEl.play()
-        state.isPlaying = true
+        let playState = state.audioEl.play()
+        if (typeof playState !== 'undefined') {
+          playState
+            .then(() => {
+              state.isPlaying = true
+            })
+            .catch(() => {
+              state.audioEl.pause()
+              state.isPlaying = false
+            })
+        }
       } else {
         state.audioEl.pause()
         state.isPlaying = false
