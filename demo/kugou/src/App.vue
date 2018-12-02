@@ -32,7 +32,7 @@ export default {
     PlayerMed
   },
   mounted() {
-    document.documentElement.style.fontSize = this.vMax + 'px'
+    document.documentElement.style.setProperty('--vh', this.vh / 100 + 'px')
     this.findAudioEl(this.$refs.audioEl)
   },
   computed: {
@@ -43,7 +43,7 @@ export default {
       song: 'song'
     }),
     ...mapState('device', {
-      vMax: 'vMax'
+      vh: 'vh'
     })
   },
   methods: {
