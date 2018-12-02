@@ -6,7 +6,7 @@
     >
       <img
         :src="singerImg?singerImg:logo__theme"
-        alt=""
+        alt
         :class="isPlayerMedSmall?'player__singer_img player__singer_img--player_min':'player__singer_img'"
       >
       <div class="player__song_info">
@@ -54,6 +54,11 @@ export default {
 }
 .player {
   background: @black90p;
+}
+.player__link {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /* transparent is for some old android browser */
+  -webkit-tap-highlight-color: transparent;
 }
 .player__singer_img {
   flex: 0 0 auto;
