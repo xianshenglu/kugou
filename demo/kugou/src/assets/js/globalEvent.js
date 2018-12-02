@@ -4,7 +4,7 @@ import router from '../../router/index'
 window.addEventListener('error', setBackupImg, true)
 window.addEventListener('scroll', letPlayerMedSmall, true)
 window.addEventListener('resize', hidePlayerMed, true)
-window.addEventListener('touchstart', toggleBetweenPages, true)
+window.addEventListener('touchstart', toggleBetweenPages)
 
 function setBackupImg(event) {
   let target = event.target

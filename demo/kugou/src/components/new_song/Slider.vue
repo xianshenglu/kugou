@@ -1,5 +1,5 @@
 <template>
-  <section class="slider">
+  <section class="slider" @touchstart.stop>
     <swiper :options="swiperOptions" ref="mySwiper" class="slider__body">
       <swiper-slide v-for="(item,index) in data" :key="index">
         <a :href="item.extra.tourl" class="slider__link">
@@ -67,7 +67,8 @@ export default {
 .slider__body {
   height: 100%;
 }
-.slider__link ,.slider__img{
+.slider__link,
+.slider__img {
   display: block;
   width: 100%;
   height: 100%;
