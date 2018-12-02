@@ -7,7 +7,7 @@ const search = {
     searchRes: {
       info: []
     },
-    prevKeyword: undefined
+    keyword: undefined
   }
 }
 export default search

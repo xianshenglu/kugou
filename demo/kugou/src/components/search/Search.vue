@@ -43,8 +43,6 @@ import axios from 'axios'
 import api from '../../assets/js/api'
 import bus from '../../assets/js/bus'
 import loading from '../../mixins/loading.js'
-import store from '../../store/index.js'
-import router from '../../router/index.js'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
@@ -59,34 +57,28 @@ export default {
       title: '搜索',
       searchType: '最近热门',
       placeholder: '歌手/歌名/拼音',
-      keyword: '',
       isSearchRecShow: false,
       isSearchResShow: false
     }
   },
   computed: {
-    ...mapState('search', ['searchRecArr', 'searchRes', 'prevKeyword'])
-  },
-  beforeRouteEnter(to, from, next) {
-    let search = store.state.search
-    let keyword = to.query.keyword
-    let isKeywordValid = typeof keyword === 'string' && keyword !== ''
-    let isPrevKeywordValid =
-      typeof search.prevKeyword === 'string' && search.prevKeyword !== ''
-    if (!isKeywordValid && isPrevKeywordValid) {
-      let newRoute = Object.assign({}, to, {
-        query: { keyword: search.prevKeyword }
-      })
-      router.push(newRoute)
+    ...mapState('search', ['searchRecArr', 'searchRes']),
+    keyword: {
+      get() {
+        return this.$store.state.search.keyword
+      },
+      set(value) {
+        this.replaceProperty({ paths: 'search.keyword', data: value })
+      }
     }
-    next()
   },
   created() {
-    let query = this.$route.query
-    let keyword = query.keyword
-    let isKeywordValid = typeof keyword === 'string' && keyword !== ''
-    if (isKeywordValid) {
-      this.keyword = keyword
+    let queryKeyword = this.$route.query.keyword
+    let isKeywordValid = typeof this.keyword === 'string' && this.keyword !== ''
+    let isQueryKeywordValid =
+      typeof queryKeyword === 'string' && queryKeyword !== ''
+    if (isQueryKeywordValid || isKeywordValid) {
+      this.keyword = isQueryKeywordValid ? queryKeyword : this.keyword
       this.getSearchRes()
     } else {
       this.getSearchRec()
@@ -139,12 +131,7 @@ export default {
       if (this.keyword === '') {
         return
       }
-      this.$router.push({ query: { keyword: this.keyword } })
-      if (this.keyword === this.prevKeyword) {
-        this.isSearchRecShow = false
-        this.isSearchResShow = true
-        return
-      }
+      this.$router.replace({ query: { keyword: this.keyword } })
       let url = api.searchResult + encodeURIComponent(this.keyword)
       this.setLoadingExcludeSearchForm()
       this.startLoading()
@@ -152,10 +139,6 @@ export default {
         this.replaceProperty({
           paths: 'search.searchRes',
           data: res.data.data
-        })
-        this.replaceProperty({
-          paths: 'search.prevKeyword',
-          data: this.keyword
         })
         this.stopLoading()
         this.isSearchRecShow = false
@@ -167,9 +150,11 @@ export default {
       this.getSearchRes()
     },
     goBackToSearchRec() {
+      // if user want to see the recommendation, clear the keyword history.
       delete this.$route.query.keyword
+      this.keyword = ''
       let newRoute = Object.assign({}, this.$route)
-      this.$router.push(newRoute)
+      this.$router.replace(newRoute)
       this.getSearchRec()
     }
   }
