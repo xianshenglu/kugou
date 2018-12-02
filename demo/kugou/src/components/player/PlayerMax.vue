@@ -47,7 +47,7 @@ export default {
   },
   watch: {
     'song.hash': function(newHash) {
-      this.$router.push({ query: { musicHash: newHash } })
+      this.$router.replace({ query: { musicHash: newHash } })
     }
   },
   mounted() {
