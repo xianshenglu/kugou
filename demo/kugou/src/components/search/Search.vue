@@ -43,6 +43,8 @@ import axios from 'axios'
 import api from '../../assets/js/api'
 import bus from '../../assets/js/bus'
 import loading from '../../mixins/loading.js'
+import store from '../../store/index.js'
+import router from '../../router/index.js'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
@@ -65,13 +67,26 @@ export default {
   computed: {
     ...mapState('search', ['searchRecArr', 'searchRes', 'prevKeyword'])
   },
-  created() {
-    let keyword = this.$route.query.keyword
+  beforeRouteEnter(to, from, next) {
+    let search = store.state.search
+    let keyword = to.query.keyword
     let isKeywordValid = typeof keyword === 'string' && keyword !== ''
     let isPrevKeywordValid =
-      typeof this.prevKeyword === 'string' && this.prevKeyword !== ''
-    if (isKeywordValid || isPrevKeywordValid) {
-      this.keyword = isKeywordValid ? keyword : this.prevKeyword
+      typeof search.prevKeyword === 'string' && search.prevKeyword !== ''
+    if (!isKeywordValid && isPrevKeywordValid) {
+      let newRoute = Object.assign({}, to, {
+        query: { keyword: search.prevKeyword }
+      })
+      router.push(newRoute)
+    }
+    next()
+  },
+  created() {
+    let query = this.$route.query
+    let keyword = query.keyword
+    let isKeywordValid = typeof keyword === 'string' && keyword !== ''
+    if (isKeywordValid) {
+      this.keyword = keyword
       this.getSearchRes()
     } else {
       this.getSearchRec()
@@ -152,7 +167,9 @@ export default {
       this.getSearchRes()
     },
     goBackToSearchRec() {
-      this.$router.push({ query: {} })
+      delete this.$route.query.keyword
+      let newRoute = Object.assign({}, this.$route)
+      this.$router.push(newRoute)
       this.getSearchRec()
     }
   }
