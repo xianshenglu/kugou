@@ -1,5 +1,5 @@
 <template>
-  <section class="player">
+  <section class="player" v-if="song">
     <router-link
       :to="{name:'PlayerMax', params: { fromPlayerMed: 1},query:{musicHash:song.hash }}"
       class="player__link"

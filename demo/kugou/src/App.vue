@@ -16,7 +16,6 @@
       @canplay="togglePlay(true)"
     ></audio>
     <PlayerMed
-      v-if="song"
       v-show="isPlayerMedShow&&$route.path!=='/player/max'"
       :class="isPlayerMedSmall?'app__player app__player--min':'app__player app__player--med'"
     />
