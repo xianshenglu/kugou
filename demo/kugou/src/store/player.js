@@ -3,7 +3,9 @@ import api from '../assets/js/api'
 import utils from '../assets/js/utils'
 import store from './index'
 function getCurMusicIndex(state) {
-  return state.musicList.findIndex(music => music.hash === state.song.hash)
+  return state.song === null
+    ? -1
+    : state.musicList.findIndex(music => music.hash === state.song.hash)
 }
 const player = {
   namespaced: true,
@@ -18,17 +20,18 @@ const player = {
   },
   getters: {
     curMusicIndex: getCurMusicIndex,
+    // todo getters got triggered when target component hasn't render?
     singerImg(state) {
-      if (!state.song.img) {
+      if (state.song === null || !state.song.img) {
         return
       }
       return utils.$_xsl__replaceImgUrlSize(state.song.img, 400)
     },
     singerName(state) {
-      return state.song.author_name
+      return state.song && state.song.author_name
     },
     songName(state) {
-      return state.song.song_name
+      return state.song && state.song.song_name
     },
     lyricItems: state => {
       let lyricsArr = state.lyrics.split(/\n/)
