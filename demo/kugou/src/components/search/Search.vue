@@ -92,37 +92,30 @@ export default {
     }
   },
   created() {
-    let queryKeyword = this.$route.query.keyword
-    let isKeywordValid = typeof this.keyword === 'string' && this.keyword !== ''
-    let isQueryKeywordValid =
-      typeof queryKeyword === 'string' && queryKeyword !== ''
-    if (isQueryKeywordValid || isKeywordValid) {
-      let keyword = isQueryKeywordValid ? queryKeyword : this.keyword
-      this.getSearchRes(keyword)
-    } else {
-      this.getSearchRec()
-    }
+    this.init()
   },
   mounted() {
-    let search__cont = document.getElementsByClassName('search__cont')[0]
-    window.search__cont = search__cont
-    //! bug with qq browser
-    let listener = function() {
-      if (search__cont.scrollTop) {
-        console.log(event.type, search__cont.scrollTop)
-      }
-    }
-    window.addEventListener('touchstart', listener)
-    window.addEventListener('touchmove', listener)
-    bus.$on('searchBtnClicked', () => {
-      if (this.$refs.searchCont) {
-        //todo smooth scroll
-        this.$refs.searchCont.scrollTop = 0
-      }
-    })
+    bus.$on('searchBtnClicked', this.scrollTopSearchCont)
+    this.initQqBugDetect()
+  },
+  destroyed() {
+    bus.$off('searchBtnClicked', this.scrollTopSearchCont)
   },
   methods: {
     ...mapMutations(['replaceProperty']),
+    init() {
+      let queryKeyword = this.$route.query.keyword
+      let isKeywordValid =
+        typeof this.keyword === 'string' && this.keyword !== ''
+      let isQueryKeywordValid =
+        typeof queryKeyword === 'string' && queryKeyword !== ''
+      if (isQueryKeywordValid || isKeywordValid) {
+        let keyword = isQueryKeywordValid ? queryKeyword : this.keyword
+        this.getSearchRes(keyword)
+      } else {
+        this.getSearchRec()
+      }
+    },
     getSearchRec() {
       if (this.searchRecArr.length !== 0) {
         this.isSearchResShow = false
@@ -181,6 +174,24 @@ export default {
       let newRoute = Object.assign({}, this.$route)
       this.$router.replace(newRoute)
       this.getSearchRec()
+    },
+    initQqBugDetect() {
+      let search__cont = document.getElementsByClassName('search__cont')[0]
+      window.search__cont = search__cont
+      //! bug with qq browser
+      let listener = function() {
+        if (search__cont.scrollTop) {
+          console.log(event.type, search__cont.scrollTop)
+        }
+      }
+      window.addEventListener('touchstart', listener)
+      window.addEventListener('touchmove', listener)
+    },
+    scrollTopSearchCont() {
+      if (this.$refs.searchCont) {
+        //todo smooth scroll
+        this.$refs.searchCont.scrollTop = 0
+      }
     }
   }
 }
