@@ -9,12 +9,12 @@
           class="search__input"
           :value.sync="keyword"
           @input="keyword=arguments[0].target.value.trim()"
-          @keyup.enter="getSearchRes"
+          @keyup.enter="getSearchRes(keyword)"
         >
         <button
           :class="isSearchResShow?'search__btn search__btn--active':'search__btn'"
           type="button"
-          @click="getSearchRes"
+          @click="getSearchRes(keyword)"
         >{{title}}</button>
       </form>
       <div class="search__rec" v-show="isSearchRecShow">
@@ -24,7 +24,7 @@
             class="search__item main_border_bottom"
             v-for="(item,index) in searchRecArr"
             :key="index"
-            @click="getTargetList(item.keyword)"
+            @click="getSearchRes(item.keyword)"
           >{{item.keyword}}</li>
         </ul>
       </div>
@@ -56,19 +56,38 @@ export default {
     return {
       title: '搜索',
       searchType: '最近热门',
-      placeholder: '歌手/歌名/拼音',
-      isSearchRecShow: false,
-      isSearchResShow: false
+      placeholder: '歌手/歌名/拼音'
     }
   },
   computed: {
-    ...mapState('search', ['searchRecArr', 'searchRes']),
+    ...mapState('search', [
+      'searchRecArr',
+      'searchRes',
+      'isSearchRecShow',
+      'isSearchResShow'
+    ]),
     keyword: {
       get() {
         return this.$store.state.search.keyword
       },
       set(value) {
         this.replaceProperty({ paths: 'search.keyword', data: value })
+      }
+    },
+    isSearchRecShow: {
+      get() {
+        return this.$store.state.search.isSearchRecShow
+      },
+      set(data) {
+        this.replaceProperty({ paths: 'search.isSearchRecShow', data })
+      }
+    },
+    isSearchResShow: {
+      get() {
+        return this.$store.state.search.isSearchResShow
+      },
+      set(data) {
+        this.replaceProperty({ paths: 'search.isSearchResShow', data })
       }
     }
   },
@@ -78,8 +97,8 @@ export default {
     let isQueryKeywordValid =
       typeof queryKeyword === 'string' && queryKeyword !== ''
     if (isQueryKeywordValid || isKeywordValid) {
-      this.keyword = isQueryKeywordValid ? queryKeyword : this.keyword
-      this.getSearchRes()
+      let keyword = isQueryKeywordValid ? queryKeyword : this.keyword
+      this.getSearchRes(keyword)
     } else {
       this.getSearchRec()
     }
@@ -127,30 +146,36 @@ export default {
           alert(err)
         })
     },
-    getSearchRes() {
-      if (this.keyword === '') {
+    getSearchRes(keyword) {
+      if (keyword === '') {
         return
       }
-      this.$router.replace({ query: { keyword: this.keyword } })
-      let url = api.searchResult + encodeURIComponent(this.keyword)
-      this.setLoadingExcludeSearchForm()
-      this.startLoading()
-      axios.get(url).then(res => {
-        this.replaceProperty({
-          paths: 'search.searchRes',
-          data: res.data.data
-        })
-        this.stopLoading()
+      if (keyword === this.keyword) {
         this.isSearchRecShow = false
         this.isSearchResShow = true
-      })
-    },
-    getTargetList(val) {
-      this.keyword = val
-      this.getSearchRes()
+        return
+      }
+      this.$router.replace({ query: { keyword } })
+      let url = api.searchResult + encodeURIComponent(keyword)
+      this.setLoadingExcludeSearchForm()
+      this.startLoading()
+      axios
+        .get(url)
+        .then(res => {
+          let data = res.data.data
+          this.keyword = keyword
+          this.replaceProperty({
+            paths: 'search.searchRes',
+            data
+          })
+          this.isSearchRecShow = false
+          this.isSearchResShow = true
+          this.stopLoading()
+        })
+        .catch(er => alert(er))
     },
     goBackToSearchRec() {
-      // if user want to see the recommendation, clear the keyword history.
+      // if user wants to see the recommendation, clear the keyword history.
       delete this.$route.query.keyword
       this.keyword = ''
       let newRoute = Object.assign({}, this.$route)
