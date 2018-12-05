@@ -9,9 +9,9 @@ const player = {
   namespaced: true,
   state: {
     musicList: [],
-    song: {},
+    song: null,
     lyrics: '',
-    audioEl: {},
+    audioEl: null,
     isPlaying: false,
     isPlayerMedShow: false,
     isPlayerMedSmall: false
