@@ -53,19 +53,7 @@ const player = {
     wantPlay(state, { musicHash, musicList = state.musicList }) {
       state.isPlayerMedShow = true
       state.isPlayerMedSmall = false
-      //tdo move async to actions.
-      axios.get(api.songLyric + musicHash).then(res => {
-        let data = res.data.data
-        state.musicList = musicList.length === 0 ? [data] : musicList
-        store.commit('replaceProperty', {
-          paths: 'player.lyrics',
-          data: data.lyrics
-        })
-        store.commit('replaceProperty', {
-          paths: 'player.song',
-          data: data
-        })
-      })
+      store.dispatch('player/fetchMusic', { musicHash, musicList })
     },
     togglePlay(state, status = !state.isPlaying) {
       if (status) {
@@ -107,6 +95,37 @@ const player = {
       }
     }
   },
-  actions: {}
+  actions: {
+    fetchMusic({ commit }, { musicHash, musicList }) {
+      axios.get(api.songLyric + musicHash).then(res => {
+        let data = res.data.data
+        musicList = musicList.length === 0 ? [data] : musicList
+        commit(
+          'replaceProperty',
+          {
+            paths: 'player.musicList',
+            data: musicList
+          },
+          { root: true }
+        )
+        commit(
+          'replaceProperty',
+          {
+            paths: 'player.lyrics',
+            data: data.lyrics
+          },
+          { root: true }
+        )
+        commit(
+          'replaceProperty',
+          {
+            paths: 'player.song',
+            data: data
+          },
+          { root: true }
+        )
+      })
+    }
+  }
 }
 export default player
