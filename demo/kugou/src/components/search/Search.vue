@@ -9,12 +9,12 @@
           class="search__input"
           :value.sync="keyword"
           @input="keyword=arguments[0].target.value.trim()"
-          @keyup.enter="getSearchRes"
+          @keyup.enter="getSearchRes(keyword)"
         >
         <button
           :class="isSearchResShow?'search__btn search__btn--active':'search__btn'"
           type="button"
-          @click="getSearchRes"
+          @click="getSearchRes(keyword)"
         >{{title}}</button>
       </form>
       <div class="search__rec" v-show="isSearchRecShow">
@@ -24,7 +24,7 @@
             class="search__item main_border_bottom"
             v-for="(item,index) in searchRecArr"
             :key="index"
-            @click="getTargetList(item.keyword)"
+            @click="getSearchRes(item.keyword)"
           >{{item.keyword}}</li>
         </ul>
       </div>
@@ -56,47 +56,66 @@ export default {
     return {
       title: '搜索',
       searchType: '最近热门',
-      placeholder: '歌手/歌名/拼音',
-      keyword: '',
-      isSearchRecShow: false,
-      isSearchResShow: false
+      placeholder: '歌手/歌名/拼音'
     }
   },
   computed: {
-    ...mapState('search', ['searchRecArr', 'searchRes', 'prevKeyword'])
+    ...mapState('search', [
+      'searchRecArr',
+      'searchRes',
+      'isSearchRecShow',
+      'isSearchResShow'
+    ]),
+    keyword: {
+      get() {
+        return this.$store.state.search.keyword
+      },
+      set(value) {
+        this.replaceProperty({ paths: 'search.keyword', data: value })
+      }
+    },
+    isSearchRecShow: {
+      get() {
+        return this.$store.state.search.isSearchRecShow
+      },
+      set(data) {
+        this.replaceProperty({ paths: 'search.isSearchRecShow', data })
+      }
+    },
+    isSearchResShow: {
+      get() {
+        return this.$store.state.search.isSearchResShow
+      },
+      set(data) {
+        this.replaceProperty({ paths: 'search.isSearchResShow', data })
+      }
+    }
   },
   created() {
-    let keyword = this.$route.query.keyword
-    let isKeywordValid = typeof keyword === 'string' && keyword !== ''
-    let isPrevKeywordValid =
-      typeof this.prevKeyword === 'string' && this.prevKeyword !== ''
-    if (isKeywordValid || isPrevKeywordValid) {
-      this.keyword = isKeywordValid ? keyword : this.prevKeyword
-      this.getSearchRes()
-    } else {
-      this.getSearchRec()
-    }
+    this.init()
   },
   mounted() {
-    let search__cont = document.getElementsByClassName('search__cont')[0]
-    window.search__cont = search__cont
-    //! bug with qq browser
-    let listener = function() {
-      if (search__cont.scrollTop) {
-        console.log(event.type, search__cont.scrollTop)
-      }
-    }
-    window.addEventListener('touchstart', listener)
-    window.addEventListener('touchmove', listener)
-    bus.$on('searchBtnClicked', () => {
-      if (this.$refs.searchCont) {
-        //todo smooth scroll
-        this.$refs.searchCont.scrollTop = 0
-      }
-    })
+    bus.$on('searchBtnClicked', this.scrollTopSearchCont)
+    this.initQqBugDetect()
+  },
+  destroyed() {
+    bus.$off('searchBtnClicked', this.scrollTopSearchCont)
   },
   methods: {
     ...mapMutations(['replaceProperty']),
+    init() {
+      let queryKeyword = this.$route.query.keyword
+      let isKeywordValid =
+        typeof this.keyword === 'string' && this.keyword !== ''
+      let isQueryKeywordValid =
+        typeof queryKeyword === 'string' && queryKeyword !== ''
+      if (isQueryKeywordValid || isKeywordValid) {
+        let keyword = isQueryKeywordValid ? queryKeyword : this.keyword
+        this.getSearchRes(keyword)
+      } else {
+        this.getSearchRec()
+      }
+    },
     getSearchRec() {
       if (this.searchRecArr.length !== 0) {
         this.isSearchResShow = false
@@ -120,40 +139,59 @@ export default {
           alert(err)
         })
     },
-    getSearchRes() {
-      if (this.keyword === '') {
+    getSearchRes(keyword) {
+      if (keyword === '') {
         return
       }
-      this.$router.push({ query: { keyword: this.keyword } })
-      if (this.keyword === this.prevKeyword) {
+      if (keyword === this.keyword) {
         this.isSearchRecShow = false
         this.isSearchResShow = true
         return
       }
-      let url = api.searchResult + encodeURIComponent(this.keyword)
+      this.$router.replace({ query: { keyword } })
+      let url = api.searchResult + encodeURIComponent(keyword)
       this.setLoadingExcludeSearchForm()
       this.startLoading()
-      axios.get(url).then(res => {
-        this.replaceProperty({
-          paths: 'search.searchRes',
-          data: res.data.data
+      axios
+        .get(url)
+        .then(res => {
+          let data = res.data.data
+          this.keyword = keyword
+          this.replaceProperty({
+            paths: 'search.searchRes',
+            data
+          })
+          this.isSearchRecShow = false
+          this.isSearchResShow = true
+          this.stopLoading()
         })
-        this.replaceProperty({
-          paths: 'search.prevKeyword',
-          data: this.keyword
-        })
-        this.stopLoading()
-        this.isSearchRecShow = false
-        this.isSearchResShow = true
-      })
-    },
-    getTargetList(val) {
-      this.keyword = val
-      this.getSearchRes()
+        .catch(er => alert(er))
     },
     goBackToSearchRec() {
-      this.$router.push({ query: {} })
+      // if user wants to see the recommendation, clear the keyword history.
+      delete this.$route.query.keyword
+      this.keyword = ''
+      let newRoute = Object.assign({}, this.$route)
+      this.$router.replace(newRoute)
       this.getSearchRec()
+    },
+    initQqBugDetect() {
+      let search__cont = document.getElementsByClassName('search__cont')[0]
+      window.search__cont = search__cont
+      //! bug with qq browser
+      let listener = function() {
+        if (search__cont.scrollTop) {
+          console.log(event.type, search__cont.scrollTop)
+        }
+      }
+      window.addEventListener('touchstart', listener)
+      window.addEventListener('touchmove', listener)
+    },
+    scrollTopSearchCont() {
+      if (this.$refs.searchCont) {
+        //todo smooth scroll
+        this.$refs.searchCont.scrollTop = 0
+      }
     }
   }
 }

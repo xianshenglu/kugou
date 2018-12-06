@@ -3,7 +3,7 @@ import router from '../../router/index'
 
 window.addEventListener('error', setBackupImg, true)
 window.addEventListener('scroll', letPlayerMedSmall, true)
-window.addEventListener('resize', hidePlayerMed, true)
+window.addEventListener('resize', togglePlayerMed, true)
 window.addEventListener('touchstart', toggleBetweenPages)
 
 function setBackupImg(event) {
@@ -18,10 +18,12 @@ function letPlayerMedSmall() {
     data: true
   })
 }
-function hidePlayerMed() {
+function togglePlayerMed() {
   store.commit('replaceProperty', {
     paths: 'player.isPlayerMedShow',
-    data: window.innerHeight > store.state.device.vMax * 0.8
+    data:
+      window.innerHeight > store.state.device.vMax * 0.8 &&
+      store.state.player.song
   })
 }
 function toggleBetweenPages(event) {
