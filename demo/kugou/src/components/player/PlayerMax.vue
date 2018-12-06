@@ -1,5 +1,5 @@
 <template>
-  <section class="player">
+  <section class="player" v-if="song">
     <div class="player__mask" :style="playerBgImg"></div>
     <div class="player__cont">
       <h6 class="player__song_name">{{songName}}</h6>
@@ -47,7 +47,7 @@ export default {
   },
   watch: {
     'song.hash': function(newHash) {
-      this.$router.push({ query: { musicHash: newHash } })
+      this.$router.replace({ query: { musicHash: newHash } })
     }
   },
   mounted() {

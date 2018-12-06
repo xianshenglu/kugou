@@ -1,5 +1,3 @@
-import axios from 'axios'
-import api from '../assets/js/api'
 const search = {
   namespaced: true,
   state: {
@@ -7,7 +5,9 @@ const search = {
     searchRes: {
       info: []
     },
-    prevKeyword: undefined
+    keyword: '',
+    isSearchRecShow: false,
+    isSearchResShow: false
   }
 }
 export default search
