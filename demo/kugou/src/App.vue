@@ -6,7 +6,13 @@
     <!-- //todo 5. add multiple split pages -->
     <AppHeader class="app__header"/>
     <router-view class="app__cont"></router-view>
-    <audio :src="song.play_url" class="hidden" ref="audioEl" loop @canplay="togglePlay(true)"></audio>
+    <audio
+      :src="song?song.play_url:''"
+      class="hidden"
+      ref="audioEl"
+      loop
+      @canplay="togglePlay(true)"
+    ></audio>
     <PlayerMed
       v-show="isPlayerMedShow&&$route.path!=='/player/max'"
       :class="isPlayerMedSmall?'app__player app__player--min':'app__player app__player--med'"
