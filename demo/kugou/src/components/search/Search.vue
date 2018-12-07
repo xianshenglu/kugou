@@ -7,14 +7,13 @@
           type="text"
           :placeholder="placeholder"
           class="search__input"
-          :value.sync="keyword"
-          @input="keyword=arguments[0].target.value.trim()"
-          @keyup.enter="getSearchRes(keyword)"
+          v-model.trim="keyword"
+          @keyup.enter="getSearchRes"
         >
         <button
           :class="isSearchResShow?'search__btn search__btn--active':'search__btn'"
           type="button"
-          @click="getSearchRes(keyword)"
+          @click="getSearchRes"
         >{{title}}</button>
       </form>
       <div class="search__rec" v-show="isSearchRecShow">
@@ -24,7 +23,7 @@
             class="search__item main_border_bottom"
             v-for="(item,index) in searchRecArr"
             :key="index"
-            @click="getSearchRes(item.keyword)"
+            @click="keyword=item.keyword;getSearchRes()"
           >{{item.keyword}}</li>
         </ul>
       </div>
@@ -109,9 +108,12 @@ export default {
         typeof this.keyword === 'string' && this.keyword !== ''
       let isQueryKeywordValid =
         typeof queryKeyword === 'string' && queryKeyword !== ''
-      if (isQueryKeywordValid || isKeywordValid) {
-        let keyword = isQueryKeywordValid ? queryKeyword : this.keyword
-        this.getSearchRes(keyword)
+      if (isQueryKeywordValid && queryKeyword !== this.keyword) {
+        this.keyword = queryKeyword
+        this.getSearchRes()
+      } else if (isKeywordValid) {
+        this.isSearchRecShow = false
+        this.isSearchResShow = true
       } else {
         this.getSearchRec()
       }
@@ -139,24 +141,18 @@ export default {
           alert(err)
         })
     },
-    getSearchRes(keyword) {
-      if (keyword === '') {
+    getSearchRes() {
+      if (this.keyword === '') {
         return
       }
-      if (keyword === this.keyword) {
-        this.isSearchRecShow = false
-        this.isSearchResShow = true
-        return
-      }
-      this.$router.replace({ query: { keyword } })
-      let url = api.searchResult + encodeURIComponent(keyword)
+      this.$router.replace({ query: { keyword: this.keyword } })
+      let url = api.searchResult + encodeURIComponent(this.keyword)
       this.setLoadingExcludeSearchForm()
       this.startLoading()
       axios
         .get(url)
         .then(res => {
           let data = res.data.data
-          this.keyword = keyword
           this.replaceProperty({
             paths: 'search.searchRes',
             data
