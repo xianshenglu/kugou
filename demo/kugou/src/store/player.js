@@ -11,7 +11,8 @@ const player = {
   namespaced: true,
   state: {
     musicList: [],
-    song: null,
+    music: null, //music info without playUrl, singerImg and some key info.
+    song: null, //music with  playUrl, singerImg and some key info.
     lyrics: '',
     audioEl: null,
     isPlaying: false,
@@ -28,10 +29,10 @@ const player = {
       return utils.$_xsl__replaceImgUrlSize(state.song.img, 400)
     },
     singerName(state) {
-      return state.song && state.song.author_name
+      return state.music && state.music.filename.split('-')[0].trim()
     },
     songName(state) {
-      return state.song && state.song.song_name
+      return state.music && state.music.filename.split('-')[1].trim()
     },
     lyricItems: state => {
       let lyricsArr = state.lyrics.split(/\n/)
@@ -53,10 +54,11 @@ const player = {
     findAudioEl(state, el) {
       state.audioEl = el
     },
-    wantPlay(state, { musicHash, musicList = state.musicList }) {
+    wantPlay(state, { music, musicList = state.musicList }) {
+      state.music = music
       state.isPlayerMedShow = true
       state.isPlayerMedSmall = false
-      store.dispatch('player/fetchMusic', { musicHash, musicList })
+      store.dispatch('player/fetchMusic', { musicHash: music.hash, musicList })
     },
     togglePlay(state, status = !state.isPlaying) {
       if (status) {
@@ -83,7 +85,7 @@ const player = {
       }
       index = index === state.musicList.length - 1 ? -1 : index
       store.commit('player/wantPlay', {
-        musicHash: state.musicList[index + 1].hash
+        music: state.musicList[index + 1]
       })
     },
     prev(state) {
@@ -93,7 +95,7 @@ const player = {
       }
       index = index === 0 ? state.musicList.length : index
       store.commit('player/wantPlay', {
-        musicHash: state.musicList[index - 1].hash
+        music: state.musicList[index - 1]
       })
     },
     togglePlayers(state, from) {

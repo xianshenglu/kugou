@@ -70,14 +70,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  //play music if musicHash exist
-  let musicHash = to.query.musicHash
-  if (musicHash && !to.params.fromPlayerMed) {
-    store.commit('player/wantPlay', { musicHash })
-  }
-  // window.router = router
   store.commit('replaceProperty', { paths: 'loading.isShow', data: false })
-
   next()
 })
 

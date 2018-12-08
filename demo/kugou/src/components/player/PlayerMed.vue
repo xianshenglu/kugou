@@ -1,7 +1,7 @@
 <template>
-  <section class="player" v-if="song">
+  <section class="player" v-if="music">
     <router-link
-      :to="{name:'PlayerMax', params: { fromPlayerMed: 1},query:{musicHash:song.hash }}"
+      :to="{name:'PlayerMax', params: { fromPlayerMed: 1},query:{musicHash:music.hash }}"
       class="player__link"
     >
       <img
@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     ...mapState('images', ['logo__theme']),
-    ...mapState('player', ['song', 'isPlayerMedSmall']),
+    ...mapState('player', ['music', 'song', 'isPlayerMedSmall']),
     ...mapGetters('player', ['songName', 'singerName', 'singerImg'])
   },
   methods: {

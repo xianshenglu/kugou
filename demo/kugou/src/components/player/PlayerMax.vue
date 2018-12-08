@@ -1,5 +1,5 @@
 <template>
-  <section class="player" v-if="song">
+  <section class="player" v-if="music">
     <div class="player__mask" :style="playerBgImg"></div>
     <div class="player__cont">
       <h6 class="player__song_name">{{songName}}</h6>
@@ -25,7 +25,11 @@ import PlayerProgress from './PlayerProgress'
 import PlayButton from './PlayButton'
 import NextButton from './NextButton'
 import PrevButton from './PrevButton'
+
 import { mapState, mapGetters, mapMutations } from 'vuex'
+import axios from 'axios'
+import api from '../../assets/js/api'
+import store from '../../store/index'
 export default {
   name: 'PlayerMax',
   components: {
@@ -37,7 +41,7 @@ export default {
   },
   computed: {
     ...mapState('images', ['logo__theme']),
-    ...mapState('player', ['audioEl', 'isPlaying', 'song']),
+    ...mapState('player', ['audioEl', 'isPlaying', 'song', 'music']),
     ...mapGetters('player', ['songName', 'singerName', 'singerImg']),
     playerBgImg() {
       return `background-image:url(${
@@ -46,9 +50,28 @@ export default {
     }
   },
   watch: {
-    'song.hash': function(newHash) {
+    'music.hash': function(newHash) {
       this.$router.replace({ query: { musicHash: newHash } })
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    //play music if musicHash exists which means this page was loaded directly
+    let musicHash = to.query.musicHash
+    if (!musicHash) {
+      return
+    }
+    if (to.params.fromPlayerMed) {
+      return next()
+    }
+    return axios
+      .get(api.songInfo + musicHash)
+      .then(res => {
+        let data = res.data
+        data.filename = data.fileName
+        store.commit('player/wantPlay', { music: data, musicList: [data] })
+        next()
+      })
+      .catch(er => alert(er))
   },
   mounted() {
     this.replaceProperty({

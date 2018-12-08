@@ -46,7 +46,7 @@ export default {
   },
   destroyed() {
     this.audioEl.removeEventListener('progress', this.progressCb)
-    this.audioEl.addEventListener('timeupdate', this.timeUpdateCb)
+    this.audioEl.removeEventListener('timeupdate', this.timeUpdateCb)
   },
   methods: {
     progressCb() {
