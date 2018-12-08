@@ -119,6 +119,9 @@ export default {
   align-items: center;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 // layout with 1rem which is actual vh set by js.
 // Using vh would be wrong.
@@ -151,6 +154,9 @@ export default {
   margin-top: .calc_on_app_cont(16) [ @result];
   height: .calc_on_app_cont(68) [ @result];
   line-height: .calc_on_app_cont(34) [ @result];
+  width: 102%;
+  box-sizing: border-box;
+  padding: 0 60px;
 }
 .player__progress {
   height: .calc_on_app_cont(48) [ @result];
