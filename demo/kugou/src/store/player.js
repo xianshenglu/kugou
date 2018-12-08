@@ -15,6 +15,7 @@ const player = {
     song: null, //music with  playUrl, singerImg and some key info.
     lyrics: '',
     audioEl: null,
+    isLoading: false,
     isPlaying: false,
     isPlayerMedShow: false,
     isPlayerMedSmall: false
@@ -55,13 +56,18 @@ const player = {
       state.audioEl = el
     },
     wantPlay(state, { music, musicList = state.musicList }) {
+      if (state.music && music.hash === state.music.hash) {
+        return
+      }
       state.music = music
+      state.isLoading = true
       state.isPlayerMedShow = true
       state.isPlayerMedSmall = false
       store.dispatch('player/fetchMusic', { musicHash: music.hash, musicList })
     },
     togglePlay(state, status = !state.isPlaying) {
       if (status) {
+        state.isLoading = false
         let playState = state.audioEl.play()
         if (typeof playState !== 'undefined') {
           playState
