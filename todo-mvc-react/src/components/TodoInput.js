@@ -1,6 +1,4 @@
 import React from 'react'
-import store from '../reducers'
-import { addTodo } from '../actions'
 class TodoInput extends React.Component {
   constructor(props) {
     super(props)
@@ -15,9 +13,7 @@ class TodoInput extends React.Component {
           id="todo_input"
           ref={this.inputRef}
         />
-        <button
-          onClick={e => store.dispatch(addTodo(this.inputRef.current.value))}
-        >
+        <button onClick={e => this.props.addTodo(this.inputRef.current.value)}>
           add todo
         </button>
       </form>

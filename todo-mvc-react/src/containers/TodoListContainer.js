@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from '../constants/FilterMode'
 import TodoList from '../components/TodoList'
+import { removeTodo } from '../actions'
 function filterTodos(todos, filterMode) {
   const map = {
     [SHOW_ALL]: todos,
@@ -9,12 +10,13 @@ function filterTodos(todos, filterMode) {
   }
   return map[filterMode]
 }
-class TodoListContainer extends Component {
-  render() {
-    return (
-      <TodoList todos={filterTodos(this.props.todos, this.props.filterMode)} />
-    )
-  }
-}
-
-export default TodoListContainer
+const mapStateToProps = (state, ownProps) => ({
+  todos: filterTodos(state.todos, state.filterMode)
+})
+const mapDispatchToProps = dispatch => ({
+  removeTodo: id => dispatch(removeTodo(id))
+})
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoList)
