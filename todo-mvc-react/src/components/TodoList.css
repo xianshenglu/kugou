@@ -1,0 +1,9 @@
+.TodoList {
+  min-height: 200px;
+  max-height: 300px;
+}
+.TodoList__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
