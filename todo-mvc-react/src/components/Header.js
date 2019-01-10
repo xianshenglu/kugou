@@ -1,4 +1,8 @@
 import React from 'react'
 export default function Header() {
-  return <header>todoApp</header>
+  return (
+    <header>
+      <h1>todoApp</h1>
+    </header>
+  )
 }
