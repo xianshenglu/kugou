@@ -20,7 +20,7 @@ const initialState = {
 function todosHandler(state, { type, id, text, completed }) {
   const map = {
     [actionType.ADD_TODO]() {
-      return state.concat({ id, text, completed: false })
+      return state.concat({ id: Date.now(), text, completed: false })
     },
     [actionType.REMOVE_TODO]() {
       let targetTodoIndex = state.findIndex(todo => todo.id === id)
@@ -41,9 +41,7 @@ function todosHandler(state, { type, id, text, completed }) {
       targetTodos[targetTodoIndex].completed = completed
     }
   }
-  if (typeof map[type] === 'function') {
-    map[type]()
-  }
+  return typeof map[type] === 'function' ? map[type]() : state
 }
 function filterModeHandler(state, action) {
   return action.type === actionType.SET_FILTER_MODE ? action.mode : state
@@ -55,13 +53,5 @@ function todoApp(state, action) {
   }
 }
 
-// const todoApp = combineReducers({
-//   todos: todosHandler,
-//   filterMode: filterModeHandler
-// })
-
-// export default todoApp
-
 const store = createStore(todoApp, initialState)
-console.log(store.getState())
 export default store
