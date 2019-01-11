@@ -26,6 +26,7 @@ button,
 label {
   margin: 0;
   padding: 0;
+  user-select: none;
 }
 li {
   list-style-type: none;

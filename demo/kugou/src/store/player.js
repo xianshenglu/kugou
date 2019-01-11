@@ -61,8 +61,11 @@ const player = {
       }
       state.music = music
       state.isLoading = true
-      state.isPlayerMedShow = true
       state.isPlayerMedSmall = false
+      // when resize event was triggered, PlayerMed will show
+      if (window.innerHeight > store.state.device.vMax * 0.8) {
+        state.isPlayerMedShow = true
+      }
       store.dispatch('player/fetchMusic', { musicHash: music.hash, musicList })
     },
     togglePlay(state, status = !state.isPlaying) {

@@ -23,7 +23,7 @@ function togglePlayerMed() {
     paths: 'player.isPlayerMedShow',
     data:
       window.innerHeight > store.state.device.vMax * 0.8 &&
-      store.state.player.song
+      store.state.player.music
   })
 }
 function toggleBetweenPages(event) {
