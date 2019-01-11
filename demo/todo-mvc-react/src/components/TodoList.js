@@ -9,7 +9,7 @@ function TodoList(props) {
           <input
             type="checkbox"
             checked={todo.completed}
-            onChange={e => props.toggleTodo(todo.id, !todo.completed)}
+            onChange={e => props.toggleTodoCompleted(todo.id, !todo.completed)}
           />
           <span>{todo.text}</span>
           <button onClick={() => props.removeTodo(todo.id)}>X</button>

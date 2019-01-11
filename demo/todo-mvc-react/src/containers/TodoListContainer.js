@@ -1,24 +1,24 @@
 import { connect } from 'react-redux'
 import TodoList from '../components/TodoList'
-import { removeTodo, toggleTodo } from '../redux/actions'
-import { filterTodos } from '../redux/selectors'
+import { removeTodo, toggleTodoCompleted } from '../redux/actions'
+import { getTodosByFilterMode } from '../redux/selectors'
 
 const mapStateToProps = state => ({
-  todos: filterTodos(state)
+  todos: getTodosByFilterMode(state)
 })
-const mapDispatchToProps = { removeTodo, toggleTodo }
+const mapDispatchToProps = { removeTodo, toggleTodoCompleted }
 // equal code below, would be more convenient when meeting lots of actionCreators
 // const mapDispatchToProps = dispatch =>
-//   bindActionCreators({ removeTodo,toggleTodo }, dispatch)
+//   bindActionCreators({ removeTodo,toggleTodoCompleted }, dispatch)
 // or
 // const mapDispatchToProps = dispatch => ({
 //   removeTodo: bindActionCreators(removeTodo,dispatch),
-//   toggleTodo: bindActionCreators(toggleTodo,dispatch)
+//   toggleTodoCompleted: bindActionCreators(toggleTodoCompleted,dispatch)
 // })
 // or
 // const mapDispatchToProps = dispatch => ({
 //   removeTodo: id => dispatch(removeTodo(id)),
-//   toggleTodo: id => dispatch(toggleTodo(id))
+//   toggleTodoCompleted: id => dispatch(toggleTodoCompleted(id))
 // })
 
 export default connect(

@@ -6,7 +6,7 @@ import {
 import { createSelector } from 'reselect'
 const todos = state => state.todos
 const filterMode = state => state.filterMode
-export const filterTodos = createSelector(
+export const getTodosByFilterMode = createSelector(
   [todos, filterMode],
   (todos, filterMode) => {
     const map = {

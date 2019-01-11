@@ -24,7 +24,7 @@ export function todosHandler(state, { type, id, text, completed }) {
       targetTodos[targetTodoIndex].completed = completed
       return targetTodos
     },
-    [actionType.TOGGLE_TODO]() {
+    [actionType.TOGGLE_TODO_COMPLETED]() {
       let targetTodoIndex = state.findIndex(todo => todo.id === id)
       if (targetTodoIndex < -1) {
         return state
