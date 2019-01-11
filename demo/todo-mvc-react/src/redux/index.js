@@ -1,7 +1,6 @@
 import { SHOW_ALL } from '../constants/FilterMode'
-import * as actionType from '../constants/ActionTypes'
-
 import { createStore } from 'redux'
+import { todosHandler, filterModeHandler } from './reducers'
 const initialState = {
   todos: [
     {
@@ -17,35 +16,7 @@ const initialState = {
   ],
   filterMode: SHOW_ALL
 }
-function todosHandler(state, { type, id, text, completed }) {
-  const map = {
-    [actionType.ADD_TODO]() {
-      return state.concat({ id: Date.now(), text, completed: false })
-    },
-    [actionType.REMOVE_TODO]() {
-      let targetTodoIndex = state.findIndex(todo => todo.id === id)
-      if (targetTodoIndex < -1) {
-        return state
-      }
-      let targetTodos = state.slice()
-      targetTodos.splice(targetTodoIndex, 1)
-      return targetTodos
-    },
-    [actionType.ALTER_TODO]() {
-      let targetTodoIndex = state.findIndex(todo => todo.id === id)
-      if (targetTodoIndex < -1) {
-        return state
-      }
-      let targetTodos = state.slice()
-      targetTodos[targetTodoIndex].text = text
-      targetTodos[targetTodoIndex].completed = completed
-    }
-  }
-  return typeof map[type] === 'function' ? map[type]() : state
-}
-function filterModeHandler(state, action) {
-  return action.type === actionType.SET_FILTER_MODE ? action.mode : state
-}
+
 function todoApp(state, action) {
   return {
     todos: todosHandler(state.todos, action),
