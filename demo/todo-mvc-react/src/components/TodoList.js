@@ -6,8 +6,11 @@ function TodoList(props) {
     <ul className="TodoList">
       {props.todos.map(todo => (
         <li key={todo.id} className="TodoList__item">
-          {/* <span>{todo.id}</span> */}
-          <input type="checkbox" checked={todo.completed} onChange={() => ''} />
+          <input
+            type="checkbox"
+            checked={todo.completed}
+            onChange={e => props.toggleTodo(todo.id, !todo.completed)}
+          />
           <span>{todo.text}</span>
           <button onClick={() => props.removeTodo(todo.id)}>X</button>
         </li>

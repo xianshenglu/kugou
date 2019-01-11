@@ -22,6 +22,16 @@ export function todosHandler(state, { type, id, text, completed }) {
       let targetTodos = state.slice()
       targetTodos[targetTodoIndex].text = text
       targetTodos[targetTodoIndex].completed = completed
+      return targetTodos
+    },
+    [actionType.TOGGLE_TODO]() {
+      let targetTodoIndex = state.findIndex(todo => todo.id === id)
+      if (targetTodoIndex < -1) {
+        return state
+      }
+      let targetTodos = state.slice()
+      targetTodos[targetTodoIndex].completed = completed
+      return targetTodos
     }
   }
   return typeof map[type] === 'function' ? map[type]() : state
