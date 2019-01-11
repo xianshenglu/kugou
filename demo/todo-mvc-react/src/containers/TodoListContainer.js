@@ -11,7 +11,8 @@ function filterTodos(todos, filterMode) {
   return map[filterMode]
 }
 const mapStateToProps = (state, ownProps) => ({
-  todos: filterTodos(state.todos, state.filterMode)
+  todos: filterTodos(state.todos, state.filterMode),
+  ...ownProps
 })
 const mapDispatchToProps = dispatch => ({
   removeTodo: id => dispatch(removeTodo(id))

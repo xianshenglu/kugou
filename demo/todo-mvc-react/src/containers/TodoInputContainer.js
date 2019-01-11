@@ -4,7 +4,8 @@ import { addTodo } from '../redux/actions'
 const mapDispatchToProps = dispatch => ({
   addTodo: text => dispatch(addTodo(text))
 })
+const mapStateToProps = (state, ownProps) => ({ ...ownProps })
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(TodoInput)
