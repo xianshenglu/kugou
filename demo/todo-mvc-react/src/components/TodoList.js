@@ -1,6 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './TodoList.css'
-export default function TodoList(props) {
+function TodoList(props) {
   return (
     <ul className="TodoList">
       {props.todos.map(todo => (
@@ -14,3 +15,14 @@ export default function TodoList(props) {
     </ul>
   )
 }
+TodoList.propTypes = {
+  todos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      text: PropTypes.string.isRequired,
+      completed: PropTypes.bool.isRequired
+    })
+  ),
+  removeTodo: PropTypes.func.isRequired
+}
+export default TodoList

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from '../constants/FilterMode'
 import './TodoFilter.css'
 const classNames = require('classnames')
@@ -32,5 +33,7 @@ function TodoFilter(props) {
     </div>
   )
 }
-
+TodoFilter.propTypes = {
+  mode: PropTypes.oneOf([SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED]).isRequired
+}
 export default TodoFilter
