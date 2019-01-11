@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import TodoFilter from '../components/TodoFilter'
-import { setFilterMode } from '../actions'
+import { setFilterMode } from '../redux/actions'
 
 const mapStateToProps = (state, ownProps) => ({
   mode: state.filterMode

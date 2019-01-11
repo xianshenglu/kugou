@@ -1,7 +1,7 @@
-import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from '../constants/FilterMode'
+import { SHOW_ALL } from '../constants/FilterMode'
 import * as actionType from '../constants/ActionTypes'
 
-import { combineReducers, createStore } from 'redux'
+import { createStore } from 'redux'
 const initialState = {
   todos: [
     {

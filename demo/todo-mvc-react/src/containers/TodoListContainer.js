@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from '../constants/FilterMode'
 import TodoList from '../components/TodoList'
-import { removeTodo } from '../actions'
+import { removeTodo } from '../redux/actions'
 function filterTodos(todos, filterMode) {
   const map = {
     [SHOW_ALL]: todos,
