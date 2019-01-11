@@ -17,3 +17,9 @@ export const getTodosByFilterMode = createSelector(
     return map[filterMode]
   }
 )
+export const getTodoIndexById = createSelector(
+  [(todos, id) => todos, (todos, id) => id],
+  (todos, id) => {
+    return todos.findIndex(todo => todo.id === id)
+  }
+)

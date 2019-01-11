@@ -1,4 +1,5 @@
 import * as actionType from '../../constants/ActionTypes'
+import { getTodoIndexById } from '../selectors'
 
 export function todosHandler(state, { type, id, text, completed }) {
   const map = {
@@ -6,29 +7,20 @@ export function todosHandler(state, { type, id, text, completed }) {
       return state.concat({ id: Date.now(), text, completed: false })
     },
     [actionType.REMOVE_TODO]() {
-      let targetTodoIndex = state.findIndex(todo => todo.id === id)
-      if (targetTodoIndex < -1) {
-        return state
-      }
+      let targetTodoIndex = getTodoIndexById(state, id)
       let targetTodos = state.slice()
       targetTodos.splice(targetTodoIndex, 1)
       return targetTodos
     },
     [actionType.ALTER_TODO]() {
-      let targetTodoIndex = state.findIndex(todo => todo.id === id)
-      if (targetTodoIndex < -1) {
-        return state
-      }
+      let targetTodoIndex = getTodoIndexById(state, id)
       let targetTodos = state.slice()
       targetTodos[targetTodoIndex].text = text
       targetTodos[targetTodoIndex].completed = completed
       return targetTodos
     },
     [actionType.TOGGLE_TODO_COMPLETED]() {
-      let targetTodoIndex = state.findIndex(todo => todo.id === id)
-      if (targetTodoIndex < -1) {
-        return state
-      }
+      let targetTodoIndex = getTodoIndexById(state, id)
       let targetTodos = state.slice()
       targetTodos[targetTodoIndex].completed = completed
       return targetTodos
