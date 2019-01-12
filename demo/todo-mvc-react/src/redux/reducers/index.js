@@ -1,33 +1,15 @@
-import * as actionType from '../../constants/ActionTypes'
-import { getTodoIndexById } from '../selectors'
+import { combineReducers } from 'redux'
+import { todosHandler } from './todos'
+import { filterModeHandler } from './filterMode'
+// function rootReducer(state = {}, action) {
+//   return {
+//     todos: todosHandler(state.todos, action),
+//     filterMode: filterModeHandler(state.filterMode, action)
+//   }
+// }
+const rootReducer = combineReducers({
+  todos: todosHandler,
+  filterMode: filterModeHandler
+})
 
-export function todosHandler(state, { type, id, text, completed }) {
-  const map = {
-    [actionType.ADD_TODO]() {
-      return state.concat({ id: Date.now(), text, completed: false })
-    },
-    [actionType.REMOVE_TODO]() {
-      let targetTodoIndex = getTodoIndexById(state, id)
-      let targetTodos = state.slice()
-      targetTodos.splice(targetTodoIndex, 1)
-      return targetTodos
-    },
-    [actionType.ALTER_TODO]() {
-      let targetTodoIndex = getTodoIndexById(state, id)
-      let targetTodos = state.slice()
-      targetTodos[targetTodoIndex].text = text
-      targetTodos[targetTodoIndex].completed = completed
-      return targetTodos
-    },
-    [actionType.TOGGLE_TODO_COMPLETED]() {
-      let targetTodoIndex = getTodoIndexById(state, id)
-      let targetTodos = state.slice()
-      targetTodos[targetTodoIndex].completed = completed
-      return targetTodos
-    }
-  }
-  return typeof map[type] === 'function' ? map[type]() : state
-}
-export function filterModeHandler(state, action) {
-  return action.type === actionType.SET_FILTER_MODE ? action.mode : state
-}
+export default rootReducer
