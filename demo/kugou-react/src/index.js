@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './assets/css/constant.less'
+import './assets/css/reset.css'
+import './assets/css/iconfont.css'
 import './assets/css/base.less'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
