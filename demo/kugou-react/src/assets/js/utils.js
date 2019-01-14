@@ -11,3 +11,6 @@ export function secondToMin(seconds) {
   let min = Math.floor(seconds / 60)
   return String(min).padStart(2, '0') + ':' + String(second).padStart(2, '0')
 }
+export function getComponentDisplayName(WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component'
+}
