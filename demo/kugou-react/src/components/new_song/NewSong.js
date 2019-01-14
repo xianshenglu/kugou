@@ -1,20 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import AppMusicList from '../public/AppMusicList'
 import AppHeader from '../public/AppHeader'
 import NewSongSlider from './NewSongSlider'
-import AppNav from '../public/AppNav'
 import './NewSong.less'
-class NewSong extends Component {
-  render() {
-    console.log(this.props)
-    return (
-      <div className="new_song">
-        <AppHeader />
-        <AppNav />
-        <NewSongSlider data={this.props.sliderData} />
-        <AppMusicList data={this.props.songs} />
-      </div>
-    )
-  }
+import AppContent from '../public/AppContent'
+function NewSong({ songs, sliderData }) {
+  return (
+    <AppContent hasNav={true}>
+      <NewSongSlider data={sliderData} />
+      <AppMusicList data={songs} />
+    </AppContent>
+  )
 }
 export default NewSong
