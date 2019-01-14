@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import logo__text from '../../assets/images/logo__text.png'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Link } from 'react-router-dom'
 import './AppHeader.less'
 class AppHeader extends Component {
   constructor(props) {
