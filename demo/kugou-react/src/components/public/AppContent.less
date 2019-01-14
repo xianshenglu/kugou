@@ -1,0 +1,10 @@
+@import (reference) '../../assets/css/constant.less';
+.AppContent {
+  overflow-y: auto;
+
+  box-sizing: border-box;
+  height: calc(var(--vh) * 100 - @header_height);
+}
+.AppContent--hasNav {
+  height: calc(var(--vh) * 100 - @header_height - @nav_height);
+}
