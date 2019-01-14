@@ -12,7 +12,12 @@ class App extends Component {
       </div>
     )
   }
-  componentDidMount() {}
+  componentDidMount() {
+    document.documentElement.style.setProperty(
+      '--vh',
+      window.innerHeight / 100 + 'px'
+    )
+  }
 }
 
 export default App
