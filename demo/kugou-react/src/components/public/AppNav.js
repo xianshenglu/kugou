@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, NavLink } from 'react-router-dom'
+import './AppNav.less'
 const navs = [
   {
     text: '新歌',
@@ -48,7 +49,7 @@ class AppNav extends Component {
             ))}
           </nav>
           <div
-            class="nav__underline"
+            className="nav__underline"
             style={
               {
                 // transform: `translateX(${this.state.activeIndex * 100}%)`

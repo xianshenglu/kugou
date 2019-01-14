@@ -14,7 +14,7 @@ const newSongHandler = (state = initialState, action) => {
       return {
         status: SUCCESS,
         songs: data.data,
-        sliderData: data.banner.concat(data.banner[0])
+        sliderData: data.banner
       }
     }
   }
