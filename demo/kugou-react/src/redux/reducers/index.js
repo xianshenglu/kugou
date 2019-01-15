@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux'
-import newSongHandler from './newSong'
-
+import newSong from './newSong'
+import rankList from './rankList'
 const rootReducer = combineReducers({
-  newSong: newSongHandler
+  newSong,
+  rankList
 })
 
 export default rootReducer
