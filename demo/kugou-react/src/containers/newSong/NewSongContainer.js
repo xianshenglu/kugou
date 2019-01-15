@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import NewSong from '../../components/new_song/NewSong'
+import NewSong from '../../components/newSong/NewSong'
 import { connect } from 'react-redux'
 import { fetchNewSongIfNeeded } from '../../redux/actions/newSong'
 import { FETCH_NEW_SONG_IF_NEEDED } from '../../constants/actionType'
