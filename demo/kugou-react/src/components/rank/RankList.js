@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './RankList.less'
 import AppList from '../public/AppList'
 class RankList extends Component {
-  getChildren(title) {
+  getChildren({ title }) {
     return <div className="rank_list__title">{title}</div>
   }
   render() {

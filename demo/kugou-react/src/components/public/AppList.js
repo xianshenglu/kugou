@@ -32,7 +32,7 @@ class AppList extends Component {
                   data-src={item.imgurl}
                   alt={item.title}
                 />
-                {render(item.title)}
+                {render(item)}
                 <button className="list__btn">
                   <svg className="icon" aria-hidden="true">
                     <use xlinkHref="#icon-arrow-right" />
