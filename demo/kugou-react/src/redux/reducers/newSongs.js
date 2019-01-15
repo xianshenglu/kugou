@@ -1,15 +1,15 @@
-import * as actionType from '../../constants/actionType'
+import { FETCH_NEW_SONGS, RECEIVE_NEW_SONGS } from '../../constants/actionType'
 import { PENDING, SUCCESS } from '../../constants/status'
 
 const initialState = { songs: [], sliderData: [] }
 const newSongsHandler = (state = initialState, action) => {
   const map = {
-    [actionType.FETCH_NEW_SONGS]() {
+    [FETCH_NEW_SONGS]() {
       return {
         status: PENDING
       }
     },
-    [actionType.RECEIVE_NEW_SONGS]() {
+    [RECEIVE_NEW_SONGS]() {
       const data = action.response.data
       return {
         status: SUCCESS,

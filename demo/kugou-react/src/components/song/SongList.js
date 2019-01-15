@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import './SongList.less'
 import AppList from '../public/AppList'
 class SongList extends Component {
-  getChildren({ title, popularity }) {
+  getChildren({ name, popularity }) {
     return (
       <div className="song_list__info">
-        <div className="song_list__title">{title}</div>
+        <div className="song_list__name">{name}</div>
         <div className="song_list__star">
           <svg className="icon song_list__icon" aria-hidden="true">
             <use xlinkHref="#icon-music" />

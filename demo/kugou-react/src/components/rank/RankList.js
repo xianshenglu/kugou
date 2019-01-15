@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import './RankList.less'
 import AppList from '../public/AppList'
 class RankList extends Component {
-  getChildren({ title }) {
-    return <div className="rank_list__title">{title}</div>
+  getChildren({ name }) {
+    return <div className="rank_list__name">{name}</div>
   }
   render() {
     const { rankList } = this.props
