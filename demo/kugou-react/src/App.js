@@ -8,22 +8,19 @@ import AppHeader from './components/public/AppHeader'
 import AppNav from './components/public/AppNav'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     const {
       location: { pathname }
     } = this.props
     const isAppNavShow = pathname.match(/(\/|\/rank\/list)/)
     let mainClassName = classNames('App__main', {
-      'App__main--hasNav': isAppNavShow
+      'App__main--underNav': isAppNavShow
     })
     return (
       <div className="App">
         <AppHeader />
+        {isAppNavShow ? <AppNav pathname={pathname} /> : undefined}
         <main className={mainClassName}>
-          {isAppNavShow ? <AppNav pathname={pathname} /> : undefined}
           <Route path="/" exact component={NewSongContainer} />
           <Route path="/rank/list" exact component={RankListContainer} />
         </main>
