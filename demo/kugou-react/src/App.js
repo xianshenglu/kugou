@@ -4,10 +4,10 @@ import classNames from 'classnames'
 import './App.less'
 import AppHeader from './components/public/AppHeader'
 import AppNav from './components/public/AppNav'
-import NewSongContainer from './containers/newSong/NewSongContainer'
+import NewSongsContainer from './containers/newSong/NewSongsContainer'
 import RankListContainer from './containers/rank/RankListContainer'
 import SongListContainer from './containers/song/SongListContainer'
-import { root, newSong, rankList, songList } from './constants/router'
+import { root, newSongs, rankList, songList } from './constants/router'
 
 class App extends Component {
   render() {
@@ -15,7 +15,7 @@ class App extends Component {
       location: { pathname }
     } = this.props
     const isAppNavShowReg = new RegExp(
-      '^(' + root + '|' + newSong + '|' + rankList + '|' + songList + ')$'
+      '^(' + root + '|' + newSongs + '|' + rankList + '|' + songList + ')$'
     )
     const isAppNavShow = pathname.match(isAppNavShowReg)
     let mainClassName = classNames('App__main', {
@@ -26,7 +26,7 @@ class App extends Component {
         <AppHeader />
         {isAppNavShow ? <AppNav pathname={pathname} /> : undefined}
         <main className={mainClassName}>
-          <Route path={newSong} exact component={NewSongContainer} />
+          <Route path={newSongs} exact component={NewSongsContainer} />
           <Route path={rankList} exact component={RankListContainer} />
           <Route path={songList} exact component={SongListContainer} />
         </main>

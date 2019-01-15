@@ -1,23 +1,23 @@
 import React from 'react'
 import Slider from 'react-slick'
-import './NewSongSlider.less'
+import './NewSongsSlider.less'
 const settings = {
   dots: true,
   autoplay: true,
   adaptiveHeight: true,
-  dotsClass: 'slick-dots newSongSlider__pagination'
+  dotsClass: 'slick-dots newSongsSlider__pagination'
 }
 
-function NewSongSlider({ data: banners }) {
+function NewSongsSlider({ data: banners }) {
   return (
-    <div className="newSongSlider" onTouchStart={e => e.stopPropagation()}>
+    <div className="newSongsSlider" onTouchStart={e => e.stopPropagation()}>
       <Slider {...settings}>
         {banners.map(banner => (
           <div key={banner.id}>
             <img
               src={banner.imgurl}
               alt={banner.title}
-              className="newSongSlider__img"
+              className="newSongsSlider__img"
             />
           </div>
         ))}
@@ -25,4 +25,4 @@ function NewSongSlider({ data: banners }) {
     </div>
   )
 }
-export default NewSongSlider
+export default NewSongsSlider

@@ -2,14 +2,14 @@ import * as actionType from '../../constants/actionType'
 import { PENDING, SUCCESS } from '../../constants/status'
 
 const initialState = { songs: [], sliderData: [] }
-const newSongHandler = (state = initialState, action) => {
+const newSongsHandler = (state = initialState, action) => {
   const map = {
-    [actionType.FETCH_NEW_SONG]() {
+    [actionType.FETCH_NEW_SONGS]() {
       return {
         status: PENDING
       }
     },
-    [actionType.RECEIVE_NEW_SONG]() {
+    [actionType.RECEIVE_NEW_SONGS]() {
       const data = action.response.data
       return {
         status: SUCCESS,
@@ -21,4 +21,4 @@ const newSongHandler = (state = initialState, action) => {
   const handler = map[action.type]
   return typeof handler !== 'function' ? state : handler()
 }
-export default newSongHandler
+export default newSongsHandler

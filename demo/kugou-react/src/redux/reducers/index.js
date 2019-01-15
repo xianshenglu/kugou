@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-import newSong from './newSong'
+import newSongs from './newSongs'
 import rankList from './rankList'
 import songList from './songList'
 const rootReducer = combineReducers({
-  newSong,
+  newSongs,
   rankList,
   songList
 })
