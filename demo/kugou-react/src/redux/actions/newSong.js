@@ -1,8 +1,4 @@
-import {
-  FETCH_NEW_SONG_IF_NEEDED,
-  FETCH_NEW_SONG,
-  RECEIVE_NEW_SONG
-} from '../../constants/actionType'
+import { RECEIVE_NEW_SONG } from '../../constants/actionType'
 import axios from 'axios'
 import api from '../../constants/api'
 import { SUCCESS, PENDING } from '../../constants/status'
@@ -21,7 +17,7 @@ export const fetchNewSong = () => {
     })
   }
 }
-export const receiveNewSong = data => ({
+export const receiveNewSong = response => ({
   type: RECEIVE_NEW_SONG,
-  data
+  response
 })

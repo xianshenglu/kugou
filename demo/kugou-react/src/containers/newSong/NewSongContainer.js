@@ -14,9 +14,10 @@ class NewSongContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ newSong: { songs, sliderData } }, ownProps) => {
-  return { songs, sliderData }
-}
+const mapStateToProps = ({ newSong: { songs, sliderData } }) => ({
+  songs,
+  sliderData
+})
 const mapDispatchToProps = null
 
 export default connect(

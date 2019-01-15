@@ -1,6 +1,5 @@
 import React from 'react'
 import AppMusicList from '../public/AppMusicList'
-import AppHeader from '../public/AppHeader'
 import NewSongSlider from './NewSongSlider'
 import './NewSong.less'
 import AppContent from '../public/AppContent'

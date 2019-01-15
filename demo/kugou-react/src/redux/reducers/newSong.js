@@ -10,7 +10,7 @@ const newSongHandler = (state = initialState, action) => {
       }
     },
     [actionType.RECEIVE_NEW_SONG]() {
-      const data = action.data.data
+      const data = action.response.data
       return {
         status: SUCCESS,
         songs: data.data,
