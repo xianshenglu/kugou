@@ -1,0 +1,6 @@
+export const root = '/'
+export const newSong = '/'
+export const rankList = '/rank/list'
+export const rankListInfo = '/rank/list/'
+export const songList = '/song/list'
+export const songListInfo = '/song/list/'
