@@ -1,26 +1,33 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import './AppNav.less'
+import {
+  newSongs,
+  rankList,
+  songList,
+  singerCategories
+} from '../../constants/router'
+
 const navs = [
   {
     text: '新歌',
     name: 'new',
-    path: '/'
+    path: newSongs
   },
   {
     text: '排行',
     name: 'rank',
-    path: '/rank/list'
+    path: rankList
   },
   {
     text: '歌单',
     name: 'song',
-    path: '/song/list'
+    path: songList
   },
   {
     text: '歌手',
     name: 'singer',
-    path: '/singer/category'
+    path: singerCategories
   }
 ]
 class AppNav extends Component {
