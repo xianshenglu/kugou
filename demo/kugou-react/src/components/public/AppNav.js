@@ -26,38 +26,34 @@ const navs = [
 class AppNav extends Component {
   constructor(props) {
     super(props)
-    console.log(props)
-    //todo update activeIndex according to router
+    const { pathname } = this.props
     this.state = {
-      // activeIndex: navs.findIndex(nav => nav.path === this.$route.path)
+      activeIndex: navs.findIndex(nav => nav.path === pathname)
     }
   }
   render() {
     return (
-      <Router>
-        <section className="nav">
-          <nav className="nav__box">
-            {navs.map(nav => (
-              <NavLink
-                className="nav__link"
-                key={nav.path}
-                to={nav.path}
-                activeClassName="nav__link--active"
-              >
-                {nav.text}
-              </NavLink>
-            ))}
-          </nav>
-          <div
-            className="nav__underline"
-            style={
-              {
-                // transform: `translateX(${this.state.activeIndex * 100}%)`
-              }
-            }
-          />
-        </section>
-      </Router>
+      <section className="nav">
+        <nav className="nav__box">
+          {navs.map((nav, index) => (
+            <NavLink
+              className="nav__link"
+              key={nav.path}
+              to={nav.path}
+              activeClassName="nav__link--active"
+              onClick={e => this.setState({ activeIndex: index })}
+            >
+              {nav.text}
+            </NavLink>
+          ))}
+        </nav>
+        <div
+          className="nav__underline"
+          style={{
+            transform: `translateX(${this.state.activeIndex * 100}%)`
+          }}
+        />
+      </section>
     )
   }
 }
