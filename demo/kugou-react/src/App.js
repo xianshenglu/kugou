@@ -7,7 +7,14 @@ import AppNav from './components/public/AppNav'
 import NewSongsContainer from './containers/newSong/NewSongsContainer'
 import RankListContainer from './containers/rank/RankListContainer'
 import SongListContainer from './containers/song/SongListContainer'
-import { root, newSongs, rankList, songList } from './constants/router'
+import {
+  root,
+  newSongs,
+  rankList,
+  songList,
+  singerCategories
+} from './constants/router'
+import SingerCategoriesContainer from './containers/singer/SingerCategoriesContainer'
 
 class App extends Component {
   render() {
@@ -15,7 +22,17 @@ class App extends Component {
       location: { pathname }
     } = this.props
     const isAppNavShowReg = new RegExp(
-      '^(' + root + '|' + newSongs + '|' + rankList + '|' + songList + ')$'
+      '^(' +
+        root +
+        '|' +
+        newSongs +
+        '|' +
+        rankList +
+        '|' +
+        songList +
+        '|' +
+        singerCategories +
+        ')$'
     )
     const isAppNavShow = pathname.match(isAppNavShowReg)
     let mainClassName = classNames('App__main', {
@@ -29,6 +46,11 @@ class App extends Component {
           <Route path={newSongs} exact component={NewSongsContainer} />
           <Route path={rankList} exact component={RankListContainer} />
           <Route path={songList} exact component={SongListContainer} />
+          <Route
+            path={singerCategories}
+            exact
+            component={SingerCategoriesContainer}
+          />
         </main>
       </div>
     )

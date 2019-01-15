@@ -7,7 +7,7 @@ let api = {
   rankInfo: baseApiHost + '/rank/info/?page=1&json=true&rankid=',
   songList: baseApiHost + '/plist/index&json=true',
   songListInfo: baseApiHost + '/plist/list/songListId?json=true',
-  singerCategory: baseApiHost + '/singer/class&json=true',
+  singerCategories: baseApiHost + '/singer/class&json=true',
   singerList: baseApiHost + '/singer/list/singerListId?json=true',
   singerInfo: baseApiHost + '/singer/info/singerId&json=true',
   songInfo: baseApiHost + '/app/i/getSongInfo.php?cmd=playInfo&hash=',
