@@ -1,5 +1,3 @@
-
-
 const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
@@ -96,6 +94,15 @@ module.exports = function(webpackEnv) {
                 flexbox: 'no-2009'
               },
               stage: 3
+            }),
+            require('postcss-pixel-to-viewport')({
+              viewportWidth: 375,
+              viewportUnit: 'vw',
+              propertyBlacklist: [],
+              minPixelValue: 2,
+              enableConvertComment: 'on',
+              disableConvertComment: 'off',
+              mediaQuery: false
             })
           ],
           sourceMap: isEnvProduction && shouldUseSourceMap
