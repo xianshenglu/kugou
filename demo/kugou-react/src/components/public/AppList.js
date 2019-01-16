@@ -31,7 +31,7 @@ class AppList extends Component {
             <li className="AppList__item main_border_bottom" key={item.path}>
               <NavLink to={item.path} className="AppList__link">
                 <img
-                  className="AppList__img lazy_image"
+                  className="AppList__img lazyImage"
                   ref={lazyImageRef}
                   src={logo__grey}
                   data-src={item.imgurl}
