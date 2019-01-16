@@ -3,44 +3,4 @@
 @import './iconfont.css';
 @import '../../../node_modules/slick-carousel/slick/slick.css';
 @import '../../../node_modules/slick-carousel/slick/slick-theme.css';
-html,
-body {
-  width: 100%;
-  height: 100%;
-
-  color: @black-3;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-.main_box_shadow {
-  box-shadow: 0 2px 5px 0 @white-3;
-}
-.main_border {
-  border: 1px solid @white-3;
-}
-.main_border_bottom {
-  border-bottom: 1px solid @white-3;
-}
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-@keyframes fade_out {
-  100% {
-    opacity: 0;
-    display: none;
-    width: 0;
-  }
-}
+@import './base.less';
