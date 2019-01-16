@@ -1,7 +1,7 @@
 import { FETCH_RANK_LIST, RECEIVE_RANK_LIST } from '../../constants/actionType'
 import { PENDING, SUCCESS } from '../../constants/status'
 import { $_xsl__replaceImgUrlSize } from '../../assets/js/utils'
-import { rankListInfo } from '../../constants/router'
+import { rankInfo } from '../../constants/router'
 
 const initialState = { rankList: [] }
 const rankListHandler = (state = initialState, action) => {
@@ -15,7 +15,7 @@ const rankListHandler = (state = initialState, action) => {
       let rankList = action.response.data.rank.list
       rankList.forEach(obj => {
         obj.imgurl = $_xsl__replaceImgUrlSize(obj.imgurl)
-        obj.path = rankListInfo + obj.rankid
+        obj.path = rankInfo + obj.rankid
         obj.name = obj.rankname
       })
       return {

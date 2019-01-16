@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import SongList from '../../components/song/SongList'
 import { connect } from 'react-redux'
 import { fetchSongListIfNeeded } from '../../redux/actions/songList'
-import { FETCH_SONG_LIST_IF_NEEDED } from '../../constants/actionType'
 
 class SongListContainer extends Component {
   componentDidMount() {
     const { dispatch } = this.props
-    dispatch(fetchSongListIfNeeded(FETCH_SONG_LIST_IF_NEEDED))
+    dispatch(fetchSongListIfNeeded())
   }
   render() {
     return <SongList {...this.props} />
