@@ -29,3 +29,13 @@ export function $_xsl__loadImgLazy(els) {
 export function getComponentDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component'
 }
+export function formatDate(milliseconds) {
+  let date = new Date(milliseconds)
+  return (
+    date.getFullYear() +
+    '-' +
+    String(date.getMonth() + 1).padStart(2, '0') +
+    '-' +
+    String(date.getDate()).padStart(2, '0')
+  )
+}
