@@ -27,23 +27,22 @@ class RankInfo extends Component {
   }
   render() {
     const {
-      rankInfo: {
-        songs,
-        info: { rankname, imgurl }
-      }
+      songsData,
+      listInfo: { rankname, imgurl }
     } = this.props
+    // console.log(this.props)
     const infoHeaderProps = {
       name: rankname,
       imgurl,
       renderUpdatedTime: this.renderUpdatedTime(
-        formatDate(songs.timestamp * 1000)
+        formatDate(songsData.timestamp * 1000)
       )
     }
     return (
       <Fragment>
         <InfoHeader {...infoHeaderProps} />
         <AppMusicList
-          data={songs.list}
+          data={songsData.list}
           renderMusicSequence={this.renderMusicSequence}
         />
       </Fragment>
@@ -51,15 +50,12 @@ class RankInfo extends Component {
   }
 }
 RankInfo.propTypes = {
-  rankInfo: PropTypes.shape({
-    songs: PropTypes.shape({
-      list: PropTypes.array.isRequired,
-      timestamp: PropTypes.number.isRequired
-    }).isRequired,
-    info: PropTypes.shape({
-      rankname: PropTypes.string.isRequired,
-      imgurl: PropTypes.string.isRequired
-    }).isRequired
-  }).isRequired
+  songsData: PropTypes.shape({
+    list: PropTypes.array.isRequired,
+    timestamp: PropTypes.number.isRequired,
+    page: PropTypes.number.isRequired,
+    pagesize: PropTypes.number.isRequired
+  }).isRequired,
+  listInfo: PropTypes.object.isRequired
 }
 export default RankInfo

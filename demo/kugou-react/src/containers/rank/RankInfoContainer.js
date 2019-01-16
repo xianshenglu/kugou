@@ -16,7 +16,10 @@ class RankInfoContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ rankInfo }) => rankInfo
+const mapStateToProps = ({ rankInfo: { songsData, listInfo } }) => ({
+  songsData,
+  listInfo
+})
 const mapDispatchToProps = null
 
 export default connect(

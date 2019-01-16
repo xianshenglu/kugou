@@ -10,11 +10,11 @@ const newSongsHandler = (state = initialState, action) => {
       }
     },
     [RECEIVE_NEW_SONGS]() {
-      const data = action.response.data
+      const { data, banner } = action.response.data
       return {
         status: SUCCESS,
-        songs: data.data,
-        sliderData: data.banner
+        songs: data,
+        sliderData: banner
       }
     }
   }

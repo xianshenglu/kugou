@@ -3,15 +3,15 @@ import { PENDING, SUCCESS } from '../../constants/status'
 import { $_xsl__replaceImgUrlSize } from '../../assets/js/utils'
 import { imgSize } from '../../constants/ui'
 const initialState = {
-  rankInfo: {
-    info: {
-      rankname: '',
-      imgurl: ''
-    },
-    songs: {
-      timestamp: Date.now(),
-      list: []
-    }
+  listInfo: {
+    rankname: '',
+    imgurl: ''
+  },
+  songsData: {
+    timestamp: Date.now(),
+    page: 1,
+    pagesize: 30,
+    list: []
   }
 }
 const rankInfoHandler = (state = initialState, action) => {
@@ -23,14 +23,15 @@ const rankInfoHandler = (state = initialState, action) => {
       }
     },
     [RECEIVE_RANK_INFO]() {
-      let { songs, info } = action.response.data
-      Object.assign(info, {
-        imgurl: $_xsl__replaceImgUrlSize(info.banner7url, imgSize),
-        name: info.rankname
+      let { songs: songsData, info: listInfo } = action.response.data
+      Object.assign(listInfo, {
+        imgurl: $_xsl__replaceImgUrlSize(listInfo.banner7url, imgSize),
+        name: listInfo.rankname
       })
       return {
         status: SUCCESS,
-        rankInfo: { songs, info }
+        songsData,
+        listInfo
       }
     }
   }

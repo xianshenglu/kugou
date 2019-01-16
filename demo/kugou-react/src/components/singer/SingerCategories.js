@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import './SingerCategories.less'
 class SingerCategories extends Component {
   render() {
     const { singerCategories } = this.props
-    console.log(this.props)
     return (
       <React.Fragment>
         {singerCategories.map(category => (
@@ -12,7 +12,7 @@ class SingerCategories extends Component {
             className="singerCategories__list main_border"
             key={category.category}
           >
-            {category.data.map(childCategory => (
+            {category.children.map(childCategory => (
               <li
                 className="singerCategories__item main_border_bottom"
                 key={childCategory.path}
@@ -37,5 +37,18 @@ class SingerCategories extends Component {
       </React.Fragment>
     )
   }
+}
+SingerCategories.propTypes = {
+  singerCategories: PropTypes.arrayOf(
+    PropTypes.shape({
+      category: PropTypes.string.isRequired,
+      children: PropTypes.arrayOf(
+        PropTypes.shape({
+          path: PropTypes.string.isRequired,
+          name: PropTypes.string.isRequired
+        })
+      )
+    })
+  ).isRequired
 }
 export default SingerCategories

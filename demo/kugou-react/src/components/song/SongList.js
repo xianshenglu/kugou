@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import './SongList.less'
 import AppList from '../public/AppList'
 class SongList extends Component {
@@ -21,5 +22,13 @@ class SongList extends Component {
       <AppList data={songList} render={this.getChildren} className="SongList" />
     )
   }
+}
+SongList.propTypes = {
+  songList: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      popularity: PropTypes.number.isRequired
+    })
+  ).isRequired
 }
 export default SongList

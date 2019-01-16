@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import './RankList.less'
 import AppList from '../public/AppList'
 class RankList extends Component {
@@ -11,5 +12,12 @@ class RankList extends Component {
       <AppList data={rankList} render={this.getChildren} className="RankList" />
     )
   }
+}
+RankList.propTypes = {
+  rankList: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired
+    })
+  ).isRequired
 }
 export default RankList

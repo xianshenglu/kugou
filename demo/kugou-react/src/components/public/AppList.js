@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
 import logo__grey from '../../assets/images/logo__grey.png'
@@ -34,7 +35,7 @@ class AppList extends Component {
                   ref={lazyImageRef}
                   src={logo__grey}
                   data-src={item.imgurl}
-                  alt={item.title}
+                  alt={item.name}
                 />
                 {render(item)}
                 <button className="AppList__btn">
@@ -50,5 +51,18 @@ class AppList extends Component {
     )
   }
 }
-
+AppList.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      path: PropTypes.string.isRequired,
+      imgurl: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  render: PropTypes.func,
+  className: PropTypes.string
+}
+AppList.defaultProps = {
+  render: () => undefined
+}
 export default AppList

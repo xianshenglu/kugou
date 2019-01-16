@@ -29,8 +29,8 @@ class AppMusicList extends Component {
 AppMusicList.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      hash: PropTypes.isRequired,
-      filename: PropTypes.isRequired
+      hash: PropTypes.string.isRequired,
+      filename: PropTypes.string.isRequired
     })
   ).isRequired,
   renderMusicSequence: PropTypes.func

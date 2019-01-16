@@ -21,11 +21,11 @@ const singerCategoriesHandler = (state = initialState, action) => {
         let level1CategoryName = obj.classname.substring(0, 2)
         let findCategories = re.find(o => o.category === level1CategoryName)
         if (findCategories !== undefined) {
-          findCategories.data.push(obj)
+          findCategories.children.push(obj)
         } else {
           re.push({
             category: level1CategoryName,
-            data: [obj]
+            children: [obj]
           })
         }
         return re
