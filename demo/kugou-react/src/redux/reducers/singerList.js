@@ -35,7 +35,7 @@ const singerListHandler = (state = initialState, action) => {
       singersData.list.forEach(obj => {
         obj.imgurl = $_xsl__replaceImgUrlSize(obj.imgurl)
         obj.id = obj.singerid
-        obj.path = singerList + obj.singerid
+        obj.path = singerList + classid + '/' + obj.singerid
         obj.name = obj.singername
       })
       return {
