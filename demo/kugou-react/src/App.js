@@ -13,10 +13,12 @@ import {
   rankList,
   songList,
   singerCategories,
-  rankInfo
+  rankInfo,
+  songListInfo
 } from './constants/router'
 import SingerCategoriesContainer from './containers/singer/SingerCategoriesContainer'
 import RankInfoContainer from './containers/rank/RankInfoContainer'
+import SongListInfoContainer from './containers/song/SongListInfoContainer'
 
 class App extends Component {
   render() {
@@ -53,7 +55,12 @@ class App extends Component {
             exact
             component={SingerCategoriesContainer}
           />
-          <Route path={rankInfo + ':id'} component={RankInfoContainer} />
+          <Route path={rankInfo + ':id'} exact component={RankInfoContainer} />
+          <Route
+            path={songListInfo + ':id'}
+            exact
+            component={SongListInfoContainer}
+          />
         </main>
       </div>
     )
