@@ -9,9 +9,7 @@ class SongListInfo extends Component {
   render() {
     console.log(this.props)
     const {
-      songsData: {
-        list: { info: songs }
-      },
+      songsData: { list: songs },
       listInfo: { specialname, imgurl, intro }
     } = this.props
     const infoHeaderProps = {
@@ -31,11 +29,8 @@ SongListInfo.propTypes = {
   songsData: PropTypes.shape({
     page: PropTypes.number.isRequired,
     pagesize: PropTypes.number.isRequired,
-    list: PropTypes.shape({
-      info: PropTypes.array.isRequired,
-      timestamp: PropTypes.number.isRequired,
-      total: PropTypes.number.isRequired
-    }).isRequired
+    list: PropTypes.array.isRequired,
+    total: PropTypes.number.isRequired
   }).isRequired,
   listInfo: PropTypes.object.isRequired
 }

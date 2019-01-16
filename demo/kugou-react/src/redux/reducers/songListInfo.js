@@ -14,11 +14,8 @@ const initialState = {
   songsData: {
     page: 1,
     pagesize: 30,
-    list: {
-      info: [],
-      timestamp: Date.now(),
-      total: 30
-    }
+    total: 30,
+    list: []
   }
 }
 const songListInfoHandler = (state = initialState, action) => {
@@ -31,9 +28,16 @@ const songListInfoHandler = (state = initialState, action) => {
     },
     [RECEIVE_SONG_LIST_INFO]() {
       let {
-        list: songsData,
+        list: {
+          list: songsData,
+          list: { info: songs },
+          page,
+          pagesize
+        },
         info: { list: listInfo }
       } = action.response.data
+      Object.assign(songsData, { list: songs, page, pagesize })
+      delete songsData.info
       Object.assign(listInfo, {
         imgurl: $_xsl__replaceImgUrlSize(listInfo.imgurl, imgSize)
       })
