@@ -23,33 +23,73 @@ import RankInfoContainer from './containers/rank/RankInfoContainer'
 import SongListInfoContainer from './containers/song/SongListInfoContainer'
 import SingerListContainer from './containers/singer/SingerListContainer'
 import SingerInfoContainer from './containers/singer/SingerInfoContainer'
-
+const navList = [
+  {
+    text: '新歌',
+    path: newSongs
+  },
+  {
+    text: '排行',
+    path: rankList
+  },
+  {
+    text: '歌单',
+    path: songList
+  },
+  {
+    text: '歌手',
+    path: singerCategories
+  }
+]
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { navActiveIndex: -1 }
+    this.historyListener = this.historyListener.bind(this)
+    this.setCssCustomVar = this.setCssCustomVar.bind(this)
+  }
+  componentDidMount() {
+    const {
+      history,
+      history: { location }
+    } = this.props
+    this.historyListener(location)
+    this.unlistenHistory = history.listen(this.historyListener)
+    this.setCssCustomVar()
+  }
+  historyListener({ pathname }) {
+    const navActiveIndex = navList.findIndex(nav => nav.path === pathname)
+    if (navActiveIndex >= 0) {
+      this.setState({ navActiveIndex })
+    }
+  }
+  setCssCustomVar() {
+    document.documentElement.style.setProperty(
+      '--vh',
+      window.innerHeight / 100 + 'px'
+    )
+  }
+  componentWillUnmount() {
+    this.unlistenHistory()
+  }
   render() {
     const {
       location: { pathname }
     } = this.props
-    const isAppNavShowReg = new RegExp(
-      '^(' +
-        root +
-        '|' +
-        newSongs +
-        '|' +
-        rankList +
-        '|' +
-        songList +
-        '|' +
-        singerCategories +
-        ')$'
-    )
-    const isAppNavShow = pathname.match(isAppNavShowReg)
-    let mainClassName = classNames('App__main', {
-      'App__main--underNav': isAppNavShow
-    })
+    const { navActiveIndex } = this.state
+    const isAppNavShow = navList.map(o => o.path).includes(pathname)
+    let appNavResult
+    let mainClassName = 'App__main'
+    if (isAppNavShow) {
+      appNavResult = (
+        <AppNav navActiveIndex={navActiveIndex} navList={navList} />
+      )
+      mainClassName += 'App__main--underNav'
+    }
     return (
       <div className="App">
         <AppHeader />
-        {isAppNavShow ? <AppNav pathname={pathname} /> : undefined}
+        {appNavResult}
         <main className={mainClassName}>
           <Route path={newSongs} exact component={NewSongsContainer} />
           <Route path={rankList} exact component={RankListContainer} />
@@ -77,12 +117,6 @@ class App extends Component {
           />
         </main>
       </div>
-    )
-  }
-  componentDidMount() {
-    document.documentElement.style.setProperty(
-      '--vh',
-      window.innerHeight / 100 + 'px'
     )
   }
 }
