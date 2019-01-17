@@ -25,7 +25,7 @@ class SingerList extends Component {
     } = this.props
     return (
       <Fragment>
-        <h4 class="module_title main_box_shadow">{classname}</h4>
+        <h4 className="module_title main_box_shadow">{classname}</h4>
         <ul
           className="SingerList__list"
           onScroll={() => $_xsl__loadImgLazy(this.lazyImages)}
