@@ -7,7 +7,6 @@ import InfoDescription from '../public/InfoDescription'
 
 class SingerInfo extends Component {
   render() {
-    console.log(this.props)
     const {
       songsData: { list: songs },
       listInfo: { singername, imgurl, intro }

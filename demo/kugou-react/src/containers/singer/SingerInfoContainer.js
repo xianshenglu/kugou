@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import SingerInfo from '../../components/singer/SingerInfo'
 import { connect } from 'react-redux'
-import { fetchSingerInfo } from '../../redux/actions/singerInfo'
+import { fetchSingerInfoIfNeeded } from '../../redux/actions/singerInfo'
 
 class SingerInfoContainer extends Component {
   componentDidMount() {
     const {
       dispatch,
-      match: { params }
+      match: {
+        params: { id }
+      }
     } = this.props
-    dispatch(fetchSingerInfo(params.id))
+    dispatch(fetchSingerInfoIfNeeded(id))
   }
   render() {
     return <SingerInfo {...this.props} />

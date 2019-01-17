@@ -20,11 +20,11 @@ const initialState = {
 }
 const songListInfoHandler = (state = initialState, action) => {
   const map = {
-    [FETCH_SONG_LIST_INFO](id) {
-      return {
+    [FETCH_SONG_LIST_INFO]() {
+      return Object.assign({}, initialState, {
         status: PENDING,
-        id
-      }
+        id: action.id
+      })
     },
     [RECEIVE_SONG_LIST_INFO]() {
       let {
@@ -43,6 +43,7 @@ const songListInfoHandler = (state = initialState, action) => {
       })
       return {
         status: SUCCESS,
+        id: action.id,
         songsData,
         listInfo
       }

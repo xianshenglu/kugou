@@ -20,20 +20,20 @@ const initialState = {
 }
 const singerInfoHandler = (state = initialState, action) => {
   const map = {
-    [FETCH_SINGER_INFO](id) {
-      return {
+    [FETCH_SINGER_INFO]() {
+      return Object.assign({}, initialState, {
         status: PENDING,
-        id
-      }
+        id: action.id
+      })
     },
     [RECEIVE_SINGER_INFO]() {
-      console.log(action.response.data)
       let { songs: songsData, info: listInfo } = action.response.data
       Object.assign(listInfo, {
         imgurl: $_xsl__replaceImgUrlSize(listInfo.imgurl, imgSize)
       })
       return {
         status: SUCCESS,
+        id: action.id,
         songsData,
         listInfo
       }

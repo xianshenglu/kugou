@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import RankInfo from '../../components/rank/RankInfo'
 import { connect } from 'react-redux'
-import { fetchRankInfo } from '../../redux/actions/rankInfo'
+import { fetchRankInfoIfNeeded } from '../../redux/actions/rankInfo'
 
 class RankInfoContainer extends Component {
   componentDidMount() {
     const {
       dispatch,
-      match: { params }
+      match: {
+        params: { id }
+      }
     } = this.props
-    dispatch(fetchRankInfo(params.id))
+    dispatch(fetchRankInfoIfNeeded(id))
   }
   render() {
     return <RankInfo {...this.props} />

@@ -13,12 +13,12 @@ const initialState = {
 const singerListHandler = (state = initialState, action) => {
   const map = {
     [FETCH_SINGER_LIST]() {
-      return {
-        status: PENDING
-      }
+      return Object.assign({}, initialState, {
+        status: PENDING,
+        id: action.id
+      })
     },
     [RECEIVE_SINGER_LIST]() {
-      console.log(action.response.data)
       let {
         singers: {
           list: singersData,
@@ -40,6 +40,7 @@ const singerListHandler = (state = initialState, action) => {
       })
       return {
         status: SUCCESS,
+        id: action.id,
         singersData,
         listInfo
       }

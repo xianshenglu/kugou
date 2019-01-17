@@ -16,20 +16,25 @@ const initialState = {
 }
 const rankInfoHandler = (state = initialState, action) => {
   const map = {
-    [FETCH_RANK_INFO](id) {
-      return {
+    [FETCH_RANK_INFO]() {
+      return Object.assign({}, initialState, {
         status: PENDING,
-        id
-      }
+        id: action.id
+      })
     },
     [RECEIVE_RANK_INFO]() {
-      let { songs: songsData, info: listInfo } = action.response.data
+      let {
+        songs: songsData,
+        info: { rankname: name, banner7url },
+        info: listInfo
+      } = action.response.data
       Object.assign(listInfo, {
-        imgurl: $_xsl__replaceImgUrlSize(listInfo.banner7url, imgSize),
-        name: listInfo.rankname
+        imgurl: $_xsl__replaceImgUrlSize(banner7url, imgSize),
+        name
       })
       return {
         status: SUCCESS,
+        id: action.id,
         songsData,
         listInfo
       }

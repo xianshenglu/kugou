@@ -6,10 +6,10 @@ let api = {
   rankList: baseApiHost + '/rank/list&json=true',
   rankInfo: baseApiHost + '/rank/info/?page=1&json=true&rankid=',
   songList: baseApiHost + '/plist/index&json=true',
-  songListInfo: baseApiHost + '/plist/list/songListId?json=true',
+  songListInfo: baseApiHost + '/plist/list/songListInfoId?json=true',
   singerCategories: baseApiHost + '/singer/class&json=true',
   singerList: baseApiHost + '/singer/list/singerListId?json=true',
-  singerInfo: baseApiHost + '/singer/info/singerId&json=true',
+  singerInfo: baseApiHost + '/singer/info/singerInfoId&json=true',
   songInfo: baseApiHost + '/app/i/getSongInfo.php?cmd=playInfo&hash=',
   songLyric: 'http://www.kugou.com/yy/index.php?r=play/getdata&hash=',
   hotSearch:
