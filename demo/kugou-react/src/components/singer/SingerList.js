@@ -18,7 +18,6 @@ class SingerList extends Component {
     $_xsl__loadImgLazy(this.lazyImages)
   }
   render() {
-    console.log(this.props)
     const {
       singersData: { list: singers },
       listInfo: { classname, classid }
