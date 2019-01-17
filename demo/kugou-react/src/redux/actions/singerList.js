@@ -10,7 +10,7 @@ export const fetchSingerList = id => ({
 })
 export const fetchSingerListIfNeeded = id => {
   return function(dispatch, getState) {
-    if (getState().singerList.id===Number(id))) {
+    if (getState().singerList.id === Number(id)) {
       return
     }
     dispatch(fetchSingerList(id))
