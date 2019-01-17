@@ -8,7 +8,7 @@ export const fetchRankInfo = id => ({
 
 export const fetchRankInfoIfNeeded = id => {
   return function(dispatch, getState) {
-    if (getState().rankInfo.id === Number(id)) {
+    if (getState().rankInfo.id === id) {
       return
     }
     dispatch(fetchRankInfo(id))

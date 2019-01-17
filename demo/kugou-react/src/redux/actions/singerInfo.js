@@ -11,7 +11,7 @@ export const fetchSingerInfo = id => ({
 })
 export const fetchSingerInfoIfNeeded = id => {
   return function(dispatch, getState) {
-    if (getState().singerInfo.id === Number(id)) {
+    if (getState().singerInfo.id === id) {
       return
     }
     dispatch(fetchSingerInfo(id))

@@ -10,7 +10,7 @@ export const fetchSongListInfo = id => ({
 })
 export const fetchSongListInfoIfNeeded = id => {
   return function(dispatch, getState) {
-    if (getState().songListInfo.id === Number(id)) {
+    if (getState().songListInfo.id === id) {
       return
     }
     dispatch(fetchSongListInfo(id))
