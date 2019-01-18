@@ -9,7 +9,7 @@ class AppMusicList extends Component {
         {data.map((music, index) => (
           <li
             className="AppMusicList__item main_border_bottom"
-            key={music.hash}
+            key={music.hash + index}
           >
             <div className="AppMusicList__info">
               {renderMusicSequence(index)}

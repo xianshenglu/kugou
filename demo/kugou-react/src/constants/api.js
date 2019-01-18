@@ -14,7 +14,7 @@ let api = {
   songLyric: 'http://www.kugou.com/yy/index.php?r=play/getdata&hash=',
   hotSearch:
     'http://mobilecdn.kugou.com/api/v3/search/hot?format=json&plat=0&count=30',
-  searchResult:
+  keywordSearch:
     'http://mobilecdn.kugou.com/api/v3/search/song?format=json&page=1&pagesize=20&showtype=1&keyword='
 }
 

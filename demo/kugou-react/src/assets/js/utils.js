@@ -39,3 +39,6 @@ export function formatDate(milliseconds) {
     String(date.getDate()).padStart(2, '0')
   )
 }
+export function isEnterKey(event) {
+  return event.code === 'Enter' || event.keyCode === 13 || event.key === 'Enter'
+}

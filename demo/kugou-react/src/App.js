@@ -16,13 +16,15 @@ import {
   rankInfo,
   songListInfo,
   singerList,
-  singerInfo
+  singerInfo,
+  search
 } from './constants/router'
 import SingerCategoriesContainer from './containers/singer/SingerCategoriesContainer'
 import RankInfoContainer from './containers/rank/RankInfoContainer'
 import SongListInfoContainer from './containers/song/SongListInfoContainer'
 import SingerListContainer from './containers/singer/SingerListContainer'
 import SingerInfoContainer from './containers/singer/SingerInfoContainer'
+import searchContainer from './containers/search/searchContainer'
 const navList = [
   {
     text: '新歌',
@@ -115,6 +117,7 @@ class App extends Component {
             exact
             component={SingerInfoContainer}
           />
+          <Route path={search} exact component={searchContainer} />
         </main>
       </div>
     )
