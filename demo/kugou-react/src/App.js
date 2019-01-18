@@ -86,7 +86,7 @@ class App extends Component {
       appNavResult = (
         <AppNav navActiveIndex={navActiveIndex} navList={navList} />
       )
-      mainClassName += 'App__main--underNav'
+      mainClassName += ' App__main--underNav'
     }
     return (
       <div className="App">
