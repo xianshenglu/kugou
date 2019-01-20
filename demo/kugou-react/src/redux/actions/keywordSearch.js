@@ -2,7 +2,6 @@ import {
   FETCH_KEYWORD_SEARCH,
   RECEIVE_KEYWORD_SEARCH
 } from '../../constants/actionType'
-import { SUCCESS } from '../../constants/status'
 import axios from 'axios'
 import api from '../../constants/api'
 

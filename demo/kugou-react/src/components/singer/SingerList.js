@@ -20,7 +20,7 @@ class SingerList extends Component {
   render() {
     const {
       singersData: { list: singers },
-      listInfo: { classname, classid }
+      listInfo: { classname }
     } = this.props
     return (
       <Fragment>

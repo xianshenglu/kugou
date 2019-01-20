@@ -19,7 +19,7 @@ const keywordSearchHandler = (state = initialState, action) => {
       })
     },
     [RECEIVE_KEYWORD_SEARCH]() {
-      console.log(action.response.data)
+      // console.log(action.response.data)
       const {
         data: { info: list, total }
       } = action.response.data

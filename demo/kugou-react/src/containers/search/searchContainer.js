@@ -23,10 +23,10 @@ class SearchContainer extends Component {
     } = this.props
     this.historyListener(location)
     this.unlistenHistory = history.listen(this.historyListener)
-    console.log('mount')
+    // console.log('mount')
   }
   componentWillUnmount() {
-    console.log('unmount')
+    // console.log('unmount')
     this.unlistenHistory()
   }
   historyListener({ search }) {

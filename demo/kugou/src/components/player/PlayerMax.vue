@@ -63,6 +63,7 @@ export default {
     if (to.params.fromPlayerMed) {
       return next()
     }
+    //? just commit player/wantPlay is enough?
     return axios
       .get(api.songInfo + musicHash)
       .then(res => {

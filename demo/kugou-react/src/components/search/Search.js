@@ -6,10 +6,6 @@ import AppMusicList from '../public/AppMusicList'
 import { isEnterKey } from '../../assets/js/utils'
 
 class Search extends Component {
-  constructor(props) {
-    console.log('constructor', props)
-    super(props)
-  }
   render() {
     const {
       isKeywordSearchShow,

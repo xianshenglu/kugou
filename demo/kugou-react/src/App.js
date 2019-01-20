@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, withRouter } from 'react-router-dom'
-import classNames from 'classnames'
+// import classNames from 'classnames'
 import './App.less'
 import AppHeader from './components/public/AppHeader'
 import AppNav from './components/public/AppNav'
@@ -8,7 +8,7 @@ import NewSongsContainer from './containers/newSong/NewSongsContainer'
 import RankListContainer from './containers/rank/RankListContainer'
 import SongListContainer from './containers/song/SongListContainer'
 import {
-  root,
+  // root,
   newSongs,
   rankList,
   songList,
@@ -55,8 +55,8 @@ class App extends Component {
       history,
       history: { location }
     } = this.props
-    this.historyListener(location)
     this.unlistenHistory = history.listen(this.historyListener)
+    this.historyListener(location)
     this.setCssCustomVar()
   }
   historyListener({ pathname }) {
@@ -113,7 +113,7 @@ class App extends Component {
             component={SingerListContainer}
           />
           <Route
-            path={singerInfo + ':id/:id'}
+            path={singerInfo + ':singerListId/:id'}
             exact
             component={SingerInfoContainer}
           />
