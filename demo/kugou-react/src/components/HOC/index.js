@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { getComponentDisplayName } from '../../assets/js/utils'
 import { fetchMusicIfNeeded } from '../../redux/actions/player'
+import { player } from '../../constants/router'
 export function withNextPrevSong(WrappedComponent, data) {
   return class extends Component {
     static displayName = getComponentDisplayName(WrappedComponent)
@@ -8,17 +9,16 @@ export function withNextPrevSong(WrappedComponent, data) {
       super(props)
       this.prevSong = this.prevSong.bind(this)
       this.nextSong = this.nextSong.bind(this)
+      this.dispatchAndRedirect = this.dispatchAndRedirect.bind(this)
     }
     nextSong() {
       const { songList, songIndex, dispatch } = this.props
       let targetSongIndex =
         songList[songIndex + 1] === undefined ? 0 : songIndex + 1
-      dispatch(
-        fetchMusicIfNeeded(
-          songList[targetSongIndex].hash,
-          targetSongIndex,
-          songList
-        )
+      this.dispatchAndRedirect(
+        songList[targetSongIndex].hash,
+        targetSongIndex,
+        songList
       )
     }
     prevSong() {
@@ -27,13 +27,22 @@ export function withNextPrevSong(WrappedComponent, data) {
         songList[songIndex - 1] === undefined
           ? songList.length - 1
           : songIndex - 1
-      dispatch(
-        fetchMusicIfNeeded(
-          songList[targetSongIndex].hash,
-          targetSongIndex,
-          songList
-        )
+      this.dispatchAndRedirect(
+        songList[targetSongIndex].hash,
+        targetSongIndex,
+        songList
       )
+    }
+    dispatchAndRedirect(hash, songIndex, songList) {
+      const {
+        dispatch,
+        history,
+        location: { pathname }
+      } = this.props
+      dispatch(fetchMusicIfNeeded(hash, songIndex, songList))
+      if (pathname === player) {
+        history.replace(pathname + '?musicHash=' + hash)
+      }
     }
     render() {
       const { nextSong, prevSong } = this
