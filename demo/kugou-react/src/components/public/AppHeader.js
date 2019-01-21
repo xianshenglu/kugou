@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import logo__text from '../../assets/images/logo__text.png'
 import { NavLink } from 'react-router-dom'
 import './AppHeader.less'
+import { root, search } from '../../constants/router'
 class AppHeader extends Component {
   constructor(props) {
     super(props)
@@ -18,12 +19,12 @@ class AppHeader extends Component {
             <use xlinkHref="#icon-arrow-left" />
           </svg>
         </button>
-        <NavLink to="/">
+        <NavLink to={root}>
           <img className="AppHeader__logo" src={logo__text} alt="logo" />
         </NavLink>
         <NavLink
           className="AppHeader__searchBtn"
-          to="/search/index"
+          to={search}
           // @click.native="bus.$emit('searchBtnClicked')"
         >
           <svg className="icon" aria-hidden="true">
