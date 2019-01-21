@@ -5,6 +5,7 @@
   "homepage": ".",
   "dependencies": {
     "@babel/core": "7.1.6",
+    "@babel/polyfill": "^7.2.5",
     "@svgr/webpack": "2.4.1",
     "axios": "^0.18.0",
     "babel-core": "7.0.0-bridge.0",
