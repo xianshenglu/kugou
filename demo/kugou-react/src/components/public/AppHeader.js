@@ -8,25 +8,21 @@ class AppHeader extends Component {
     this.goBack = this.goBack.bind(this)
   }
   goBack() {
-    // if (this.curPlayerId === 1) {
-    //   this.togglePlayers(1)
-    //   return
-    // }
     window.history.go(-1)
   }
   render() {
     return (
-      <header className="header">
-        <button className="header__back" onClick={this.goBack}>
+      <header className="AppHeader">
+        <button className="AppHeader__back" onClick={this.goBack}>
           <svg className="icon" aria-hidden="true">
             <use xlinkHref="#icon-arrow-left" />
           </svg>
         </button>
         <NavLink to="/">
-          <img className="header__logo" src={logo__text} alt="logo" />
+          <img className="AppHeader__logo" src={logo__text} alt="logo" />
         </NavLink>
         <NavLink
-          className="header__search_btn"
+          className="AppHeader__searchBtn"
           to="/search/index"
           // @click.native="bus.$emit('searchBtnClicked')"
         >
