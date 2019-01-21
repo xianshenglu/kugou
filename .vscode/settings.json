@@ -1,9 +1,14 @@
 {
   "git.ignoreLimitWarning": true,
   "cSpell.words": [
+    "classid",
+    "classname",
     "imgurl",
     "rankid",
     "rankname",
+    "singerid",
+    "singername",
+    "specialname",
     "timelength"
   ]
 }

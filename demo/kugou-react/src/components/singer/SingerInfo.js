@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import InfoHeader from '../public/InfoHeader'
 import AppMusicList from '../public/AppMusicList'
-import './SingerInfo.less'
 import InfoDescription from '../public/InfoDescription'
 
 class SingerInfo extends Component {
