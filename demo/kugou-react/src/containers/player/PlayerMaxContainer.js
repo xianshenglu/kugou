@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PlayerMax from '../../components/player/PlayerMax'
 import { connect } from 'react-redux'
 import { fetchMusicIfNeeded } from '../../redux/actions/player'
+import { withNextPrevSong } from '../../components/HOC'
 
 class PlayerMaxContainer extends Component {
   componentDidMount() {
@@ -12,7 +13,7 @@ class PlayerMaxContainer extends Component {
     } = this.props
     if (play_url === '') {
       const musicHash = new URLSearchParams(location.search).get('musicHash')
-      dispatch(fetchMusicIfNeeded(musicHash))
+      dispatch(fetchMusicIfNeeded(musicHash, 0, [{ hash: musicHash }]))
     }
   }
   render() {
@@ -29,15 +30,17 @@ class PlayerMaxContainer extends Component {
 }
 
 const mapStateToProps = ({
-  player: { musicStatus, songInfo, audioElRef }
+  player: { musicStatus, songInfo, audioElRef, songIndex, songList }
 }) => ({
   musicStatus,
   songInfo,
-  audioElRef
+  audioElRef,
+  songIndex,
+  songList
 })
 const mapDispatchToProps = null
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PlayerMaxContainer)
+)(withNextPrevSong(PlayerMaxContainer))

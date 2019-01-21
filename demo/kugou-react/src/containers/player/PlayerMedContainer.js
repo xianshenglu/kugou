@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter, BrowserRouter as Route } from 'react-router-dom'
 import PlayerMed from '../../components/player/PlayerMed'
 import { connect } from 'react-redux'
+import { withNextPrevSong } from '../../components/HOC'
 
 class PlayerMedContainer extends Component {
   render() {
@@ -18,11 +19,13 @@ class PlayerMedContainer extends Component {
 }
 
 const mapStateToProps = ({
-  player: { musicStatus, songInfo, audioElRef }
+  player: { musicStatus, songInfo, audioElRef, songIndex, songList }
 }) => ({
   musicStatus,
   songInfo,
-  audioElRef
+  audioElRef,
+  songIndex,
+  songList
 })
 const mapDispatchToProps = null
 
@@ -30,5 +33,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(PlayerMedContainer)
+  )(withNextPrevSong(PlayerMedContainer))
 )

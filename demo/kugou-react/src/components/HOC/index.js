@@ -1,31 +1,44 @@
 import React, { Component } from 'react'
-import AppHeader from '../public/AppHeader'
-import AppNav from '../public/AppNav'
 import { getComponentDisplayName } from '../../assets/js/utils'
-export function withAppHeader(WrappedComponent, data) {
+import { fetchMusicIfNeeded } from '../../redux/actions/player'
+export function withNextPrevSong(WrappedComponent, data) {
   return class extends Component {
     static displayName = getComponentDisplayName(WrappedComponent)
-    render() {
-      return (
-        <section className="">
-          <AppHeader />
-          <WrappedComponent {...data} {...this.props} />
-        </section>
+    constructor(props) {
+      super(props)
+      this.prevSong = this.prevSong.bind(this)
+      this.nextSong = this.nextSong.bind(this)
+    }
+    nextSong() {
+      const { songList, songIndex, dispatch } = this.props
+      let targetSongIndex =
+        songList[songIndex + 1] === undefined ? 0 : songIndex + 1
+      dispatch(
+        fetchMusicIfNeeded(
+          songList[targetSongIndex].hash,
+          targetSongIndex,
+          songList
+        )
       )
     }
-  }
-}
-export function withAppHeaderAndNav(WrappedComponent, data) {
-  return class extends Component {
-    static displayName = getComponentDisplayName(WrappedComponent)
-    render() {
-      return (
-        <section className="">
-          <AppHeader />
-          <AppNav />
-          <WrappedComponent {...data} {...this.props} />
-        </section>
+    prevSong() {
+      const { songList, songIndex, dispatch } = this.props
+      let targetSongIndex =
+        songList[songIndex - 1] === undefined
+          ? songList.length - 1
+          : songIndex - 1
+      dispatch(
+        fetchMusicIfNeeded(
+          songList[targetSongIndex].hash,
+          targetSongIndex,
+          songList
+        )
       )
+    }
+    render() {
+      const { nextSong, prevSong } = this
+      const props = { nextSong, prevSong }
+      return <WrappedComponent {...data} {...this.props} {...props} />
     }
   }
 }

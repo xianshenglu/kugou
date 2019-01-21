@@ -14,7 +14,9 @@ class PlayerMed extends Component {
     const {
       songInfo: { song_name, author_name, img: singerImg, hash },
       musicStatus: { isPlaying, isLoading },
-      dispatch
+      dispatch,
+      prevSong,
+      nextSong
     } = this.props
     return (
       <Fragment>
@@ -34,14 +36,14 @@ class PlayerMed extends Component {
             </div>
           </NavLink>
           <div className="PlayerMed__buttonContainer">
-            <PrevButton className="PlayerMed__prevBtn" prev={e => null} />
+            <PrevButton className="PlayerMed__prevBtn" prev={prevSong} />
             <PlayButton
               className="PlayerMed__playBtn"
               isLoading={isLoading}
               isPlaying={isPlaying}
               togglePlay={e => dispatch(togglePlay())}
             />
-            <NextButton className="PlayerMed__nextBtn" next={e => null} />
+            <NextButton className="PlayerMed__nextBtn" next={nextSong} />
           </div>
         </div>
       </Fragment>
@@ -58,6 +60,8 @@ PlayerMed.propTypes = {
     author_name: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired
   }).isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  nextSong: PropTypes.func.isRequired,
+  prevSong: PropTypes.func.isRequired
 }
 export default PlayerMed

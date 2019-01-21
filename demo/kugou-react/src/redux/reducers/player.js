@@ -35,7 +35,7 @@ const playerHandler = (state = initialState, action) => {
       return Object.assign({}, state, {
         status: PENDING,
         id: action.id,
-        songIndex: action.index,
+        songIndex: action.songIndex,
         songList: action.songList
       })
     },

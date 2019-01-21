@@ -15,7 +15,9 @@ class PlayerMax extends Component {
     const {
       songInfo: { song_name, author_name, img: singerImg },
       musicStatus: { isPlaying, isLoading },
-      dispatch
+      dispatch,
+      prevSong,
+      nextSong
     } = this.props
     return (
       <Fragment>
@@ -37,14 +39,14 @@ class PlayerMax extends Component {
           <PlayerLyricContainer />
           <PlayerProgressContainer />
           <div className="PlayerMax__buttonContainer">
-            <PrevButton className="PlayerMax__prevBtn" prev={e => null} />
+            <PrevButton className="PlayerMax__prevBtn" prev={prevSong} />
             <PlayButton
               className="PlayerMax__playBtn"
               isLoading={isLoading}
               isPlaying={isPlaying}
               togglePlay={e => dispatch(togglePlay())}
             />
-            <NextButton className="PlayerMax__nextBtn" next={e => null} />
+            <NextButton className="PlayerMax__nextBtn" next={nextSong} />
           </div>
           <button className="PlayerMax__download" />
         </div>
@@ -62,6 +64,8 @@ PlayerMax.propTypes = {
     isPlaying: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired
   }).isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  nextSong: PropTypes.func.isRequired,
+  prevSong: PropTypes.func.isRequired
 }
 export default PlayerMax
