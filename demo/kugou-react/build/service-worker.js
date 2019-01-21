@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/vue/demo/kugou-react/build/precache-manifest.fd139e64dc2ca620ff8fa58b7c9b32ac.js"
+  "/vue/demo/kugou-react/build/precache-manifest.3d343107e9d83cbaa3d127084e5be1fa.js"
 );
 
 workbox.clientsClaim();

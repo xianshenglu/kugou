@@ -1,16 +1,16 @@
 {
   "main.css": "/vue/demo/kugou-react/build/static/css/main.a70f71e3.chunk.css",
-  "main.js": "/vue/demo/kugou-react/build/static/js/main.5f6d3c53.chunk.js",
-  "main.js.map": "/vue/demo/kugou-react/build/static/js/main.5f6d3c53.chunk.js.map",
+  "main.js": "/vue/demo/kugou-react/build/static/js/main.46b21200.chunk.js",
+  "main.js.map": "/vue/demo/kugou-react/build/static/js/main.46b21200.chunk.js.map",
   "static/css/1.ab000770.chunk.css": "/vue/demo/kugou-react/build/static/css/1.ab000770.chunk.css",
   "static/js/1.e7f7b31a.chunk.js": "/vue/demo/kugou-react/build/static/js/1.e7f7b31a.chunk.js",
   "static/js/1.e7f7b31a.chunk.js.map": "/vue/demo/kugou-react/build/static/js/1.e7f7b31a.chunk.js.map",
   "runtime~main.js": "/vue/demo/kugou-react/build/static/js/runtime~main.f372034a.js",
   "runtime~main.js.map": "/vue/demo/kugou-react/build/static/js/runtime~main.f372034a.js.map",
-  "static/media/index.less": "/vue/demo/kugou-react/build/static/media/slick.b7c9e1e4.woff",
-  "static/css/1.ab000770.chunk.css.map": "/vue/demo/kugou-react/build/static/css/1.ab000770.chunk.css.map",
+  "static/media/index.less": "/vue/demo/kugou-react/build/static/media/slick.d41f55a7.ttf",
   "static/css/main.a70f71e3.chunk.css.map": "/vue/demo/kugou-react/build/static/css/main.a70f71e3.chunk.css.map",
+  "static/css/1.ab000770.chunk.css.map": "/vue/demo/kugou-react/build/static/css/1.ab000770.chunk.css.map",
   "index.html": "/vue/demo/kugou-react/build/index.html",
-  "precache-manifest.fd139e64dc2ca620ff8fa58b7c9b32ac.js": "/vue/demo/kugou-react/build/precache-manifest.fd139e64dc2ca620ff8fa58b7c9b32ac.js",
+  "precache-manifest.3d343107e9d83cbaa3d127084e5be1fa.js": "/vue/demo/kugou-react/build/precache-manifest.3d343107e9d83cbaa3d127084e5be1fa.js",
   "service-worker.js": "/vue/demo/kugou-react/build/service-worker.js"
 }
