@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 // import classNames from 'classnames'
+import logo__theme from './assets/images/logo__theme.png'
 import { player } from './constants/router'
 import App from './App'
 import {
@@ -17,6 +18,7 @@ class AppContainer extends Component {
     this.historyListener = this.historyListener.bind(this)
     this.setCssCustomVar = this.setCssCustomVar.bind(this)
     this.canPlayCb = this.canPlayCb.bind(this)
+    this.setBackupImg = this.setBackupImg.bind(this)
   }
   componentDidMount() {
     const {
@@ -26,6 +28,7 @@ class AppContainer extends Component {
     this.unlistenHistory = history.listen(this.historyListener)
     this.historyListener(location)
     this.setCssCustomVar()
+    window.addEventListener('error', this.setBackupImg, true)
   }
   historyListener({ pathname }) {
     const {
@@ -46,8 +49,15 @@ class AppContainer extends Component {
       window.innerHeight / 100 + 'px'
     )
   }
+  setBackupImg(event) {
+    let target = event.target
+    if (target.tagName && target.tagName.toLowerCase() === 'img') {
+      target.src = logo__theme
+    }
+  }
   componentWillUnmount() {
     this.unlistenHistory()
+    window.removeEventListener('error', this.setBackupImg, true)
   }
   canPlayCb(e) {
     // ! play may return a reject error when user haven't interact with page
