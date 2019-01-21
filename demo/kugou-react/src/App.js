@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Route, withRouter } from 'react-router-dom'
-// import classNames from 'classnames'
+import { Route } from 'react-router-dom'
+import classNames from 'classnames'
 import './App.less'
 import AppHeader from './components/public/AppHeader'
-import AppNav from './components/public/AppNav'
+import PlayerMedContainer from './containers/player/PlayerMedContainer'
 import NewSongsContainer from './containers/newSong/NewSongsContainer'
 import RankListContainer from './containers/rank/RankListContainer'
 import SongListContainer from './containers/song/SongListContainer'
@@ -17,7 +17,8 @@ import {
   songListInfo,
   singerList,
   singerInfo,
-  search
+  search,
+  player
 } from './constants/router'
 import SingerCategoriesContainer from './containers/singer/SingerCategoriesContainer'
 import RankInfoContainer from './containers/rank/RankInfoContainer'
@@ -25,74 +26,22 @@ import SongListInfoContainer from './containers/song/SongListInfoContainer'
 import SingerListContainer from './containers/singer/SingerListContainer'
 import SingerInfoContainer from './containers/singer/SingerInfoContainer'
 import searchContainer from './containers/search/searchContainer'
-const navList = [
-  {
-    text: '新歌',
-    path: newSongs
-  },
-  {
-    text: '排行',
-    path: rankList
-  },
-  {
-    text: '歌单',
-    path: songList
-  },
-  {
-    text: '歌手',
-    path: singerCategories
-  }
-]
+import PlayerMaxContainer from './containers/player/PlayerMaxContainer'
+import AppNavContainer from './containers/public/AppNavContainer'
+
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { navActiveIndex: -1 }
-    this.historyListener = this.historyListener.bind(this)
-    this.setCssCustomVar = this.setCssCustomVar.bind(this)
-  }
-  componentDidMount() {
-    const {
-      history,
-      history: { location }
-    } = this.props
-    this.unlistenHistory = history.listen(this.historyListener)
-    this.historyListener(location)
-    this.setCssCustomVar()
-  }
-  historyListener({ pathname }) {
-    const navActiveIndex = navList.findIndex(nav => nav.path === pathname)
-    if (navActiveIndex >= 0) {
-      this.setState({ navActiveIndex })
-    }
-  }
-  setCssCustomVar() {
-    document.documentElement.style.setProperty(
-      '--vh',
-      window.innerHeight / 100 + 'px'
-    )
-  }
-  componentWillUnmount() {
-    this.unlistenHistory()
-  }
   render() {
-    const {
-      location: { pathname }
-    } = this.props
-    const { navActiveIndex } = this.state
-    const isAppNavShow = navList.map(o => o.path).includes(pathname)
-    let appNavResult
-    let mainClassName = 'App__main'
-    if (isAppNavShow) {
-      appNavResult = (
-        <AppNav navActiveIndex={navActiveIndex} navList={navList} />
-      )
-      mainClassName += ' App__main--underNav'
-    }
+    const { isPlayerMedShow, isAppNavShow } = this.props
+    let mainClassName = classNames('App__main', {
+      'App__main--underNav': isAppNavShow
+    })
     return (
       <div className="App">
         <AppHeader />
-        {appNavResult}
+        <AppNavContainer />
+        {isPlayerMedShow ? <PlayerMedContainer /> : undefined}
         <main className={mainClassName}>
+          <Route path={player} exact component={PlayerMaxContainer} />
           <Route path={newSongs} exact component={NewSongsContainer} />
           <Route path={rankList} exact component={RankListContainer} />
           <Route path={songList} exact component={SongListContainer} />
@@ -124,4 +73,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App)
+export default App
