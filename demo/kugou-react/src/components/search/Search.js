@@ -19,7 +19,7 @@ class Search extends Component {
     return (
       <Fragment>
         <h4 className="main_box_shadow module_title">搜索</h4>
-        <div className="Search__cont" ref="searchCont">
+        <div className="Search__container">
           <form className="Search__form" onSubmit={e => e.preventDefault()}>
             <input
               type="text"
@@ -55,7 +55,7 @@ class Search extends Component {
           </div>
           <div className={classNames({ hidden: !isKeywordSearchShow })}>
             <div className="Search__count">共有{total}条结果</div>
-            <AppMusicList data={songs} className="Search__res-list" />
+            <AppMusicList data={songs} className="Search__resultList" />
           </div>
         </div>
       </Fragment>
@@ -63,6 +63,11 @@ class Search extends Component {
   }
 }
 Search.propTypes = {
+  isKeywordSearchShow: PropTypes.bool.isRequired,
+  isHotSearchShow: PropTypes.bool.isRequired,
+  keyword: PropTypes.string.isRequired,
+  updateKeyword: PropTypes.func.isRequired,
+  searchKeyword: PropTypes.func.isRequired,
   hotSearch: PropTypes.shape({
     list: PropTypes.arrayOf(
       PropTypes.shape({ keyword: PropTypes.string.isRequired })

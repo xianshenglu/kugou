@@ -54,13 +54,21 @@ class SingerList extends Component {
 }
 SingerList.propTypes = {
   singersData: PropTypes.shape({
+    // page, pagesize was prepared for load more button
     page: PropTypes.number.isRequired,
     pagesize: PropTypes.number.isRequired,
-    list: PropTypes.array.isRequired,
+    list: PropTypes.arrayOf(
+      PropTypes.shape({
+        singerid: PropTypes.number.isRequired,
+        path: PropTypes.string.isRequired,
+        imgurl: PropTypes.string.isRequired,
+        singername: PropTypes.string.isRequired
+      })
+    ).isRequired,
     total: PropTypes.number.isRequired
   }).isRequired,
   listInfo: PropTypes.shape({
-    classid: PropTypes.number.isRequired,
+    // classid: PropTypes.number.isRequired,
     classname: PropTypes.string.isRequired
   }).isRequired
 }

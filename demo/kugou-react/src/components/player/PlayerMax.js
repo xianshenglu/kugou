@@ -52,5 +52,16 @@ class PlayerMax extends Component {
     )
   }
 }
-PlayerMax.propTypes = {}
+PlayerMax.propTypes = {
+  songInfo: PropTypes.shape({
+    song_name: PropTypes.string.isRequired,
+    author_name: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired
+  }).isRequired,
+  musicStatus: PropTypes.shape({
+    isPlaying: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired
+}
 export default PlayerMax
