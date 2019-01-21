@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter, BrowserRouter as Route } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import PlayerMed from '../../components/player/PlayerMed'
 import { connect } from 'react-redux'
 import { withNextPrevSong } from '../../components/HOC'
