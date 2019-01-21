@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import './AppNav.less'
-
 class AppNav extends Component {
   render() {
-    const { navList, navActiveIndex } = this.props
+    const { navList, activeIndex } = this.props
     return (
       <section className="nav">
         <nav className="nav__box">
@@ -22,7 +21,7 @@ class AppNav extends Component {
         <div
           className="nav__underline"
           style={{
-            transform: `translateX(${navActiveIndex * 100}%)`
+            transform: `translateX(${activeIndex * 100}%)`
           }}
         />
       </section>

@@ -16,7 +16,6 @@ class PlayerMaxContainer extends Component {
     }
   }
   render() {
-    console.log(this.props)
     const {
       songInfo: { play_url },
       dispatch,

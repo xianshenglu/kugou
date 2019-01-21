@@ -11,7 +11,7 @@ import PlayerProgressContainer from '../../containers/player/PlayerProgressConta
 
 class PlayerMax extends Component {
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     const {
       songInfo: { song_name, author_name, img: singerImg },
       musicStatus: { isPlaying, isLoading },
