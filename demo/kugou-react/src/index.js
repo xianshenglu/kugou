@@ -13,7 +13,7 @@ import AppContainer from './AppContainer'
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger))
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename="/vue/demo/kugou-react/build/">
     <Provider store={store}>
       <AppContainer />
     </Provider>
