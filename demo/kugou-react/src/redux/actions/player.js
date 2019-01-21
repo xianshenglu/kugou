@@ -23,7 +23,6 @@ export const fetchMusicIfNeeded = (id, songIndex = 0, songList) => {
     //   return
     // }
     dispatch(fetchMusic(id, songIndex, songList))
-    dispatch(switchPlayerMed(true))
     dispatch(showMusicLoading())
     axios.get(api.songInfoHasLyric + id).then(res => {
       dispatch(receiveMusic(res, id))

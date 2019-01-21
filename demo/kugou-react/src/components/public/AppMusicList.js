@@ -1,18 +1,28 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import './AppMusicList.less'
-import { fetchMusicIfNeeded } from '../../redux/actions/player'
+import { fetchMusicIfNeeded, switchPlayerMed } from '../../redux/actions/player'
+import { player } from '../../constants/router'
 class AppMusicList extends Component {
   render() {
-    const { data, renderMusicSequence, dispatch } = this.props
+    const {
+      data,
+      renderMusicSequence,
+      dispatch,
+      location: { pathname }
+    } = this.props
     return (
       <ul className="AppMusicList">
         {data.map((music, index) => (
           <li
             className="AppMusicList__item main_border_bottom"
             key={music.hash}
-            onClick={e => dispatch(fetchMusicIfNeeded(music.hash, index, data))}
+            onClick={e => {
+              dispatch(fetchMusicIfNeeded(music.hash, index, data))
+              dispatch(switchPlayerMed(pathname !== player))
+            }}
           >
             <div className="AppMusicList__info">
               {renderMusicSequence(index)}
@@ -47,4 +57,4 @@ AppMusicList.defaultProps = {
 export default connect(
   null,
   null
-)(AppMusicList)
+)(withRouter(AppMusicList))
