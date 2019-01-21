@@ -86,7 +86,16 @@ const mapStateToProps = ({ player, appNav: { isShow: isAppNavShow } }) => ({
   player,
   isAppNavShow
 })
-export default connect(
-  mapStateToProps,
-  null
-)(withRouter(AppContainer))
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(AppContainer)
+)
+// different with, think about it
+// export default withRouter(
+//   connect(
+//     mapStateToProps,
+//     null
+//   )(AppContainer)
+// )

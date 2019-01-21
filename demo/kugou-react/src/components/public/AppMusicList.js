@@ -54,7 +54,9 @@ AppMusicList.propTypes = {
 AppMusicList.defaultProps = {
   renderMusicSequence: () => undefined
 }
-export default connect(
-  null,
-  null
-)(withRouter(AppMusicList))
+export default withRouter(
+  connect(
+    null,
+    null
+  )(AppMusicList)
+)

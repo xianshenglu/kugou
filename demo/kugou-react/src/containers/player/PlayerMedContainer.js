@@ -26,7 +26,9 @@ const mapStateToProps = ({
 })
 const mapDispatchToProps = null
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(PlayerMedContainer))
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(PlayerMedContainer)
+)

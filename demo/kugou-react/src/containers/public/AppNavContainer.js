@@ -63,7 +63,9 @@ const mapStateToProps = ({ appNav }) => ({
 })
 const mapDispatchToProps = null
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(AppNavContainer))
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AppNavContainer)
+)
