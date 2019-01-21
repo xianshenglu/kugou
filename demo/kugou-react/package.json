@@ -126,6 +126,7 @@
   "devDependencies": {
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "postcss-pixel-to-viewport": "^1.0.2"
+    "postcss-pixel-to-viewport": "^1.0.2",
+    "redux-logger": "^3.0.6"
   }
 }
