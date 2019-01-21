@@ -31,6 +31,7 @@ class AppNavContainer extends Component {
   constructor(props) {
     super(props)
     this.historyListener = this.historyListener.bind(this)
+    this.toggleBetweenPages = this.toggleBetweenPages.bind(this)
   }
   componentDidMount() {
     const {
@@ -39,6 +40,11 @@ class AppNavContainer extends Component {
     } = this.props
     this.unlistenHistory = history.listen(this.historyListener)
     this.historyListener(location)
+    window.addEventListener('touchstart', this.toggleBetweenPages)
+  }
+  componentWillUnmount() {
+    this.unlistenHistory()
+    window.removeEventListener('touchstart', this.toggleBetweenPages)
   }
   historyListener({ pathname }) {
     const activeIndex = navList.findIndex(nav => nav.path === pathname)
@@ -49,6 +55,43 @@ class AppNavContainer extends Component {
     } else {
       dispatch(switchNav(false))
     }
+  }
+  toggleBetweenPages(event) {
+    let interval = 300
+    let startTime = Date.now()
+    let minOffset = window.innerWidth * 0.1
+    let maxOffset = window.innerWidth * 0.4
+    let startClientX = event.touches[0].clientX
+    let startClientY = event.touches[0].clientY
+
+    const detectToSwipe = event => {
+      window.removeEventListener('touchend', detectToSwipe, true)
+
+      let endClientX = event.changedTouches[0].clientX
+      let endClientY = event.changedTouches[0].clientY
+      let offsetX = Math.abs(endClientX - startClientX)
+      let offsetY = Math.abs(endClientY - startClientY)
+      if (offsetY > offsetX) {
+        return
+      }
+      let direction = endClientX - startClientX < 0
+      let endTime = Date.now()
+      let isSlow = endTime - startTime > interval
+      let isSlowMoveEnough = isSlow && offsetX > maxOffset
+      let isFastMoveEnough = !isSlow && offsetX > minOffset
+      const {
+        appNav: { activeIndex, isShow: isAppNavShow },
+        history
+      } = this.props
+      if (isAppNavShow && (isSlowMoveEnough || isFastMoveEnough)) {
+        let nextRouteIndex = direction ? activeIndex + 1 : activeIndex - 1
+        let nextRoute = navList[nextRouteIndex]
+        if (nextRoute !== undefined) {
+          history.push(nextRoute.path)
+        }
+      }
+    }
+    window.addEventListener('touchend', detectToSwipe, true)
   }
   render() {
     const {
