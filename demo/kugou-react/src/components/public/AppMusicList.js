@@ -1,21 +1,27 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import './AppMusicList.less'
+import { fetchMusicIfNeeded } from '../../redux/actions/player'
 class AppMusicList extends Component {
   render() {
-    const { data, renderMusicSequence } = this.props
+    const { data, renderMusicSequence, dispatch } = this.props
     return (
       <ul className="AppMusicList">
         {data.map((music, index) => (
           <li
             className="AppMusicList__item main_border_bottom"
-            key={music.hash + index}
+            key={music.hash}
+            onClick={e => dispatch(fetchMusicIfNeeded(music.hash, index, data))}
           >
             <div className="AppMusicList__info">
               {renderMusicSequence(index)}
               <div className="AppMusicList__name">{music.filename}</div>
             </div>
-            <button className="AppMusicList__download">
+            <button
+              className="AppMusicList__download"
+              onClick={e => e.stopPropagation}
+            >
               <svg className="icon" aria-hidden="true">
                 <use xlinkHref="#icon-download" />
               </svg>
@@ -38,4 +44,7 @@ AppMusicList.propTypes = {
 AppMusicList.defaultProps = {
   renderMusicSequence: () => undefined
 }
-export default AppMusicList
+export default connect(
+  null,
+  null
+)(AppMusicList)
