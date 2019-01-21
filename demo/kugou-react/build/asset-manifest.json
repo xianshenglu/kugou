@@ -1,7 +1,7 @@
 {
   "main.css": "/vue/demo/kugou-react/build/static/css/main.a70f71e3.chunk.css",
-  "main.js": "/vue/demo/kugou-react/build/static/js/main.185da0df.chunk.js",
-  "main.js.map": "/vue/demo/kugou-react/build/static/js/main.185da0df.chunk.js.map",
+  "main.js": "/vue/demo/kugou-react/build/static/js/main.2723a5a2.chunk.js",
+  "main.js.map": "/vue/demo/kugou-react/build/static/js/main.2723a5a2.chunk.js.map",
   "static/css/1.ab000770.chunk.css": "/vue/demo/kugou-react/build/static/css/1.ab000770.chunk.css",
   "static/js/1.e7f7b31a.chunk.js": "/vue/demo/kugou-react/build/static/js/1.e7f7b31a.chunk.js",
   "static/js/1.e7f7b31a.chunk.js.map": "/vue/demo/kugou-react/build/static/js/1.e7f7b31a.chunk.js.map",
@@ -11,6 +11,6 @@
   "static/css/main.a70f71e3.chunk.css.map": "/vue/demo/kugou-react/build/static/css/main.a70f71e3.chunk.css.map",
   "static/css/1.ab000770.chunk.css.map": "/vue/demo/kugou-react/build/static/css/1.ab000770.chunk.css.map",
   "index.html": "/vue/demo/kugou-react/build/index.html",
-  "precache-manifest.0baaaa73c57e920093f21a90e6092738.js": "/vue/demo/kugou-react/build/precache-manifest.0baaaa73c57e920093f21a90e6092738.js",
+  "precache-manifest.8a9e9faa6244c029b45a1044bcf52a4c.js": "/vue/demo/kugou-react/build/precache-manifest.8a9e9faa6244c029b45a1044bcf52a4c.js",
   "service-worker.js": "/vue/demo/kugou-react/build/service-worker.js"
 }
