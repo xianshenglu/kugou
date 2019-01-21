@@ -2,7 +2,6 @@
   "name": "kugou-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://xianshenglu.github.io/vue/demo/kugou-react/build",
   "dependencies": {
     "@babel/core": "7.1.6",
     "@svgr/webpack": "2.4.1",
