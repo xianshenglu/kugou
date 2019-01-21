@@ -20,15 +20,15 @@ self.__precacheManifest = [
     "url": "/vue/demo/kugou-react/build/static/js/runtime~main.f372034a.js"
   },
   {
-    "revision": "46b2120023022480b748",
-    "url": "/vue/demo/kugou-react/build/static/js/main.46b21200.chunk.js"
+    "revision": "e9a87fc6fc15dd04d351",
+    "url": "/vue/demo/kugou-react/build/static/js/main.e9a87fc6.chunk.js"
   },
   {
     "revision": "e7f7b31ab76188a4ccdc",
     "url": "/vue/demo/kugou-react/build/static/js/1.e7f7b31a.chunk.js"
   },
   {
-    "revision": "46b2120023022480b748",
+    "revision": "e9a87fc6fc15dd04d351",
     "url": "/vue/demo/kugou-react/build/static/css/main.a70f71e3.chunk.css"
   },
   {
@@ -36,7 +36,7 @@ self.__precacheManifest = [
     "url": "/vue/demo/kugou-react/build/static/css/1.ab000770.chunk.css"
   },
   {
-    "revision": "b68a2b6ab571386fa5f9f2d571bc088d",
+    "revision": "75711e2cae6cff0e7c2c08024c992587",
     "url": "/vue/demo/kugou-react/build/index.html"
   }
 ];
