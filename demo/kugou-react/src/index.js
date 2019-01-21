@@ -1,20 +1,21 @@
 import 'url-search-params-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
 import './assets/css/index.less'
 import * as serviceWorker from './serviceWorker'
 import { BrowserRouter } from 'react-router-dom'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
+import logger from 'redux-logger'
 import rootReducer from './redux/reducers'
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+import AppContainer from './AppContainer'
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger))
 
 ReactDOM.render(
   <BrowserRouter basename="/">
     <Provider store={store}>
-      <App />
+      <AppContainer />
     </Provider>
   </BrowserRouter>,
   document.getElementById('root')
