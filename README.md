@@ -1,4 +1,4 @@
-[Demo](https://github.com/xianshenglu/vue/tree/master/demo) about [Vue.js](https://vuejs.org/index.html)
+[Demo](https://github.com/xianshenglu/vue/tree/master/demo) about [Vue.js](https://vuejs.org/index.html)&&[Reactjs](https://reactjs.org/)
 
 Listed from easy to hard:
 
@@ -14,9 +14,9 @@ Listed from easy to hard:
 
   ![resume](https://xianshenglu.github.io/home/src/assets/images/homepage.gif)
 
-- [kugou-music](https://xianshenglu.github.io/vue/demo/kugou/dist/index.html)
+- kugou-music [Vue-version](https://xianshenglu.github.io/vue/demo/kugou/dist/index.html) [React-version](https://xianshenglu.github.io/vue/demo/kugou-react/build/)
 
-  ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-1.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-2.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-3.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-5.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-6.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-7.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-8.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-9.jpg)
+![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-1.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-2.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-3.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-5.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-6.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-7.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-8.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-9.jpg)
 
 - [multi-cascader-ant-design-vue](https://xianshenglu.github.io/vue/demo/multi-cascader-ant-design-vue/dist/index.html)
 
