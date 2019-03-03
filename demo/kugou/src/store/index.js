@@ -24,7 +24,7 @@ let store = new Vuex.Store({
     search,
     images
   },
-
+  strict: process && process.env.NODE_ENV !== 'production',
   mutations: {
     replaceProperty(state, { paths, data }) {
       if (typeof paths !== 'string') {
