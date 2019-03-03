@@ -1,6 +1,6 @@
 <template>
   <section class="search">
-    <PubModuleTitle :title="title" class="search__title" @click="goBackToSearchRec"/>
+    <PubModuleTitle :title="title" class="search__title"/>
     <div class="search__cont" ref="searchCont">
       <form class="search__form" @submit.prevent>
         <input
@@ -162,14 +162,6 @@ export default {
           this.stopLoading()
         })
         .catch(er => alert(er))
-    },
-    goBackToSearchRec() {
-      // if user wants to see the recommendation, clear the keyword history.
-      delete this.$route.query.keyword
-      this.keyword = ''
-      let newRoute = Object.assign({}, this.$route)
-      this.$router.replace(newRoute)
-      this.getSearchRec()
     },
     initQqBugDetect() {
       let search__cont = document.getElementsByClassName('search__cont')[0]
