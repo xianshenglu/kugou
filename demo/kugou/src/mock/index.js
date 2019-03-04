@@ -1,5 +1,5 @@
 import Mock from 'mockjs'
-import api from '../js/api'
+import api from '../assets/js/api'
 import newSong from './newSong'
 import rankList from './rankList'
 import songList from './songList'
