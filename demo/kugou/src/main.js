@@ -8,8 +8,9 @@ import './assets/css/reset.css'
 import './assets/css/base.less'
 import './assets/css/iconfont.css'
 
-// use mock instead of real http request
-import './mock/index'
+// use mock instead of real http request when in development
+
+// import './mock/index'
 
 Vue.config.productionTip = false
 Vue.prototype.window = window
