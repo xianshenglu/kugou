@@ -1,20 +1,15 @@
-[Demo](https://github.com/xianshenglu/vue/tree/master/demo) about [Vue.js](https://vuejs.org/index.html)&&[Reactjs](https://reactjs.org/)
+# [酷狗音乐](https://github.com/xianshenglu/vue/tree/master/demo) 的 [Vue.js](https://vuejs.org/index.html) / [Reactjs](https://reactjs.org/) 实现
 
-Listed from easy to hard:
+## 主要技术栈
 
-- [grid-component](https://xianshenglu.github.io/vue/demo/grid-component/dist/index.html)
+- Vue/React 全家桶
+- Mock
 
-  ![grid-component](https://xianshenglu.github.io/vue/demo/img-displayed/grid-component.gif)
-
-- [todo-mvc](https://xianshenglu.github.io/vue/demo/todo-mvc/dist/index.html)
-
-  ![todo-mvc](https://xianshenglu.github.io/vue/demo/img-displayed/todo-mvc.gif)
-
-- [resume](https://github.com/xianshenglu/xianshenglu.github.io)
-
-  ![resume](https://xianshenglu.github.io/home/src/assets/images/homepage.gif)
+## 预览
 
 - kugou-music [Vue-version](https://xianshenglu.github.io/vue/demo/kugou/dist/index.html) [React-version](https://xianshenglu.github.io/vue/demo/kugou-react/build/)
+
+## 示例
 
 ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-1.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-2.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-3.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-5.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-6.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-7.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-8.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-9.jpg)
 
