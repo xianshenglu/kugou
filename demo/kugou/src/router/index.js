@@ -3,17 +3,18 @@ import VueRouter from 'vue-router'
 
 import store from '../store/index'
 
-import Main from '../components/Main'
-import NewSong from '../components/new_song/NewSong'
-import RankList from '../components/rank/RankList'
-import SongList from '../components/song/SongList'
-import SingerCategory from '../components/singer/SingerCategory'
-import RankInfo from '../components/rank/RankInfo'
-import SongListInfo from '../components/song/SongListInfo'
-import SingerList from '../components/singer/SingerList'
-import SingerInfo from '../components/singer/SingerInfo'
-import Search from '../components/search/Search'
-import PlayerMax from '../components/player/PlayerMax'
+const Main = () => import('../components/Main')
+
+const NewSong = () => import('../components/new_song/NewSong')
+const RankList = () => import('../components/rank/RankList')
+const SongList = () => import('../components/song/SongList')
+const SingerCategory = () => import('../components/singer/SingerCategory')
+const RankInfo = () => import('../components/rank/RankInfo')
+const SongListInfo = () => import('../components/song/SongListInfo')
+const SingerList = () => import('../components/singer/SingerList')
+const SingerInfo = () => import('../components/singer/SingerInfo')
+const Search = () => import('../components/search/Search')
+const PlayerMax = () => import('../components/player/PlayerMax')
 
 Vue.use(VueRouter)
 
