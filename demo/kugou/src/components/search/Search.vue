@@ -169,7 +169,7 @@ export default {
       //! bug with qq browser
       let listener = function() {
         if (search__cont.scrollTop) {
-          console.log(event.type, search__cont.scrollTop)
+          // console.log(event.type, search__cont.scrollTop)
         }
       }
       window.addEventListener('touchstart', listener)
