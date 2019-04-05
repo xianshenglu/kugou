@@ -1,97 +1,82 @@
 <template>
   <section class="slider" @touchstart.stop>
-    <swiper :options="swiperOptions" ref="mySwiper" class="slider__body">
-      <swiper-slide v-for="(item,index) in data" :key="index">
-        <a :href="item.extra.tourl" class="slider__link">
-          <img :src="item.imgurl" :alt="item.title" class="slider__img">
-        </a>
-      </swiper-slide>
-      <div class="swiper-pagination" slot="pagination"></div>
-    </swiper>
+    <div class="glide slider__body" ref="glide">
+      <div class="glide__track slider__track" data-glide-el="track">
+        <ul class="glide__slides slider__slides">
+          <li class="glide__slide" v-for="(item,index) in data" :key="index">
+            <a :href="item.extra.tourl" class="slider__link">
+              <img :src="item.imgurl" :alt="item.title" class="slider__img">
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="glide__bullets slider__bullets" data-glide-el="controls[nav]">
+        <button
+          class="glide__bullet"
+          v-for="(item,index) in data"
+          :key="index"
+          :data-glide-dir="'='+index"
+        ></button>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import 'swiper/dist/css/swiper.css'
+import Glide, {
+  Controls,
+  Autoplay,
+  Swipe
+} from '@glidejs/glide/dist/glide.modular.esm'
+
+let glide
 export default {
   name: 'Slider',
   props: ['data'],
-  components: {
-    swiper,
-    swiperSlide
+  mounted() {
+    this.$nextTick(() => {
+      // todo avoid setTimeout
+      setTimeout(() => {
+        glide = new Glide('.slider__body', {
+          type: 'carousel',
+          autoplay: 3000,
+          animationDuration: 1000
+        }).mount({
+          Autoplay,
+          Controls,
+          Swipe
+        })
+      }, 2000)
+    })
   },
-  data() {
-    return {
-      swiperOptions: {
-        autoplay: {
-          delay: 3000,
-          stopOnLastSlide: true,
-          disableOnInteraction: false
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          type: 'bullets',
-          clickable: true,
-          hideOnClick: false
-        },
-        on: {
-          imagesReady: function() {
-            this.autoplay.start()
-          },
-          slideChangeTransitionEnd: function() {
-            if (this.isEnd) {
-              this.autoplay.stop()
-              //! avoid blink in chrome, change to the same picture after render
-              setTimeout(() => {
-                this.slideTo(0, 0)
-                setTimeout(() => {
-                  this.autoplay.start()
-                }, this.params.autoplay.delay)
-              })
-            }
-          }
-        }
-      }
-    }
+  destroyed() {
+    glide.destroy()
   }
 }
 </script>
 
+<style lang="sass" scoped>
+@import 'node_modules/@glidejs/glide/src/assets/sass/glide.core';
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.theme";
+</style>
 <style scoped lang="less">
 @import (reference) '../../assets/css/constant.less';
 .slider {
   padding-top: 5px;
   position: relative;
 }
-.slider__body {
+.slider__body,
+.slider__track,
+.slider__slides {
   height: 100%;
+}
+.slider__bullets {
+  bottom: 0.8em;
 }
 .slider__link,
 .slider__img {
   display: block;
   width: 100%;
   height: 100%;
-}
-.swiper-pagination {
-  width: 20%;
-  margin: auto;
-  position: absolute;
-  bottom: 0px;
-  left: 0;
-  right: 0;
-}
-/deep/ .swiper-pagination-bullet {
-  background: @white;
-  opacity: 0.5;
-  width: 10px;
-  height: 10px;
-  margin: 4px;
-}
-/deep/ .swiper-pagination-bullet:last-child {
-  display: none;
-}
-/deep/ .swiper-pagination-bullet-active {
-  opacity: 1;
 }
 </style>
