@@ -36,7 +36,7 @@ export default {
         let banners = data.banner
         this.replaceProperty({
           paths: 'newSong.sliderData',
-          data: [...banners, banners[0]]
+          data: banners
         })
         this.stopLoading()
       })

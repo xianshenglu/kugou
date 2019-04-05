@@ -28,29 +28,48 @@ import Glide, {
   Autoplay,
   Swipe
 } from '@glidejs/glide/dist/glide.modular.esm'
-
+import { watchRefs } from '@/utils'
 let glide
 export default {
   name: 'Slider',
   props: ['data'],
   mounted() {
-    this.$nextTick(() => {
-      // todo avoid setTimeout
-      setTimeout(() => {
-        glide = new Glide('.slider__body', {
-          type: 'carousel',
-          autoplay: 3000,
-          animationDuration: 1000
-        }).mount({
-          Autoplay,
-          Controls,
-          Swipe
-        })
-      }, 2000)
-    })
+    this.checkDomReady()
   },
   destroyed() {
     glide.destroy()
+  },
+  methods: {
+    checkDomReady() {
+      const {
+        $refs: { glide }
+      } = this
+      let validator = els => els.length > 0 && els.length === this.data.length
+      let isDomReady =
+        validator(glide.querySelectorAll('.glide__slide')) &&
+        validator(glide.querySelectorAll('.glide__bullet'))
+      if (isDomReady) {
+        this.initGlideVm()
+        return
+      }
+      Promise.all([
+        watchRefs(this.$refs.glide, '.glide__slide', validator),
+        watchRefs(this.$refs.glide, '.glide__bullet', validator)
+      ]).then(() => {
+        this.initGlideVm()
+      })
+    },
+    initGlideVm() {
+      glide = new Glide('.slider__body', {
+        type: 'carousel',
+        autoplay: 3000,
+        animationDuration: 1000
+      }).mount({
+        Autoplay,
+        Controls,
+        Swipe
+      })
+    }
   }
 }
 </script>

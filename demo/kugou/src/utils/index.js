@@ -1,4 +1,8 @@
-export function watchRefs(parentNode = document, refsSelector) {
+export function watchRefs(
+  parentNode = document,
+  refsSelector,
+  validator = els => els.length > 0
+) {
   return new Promise(function(resolve) {
     let observer = new MutationObserver(callback)
     let config = { childList: true, subtree: true }
@@ -7,10 +11,10 @@ export function watchRefs(parentNode = document, refsSelector) {
     function callback(mutationsList, observer) {
       mutationsList.forEach(mutation => {
         if (mutation.type == 'childList') {
-          let refs = parentNode.querySelectorAll(refsSelector)
-          if (refs.length !== 0) {
+          let els = Array.from(parentNode.querySelectorAll(refsSelector))
+          if (validator(els)) {
             observer.disconnect()
-            resolve(Array.from(refs))
+            resolve(Array.from(els))
           }
         }
       })
