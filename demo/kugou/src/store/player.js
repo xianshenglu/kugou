@@ -1,7 +1,7 @@
 import axios from 'axios'
 import api from '../assets/js/api'
-import utils from '../assets/js/utils'
 import store from './index'
+import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 function getCurMusicIndex(state) {
   return state.song === null
     ? -1
@@ -27,7 +27,7 @@ const player = {
       if (state.song === null || !state.song.img) {
         return
       }
-      return utils.$_xsl__replaceImgUrlSize(state.song.img, 400)
+      return replaceSizeInUrl(state.song.img, 400)
     },
     singerName(state) {
       return state.music && state.music.filename.split('-')[0].trim()

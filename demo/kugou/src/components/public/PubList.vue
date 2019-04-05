@@ -1,5 +1,5 @@
 <template>
-  <ul class="list" @scroll="$_xsl__loadImgLazy($refs.lazyImages)">
+  <ul class="list" @scroll="lazyLoad($refs.lazyImages)">
     <li class="list__item main_border_bottom" v-for="(item,index) in pubList" :key="index">
       <router-link :to="item.path" class="list__link">
         <img
@@ -7,7 +7,7 @@
           ref="lazyImages"
           :src="logo__grey"
           :data-src="item.imgUrl"
-          :data-is-loaded="isLoaded"
+          :data-is-loaded="false"
         >
         <slot :data="item" name="cont"></slot>
         <button class="list__btn">
@@ -21,11 +21,11 @@
 </template>
 
 <script>
-import mixin from '../../mixins/index'
+import { lazyLoad } from '@/utils'
 import { mapState } from 'vuex'
+import detectToLazyLoad from '@/utils/detectToLazyLoad'
 export default {
   name: 'PubList',
-  mixins: [mixin],
   props: {
     pubList: {
       type: Array,
@@ -34,12 +34,17 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      lazyLoad
+    }
+  },
   computed: {
     ...mapState('images', ['logo__grey'])
   },
   mounted() {
     let lazyImages = this.$refs.lazyImages
-    this.$_xsl__detectToLoadImgLazy(lazyImages, this.$el, '.lazy_image')
+    detectToLazyLoad(lazyImages, this.$el, '.lazy_image')
   }
 }
 </script>

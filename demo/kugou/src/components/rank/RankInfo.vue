@@ -18,12 +18,12 @@ import PubModuleHead from '../public/PubModuleHead'
 import AppMusicList from '../public/AppMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api'
-import mixin from '../../mixins/index'
 import { mapState, mapMutations } from 'vuex'
 import loading from '../../mixins/loading'
+import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 export default {
   name: 'RankInfo',
-  mixins: [mixin, loading],
+  mixins: [loading],
   components: {
     PubModuleHead,
     AppMusicList
@@ -37,7 +37,7 @@ export default {
     ...mapState('rank', ['rankInfo']),
     getModuleHeadInfo() {
       return {
-        imgUrl: this.$_xsl__replaceImgUrlSize(this.rankInfo.info.banner7url),
+        imgUrl: replaceSizeInUrl(this.rankInfo.info.banner7url),
         name: this.rankInfo.info.rankname
       }
     },

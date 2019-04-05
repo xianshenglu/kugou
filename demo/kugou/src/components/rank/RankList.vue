@@ -10,13 +10,12 @@
 import PubList from '../public/PubList'
 import axios from 'axios'
 import api from '../../assets/js/api'
-import mixin from '../../mixins/index'
 import { mapState, mapMutations } from 'vuex'
 import loading from '../../mixins/loading'
-
+import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 export default {
   name: 'RankList',
-  mixins: [mixin, loading],
+  mixins: [loading],
   components: {
     PubList
   },
@@ -35,7 +34,7 @@ export default {
     getRank() {
       axios.get(api.rankList).then(({ data }) => {
         data.rank.list.forEach(obj => {
-          obj.imgUrl = this.$_xsl__replaceImgUrlSize(obj.imgurl)
+          obj.imgUrl = replaceSizeInUrl(obj.imgurl)
           obj.path = '/rank/info/' + obj.rankid
           obj.title = obj.rankname
         })

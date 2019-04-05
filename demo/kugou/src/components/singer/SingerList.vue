@@ -1,7 +1,7 @@
 <template>
   <section class="singer_list">
     <PubModuleTitle :title="singerList.info.name"/>
-    <ul class="singer_list__list" @scroll="$_xsl__loadImgLazy($refs.lazyImages)">
+    <ul class="singer_list__list" @scroll="lazyLoad($refs.lazyImages)">
       <li
         class="singer_list__item main_border_bottom"
         v-for="(item,index) in singerList.data"
@@ -13,7 +13,7 @@
             ref="lazyImages"
             :src="logo__grey"
             :data-src="item.imgUrl"
-            :data-is-loaded="isLoaded"
+            :data-is-loaded="false"
           >
           <div class="singer_list__name">{{item.name}}</div>
         </router-link>
@@ -26,15 +26,21 @@
 import PubModuleTitle from '../public/PubModuleTitle'
 import axios from 'axios'
 import api from '../../assets/js/api'
-import mixin from '../../mixins/index'
 import loading from '../../mixins/loading'
+import { lazyLoad } from '@/utils'
+import detectToLazyLoad from '@/utils/detectToLazyLoad'
 import { mapState, mapMutations } from 'vuex'
-
+import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 export default {
   name: 'SingerList',
-  mixins: [mixin, loading],
+  mixins: [loading],
   components: {
     PubModuleTitle
+  },
+  data() {
+    return {
+      lazyLoad
+    }
   },
   computed: {
     ...mapState('images', ['logo__grey']),
@@ -54,7 +60,7 @@ export default {
   },
   mounted() {
     let lazyImages = this.$refs.lazyImages
-    this.$_xsl__detectToLoadImgLazy(lazyImages, this.$el, '.lazy_image')
+    detectToLazyLoad(lazyImages, this.$el, '.lazy_image')
   },
   methods: {
     ...mapMutations(['replaceProperty']),
@@ -73,7 +79,7 @@ export default {
           data.singers.list.info.forEach(obj => {
             obj.id = obj.singerid
             obj.name = obj.singername
-            obj.imgUrl = this.$_xsl__replaceImgUrlSize(obj.imgurl)
+            obj.imgUrl = replaceSizeInUrl(obj.imgurl)
             obj.path = '/singer/info/' + obj.id
           })
           this.replaceProperty({

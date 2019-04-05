@@ -13,13 +13,12 @@ import PubModuleDes from '../public/PubModuleDes'
 import AppMusicList from '../public/AppMusicList'
 import axios from 'axios'
 import api from '../../assets/js/api'
-import mixin from '../../mixins/index'
 import loading from '../../mixins/loading'
 import { mapState, mapMutations } from 'vuex'
-
+import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 export default {
   name: 'SingerInfo',
-  mixins: [mixin, loading],
+  mixins: [loading],
   components: {
     PubModuleHead,
     AppMusicList,
@@ -52,7 +51,7 @@ export default {
               name: data.info.singername,
               count: data.info.songcount,
               albumcount: data.info.albumcount,
-              imgUrl: this.$_xsl__replaceImgUrlSize(data.info.imgurl),
+              imgUrl: replaceSizeInUrl(data.info.imgurl),
               intro: data.info.intro
             },
             data: data.songs.list

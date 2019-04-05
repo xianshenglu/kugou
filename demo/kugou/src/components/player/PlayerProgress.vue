@@ -10,12 +10,12 @@
 
 <script>
 import { mapState } from 'vuex'
-import mixin from '../../mixins/index'
+import { secondToMin } from '@/utils'
 export default {
   name: 'PlayerProgress',
-  mixins: [mixin],
   data() {
     return {
+      secondToMin,
       currentTime: 0,
       loadProgress: 0,
       isTouching: false,
@@ -31,11 +31,11 @@ export default {
     progressBarStyle() {
       return `background-image:linear-gradient(to right, #2ca2f9 ${
         this.currentProgress
-      }%, transparent ${
+        }%, transparent ${
         this.currentProgress
-      }%),linear-gradient(to right, #6c6b70 ${
+        }%),linear-gradient(to right, #6c6b70 ${
         this.loadProgress
-      }%, transparent ${this.loadProgress}%)`
+        }%, transparent ${this.loadProgress}%)`
     }
   },
   mounted() {
@@ -56,8 +56,7 @@ export default {
       }
       let bufferedLength = this.audioEl.buffered.length
       this.loadProgress = Math.floor(
-        (100 * this.audioEl.buffered.end(bufferedLength - 1)) /
-          this.audioEl.duration
+        (100 * this.audioEl.buffered.end(bufferedLength - 1)) / this.audioEl.duration
       )
     },
     timeUpdateCb(event) {

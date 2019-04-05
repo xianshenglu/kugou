@@ -4,7 +4,7 @@
       v-for="(item,index) in lyricItems"
       :key="item.millisecond"
       :ref="item.millisecond"
-      v-bind="vBindAttr('millisecond-'+item.millisecond)"
+      v-bind="getVBindObj('millisecond-'+item.millisecond)"
       :class="index===prevLyricIndex+1?'player_lyric_text player_lyric_text--active ':'player_lyric_text'"
     >{{ item.text }}</p>
     <!-- //todo make it width: 100% -->
@@ -13,12 +13,12 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import mixin from '../../mixins/index'
+import { getVBindObj } from '@/utils'
 export default {
   name: 'PlayerLyrics',
-  mixins: [mixin],
   data() {
     return {
+      getVBindObj,
       prevLyricIndex: 0,
       isTouching: false
     }
