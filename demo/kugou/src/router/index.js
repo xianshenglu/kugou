@@ -3,18 +3,28 @@ import VueRouter from 'vue-router'
 
 import store from '../store/index'
 
-const Main = () => import('../components/Main')
+const Main = () => import(/* webpackChunkName: "Main" */ '../components/Main')
 
-const NewSong = () => import('../components/new_song/NewSong')
-const RankList = () => import('../components/rank/RankList')
-const SongList = () => import('../components/song/SongList')
-const SingerCategory = () => import('../components/singer/SingerCategory')
-const RankInfo = () => import('../components/rank/RankInfo')
-const SongListInfo = () => import('../components/song/SongListInfo')
-const SingerList = () => import('../components/singer/SingerList')
-const SingerInfo = () => import('../components/singer/SingerInfo')
-const Search = () => import('../components/search/Search')
-const PlayerMax = () => import('../components/player/PlayerMax')
+const NewSong = () =>
+  import(/* webpackChunkName: "NewSong" */ '../components/new_song/NewSong')
+const RankList = () =>
+  import(/* webpackChunkName: "RankList" */ '../components/rank/RankList')
+const SongList = () =>
+  import(/* webpackChunkName: "SongList" */ '../components/song/SongList')
+const SingerCategory = () =>
+  import(/* webpackChunkName: "SingerCategory" */ '../components/singer/SingerCategory')
+const RankInfo = () =>
+  import(/* webpackChunkName: "RankInfo" */ '../components/rank/RankInfo')
+const SongListInfo = () =>
+  import(/* webpackChunkName: "SongListInfo" */ '../components/song/SongListInfo')
+const SingerList = () =>
+  import(/* webpackChunkName: "SingerList" */ '../components/singer/SingerList')
+const SingerInfo = () =>
+  import(/* webpackChunkName: "SingerInfo" */ '../components/singer/SingerInfo')
+const Search = () =>
+  import(/* webpackChunkName: "Search" */ '../components/search/Search')
+const PlayerMax = () =>
+  import(/* webpackChunkName: "PlayerMax" */ '../components/player/PlayerMax')
 
 Vue.use(VueRouter)
 
