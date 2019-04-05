@@ -11,8 +11,7 @@
     "@glidejs/glide": "^3.2.7",
     "css-vars-ponyfill": "^1.15.3",
     "mockjs": "^1.0.1-beta3",
-    "vue": "^2.5.16",
-    "xsl-js-utils": "^1.0.0"
+    "vue": "^2.5.16"
   },
   "devDependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
