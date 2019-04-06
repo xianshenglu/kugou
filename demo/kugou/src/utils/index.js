@@ -22,18 +22,19 @@ export function watchRefs(
   })
 }
 
-export function lazyLoad(els) {
-  if (!Array.isArray(els)) {
-    return
-  }
-  let unloadedImages = els.filter(img => !img.dataset.isLoaded)
-  unloadedImages.forEach(img => {
-    let top = img.getBoundingClientRect().top
-    if (top < window.innerHeight) {
-      img.src = img.dataset.src
-      img.dataset.isLoaded = true
-    }
-  })
+export function lazyLoad(els, options) {
+  let observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting) {
+          target.src = target.dataset.src
+          observer.unobserve(target)
+        }
+      })
+    },
+    { threshold: 1, ...options }
+  )
+  Array.from(els).forEach(el => observer.observe(el))
 }
 
 export function secondToMin(seconds) {

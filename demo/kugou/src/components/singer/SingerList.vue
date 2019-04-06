@@ -1,7 +1,7 @@
 <template>
   <section class="singer_list">
     <PubModuleTitle :title="singerList.info.name"/>
-    <ul class="singer_list__list" @scroll="lazyLoad($refs.lazyImages)">
+    <ul class="singer_list__list" ref="lazyLoadRoot">
       <li
         class="singer_list__item main_border_bottom"
         v-for="(item,index) in singerList.data"
@@ -13,7 +13,6 @@
             ref="lazyImages"
             :src="logo__grey"
             :data-src="item.imgUrl"
-            :data-is-loaded="false"
           >
           <div class="singer_list__name">{{item.name}}</div>
         </router-link>
@@ -28,7 +27,6 @@ import axios from 'axios'
 import api from '../../assets/js/api'
 import loading from '../../mixins/loading'
 import { lazyLoad } from '@/utils'
-import detectToLazyLoad from '@/utils/detectToLazyLoad'
 import { mapState, mapMutations } from 'vuex'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 export default {
@@ -37,17 +35,25 @@ export default {
   components: {
     PubModuleTitle
   },
-  data() {
-    return {
-      lazyLoad
-    }
-  },
   computed: {
     ...mapState('images', ['logo__grey']),
     ...mapState('singer', ['singerList']),
     ...mapState('loading', {
       isLoadingShow: 'isShow'
     })
+  },
+  watch: {
+    'singerList.data': {
+      handler: function(newArray) {
+        if (newArray.length === 0) {
+          return
+        }
+        this.$nextTick(() =>
+          lazyLoad(this.$refs.lazyImages, { root: this.$refs.lazyLoadRoot })
+        )
+      },
+      immediate: true
+    }
   },
   created() {
     // todo add scrollRemember
@@ -57,10 +63,6 @@ export default {
       this.startLoading()
       this.getSingerList(singerListId)
     }
-  },
-  mounted() {
-    let lazyImages = this.$refs.lazyImages
-    detectToLazyLoad(lazyImages, this.$el, '.lazy_image')
   },
   methods: {
     ...mapMutations(['replaceProperty']),

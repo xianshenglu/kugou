@@ -1,5 +1,5 @@
 <template>
-  <ul class="list" @scroll="lazyLoad($refs.lazyImages)">
+  <ul class="list" ref="lazyLoadRoot">
     <li class="list__item main_border_bottom" v-for="(item,index) in pubList" :key="index">
       <router-link :to="item.path" class="list__link">
         <img
@@ -7,7 +7,6 @@
           ref="lazyImages"
           :src="logo__grey"
           :data-src="item.imgUrl"
-          :data-is-loaded="false"
         >
         <slot :data="item" name="cont"></slot>
         <button class="list__btn">
@@ -23,7 +22,6 @@
 <script>
 import { lazyLoad } from '@/utils'
 import { mapState } from 'vuex'
-import detectToLazyLoad from '@/utils/detectToLazyLoad'
 export default {
   name: 'PubList',
   props: {
@@ -34,17 +32,21 @@ export default {
       }
     }
   },
-  data() {
-    return {
-      lazyLoad
+  watch: {
+    pubList: {
+      handler: function(newArray) {
+        if (newArray.length === 0) {
+          return
+        }
+        this.$nextTick(() =>
+          lazyLoad(this.$refs.lazyImages, { root: this.$refs.lazyLoadRoot })
+        )
+      },
+      immediate: true
     }
   },
   computed: {
     ...mapState('images', ['logo__grey'])
-  },
-  mounted() {
-    let lazyImages = this.$refs.lazyImages
-    detectToLazyLoad(lazyImages, this.$el, '.lazy_image')
   }
 }
 </script>
