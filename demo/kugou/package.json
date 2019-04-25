@@ -10,20 +10,22 @@
   },
   "dependencies": {
     "@glidejs/glide": "^3.2.7",
+    "axios": "^0.18.0",
     "css-vars-ponyfill": "^1.15.3",
-    "mockjs": "^1.0.1-beta3",
-    "vue": "^2.5.16"
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@vue/cli-plugin-babel": "^3.0.0-beta.15",
     "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
     "@vue/cli-service": "^3.0.0-beta.15",
-    "axios": "^0.18.0",
     "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-prettier": "^3.0.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
+    "mockjs": "^1.0.1-beta3",
     "node-sass": "^4.11.0",
     "postcss-pixel-to-viewport": "^1.0.2",
     "postcss-plugin-pxtoviewport": "0.0.5",
@@ -31,9 +33,7 @@
     "prettier": "^1.14.3",
     "sass-loader": "^7.1.0",
     "vconsole": "^3.2.0",
-    "vue-router": "^3.0.1",
-    "vue-template-compiler": "^2.5.16",
-    "vuex": "^3.0.1"
+    "vue-template-compiler": "^2.5.16"
   },
   "eslintConfig": {
     "root": true,
