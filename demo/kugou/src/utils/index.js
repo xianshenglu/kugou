@@ -36,7 +36,8 @@ export function lazyLoad(els, options) {
   )
   Array.from(els).forEach(el => observer.observe(el))
 }
-
+// todo tree-shake bug: https://github.com/webpack/webpack/issues/4453
+// secondToMin only used once. But it exists in all chunks which have imported from this file.
 export function secondToMin(seconds) {
   if (isNaN(Number(seconds))) {
     return '00:00'
