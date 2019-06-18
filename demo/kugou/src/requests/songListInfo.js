@@ -1,6 +1,8 @@
 import http from './http'
-import { getSongListInfo } from '../api/rankInfo'
+import { getSongListInfo } from '../api/songListInfo'
 
-export const fetchSongListInfo = (params = {}) => {
-  return http({ ...getSongListInfo, params: { json: true, ...params } })
+export const fetchSongListInfo = ({ songListId, params = {} } = {}) => {
+  let { url, ...props } = getSongListInfo
+  url += '/' + songListId
+  return http({ ...props, url, params: { json: true, ...params } })
 }
