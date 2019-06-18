@@ -1,6 +1,6 @@
 import http from './http'
-import { getSongList } from '../api/rankInfo'
+import { getSongList } from '../api/songList'
 
-export const fetchSongList = (params = {}) => {
+export const fetchSongList = ({ params = {} } = {}) => {
   return http({ ...getSongList, params: { ...params } })
 }
