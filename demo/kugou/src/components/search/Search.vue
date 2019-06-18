@@ -38,8 +38,7 @@
 <script>
 import PubModuleTitle from '../public/PubModuleTitle'
 import AppMusicList from '../public/AppMusicList'
-import axios from 'axios'
-import api from '../../assets/js/api'
+import { fetchHotSearch, fetchSearchResult } from '../../requests/search'
 import bus from '../../assets/js/bus'
 import loading from '../../mixins/loading.js'
 import { mapState, mapMutations } from 'vuex'
@@ -126,8 +125,7 @@ export default {
       }
       this.setLoadingExcludeSearchForm()
       this.startLoading()
-      axios
-        .get(api.hotSearch)
+      fetchHotSearch()
         .then(({ data }) => {
           this.replaceProperty({
             paths: 'search.searchRecArr',
@@ -146,22 +144,18 @@ export default {
         return
       }
       this.$router.replace({ query: { keyword: this.keyword } })
-      let url = api.searchResult + encodeURIComponent(this.keyword)
       this.setLoadingExcludeSearchForm()
       this.startLoading()
-      axios
-        .get(url)
-        .then(res => {
-          let data = res.data.data
-          this.replaceProperty({
-            paths: 'search.searchRes',
-            data
-          })
-          this.isSearchRecShow = false
-          this.isSearchResShow = true
-          this.stopLoading()
+      fetchSearchResult({ params: { keyword: this.keyword } }).then(res => {
+        let data = res.data.data
+        this.replaceProperty({
+          paths: 'search.searchRes',
+          data
         })
-        .catch(er => alert(er))
+        this.isSearchRecShow = false
+        this.isSearchResShow = true
+        this.stopLoading()
+      })
     },
     initQqBugDetect() {
       let search__cont = document.getElementsByClassName('search__cont')[0]

@@ -8,8 +8,7 @@
 <script>
 import AppMusicList from '../public/AppMusicList'
 import Slider from './Slider.vue'
-import axios from 'axios'
-import api from '../../assets/js/api'
+import { fetchNewSong } from '@/requests/newSong'
 import { mapState, mapMutations } from 'vuex'
 import loading from '../../mixins/loading'
 export default {
@@ -28,7 +27,7 @@ export default {
   methods: {
     ...mapMutations(['replaceProperty']),
     getNewSong() {
-      axios.get(api.newSong).then(({ data }) => {
+      fetchNewSong().then(({ data }) => {
         this.replaceProperty({
           paths: 'newSong.newSongs',
           data: data.data

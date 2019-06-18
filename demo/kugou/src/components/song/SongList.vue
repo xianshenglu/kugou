@@ -16,8 +16,7 @@
 
 <script>
 import PubList from '../public/PubList'
-import axios from 'axios'
-import api from '../../assets/js/api'
+import { fetchSongList } from '../../requests/songList'
 import { mapState, mapMutations } from 'vuex'
 import loading from '../../mixins/loading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
@@ -40,7 +39,7 @@ export default {
   methods: {
     ...mapMutations(['replaceProperty']),
     getSongList() {
-      axios.get(api.songList).then(({ data }) => {
+      fetchSongList().then(({ data }) => {
         data.plist.list.info.forEach(obj => {
           obj.imgUrl = replaceSizeInUrl(obj.imgurl)
           obj.path = '/song/list/' + obj.specialid

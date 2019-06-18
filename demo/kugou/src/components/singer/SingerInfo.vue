@@ -11,8 +11,7 @@
 import PubModuleHead from '../public/PubModuleHead'
 import PubModuleDes from '../public/PubModuleDes'
 import AppMusicList from '../public/AppMusicList'
-import axios from 'axios'
-import api from '../../assets/js/api'
+import { fetchSingerInfo } from '../../requests/singerInfo'
 import loading from '../../mixins/loading'
 import { mapState, mapMutations } from 'vuex'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
@@ -42,8 +41,7 @@ export default {
   methods: {
     ...mapMutations(['replaceProperty']),
     getSingerInfo(singerId) {
-      axios
-        .get(api.singerInfo.replace(/singerId?/i, singerId))
+      fetchSingerInfo({ singerId })
         .then(({ data }) => {
           let singerInfo = {
             info: {
@@ -65,9 +63,6 @@ export default {
             data: singerInfo
           })
           this.stopLoading()
-        })
-        .catch(er => {
-          alert(er)
         })
     }
   }

@@ -27,8 +27,7 @@ import NextButton from './NextButton'
 import PrevButton from './PrevButton'
 
 import { mapState, mapGetters, mapMutations } from 'vuex'
-import axios from 'axios'
-import api from '../../assets/js/api'
+import { fetchSongLyric } from '@/requests/playerMax'
 import store from '../../store/index'
 export default {
   name: 'PlayerMax',
@@ -64,15 +63,12 @@ export default {
       return next()
     }
     //? just commit player/wantPlay is enough?
-    return axios
-      .get(api.songInfo + musicHash)
-      .then(res => {
-        let data = res.data
-        data.filename = data.fileName
-        store.commit('player/wantPlay', { music: data, musicList: [data] })
-        next()
-      })
-      .catch(er => alert(er))
+    return fetchSongLyric({ params: { hash: musicHash } }).then(res => {
+      let data = res.data
+      data.filename = data.fileName
+      store.commit('player/wantPlay', { music: data, musicList: [data] })
+      next()
+    })
   },
   mounted() {
     this.replaceProperty({

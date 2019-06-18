@@ -16,8 +16,7 @@
 <script>
 import PubModuleHead from '../public/PubModuleHead'
 import AppMusicList from '../public/AppMusicList'
-import axios from 'axios'
-import api from '../../assets/js/api'
+import { fetchRankInfo } from '@/requests/rankInfo'
 import { mapState, mapMutations } from 'vuex'
 import loading from '../../mixins/loading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
@@ -64,22 +63,17 @@ export default {
   methods: {
     ...mapMutations(['replaceProperty']),
     getRankInfo(rankId) {
-      axios
-        .get(api.rankInfo + rankId)
-        .then(res => {
-          let rankInfo = {
-            info: res.data.info,
-            songs: res.data.songs
-          }
-          this.replaceProperty({
-            paths: 'rank.rankInfo',
-            data: rankInfo
-          })
-          this.stopLoading()
+      fetchRankInfo({ params: { rankid: rankId } }).then(res => {
+        let rankInfo = {
+          info: res.data.info,
+          songs: res.data.songs
+        }
+        this.replaceProperty({
+          paths: 'rank.rankInfo',
+          data: rankInfo
         })
-        .catch(er => {
-          alert(er)
-        })
+        this.stopLoading()
+      })
     }
   }
 }

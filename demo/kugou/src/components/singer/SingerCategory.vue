@@ -24,8 +24,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-import api from '../../assets/js/api'
+import { fetchSingerCategory } from '../../requests/singerCategory'
 import { mapState, mapMutations } from 'vuex'
 import loading from '../../mixins/loading'
 export default {
@@ -44,7 +43,7 @@ export default {
   methods: {
     ...mapMutations(['replaceProperty']),
     getSingerCategories() {
-      axios.get(api.singerCategory).then(({ data }) => {
+      fetchSingerCategory().then(({ data }) => {
         let singerCategories = data.list.reduce((re, obj) => {
           obj.path = '/singer/list/' + obj.classid
           let findCategories = re.find(

@@ -23,8 +23,7 @@
 
 <script>
 import PubModuleTitle from '../public/PubModuleTitle'
-import axios from 'axios'
-import api from '../../assets/js/api'
+import { fetchSingerList } from '../../requests/singerList'
 import loading from '../../mixins/loading'
 import { lazyLoad } from '@/utils'
 import { mapState, mapMutations } from 'vuex'
@@ -67,32 +66,27 @@ export default {
   methods: {
     ...mapMutations(['replaceProperty']),
     getSingerList(singerListId) {
-      axios
-        .get(api.singerList.replace(/singerListId?/i, singerListId))
-        .then(({ data }) => {
-          let singerList = {
-            info: {
-              id: data.classid,
-              name: data.classname,
-              count: data.singers.total
-            },
-            data: data.singers.list.info
-          }
-          data.singers.list.info.forEach(obj => {
-            obj.id = obj.singerid
-            obj.name = obj.singername
-            obj.imgUrl = replaceSizeInUrl(obj.imgurl)
-            obj.path = '/singer/info/' + obj.id
-          })
-          this.replaceProperty({
-            paths: 'singer.singerList',
-            data: singerList
-          })
-          this.stopLoading()
+      fetchSingerList({ params: { singerListId } }).then(({ data }) => {
+        let singerList = {
+          info: {
+            id: data.classid,
+            name: data.classname,
+            count: data.singers.total
+          },
+          data: data.singers.list.info
+        }
+        data.singers.list.info.forEach(obj => {
+          obj.id = obj.singerid
+          obj.name = obj.singername
+          obj.imgUrl = replaceSizeInUrl(obj.imgurl)
+          obj.path = '/singer/info/' + obj.id
         })
-        .catch(er => {
-          alert(er)
+        this.replaceProperty({
+          paths: 'singer.singerList',
+          data: singerList
         })
+        this.stopLoading()
+      })
     }
   }
 }
