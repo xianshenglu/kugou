@@ -1,13 +1,26 @@
 import axios from 'axios'
-const http = axios.create({})
-http.interceptors.response.use(response => response, function(error) {
+import { isObject } from '../utils'
+const requestErrorHandler = error => {
   const isMsgValid =
-    typeof error === 'object' && error !== null && String(error.message) !== ''
+    isObject(error) &&
+    typeof error.message === 'string' &&
+    error.message.trim() !== ''
   if (isMsgValid) {
     alert(error.message)
   } else {
     alert('System error, please contact administrator!')
   }
   return Promise.reject(error)
-})
+}
+
+const http = axios.create({})
+
+http.interceptors.response.use(response => {
+  const { data } = response
+  if (data.status === 0) {
+    return requestErrorHandler(data)
+  }
+  return response
+}, requestErrorHandler)
+
 export default http

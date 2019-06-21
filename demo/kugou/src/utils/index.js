@@ -53,3 +53,6 @@ export function getVBindObj(key, prefix = 'data-') {
     [`${prefix + key}`]: ''
   }
 }
+export function isObject(obj) {
+  return typeof obj === 'object' && obj !== null
+}
