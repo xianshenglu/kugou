@@ -17,6 +17,7 @@ const http = axios.create({})
 
 http.interceptors.response.use(response => {
   const { data } = response
+  // todo add other error scenarios
   if (data.status === 0) {
     return requestErrorHandler(data)
   }
