@@ -1,5 +1,4 @@
-import axios from 'axios'
-import api from '../assets/js/api'
+import { fetchSongLyric } from '../requests/playerMax'
 import store from './index'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 function getCurMusicIndex(state) {
@@ -120,7 +119,7 @@ const player = {
   },
   actions: {
     fetchMusic({ commit }, { musicHash, musicList }) {
-      axios.get(api.songLyric + musicHash).then(res => {
+      fetchSongLyric({ params: { hash: musicHash } }).then(res => {
         let data = res.data.data
         musicList = musicList.length === 0 ? [data] : musicList
         commit(
