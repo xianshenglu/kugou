@@ -4,9 +4,7 @@ import router from './router/index'
 import store from './store/index'
 import './assets/js/globalEvent'
 // import '../src/assets/js/mobileLayout.js'
-import './assets/css/reset.css'
-import './assets/css/base.less'
-import './assets/css/iconfont.css'
+import './styles/index.less'
 
 // use mock instead of real http request when in development
 

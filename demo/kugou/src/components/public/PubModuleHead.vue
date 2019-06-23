@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) '../../assets/css/constant.less';
+@import (reference) '../../styles/constant';
 .module__head {
   display: flex;
 

@@ -60,7 +60,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) './assets/css/constant.less';
+@import (reference) './styles/constant';
 .app {
   width: 100%;
   height: 100%;

@@ -180,7 +180,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import (reference) '../../assets/css/constant.less';
+@import (reference) '../../styles/constant';
 .search {
   box-sizing: border-box;
 }

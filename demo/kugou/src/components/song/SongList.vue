@@ -58,7 +58,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) '../../assets/css/constant.less';
+@import (reference) '../../styles/constant';
 .song_list__cont {
   overflow: scroll;
 

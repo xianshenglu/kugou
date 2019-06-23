@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) '../../assets/css/constant.less';
+@import (reference) '../../styles/constant';
 .singer_category__list {
   width: 347px;
   margin: 18px auto;

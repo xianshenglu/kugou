@@ -72,7 +72,7 @@ export default {
 @import "node_modules/@glidejs/glide/src/assets/sass/glide.theme";
 </style>
 <style scoped lang="less">
-@import (reference) '../../assets/css/constant.less';
+@import (reference) '../../styles/constant';
 .slider {
   padding-top: 5px;
   position: relative;
