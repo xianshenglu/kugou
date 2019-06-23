@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import PubModuleHead from '../public/PubModuleHead'
-import PubModuleDes from '../public/PubModuleDes'
-import AppMusicList from '../public/AppMusicList'
+import PubModuleHead from '@/components/PubModuleHead'
+import PubModuleDes from '@/components/PubModuleDes'
+import AppMusicList from '@/components/AppMusicList'
 import { fetchSongListInfo } from '../../requests/songListInfo'
 import loading from '../../mixins/loading'
 import { mapState, mapMutations } from 'vuex'

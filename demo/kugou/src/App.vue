@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import AppHeader from '@/components/public/AppHeader'
-import AppNav from './components/public/AppNav'
-import AppLoading from './components/public/AppLoading'
+import AppHeader from '@/components/AppHeader'
+import AppNav from './components/AppNav'
+import AppLoading from './components/AppLoading'
 import PlayerMed from './components/player/PlayerMed'
 import { mapState, mapMutations } from 'vuex'
 

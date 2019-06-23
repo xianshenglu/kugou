@@ -3,28 +3,28 @@ import VueRouter from 'vue-router'
 
 import store from '../store/index'
 
-const Main = () => import(/* webpackChunkName: "Main" */ '../components/Main')
+const Main = () => import(/* webpackChunkName: "Main" */ '../views/Main')
 
 const NewSong = () =>
-  import(/* webpackChunkName: "NewSong" */ '../components/new_song/NewSong')
+  import(/* webpackChunkName: "NewSong" */ '../views/new_song/NewSong')
 const RankList = () =>
-  import(/* webpackChunkName: "RankList" */ '../components/rank/RankList')
+  import(/* webpackChunkName: "RankList" */ '../views/rank/RankList')
 const SongList = () =>
-  import(/* webpackChunkName: "SongList" */ '../components/song/SongList')
+  import(/* webpackChunkName: "SongList" */ '../views/song/SongList')
 const SingerCategory = () =>
-  import(/* webpackChunkName: "SingerCategory" */ '../components/singer/SingerCategory')
+  import(/* webpackChunkName: "SingerCategory" */ '../views/singer/SingerCategory')
 const RankInfo = () =>
-  import(/* webpackChunkName: "RankInfo" */ '../components/rank/RankInfo')
+  import(/* webpackChunkName: "RankInfo" */ '../views/rank/RankInfo')
 const SongListInfo = () =>
-  import(/* webpackChunkName: "SongListInfo" */ '../components/song/SongListInfo')
+  import(/* webpackChunkName: "SongListInfo" */ '../views/song/SongListInfo')
 const SingerList = () =>
-  import(/* webpackChunkName: "SingerList" */ '../components/singer/SingerList')
+  import(/* webpackChunkName: "SingerList" */ '../views/singer/SingerList')
 const SingerInfo = () =>
-  import(/* webpackChunkName: "SingerInfo" */ '../components/singer/SingerInfo')
+  import(/* webpackChunkName: "SingerInfo" */ '../views/singer/SingerInfo')
 const Search = () =>
-  import(/* webpackChunkName: "Search" */ '../components/search/Search')
+  import(/* webpackChunkName: "Search" */ '../views/search/Search')
 const PlayerMax = () =>
-  import(/* webpackChunkName: "PlayerMax" */ '../components/player/PlayerMax')
+  import(/* webpackChunkName: "PlayerMax" */ '../views/player/PlayerMax')
 
 Vue.use(VueRouter)
 

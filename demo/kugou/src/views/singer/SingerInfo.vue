@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import PubModuleHead from '../public/PubModuleHead'
-import PubModuleDes from '../public/PubModuleDes'
-import AppMusicList from '../public/AppMusicList'
+import PubModuleHead from '@/components/PubModuleHead'
+import PubModuleDes from '@/components/PubModuleDes'
+import AppMusicList from '@/components/AppMusicList'
 import { fetchSingerInfo } from '../../requests/singerInfo'
 import loading from '../../mixins/loading'
 import { mapState, mapMutations } from 'vuex'
@@ -41,29 +41,28 @@ export default {
   methods: {
     ...mapMutations(['replaceProperty']),
     getSingerInfo(singerId) {
-      fetchSingerInfo({ singerId })
-        .then(({ data }) => {
-          let singerInfo = {
-            info: {
-              id: data.info.singerid,
-              name: data.info.singername,
-              count: data.info.songcount,
-              albumcount: data.info.albumcount,
-              imgUrl: replaceSizeInUrl(data.info.imgurl),
-              intro: data.info.intro
-            },
-            data: data.songs.list
-          }
-          data.songs.list.forEach(obj => {
-            obj.name = obj.filename
-            // obj.path='/singer/info/'+obj.id
-          })
-          this.replaceProperty({
-            paths: 'singer.singerInfo',
-            data: singerInfo
-          })
-          this.stopLoading()
+      fetchSingerInfo({ singerId }).then(({ data }) => {
+        let singerInfo = {
+          info: {
+            id: data.info.singerid,
+            name: data.info.singername,
+            count: data.info.songcount,
+            albumcount: data.info.albumcount,
+            imgUrl: replaceSizeInUrl(data.info.imgurl),
+            intro: data.info.intro
+          },
+          data: data.songs.list
+        }
+        data.songs.list.forEach(obj => {
+          obj.name = obj.filename
+          // obj.path='/singer/info/'+obj.id
         })
+        this.replaceProperty({
+          paths: 'singer.singerInfo',
+          data: singerInfo
+        })
+        this.stopLoading()
+      })
     }
   }
 }

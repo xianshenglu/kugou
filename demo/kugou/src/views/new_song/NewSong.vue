@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import AppMusicList from '../public/AppMusicList'
+import AppMusicList from '@/components/AppMusicList'
 import Slider from './Slider.vue'
 import { fetchNewSong } from '@/requests/newSong'
 import { mapState, mapMutations } from 'vuex'

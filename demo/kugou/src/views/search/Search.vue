@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import PubModuleTitle from '../public/PubModuleTitle'
-import AppMusicList from '../public/AppMusicList'
+import PubModuleTitle from '@/components/PubModuleTitle'
+import AppMusicList from '@/components/AppMusicList'
 import { fetchHotSearch, fetchSearchResult } from '../../requests/search'
 import bus from '@/eventBus'
 import loading from '../../mixins/loading.js'

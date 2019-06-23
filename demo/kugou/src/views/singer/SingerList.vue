@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import PubModuleTitle from '../public/PubModuleTitle'
+import PubModuleTitle from '@/components/PubModuleTitle'
 import { fetchSingerList } from '../../requests/singerList'
 import loading from '../../mixins/loading'
 import { lazyLoad } from '@/utils'

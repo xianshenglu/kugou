@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import (reference) '../../styles/constant';
+@import (reference) '../styles/constant';
 .module_title {
   width: 100%;
   height: @module_title_height;

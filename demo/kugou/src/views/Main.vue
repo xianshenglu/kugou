@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import AppNav from './public/AppNav'
+import AppNav from '@/components/AppNav'
 export default {
   name: 'Main',
   components: {

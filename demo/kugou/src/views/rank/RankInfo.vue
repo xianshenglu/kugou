@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import PubModuleHead from '../public/PubModuleHead'
-import AppMusicList from '../public/AppMusicList'
+import PubModuleHead from '@/components/PubModuleHead'
+import AppMusicList from '@/components/AppMusicList'
 import { fetchRankInfo } from '@/requests/rankInfo'
 import { mapState, mapMutations } from 'vuex'
 import loading from '../../mixins/loading'

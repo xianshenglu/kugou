@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) '../../styles/constant';
+@import (reference) '../styles/constant';
 .nav {
   position: relative;
 }
