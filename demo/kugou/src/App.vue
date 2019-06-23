@@ -3,7 +3,6 @@
     <AppLoading/>
     <!-- //todo 3. add download for download button when user is admin-->
     <!-- //todo 4. add download, songInfo, comments in PlayerMax -->
-    <!-- //todo 5. add multiple split pages -->
     <AppHeader class="app__header"/>
     <router-view class="app__cont"></router-view>
     <audio
