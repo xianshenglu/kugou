@@ -2,8 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import store from '../store/index'
-
-const Main = () => import(/* webpackChunkName: "Main" */ '../views/Main')
+import Main from '../components/Main'
 
 const NewSong = () =>
   import(/* webpackChunkName: "NewSong" */ '../views/newSong/NewSong')
