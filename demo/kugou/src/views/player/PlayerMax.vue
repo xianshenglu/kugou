@@ -27,7 +27,7 @@ import NextButton from './NextButton'
 import PrevButton from './PrevButton'
 
 import { mapState, mapGetters, mapMutations } from 'vuex'
-import { fetchSongLyric } from '@/requests/playerMax'
+import { fetchSongLyric } from '@/requests/player'
 import store from '../../store/index'
 export default {
   name: 'PlayerMax',

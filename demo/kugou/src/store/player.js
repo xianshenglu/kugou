@@ -1,4 +1,4 @@
-import { fetchSongLyric } from '../requests/playerMax'
+import { fetchSongLyric } from '../requests/player'
 import store from './index'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 function getCurMusicIndex(state) {

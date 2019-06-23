@@ -1,4 +1,4 @@
-import { getSongLyric, getSongInfo } from '../api/playerMax'
+import { getSongLyric, getSongInfo } from '../api/player'
 import http from './http'
 
 export const fetchSongLyric = ({ params = {} } = {}) => {
