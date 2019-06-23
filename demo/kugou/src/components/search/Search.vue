@@ -39,7 +39,7 @@
 import PubModuleTitle from '../public/PubModuleTitle'
 import AppMusicList from '../public/AppMusicList'
 import { fetchHotSearch, fetchSearchResult } from '../../requests/search'
-import bus from '../../assets/js/bus'
+import bus from '@/eventBus'
 import loading from '../../mixins/loading.js'
 import { mapState, mapMutations } from 'vuex'
 

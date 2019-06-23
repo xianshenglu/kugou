@@ -22,7 +22,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
-import bus from '../../assets/js/bus.js'
+import bus from '@/eventBus'
 export default {
   name: 'AppHeader',
   data() {
