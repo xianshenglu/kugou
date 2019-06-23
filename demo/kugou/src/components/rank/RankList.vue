@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import PubList from '../public/PubList'
+import PubList from '@/modules/PubList'
 import { fetchRankList } from '@/requests/rankList'
 import { mapState, mapMutations } from 'vuex'
 import loading from '../../mixins/loading'

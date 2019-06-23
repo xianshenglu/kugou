@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import PubList from '../public/PubList'
+import PubList from '@/modules/PubList'
 import { fetchSongList } from '../../requests/songList'
 import { mapState, mapMutations } from 'vuex'
 import loading from '../../mixins/loading'
