@@ -6,7 +6,7 @@ import store from '../store/index'
 const Main = () => import(/* webpackChunkName: "Main" */ '../views/Main')
 
 const NewSong = () =>
-  import(/* webpackChunkName: "NewSong" */ '../views/new_song/NewSong')
+  import(/* webpackChunkName: "NewSong" */ '../views/newSong/NewSong')
 const RankList = () =>
   import(/* webpackChunkName: "RankList" */ '../views/rank/RankList')
 const SongList = () =>
