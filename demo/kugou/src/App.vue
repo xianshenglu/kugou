@@ -24,7 +24,7 @@
 import AppHeader from '@/components/AppHeader'
 import AppNav from './components/AppNav'
 import AppLoading from './components/AppLoading'
-import PlayerMed from './components/player/PlayerMed'
+import PlayerMed from './views/player/PlayerMed'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
