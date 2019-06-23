@@ -37,7 +37,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import (reference) '../styles/constant';
+@import (reference) '~@/styles/constant';
 .module_info__intro {
   display: flex;
   overflow: hidden;

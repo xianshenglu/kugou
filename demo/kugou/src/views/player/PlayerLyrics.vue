@@ -60,7 +60,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import (reference) '../../styles/constant';
+@import (reference) '~@/styles/constant';
 .player_lyric {
   color: @white-3;
   overflow: scroll;

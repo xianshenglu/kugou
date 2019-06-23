@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) '../styles/constant';
+@import (reference) '~@/styles/constant';
 .list {
   padding-left: @padding_width;
 }

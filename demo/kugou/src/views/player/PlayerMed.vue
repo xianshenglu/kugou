@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import (reference) '../../styles/constant';
+@import (reference) '~@/styles/constant';
 .player,
 .player__link {
   display: flex;

@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) '../styles/constant';
+@import (reference) '~@/styles/constant';
 .header {
   display: flex;
   align-items: center;

@@ -80,7 +80,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import (reference) '../../styles/constant';
+@import (reference) '~@/styles/constant';
 .rank_info__update_time {
   align-self: flex-end;
 
