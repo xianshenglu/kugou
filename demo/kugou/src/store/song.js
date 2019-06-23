@@ -1,5 +1,3 @@
-import axios from 'axios'
-import api from '../assets/js/api'
 const song = {
   namespaced: true,
   state: {
