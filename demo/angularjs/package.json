@@ -1,0 +1,30 @@
+{
+  "name": "kugou",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "npm install",
+    "start": "http-server ./app -a localhost -p 8000 -c-1",
+    "build": ""
+  },
+  "keywords": [
+    "angularjs",
+    "kugou"
+  ],
+  "author": "'xianshenglu' <'xianshenglu@foxmail.com'>",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.8.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
+    "@xianshenglu/eslint-config": "^1.0.0",
+    "eslint": "^7.23.0",
+    "eslint-plugin-import": "^2.22.1",
+    "prettier": "^2.2.1",
+    "webpack": "^5.30.0"
+  }
+}
