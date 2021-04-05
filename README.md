@@ -13,14 +13,14 @@
 
 ## 预览
 
-- kugou-music [Vue-version](https://xianshenglu.github.io/vue/demo/kugou/dist/index.html) [React-version](https://xianshenglu.github.io/vue/demo/kugou-react/build/)
+- kugou-music [Vue-version](https://xianshenglu.github.io/kugou/demo/vue@2.x/dist/index.html) [React-version](https://xianshenglu.github.io/kugou/demo/react/build/)
 
 ## 示例
 
-![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-1.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-2.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-3.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-5.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-6.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-7.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-8.jpg) ![kugou](https://xianshenglu.github.io/vue/demo/img-displayed/kugou-9.jpg)
+![kugou](https://xianshenglu.github.io/kugou/demo/img-displayed/kugou-1.jpg) ![kugou](https://xianshenglu.github.io/kugou/demo/img-displayed/kugou-2.jpg) ![kugou](https://xianshenglu.github.io/kugou/demo/img-displayed/kugou-3.jpg) ![kugou](https://xianshenglu.github.io/kugou/demo/img-displayed/kugou-5.jpg) ![kugou](https://xianshenglu.github.io/kugou/demo/img-displayed/kugou-6.jpg) ![kugou](https://xianshenglu.github.io/kugou/demo/img-displayed/kugou-7.jpg) ![kugou](https://xianshenglu.github.io/kugou/demo/img-displayed/kugou-8.jpg) ![kugou](https://xianshenglu.github.io/kugou/demo/img-displayed/kugou-9.jpg)
 
 ## 遗留项目
 
-- [multi-cascader-ant-design-vue](https://xianshenglu.github.io/vue/demo/multi-cascader-ant-design-vue/dist/index.html)
+- [multi-cascader-ant-design-vue](https://xianshenglu.github.io/kugou/demo/multi-cascader-ant-design-vue/dist/index.html)
 
-  ![multi-cascader-ant-design-vue](https://xianshenglu.github.io/vue/demo/img-displayed/multi-cascader-ant-design-vue.gif)
+  ![multi-cascader-ant-design-vue](https://xianshenglu.github.io/kugou/demo/img-displayed/multi-cascader-ant-design-vue.gif)
