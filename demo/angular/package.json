@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "prepare": "cd ../.. && husky install demo/angular/.husky"
+    "prepare": "cd ../.. && husky install demo/angular/.husky",
+    "format": "prettier --write ."
   },
   "private": true,
   "dependencies": {
