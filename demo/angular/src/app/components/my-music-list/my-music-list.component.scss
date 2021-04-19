@@ -1,0 +1,36 @@
+@import "src/app/styles/constant";
+.music_list {
+  padding-left: 19px;
+}
+
+.music_list__item {
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  min-height: 72px;
+  padding: 10px 0;
+}
+
+.music_list__info {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.music_list__index {
+  width: 48px;
+  flex: 0 0 auto;
+}
+.music_list__name {
+  width: calc(100% - 48px);
+  flex: 1 0 auto;
+}
+
+.music_list__download {
+  box-sizing: content-box;
+  width: 23px;
+  height: 100%;
+  padding: 0 $padding_width;
+}

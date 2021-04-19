@@ -1,7 +1,25 @@
+import { RankListComponent } from './views/rank/rank-list/rank-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MyMainComponent } from './components/my-main/my-main.component';
+import { NewSongComponent } from './views/new-song/new-song.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    component: MyMainComponent,
+    children: [
+      {
+        path: '',
+        component: NewSongComponent,
+      },
+      {
+        path: 'rank/list',
+        component: RankListComponent,
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

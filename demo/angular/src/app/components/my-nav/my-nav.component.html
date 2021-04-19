@@ -1,0 +1,15 @@
+<section class="nav">
+  <nav class="nav__box">
+    <a
+      class="nav__link"
+      *ngFor="let item of navs"
+      [routerLink]="item.path"
+      exact-active-class="nav__link--active"
+      >{{ item.text }}</a
+    >
+  </nav>
+  <div
+    class="nav__underline"
+    [style]="'transform:translateX(' + activeIndex * 100 + '%)'"
+  ></div>
+</section>

@@ -1,0 +1,21 @@
+<ul class="music_list">
+  <li
+    class="music_list__item main_border_bottom"
+    *ngFor="let item of musicList"
+  >
+    <div class="music_list__info" (click)="player.wantPlay({ music: item })">
+      <slot
+        :data="index"
+        name="index"
+        class="music_list__index"
+        (click)="player.wantPlay({ music: item })"
+      ></slot>
+      <div class="music_list__name">{{ item.filename }}</div>
+    </div>
+    <button class="music_list__download">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-download"></use>
+      </svg>
+    </button>
+  </li>
+</ul>

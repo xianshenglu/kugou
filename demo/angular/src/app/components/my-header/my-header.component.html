@@ -1,0 +1,17 @@
+<button class="header__back" (click)="goBack()">
+  <svg class="icon" aria-hidden="true">
+    <use xlink:href="#icon-arrow-left"></use>
+  </svg>
+</button>
+<a routerLink="/">
+  <img class="header__logo" src="assets/images/logo__text.png" />
+</a>
+<a
+  class="header__search_btn"
+  routerLink="/search/index"
+  (click)="(onSearchBtnClick)"
+>
+  <svg class="icon" aria-hidden="true">
+    <use xlink:href="#icon-search"></use>
+  </svg>
+</a>

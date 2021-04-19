@@ -1,0 +1,66 @@
+html,
+body,
+ul,
+li,
+div,
+dl,
+dt,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+header,
+main,
+section,
+article,
+aside,
+time,
+footer,
+input,
+button,
+label {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+li {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+
+  color: inherit;
+}
+input,
+button {
+  color: inherit;
+  border: none;
+  outline: none;
+  background: none;
+  appearance: none;
+  font-size: inherit;
+}
+.hidden {
+  display: none;
+}
+html {
+  -webkit-text-size-adjust: none;
+  -webkit-touch-callout: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+img[src=""],
+img:not([src]) {
+  opacity: 0;
+}

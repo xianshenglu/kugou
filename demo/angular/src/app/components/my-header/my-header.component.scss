@@ -1,0 +1,30 @@
+@import "src/app/styles/constant";
+:host {
+  background: $theme;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 12px;
+
+  color: $white;
+}
+.header__logo {
+  width: 131px;
+  height: 30px;
+  margin: auto;
+}
+.header__back {
+  font-size: 25px;
+  transform: translate(-2px, 2px);
+}
+.header__search_btn {
+  display: block;
+
+  width: 27px;
+  height: 27px;
+
+  transform: translate(1px, -3px);
+
+  font-size: 27px;
+}
