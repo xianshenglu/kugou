@@ -1,4 +1,5 @@
-import { SongListService, SongItem } from 'src/app/services/song-list.service';
+import { ResponseTypeFromServiceReq } from 'src/app/typings/index';
+import { SongListService } from 'src/app/services/song-list.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./song-list.component.scss'],
 })
 export class SongListComponent implements OnInit {
-  songList: SongItem[] = [];
+  songList: ResponseTypeFromServiceReq<
+    typeof SongListService,
+    'fetchSongList'
+  > = [];
   constructor(private songListService: SongListService) {}
 
   async ngOnInit(): Promise<void> {

@@ -9,7 +9,7 @@ type SongListResponse = {
     };
   };
 };
-export type SongItem = {
+type SongItem = {
   imgurl: string;
   imgUrl: string;
   specialid: string;

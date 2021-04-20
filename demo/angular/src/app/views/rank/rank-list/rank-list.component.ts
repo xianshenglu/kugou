@@ -1,4 +1,5 @@
-import { RankListService, RankItem } from 'src/app/services/rank-list.service';
+import { ResponseTypeFromServiceReq } from 'src/app/typings/index';
+import { RankListService } from 'src/app/services/rank-list.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rank-list.component.scss'],
 })
 export class RankListComponent implements OnInit {
-  rankList: RankItem[] = [];
+  rankList: ResponseTypeFromServiceReq<
+    typeof RankListService,
+    'fetchRankList'
+  > = [];
   constructor(private rankListService: RankListService) {}
 
   async ngOnInit(): Promise<void> {

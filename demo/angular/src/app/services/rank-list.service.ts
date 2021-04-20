@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BASE_ORIGIN } from 'src/app/constants';
 import replaceSizeInUrl from '../utils/replaceSizeInUrl';
-export type RankItem = {
+type RankItem = {
   imgurl: string;
   rankid: string;
   rankname: string;
