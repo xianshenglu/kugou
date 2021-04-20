@@ -21,19 +21,3 @@
     </a>
   </li>
 </ul>
-
-<script>
-  import { lazyLoad } from "@/utils";
-  import { mapState } from "vuex";
-  export default {
-    name: "PubList",
-    props: {
-      pubList: {
-        type: Array,
-        default() {
-          return [];
-        },
-      },
-    },
-  };
-</script>
