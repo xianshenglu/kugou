@@ -1,3 +1,4 @@
+import { SingerCategoryComponent } from './views/singer/singer-category/singer-category.component';
 import { SongListComponent } from './views/song/song-list/song-list.component';
 import { RankListComponent } from './views/rank/rank-list/rank-list.component';
 import { NgModule } from '@angular/core';
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'song/list',
         component: SongListComponent,
+      },
+      {
+        path: 'singer/category',
+        component: SingerCategoryComponent,
       },
     ],
   },

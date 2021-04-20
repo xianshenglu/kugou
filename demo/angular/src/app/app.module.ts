@@ -13,6 +13,7 @@ import { MyMainComponent } from './components/my-main/my-main.component';
 import { RankListComponent } from './views/rank/rank-list/rank-list.component';
 import { MyCardListComponent } from './components/my-card-list/my-card-list.component';
 import { SongListComponent } from './views/song/song-list/song-list.component';
+import { SingerCategoryComponent } from './views/singer/singer-category/singer-category.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { SongListComponent } from './views/song/song-list/song-list.component';
     RankListComponent,
     MyCardListComponent,
     SongListComponent,
+    SingerCategoryComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule],
   providers: [],

@@ -1,0 +1,20 @@
+<section class="singer_category">
+  <ul
+    class="singer_category__list main_border"
+    *ngFor="let list of singerCategories"
+  >
+    <li
+      class="singer_category__item main_border_bottom"
+      *ngFor="let item of list.data"
+    >
+      <a [routerLink]="item.path" class="singer_category__link">
+        <div class="singer_category__title">{{ item.classname }}</div>
+        <button class="singer_category_btn">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-arrow-right"></use>
+          </svg>
+        </button>
+      </a>
+    </li>
+  </ul>
+</section>
