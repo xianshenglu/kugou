@@ -1,3 +1,4 @@
+import { SongListComponent } from './views/song/song-list/song-list.component';
 import { RankListComponent } from './views/rank/rank-list/rank-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'rank/list',
         component: RankListComponent,
+      },
+      {
+        path: 'song/list',
+        component: SongListComponent,
       },
     ],
   },

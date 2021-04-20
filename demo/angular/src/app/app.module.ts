@@ -12,6 +12,7 @@ import { MyNavComponent } from './components/my-nav/my-nav.component';
 import { MyMainComponent } from './components/my-main/my-main.component';
 import { RankListComponent } from './views/rank/rank-list/rank-list.component';
 import { MyCardListComponent } from './components/my-card-list/my-card-list.component';
+import { SongListComponent } from './views/song/song-list/song-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +24,7 @@ import { MyCardListComponent } from './components/my-card-list/my-card-list.comp
     MyMainComponent,
     RankListComponent,
     MyCardListComponent,
+    SongListComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule],
   providers: [],

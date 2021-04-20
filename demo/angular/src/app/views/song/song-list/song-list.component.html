@@ -1,0 +1,15 @@
+<section class="song_list">
+  <app-my-card-list [pubList]="songList" class="song_list__cont">
+    <ng-template let-item>
+      <div class="song_list__info">
+        <div class="song_list__title">{{ item.title }}</div>
+        <div class="song_list__star">
+          <svg class="icon song_list__icon" aria-hidden="true">
+            <use xlink:href="#icon-music"></use>
+          </svg>
+          <span class="song_list__popularity">{{ item.popularity }}</span>
+        </div>
+      </div>
+    </ng-template>
+  </app-my-card-list>
+</section>
