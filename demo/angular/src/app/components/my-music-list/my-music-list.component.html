@@ -4,12 +4,18 @@
     *ngFor="let item of musicList"
   >
     <div class="music_list__info" (click)="player.wantPlay({ music: item })">
-      <slot
-        :data="index"
-        name="index"
+      <ng-template
+        [ngTemplateOutlet]="template"
+        [ngTemplateOutletContext]="{ $implicit: item }"
+      >
+      </ng-template>
+      <ng-content
+        select="[slot=default]"
         class="music_list__index"
         (click)="player.wantPlay({ music: item })"
-      ></slot>
+      >
+      </ng-content>
+
       <div class="music_list__name">{{ item.filename }}</div>
     </div>
     <button class="music_list__download">

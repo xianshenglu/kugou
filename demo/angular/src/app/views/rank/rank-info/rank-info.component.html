@@ -1,0 +1,19 @@
+<section class="rank_info">
+  <app-my-module-head [moduleHeadInfo]="getModuleHeadInfo">
+    <ng-template>
+      <time class="rank_info__update_time" slot="moduleUpdateTime"
+        >{{ msg }} {{ formatDate }}</time
+      >
+    </ng-template>
+  </app-my-module-head>
+  <app-my-music-list [musicList]="getMusicList">
+    <ng-template let-music>
+      <div
+        slot="default"
+        [class]="['rank_info__index', 'rank_info__index' + (music.index + 1)]"
+      >
+        {{ music.index + 1 }}
+      </div>
+    </ng-template>
+  </app-my-music-list>
+</section>

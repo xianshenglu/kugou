@@ -14,6 +14,8 @@ import { RankListComponent } from './views/rank/rank-list/rank-list.component';
 import { MyCardListComponent } from './components/my-card-list/my-card-list.component';
 import { SongListComponent } from './views/song/song-list/song-list.component';
 import { SingerCategoryComponent } from './views/singer/singer-category/singer-category.component';
+import { RankInfoComponent } from './views/rank/rank-info/rank-info.component';
+import { MyModuleHeadComponent } from './components/my-module-head/my-module-head.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +29,8 @@ import { SingerCategoryComponent } from './views/singer/singer-category/singer-c
     MyCardListComponent,
     SongListComponent,
     SingerCategoryComponent,
+    RankInfoComponent,
+    MyModuleHeadComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule],
   providers: [],

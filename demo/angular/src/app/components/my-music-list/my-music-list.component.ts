@@ -1,6 +1,12 @@
 import { Music } from 'src/app/services/player.service';
 import { PlayerService } from 'src/app/services/player.service';
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ContentChild,
+  Input,
+  OnInit,
+  TemplateRef,
+} from '@angular/core';
 
 @Component({
   selector: 'app-my-music-list',
@@ -10,6 +16,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MyMusicListComponent implements OnInit {
   // @ts-ignore
   @Input() musicList: Music[];
+  // @ts-ignore
+  @ContentChild(TemplateRef) template: TemplateRef<>;
   constructor(public player: PlayerService) {}
 
   ngOnInit(): void {}

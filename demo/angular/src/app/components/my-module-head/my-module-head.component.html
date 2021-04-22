@@ -1,0 +1,10 @@
+<div>
+  <div
+    class="module__head"
+    [style]="'background-image:url(' + moduleHeadInfo.imgUrl + ')'"
+  >
+    <h6 class="module__title">{{ moduleHeadInfo.name }}</h6>
+    <ng-content select="[slot=moduleUpdateTime]"></ng-content>
+  </div>
+  <ng-content select="[slot=moduleDes]"></ng-content>
+</div>

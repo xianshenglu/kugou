@@ -1,0 +1,47 @@
+@import "src/app/styles/constant";
+.rank_info__update_time {
+  align-self: flex-end;
+
+  width: 100%;
+  height: 50px;
+  padding-left: 16px;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.6) 5%,
+    rgba(107, 107, 107, 0.1) 90%,
+    rgba(255, 255, 255, 0)
+  );
+
+  font-size: $font_size_med;
+  line-height: 2.3;
+}
+
+.rank_info__index {
+  width: 27px;
+  height: 19px;
+  margin-right: 10px;
+
+  text-align: center;
+
+  color: $white-to-black;
+  border-radius: 9px;
+
+  font-size: $font_size_small;
+  line-height: 19px;
+}
+
+.rank_info__index1 {
+  color: $white;
+  background-color: $red;
+}
+
+.rank_info__index2 {
+  color: $white;
+  background-color: $orange;
+}
+
+.rank_info__index3 {
+  color: $white;
+  background-color: $yellow;
+}

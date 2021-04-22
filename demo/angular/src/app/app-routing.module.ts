@@ -1,3 +1,4 @@
+import { RankInfoComponent } from './views/rank/rank-info/rank-info.component';
 import { SingerCategoryComponent } from './views/singer/singer-category/singer-category.component';
 import { SongListComponent } from './views/song/song-list/song-list.component';
 import { RankListComponent } from './views/rank/rank-list/rank-list.component';
@@ -28,6 +29,10 @@ const routes: Routes = [
         component: SingerCategoryComponent,
       },
     ],
+  },
+  {
+    path: 'rank/info/:rankId',
+    component: RankInfoComponent,
   },
 ];
 
