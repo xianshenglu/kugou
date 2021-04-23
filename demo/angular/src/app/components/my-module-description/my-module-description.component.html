@@ -1,0 +1,27 @@
+<div
+  [class]="
+    showMore
+      ? 'module_info__intro module_info__intro--more main_box_shadow'
+      : 'module_info__intro main_box_shadow'
+  "
+>
+  <p class="module_info__text">{{ description }}</p>
+  <button
+    class="module_info__button"
+    [hidden]="showMore"
+    (click)="showMore = !showMore"
+  >
+    <svg class="icon" aria-hidden="true">
+      <use xlink:href="#icon-circle-arrow-up"></use>
+    </svg>
+  </button>
+  <button
+    class="module_info__button"
+    [hidden]="!showMore"
+    (click)="showMore = !showMore"
+  >
+    <svg class="icon" aria-hidden="true">
+      <use xlink:href="#icon-circle-arrow-down"></use>
+    </svg>
+  </button>
+</div>

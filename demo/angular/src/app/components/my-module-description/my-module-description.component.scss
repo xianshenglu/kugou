@@ -1,0 +1,26 @@
+.module_info__intro {
+  display: flex;
+  overflow: hidden;
+  align-items: flex-start;
+
+  box-sizing: border-box;
+  height: 41px;
+  padding: 5px 0 5px 19px;
+
+  line-height: 1.8;
+}
+
+.module_info__intro--more {
+  height: auto;
+}
+.module_info__text {
+  margin-right: auto;
+}
+.module_info__button {
+  font-size: 25px;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  margin: 3.5px 10px 0 8px;
+  box-sizing: border-box;
+}

@@ -1,0 +1,10 @@
+<section class="song_list_info">
+  <app-my-module-head [moduleHeadInfo]="getModuleHeadInfo">
+    <app-my-module-description
+      slot="moduleDes"
+      [description]="getModuleHeadInfo.intro"
+    >
+    </app-my-module-description>
+  </app-my-module-head>
+  <app-my-music-list [musicList]="getMusicList"> </app-my-music-list>
+</section>
