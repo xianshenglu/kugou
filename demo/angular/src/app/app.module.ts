@@ -18,6 +18,8 @@ import { RankInfoComponent } from './views/rank/rank-info/rank-info.component';
 import { MyModuleHeadComponent } from './components/my-module-head/my-module-head.component';
 import { SongListInfoComponent } from './views/song/song-list-info/song-list-info.component';
 import { MyModuleDescriptionComponent } from './components/my-module-description/my-module-description.component';
+import { SingerListComponent } from './views/singer/singer-list/singer-list.component';
+import { MyModuleTitleComponent } from './components/my-module-title/my-module-title.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +37,8 @@ import { MyModuleDescriptionComponent } from './components/my-module-description
     MyModuleHeadComponent,
     SongListInfoComponent,
     MyModuleDescriptionComponent,
+    SingerListComponent,
+    MyModuleTitleComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule],
   providers: [],
