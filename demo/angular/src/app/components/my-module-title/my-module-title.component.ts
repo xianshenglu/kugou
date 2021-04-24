@@ -1,4 +1,3 @@
-import { EventBusService } from './../../services/event-bus.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -8,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MyModuleTitleComponent implements OnInit {
   @Input() title = '';
-  constructor(public eventBus: EventBusService) {}
+  constructor() {}
 
   ngOnInit(): void {}
 }
