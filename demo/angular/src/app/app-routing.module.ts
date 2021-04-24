@@ -1,3 +1,4 @@
+import { SingerInfoComponent } from './views/singer/singer-info/singer-info.component';
 import { SingerListComponent } from './views/singer/singer-list/singer-list.component';
 import { SongListInfoComponent } from './views/song/song-list-info/song-list-info.component';
 import { RankInfoComponent } from './views/rank/rank-info/rank-info.component';
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: 'singer/list/:singerListId',
     component: SingerListComponent,
+  },
+  {
+    path: 'singer/info/:singerId',
+    component: SingerInfoComponent,
   },
 ];
 

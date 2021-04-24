@@ -20,6 +20,7 @@ import { SongListInfoComponent } from './views/song/song-list-info/song-list-inf
 import { MyModuleDescriptionComponent } from './components/my-module-description/my-module-description.component';
 import { SingerListComponent } from './views/singer/singer-list/singer-list.component';
 import { MyModuleTitleComponent } from './components/my-module-title/my-module-title.component';
+import { SingerInfoComponent } from './views/singer/singer-info/singer-info.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { MyModuleTitleComponent } from './components/my-module-title/my-module-t
     MyModuleDescriptionComponent,
     SingerListComponent,
     MyModuleTitleComponent,
+    SingerInfoComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule],
   providers: [],
