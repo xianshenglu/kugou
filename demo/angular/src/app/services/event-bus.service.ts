@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { Subject, Subscription, Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-export enum Events {
-  CustomerSelected,
-}
 export class EmitEvent {
   constructor(public name: any, public value?: any) {}
 }
@@ -13,15 +10,14 @@ export class EmitEvent {
   providedIn: 'root',
 })
 export class EventBusService {
+  private subject$ = new Subject();
   constructor() {}
 
-  private subject$ = new Subject();
-
-  on(event: Events, action: any): Subscription {
+  on(eventName: 'searchBtnClicked', action: ()=>any): Subscription {
     return this.subject$
       .pipe(
         // @ts-ignore
-        filter((e: EmitEvent) => e.name === event),
+        filter((e: EmitEvent) => e.name === eventName),
         map((e: EmitEvent) => e.value)
       )
       .subscribe(action);

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { MyModuleDescriptionComponent } from './components/my-module-description
 import { SingerListComponent } from './views/singer/singer-list/singer-list.component';
 import { MyModuleTitleComponent } from './components/my-module-title/my-module-title.component';
 import { SingerInfoComponent } from './views/singer/singer-info/singer-info.component';
+import { SearchComponent } from './views/search/search.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,8 +43,9 @@ import { SingerInfoComponent } from './views/singer/singer-info/singer-info.comp
     SingerListComponent,
     MyModuleTitleComponent,
     SingerInfoComponent,
+    SearchComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule,FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

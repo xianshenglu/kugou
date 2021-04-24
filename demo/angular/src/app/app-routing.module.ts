@@ -1,3 +1,4 @@
+import { SearchComponent } from './views/search/search.component';
 import { SingerInfoComponent } from './views/singer/singer-info/singer-info.component';
 import { SingerListComponent } from './views/singer/singer-list/singer-list.component';
 import { SongListInfoComponent } from './views/song/song-list-info/song-list-info.component';
@@ -49,6 +50,11 @@ const routes: Routes = [
     path: 'singer/info/:singerId',
     component: SingerInfoComponent,
   },
+  {
+    path: 'search/index',
+    component: SearchComponent,
+  },
+
 ];
 
 @NgModule({
