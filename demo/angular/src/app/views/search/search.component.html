@@ -1,5 +1,9 @@
 <section class="search">
-  <app-my-module-title [title]="title" class="search__title" (titleClick)="scrollTopSearchCont()">
+  <app-my-module-title
+    [title]="title"
+    class="search__title"
+    (titleClick)="scrollTopSearchCont()"
+  >
   </app-my-module-title>
   <div class="search__cont" #searchCont>
     <form class="search__form" (submit)="$event.preventDefault()">
@@ -34,8 +38,8 @@
       </ul>
     </div>
     <div class="search__res" ng-show="isSearchResShow">
-      <div class="search__count">共有{{ searchRes.info.length }}条结果</div>
-      <app-my-music-list [musicList]="searchRes.info" class="search__res-list">
+      <div class="search__count">共有{{ searchResInfo.length }}条结果</div>
+      <app-my-music-list [musicList]="searchResInfo" class="search__res-list">
       </app-my-music-list>
     </div>
   </div>

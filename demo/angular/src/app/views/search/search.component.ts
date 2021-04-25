@@ -10,8 +10,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-    // @ts-ignore
-    @ViewChild('searchCont') searchCont: ElementRef;
+  // @ts-ignore
+  @ViewChild('searchCont') searchCont: ElementRef;
   title = '搜索';
   searchType = '最近热门';
   placeholder = '歌手/歌名/拼音';
@@ -26,6 +26,10 @@ export class SearchComponent implements OnInit {
   keyword = '';
   isSearchRecShow = false;
   isSearchResShow = false;
+  get searchResInfo() {
+    // @ts-ignore
+    return this.searchRes.info;
+  }
   constructor(
     private eventBus: EventBusService,
     private router: Router,
@@ -34,18 +38,18 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.searchByUrl()
+    this.searchByUrl();
   }
 
-  searchByUrl(){
+  searchByUrl() {
     // remove in destroy?
     this.eventBus.on('searchBtnClicked', this.scrollTopSearchCont);
-    let queryKeyword = new URLSearchParams(window.location.search).get(
+    const queryKeyword = new URLSearchParams(window.location.search).get(
       'keyword'
     );
-    let isKeywordValid =
+    const isKeywordValid =
       typeof this.keyword === 'string' && this.keyword !== '';
-    let isQueryKeywordValid =
+    const isQueryKeywordValid =
       typeof queryKeyword === 'string' && queryKeyword !== '';
     if (isQueryKeywordValid && queryKeyword !== this.keyword) {
       // @ts-ignore
