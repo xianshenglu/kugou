@@ -1,4 +1,4 @@
-import replaceSizeInUrl from 'src/app/utils/replaceSizeInUrl';
+import {replaceSizeInUrl}from 'src/app/utils';
 import { ResponseTypeFromServiceReq } from 'src/app/typings/index';
 import { RankInfoService } from 'src/app/services/rank-info.service';
 import { Component, OnInit } from '@angular/core';

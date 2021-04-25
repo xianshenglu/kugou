@@ -1,4 +1,4 @@
-import replaceSizeInUrl from 'src/app/utils/replaceSizeInUrl';
+import {replaceSizeInUrl}from 'src/app/utils';
 import { BASE_ORIGIN } from 'src/app/constants';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

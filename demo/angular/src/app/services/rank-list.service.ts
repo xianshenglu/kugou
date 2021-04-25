@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BASE_ORIGIN } from 'src/app/constants';
-import replaceSizeInUrl from '../utils/replaceSizeInUrl';
+import {replaceSizeInUrl}from '../utils';
 type RankItem = {
   imgurl: string;
   rankid: string;

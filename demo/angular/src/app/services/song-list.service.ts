@@ -1,5 +1,5 @@
 import { BASE_ORIGIN } from 'src/app/constants/index';
-import replaceSizeInUrl from 'src/app/utils/replaceSizeInUrl';
+import {replaceSizeInUrl}from 'src/app/utils';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 type SongListResponse = {

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { KU_GOU_ORIGIN, BASE_ORIGIN } from 'src/app/constants';
 import { Injectable } from '@angular/core';
 import { DeviceService } from './device.service';
-import replaceSizeInUrl from 'src/app/utils/replaceSizeInUrl';
+import {replaceSizeInUrl}from 'src/app/utils';
 
 export type Music = {
   hash: string;
@@ -11,6 +11,7 @@ export type Music = {
 type Song = {
   hash: string;
   img: string;
+  // @ts-ignore
   play_url: string;
 };
 @Injectable({

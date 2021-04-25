@@ -1,3 +1,5 @@
+import { IMG_SIZE__DEFAULT } from 'src/app/constants';
+
 export function lazyLoad(
   els: HTMLImageElement[],
   options: Record<string, any>
@@ -29,4 +31,11 @@ export function secondToMin(seconds: number) {
 }
 export function isObject(obj: any) {
   return typeof obj === 'object' && obj !== null;
+}
+
+export  function replaceSizeInUrl(
+  url = '',
+  size: number | string = IMG_SIZE__DEFAULT
+) {
+  return url.replace(/\{\s*size\s*\}/, String(size));
 }

@@ -1,6 +1,6 @@
 import { ResponseTypeFromServiceReq } from 'src/app/typings/index';
 import { SongListInfoService } from 'src/app/services/song-list-info.service';
-import replaceSizeInUrl from 'src/app/utils/replaceSizeInUrl';
+import {replaceSizeInUrl}from 'src/app/utils';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
