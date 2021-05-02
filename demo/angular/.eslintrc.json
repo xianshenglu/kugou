@@ -1,6 +1,10 @@
 {
   "root": true,
   "ignorePatterns": ["projects/**/*"],
+  "extends": ["eslint-config-prettier"],
+  "parserOptions": {
+    "ecmaVersion":2015
+  },
   "overrides": [
     {
       "files": ["*.ts"],
