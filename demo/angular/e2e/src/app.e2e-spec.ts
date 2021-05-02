@@ -1,25 +1,20 @@
-import { browser, logging } from 'protractor';
+import { expectNoErrorLog } from './common/index';
 import { AppPage } from './app.po';
 
-describe('workspace-project App', () => {
+describe('App', () => {
   let page: AppPage;
 
-  beforeEach(() => {
+  beforeEach(async (done) => {
     page = new AppPage();
-  });
-
-  it('should display welcome message', async () => {
-    await page.navigateTo();
-    expect(await page.getTitleText()).toEqual('angular app is running!');
+    await page.returnHome();
+    done();
   });
 
   afterEach(async () => {
-    // Assert that there are no errors emitted from the browser
-    const logs = await browser.manage().logs().get(logging.Type.BROWSER);
-    expect(logs).not.toContain(
-      jasmine.objectContaining({
-        level: logging.Level.SEVERE,
-      } as logging.Entry)
-    );
+    expectNoErrorLog();
+  });
+
+  afterAll(() => {
+    page.returnHome();
   });
 });

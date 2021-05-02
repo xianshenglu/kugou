@@ -1,4 +1,4 @@
-<section class="singer_category">
+<section class="singer_category" test-id="page-singer-category">
   <ul
     class="singer_category__list main_border"
     *ngFor="let list of singerCategories"
@@ -6,8 +6,13 @@
     <li
       class="singer_category__item main_border_bottom"
       *ngFor="let item of list.data"
+      test-class="list"
     >
-      <a [routerLink]="item.path" class="singer_category__link">
+      <a
+        [routerLink]="item.path"
+        class="singer_category__link"
+        test-class="link"
+      >
         <div class="singer_category__title">{{ item.classname }}</div>
         <button class="singer_category_btn">
           <svg class="icon" aria-hidden="true">

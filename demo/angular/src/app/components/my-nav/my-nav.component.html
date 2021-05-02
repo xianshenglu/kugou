@@ -4,6 +4,7 @@
       class="nav__link"
       *ngFor="let item of navs"
       [routerLink]="item.path"
+      [attr.test-id]="'nav-link' + item.name"
       exact-active-class="nav__link--active"
       >{{ item.text }}</a
     >

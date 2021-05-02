@@ -1,11 +1,12 @@
-<section class="singer_list">
+<section class="singer_list" test-id="page-singer-list">
   <app-my-module-title [title]="singerName"></app-my-module-title>
   <ul class="singer_list__list" #lazyLoadRoot>
     <li
       class="singer_list__item main_border_bottom"
       *ngFor="let item of singerListData"
+      test-class="list"
     >
-      <a [routerLink]="item.path" class="singer_list__link">
+      <a [routerLink]="item.path" class="singer_list__link" test-class="link">
         <img
           class="singer_list__img lazy_image"
           #lazyImages

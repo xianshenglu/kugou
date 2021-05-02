@@ -1,6 +1,10 @@
 <ul class="list" #lazyLoadRoot>
-  <li class="list__item main_border_bottom" *ngFor="let item of pubList">
-    <a [routerLink]="item.path" class="list__link">
+  <li
+    class="list__item main_border_bottom"
+    test-class="list"
+    *ngFor="let item of pubList"
+  >
+    <a [routerLink]="item.path" class="list__link" test-class="link">
       <img
         class="list__img lazy_image"
         #lazyImages

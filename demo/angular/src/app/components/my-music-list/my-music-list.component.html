@@ -2,6 +2,7 @@
   <li
     class="music_list__item main_border_bottom"
     *ngFor="let item of musicList"
+    [attr.test-id]="'music-item-' + item.hash"
   >
     <div class="music_list__info" (click)="player.wantPlay({ music: item })">
       <ng-template
