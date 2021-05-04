@@ -35,7 +35,14 @@
             "prefix": "app",
             "style": "camelCase"
           }
-        ]
+        ],
+        "@typescript-eslint/explicit-module-boundary-types":["off"],
+        "@typescript-eslint/ban-ts-comment":["off"],
+        "lines-between-class-members":["off"],
+        "no-useless-constructor": "off",
+        "@typescript-eslint/no-useless-constructor": ["error"],
+        "@typescript-eslint/no-floating-promises":["off"],
+        "array-callback-return": ["error", { "checkForEach": false}]
       }
     },
     {
