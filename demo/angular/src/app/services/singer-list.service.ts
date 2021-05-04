@@ -1,7 +1,8 @@
-import {replaceSizeInUrl}from 'src/app/utils';
+import { replaceSizeInUrl } from 'src/app/utils';
 import { BASE_ORIGIN } from 'src/app/constants';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 type SingerListResponse = {
   classid: string;
   classname: string;
@@ -29,7 +30,7 @@ export class SingerListService {
   async fetchSingerList(singerListId: string) {
     const response = await this.http
       .get<SingerListResponse>(
-        BASE_ORIGIN + '/singer/list/&json=true&singerListId=' + singerListId
+        `${BASE_ORIGIN}/singer/list/&json=true&singerListId=${singerListId}`
       )
       .toPromise();
     const {
@@ -42,7 +43,7 @@ export class SingerListService {
       obj.id = obj.singerid;
       obj.name = obj.singername;
       obj.imgUrl = replaceSizeInUrl(obj.imgurl);
-      obj.path = '/singer/info/' + obj.id;
+      obj.path = `/singer/info/${obj.id}`;
     });
     return {
       info: {

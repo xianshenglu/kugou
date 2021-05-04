@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./slider.component.scss'],
 })
 export class SliderComponent implements OnInit {
-  constructor() {}
-
+  // eslint-disable-next-line class-methods-use-this
   ngOnInit(): void {}
 }

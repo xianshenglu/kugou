@@ -1,19 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MyMuduleHeadComponent } from './my-module-head.component';
+import { MyModuleHeadComponent } from './my-module-head.component';
 
-describe('MyMuduleHeadComponent', () => {
-  let component: MyMuduleHeadComponent;
-  let fixture: ComponentFixture<MyMuduleHeadComponent>;
+describe('MyModuleHeadComponent', () => {
+  let component: MyModuleHeadComponent;
+  let fixture: ComponentFixture<MyModuleHeadComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MyMuduleHeadComponent],
+      declarations: [MyModuleHeadComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MyMuduleHeadComponent);
+    fixture = TestBed.createComponent(MyModuleHeadComponent);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -12,6 +12,7 @@ export class RankListComponent implements OnInit {
     typeof RankListService,
     'fetchRankList'
   > = [];
+
   constructor(private rankListService: RankListService) {}
 
   async ngOnInit(): Promise<void> {

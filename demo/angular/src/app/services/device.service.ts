@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class DeviceService {
   vh = document.documentElement.clientHeight;
+
   vMax = Math.max(
     document.documentElement.clientHeight,
     document.documentElement.clientWidth
   );
-  constructor() {}
 }

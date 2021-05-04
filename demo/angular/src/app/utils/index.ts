@@ -1,14 +1,16 @@
-import { IMG_SIZE__DEFAULT } from 'src/app/constants';
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
+import { IMG_SIZE_DEFAULT } from 'src/app/constants';
 
 export function lazyLoad(
   els: HTMLImageElement[],
   options: Record<string, any>
 ) {
-  let observer = new IntersectionObserver(
+  const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach(({ target, isIntersecting }) => {
         if (isIntersecting) {
           // @ts-ignore
+          // eslint-disable-next-line
           target.src = target.dataset.src;
           observer.unobserve(target);
         }
@@ -20,22 +22,22 @@ export function lazyLoad(
 }
 
 export function secondToMin(seconds: number) {
-  if (isNaN(Number(seconds))) {
+  if (Number.isNaN(Number(seconds))) {
     return '00:00';
   }
-  //todo support more than 1 hour
+  // todo support more than 1 hour
   seconds = Math.floor(seconds);
-  let second = seconds % 60;
-  let min = Math.floor(seconds / 60);
-  return String(min).padStart(2, '0') + ':' + String(second).padStart(2, '0');
+  const second = seconds % 60;
+  const min = Math.floor(seconds / 60);
+  return `${String(min).padStart(2, '0')}:${String(second).padStart(2, '0')}`;
 }
 export function isObject(obj: any) {
   return typeof obj === 'object' && obj !== null;
 }
 
-export  function replaceSizeInUrl(
+export function replaceSizeInUrl(
   url = '',
-  size: number | string = IMG_SIZE__DEFAULT
+  size: number | string = IMG_SIZE_DEFAULT
 ) {
   return url.replace(/\{\s*size\s*\}/, String(size));
 }

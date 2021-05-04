@@ -12,6 +12,7 @@ export class SongListComponent implements OnInit {
     typeof SongListService,
     'fetchSongList'
   > = [];
+
   constructor(private songListService: SongListService) {}
 
   async ngOnInit(): Promise<void> {

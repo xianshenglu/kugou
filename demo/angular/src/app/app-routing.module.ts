@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { SearchComponent } from './views/search/search.component';
 import { SingerInfoComponent } from './views/singer/singer-info/singer-info.component';
 import { SingerListComponent } from './views/singer/singer-list/singer-list.component';
@@ -6,8 +8,6 @@ import { RankInfoComponent } from './views/rank/rank-info/rank-info.component';
 import { SingerCategoryComponent } from './views/singer/singer-category/singer-category.component';
 import { SongListComponent } from './views/song/song-list/song-list.component';
 import { RankListComponent } from './views/rank/rank-list/rank-list.component';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { MyMainComponent } from './components/my-main/my-main.component';
 import { NewSongComponent } from './views/new-song/new-song.component';
 
@@ -54,7 +54,6 @@ const routes: Routes = [
     path: 'search/index',
     component: SearchComponent,
   },
-
 ];
 
 @NgModule({

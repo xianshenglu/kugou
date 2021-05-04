@@ -25,7 +25,9 @@ describe('AppComponent', () => {
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const compiled = fixture.nativeElement;
+    // eslint-disable-next-line
     expect(compiled.querySelector('.content span').textContent).toContain(
       'angular app is running!'
     );

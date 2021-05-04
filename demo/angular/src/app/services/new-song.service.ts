@@ -1,6 +1,7 @@
 import { BASE_ORIGIN } from 'src/app/constants';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 type NewSongResponse = {
   data: [];
   banner: [];

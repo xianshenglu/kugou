@@ -1,13 +1,7 @@
 import { lazyLoad } from 'src/app/utils';
 import { ResponseTypeFromServiceReq } from 'src/app/typings/index';
-import { SingerListService } from './../../../services/singer-list.service';
-import {
-  Component,
-  OnInit,
-  SimpleChanges,
-  ViewChild,
-  ViewChildren,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { SingerListService } from '../../../services/singer-list.service';
 
 @Component({
   selector: 'app-singer-list',
@@ -17,6 +11,7 @@ import {
 export class SingerListComponent implements OnInit {
   // @ts-ignore
   @ViewChild('lazyLoadRoot') lazyLoadRoot: ElementRef<HTMLImageElement>;
+
   // @ts-ignore
   @ViewChildren('lazyImages') lazyImages: ElementRef<HTMLImageElement>;
 
@@ -31,15 +26,21 @@ export class SingerListComponent implements OnInit {
     },
     data: [],
   };
+
   constructor(private singerListService: SingerListService) {}
+
   get singerListData() {
     // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.singerList.data;
   }
+
   get singerName() {
     // @ts-ignore
+    // eslint-disable-next-line
     return this.singerList.info.name;
   }
+
   async ngOnInit(): Promise<void> {
     const singerListId = window.location.pathname.split('/').pop();
     if (singerListId === undefined) {
@@ -49,10 +50,12 @@ export class SingerListComponent implements OnInit {
       singerListId
     );
     requestAnimationFrame(() => {
-      //todo ? why ngOnChanges not work here?
+      // todo ? why ngOnChanges not work here?
       this.onSingerListChange();
     });
   }
+  /* eslint-disable */
+
   onSingerListChange() {
     // @ts-ignore
     if (this.singerList.data.length === 0 || this.lazyImages === undefined) {
@@ -65,5 +68,6 @@ export class SingerListComponent implements OnInit {
         root: this.lazyLoadRoot.nativeElement,
       }
     );
+    /* eslint-enable */
   }
 }

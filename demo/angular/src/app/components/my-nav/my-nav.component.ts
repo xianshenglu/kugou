@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
@@ -30,7 +29,8 @@ export class MyNavComponent implements OnInit {
       path: '/singer/category',
     },
   ];
-  activeIndex: number = 0;
+
+  activeIndex = 0;
 
   constructor(private router: Router) {}
 
@@ -44,6 +44,7 @@ export class MyNavComponent implements OnInit {
       this.setActiveIndexByRouter();
     });
   }
+
   setActiveIndexByRouter() {
     const path = window.location.pathname;
     const index = this.navs.findIndex((nav) => nav.path === path);

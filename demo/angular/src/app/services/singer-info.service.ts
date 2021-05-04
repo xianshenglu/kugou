@@ -1,4 +1,4 @@
-import {replaceSizeInUrl}from 'src/app/utils';
+import { replaceSizeInUrl } from 'src/app/utils';
 import { BASE_ORIGIN } from 'src/app/constants';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -22,10 +22,11 @@ type SingerInfoResponse = {
 })
 export class SingerInfoService {
   constructor(private http: HttpClient) {}
+
   async fetchSingerInfo(singerId: string) {
     const response = await this.http
       .get<SingerInfoResponse>(
-        BASE_ORIGIN + `/singer/info/${singerId}&json=true`
+        `${BASE_ORIGIN}/singer/info/${singerId}&json=true`
       )
       .toPromise();
     const { info, songs } = response;

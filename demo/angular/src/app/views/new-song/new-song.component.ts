@@ -1,5 +1,5 @@
-import { NewSongService } from '../../services/new-song.service';
 import { Component, OnInit } from '@angular/core';
+import { NewSongService } from '../../services/new-song.service';
 
 @Component({
   selector: 'app-new-song',
@@ -8,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewSongComponent implements OnInit {
   newSongs = [];
+
   sliderData = [];
+
   constructor(private newSong: NewSongService) {}
 
   async ngOnInit(): Promise<void> {

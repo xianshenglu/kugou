@@ -1,16 +1,15 @@
-import { EventBusService } from './../../services/event-bus.service';
 import { PlayerService } from 'src/app/services/player.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { EventBusService } from '../../services/event-bus.service';
 
 @Component({
   selector: 'app-my-header',
   templateUrl: './my-header.component.html',
   styleUrls: ['./my-header.component.scss'],
 })
-export class MyHeaderComponent implements OnInit {
+export class MyHeaderComponent {
   constructor(private player: PlayerService, private bus: EventBusService) {}
 
-  ngOnInit(): void {}
   // computed: {
   //   ...mapState('images', ['logo__text']),
   // }
@@ -19,8 +18,9 @@ export class MyHeaderComponent implements OnInit {
       this.player.togglePlayers(1);
       return;
     }
-    history.go(-1);
+    window.history.go(-1);
   }
+
   onSearchBtnClick() {
     this.bus.emit({ name: 'searchBtnClicked' });
   }

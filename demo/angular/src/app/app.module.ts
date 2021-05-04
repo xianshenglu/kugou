@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NewSongComponent } from './views/new-song/new-song.component';
-import { HttpClientModule } from '@angular/common/http';
 import { SliderComponent } from './views/new-song/slider/slider.component';
 import { MyMusicListComponent } from './components/my-music-list/my-music-list.component';
 import { MyHeaderComponent } from './components/my-header/my-header.component';
@@ -45,7 +45,7 @@ import { SearchComponent } from './views/search/search.component';
     SingerInfoComponent,
     SearchComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule,FormsModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

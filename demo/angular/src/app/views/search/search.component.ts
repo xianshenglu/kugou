@@ -12,24 +12,35 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 export class SearchComponent implements OnInit {
   // @ts-ignore
   @ViewChild('searchCont') searchCont: ElementRef;
+
   title = '搜索';
+
   searchType = '最近热门';
+
   placeholder = '歌手/歌名/拼音';
+
   searchRecArr: ResponseTypeFromServiceReq<
     typeof SearchService,
     'fetchHotSearch'
   > = [];
+
   searchRes: ResponseTypeFromServiceReq<
     typeof SearchService,
     'fetchSearchResult'
   > = { info: [] };
+
   keyword = '';
+
   isSearchRecShow = false;
+
   isSearchResShow = false;
+
   get searchResInfo() {
     // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.searchRes.info;
   }
+
   constructor(
     private eventBus: EventBusService,
     private router: Router,
@@ -43,6 +54,7 @@ export class SearchComponent implements OnInit {
 
   searchByUrl() {
     // remove in destroy?
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     this.eventBus.on('searchBtnClicked', this.scrollTopSearchCont);
     const queryKeyword = new URLSearchParams(window.location.search).get(
       'keyword'
@@ -54,11 +66,13 @@ export class SearchComponent implements OnInit {
     if (isQueryKeywordValid && queryKeyword !== this.keyword) {
       // @ts-ignore
       this.keyword = queryKeyword;
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       this.getSearchRes();
     } else if (isKeywordValid) {
       this.isSearchRecShow = false;
       this.isSearchResShow = true;
     } else {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       this.getSearchRec();
     }
   }
@@ -74,10 +88,12 @@ export class SearchComponent implements OnInit {
     this.isSearchResShow = false;
     this.isSearchRecShow = true;
   }
+
   async getSearchRes() {
     if (this.keyword === '') {
       return;
     }
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
       queryParams: { keyword: this.keyword },
@@ -89,8 +105,10 @@ export class SearchComponent implements OnInit {
     this.isSearchRecShow = false;
     this.isSearchResShow = true;
   }
+
   scrollTopSearchCont() {
     if (this.searchCont.nativeElement) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       this.searchCont.nativeElement.scrollTop = 0;
     }
   }

@@ -1,6 +1,6 @@
 import { ResponseTypeFromServiceReq } from 'src/app/typings/index';
 import { SongListInfoService } from 'src/app/services/song-list-info.service';
-import {replaceSizeInUrl}from 'src/app/utils';
+import { replaceSizeInUrl } from 'src/app/utils';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -13,9 +13,11 @@ export class SongListInfoComponent implements OnInit {
     typeof SongListInfoService,
     'fetchSongListInfo'
   > = { info: { list: {}, songs: { list: { info: [] } } } };
+
   constructor(private songListInfoService: SongListInfoService) {}
 
   get getModuleHeadInfo() {
+    /* eslint-disable */
     // @ts-ignore
     const data = this.songListInfo.info.list;
     return {
@@ -23,11 +25,15 @@ export class SongListInfoComponent implements OnInit {
       name: data.specialname,
       intro: data.intro,
     };
+    /* eslint-enable */
   }
+
   get getMusicList() {
     // @ts-ignore
+    // eslint-disable-next-line
     return this.songListInfo.songs.list.info;
   }
+
   async ngOnInit(): Promise<void> {
     const songListId = window.location.pathname.split('/').pop();
     if (songListId === undefined) {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, Subscription, Observable } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
 export class EmitEvent {
@@ -11,13 +11,13 @@ export class EmitEvent {
 })
 export class EventBusService {
   private subject$ = new Subject();
-  constructor() {}
 
-  on(eventName: 'searchBtnClicked', action: ()=>any): Subscription {
+  on(eventName: 'searchBtnClicked', action: () => any): Subscription {
     return this.subject$
       .pipe(
         // @ts-ignore
         filter((e: EmitEvent) => e.name === eventName),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         map((e: EmitEvent) => e.value)
       )
       .subscribe(action);

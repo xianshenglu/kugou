@@ -12,6 +12,7 @@ export class SingerCategoryComponent implements OnInit {
     typeof SingerCategoryService,
     'fetchSingerCategory'
   > = [];
+
   constructor(private singerCategoryService: SingerCategoryService) {}
 
   async ngOnInit(): Promise<void> {

@@ -21,7 +21,7 @@ export class SongListInfoService {
   async fetchSongListInfo(songListId: string) {
     const response = await this.http
       .get<SongListInfoResponse>(
-        BASE_ORIGIN + `/plist/list/${songListId}&json=true`
+        `${BASE_ORIGIN}/plist/list/${songListId}&json=true`
       )
       .toPromise();
     const { info, list } = response;

@@ -1,8 +1,8 @@
-//doc: https://github.com/xCss/JsonBird
+// doc: https://github.com/xCss/JsonBird
 const PROXY_URL = 'https://bird.ioliu.cn/v1?url=';
 
-export const BASE_ORIGIN = PROXY_URL + 'http://m.kugou.com';
-export const KU_GOU_ORIGIN = PROXY_URL + 'http://www.kugou.com';
-export const KU_GOU_MOBILE_CDN_ORIGIN = PROXY_URL + 'http://mobilecdn.kugou.com'
+export const BASE_ORIGIN = `${PROXY_URL}http://m.kugou.com`;
+export const KU_GOU_ORIGIN = `${PROXY_URL}http://www.kugou.com`;
+export const KU_GOU_MOBILE_CDN_ORIGIN = `${PROXY_URL}http://mobilecdn.kugou.com`;
 
-export const IMG_SIZE__DEFAULT = '400';
+export const IMG_SIZE_DEFAULT = '400';
