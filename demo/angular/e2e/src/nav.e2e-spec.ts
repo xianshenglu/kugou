@@ -1,4 +1,3 @@
-import { expectNoErrorLog } from './common/index';
 import { $$, browser } from 'protractor';
 import { AppPage } from './app.po';
 
@@ -33,16 +32,12 @@ describe('nav', () => {
 
   it('should the fourth nav navigate correctly', async () => {
     await navBtns.get(3).click();
-    const currentUrl = await browser.getCurrentUrl();
     // can't use code below because it always return true
     //  expect(browser.getCurrentUrl()).toContain('1/singer/category');
     expect(await browser.getCurrentUrl()).toContain('/singer/category');
   });
 
-  afterEach(async () => {
-    expectNoErrorLog();
-  });
-  afterAll(async () => {
+  afterAll(() => {
     page.returnHome();
   });
 });

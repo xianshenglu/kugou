@@ -1,5 +1,5 @@
-import { expectNoErrorLog, waitForListRendered } from './common/index';
-import { browser, $$, $ } from 'protractor';
+import { browser, $$ } from 'protractor';
+import { waitForListRendered } from './common/index';
 import { AppPage } from './app.po';
 
 describe('song-list', () => {
@@ -19,10 +19,6 @@ describe('song-list', () => {
     const targetHref = await firstListItemLink.getAttribute('href');
     await firstListItemLink.click();
     expect(await browser.getCurrentUrl()).toContain(targetHref);
-  });
-
-  afterEach(async () => {
-    expectNoErrorLog();
   });
 
   afterAll(() => {

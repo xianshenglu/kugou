@@ -1,5 +1,5 @@
-import { expectNoErrorLog, waitForListRendered } from './common/index';
-import { browser, $$ } from 'protractor';
+import { $$ } from 'protractor';
+import { waitForListRendered } from './common/index';
 import { AppPage } from './app.po';
 
 describe('song-list-info', () => {
@@ -14,10 +14,6 @@ describe('song-list-info', () => {
     await waitForListRendered(dataListFinders);
 
     done();
-  });
-
-  afterEach(async () => {
-    expectNoErrorLog();
   });
 
   afterAll(() => {

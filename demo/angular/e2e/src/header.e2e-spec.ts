@@ -1,5 +1,4 @@
-import { expectNoErrorLog } from './common/index';
-import { browser, $, ExpectedConditions } from 'protractor';
+import { browser, $ } from 'protractor';
 import { AppPage } from './app.po';
 
 describe('header ', () => {
@@ -49,8 +48,7 @@ describe('header ', () => {
     expect(await browser.getCurrentUrl()).toContain(browser.baseUrl);
   });
 
-  afterEach(async () => {
-    expectNoErrorLog();
+  afterEach(() => {
     page.returnHome();
   });
 });

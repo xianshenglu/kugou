@@ -1,22 +1,4 @@
-import {
-  browser,
-  logging,
-  ElementArrayFinder,
-  ElementFinder,
-} from 'protractor';
-/**
- * @todo fix error not work. error log can be collected from //protractor-beautiful-reporter
- */
-export const expectNoErrorLog = async () => {
-  it('should appear no errors at the console', async () => {
-    const logs = await browser.manage().logs().get(logging.Type.BROWSER);
-    expect(logs).not.toContain(
-      jasmine.objectContaining({
-        level: logging.Level.SEVERE,
-      } as logging.Entry)
-    );
-  });
-};
+import { browser, ElementArrayFinder } from 'protractor';
 // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export async function waitForListRendered(
   dataListFinders: ElementArrayFinder,
