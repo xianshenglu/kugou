@@ -11,7 +11,7 @@ type RankItem = {
   path: string;
   title: string;
 };
-type RankListResponse = {
+export type RankListResponse = {
   rank: {
     list: RankItem[];
   };
@@ -20,11 +20,13 @@ type RankListResponse = {
   providedIn: 'root',
 })
 export class RankListService {
+  rankListUrl = `${BASE_ORIGIN}/rank/list&json=true`;
+
   constructor(private http: HttpClient) {}
 
   async fetchRankList(params = {}): Promise<RankItem[]> {
     const response = await this.http
-      .get<RankListResponse>(`${BASE_ORIGIN}/rank/list&json=true`, {
+      .get<RankListResponse>(this.rankListUrl, {
         params: { ...params },
         observe: 'body',
         responseType: 'json',

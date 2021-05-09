@@ -13,4 +13,10 @@ describe('DeviceService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should vh,vMax be valid value', () => {
+    expect(typeof service.vh).toBe('number');
+    expect(typeof service.vMax).toBe('number');
+    expect(service.vMax).toBeGreaterThanOrEqual(service.vh);
+  });
 });
