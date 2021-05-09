@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SingerCategoryComponent } from './singer-category.component';
