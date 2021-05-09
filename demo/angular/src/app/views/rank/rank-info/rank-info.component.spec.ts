@@ -1,3 +1,5 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RankInfoComponent } from './rank-info.component';
@@ -9,6 +11,7 @@ describe('RankInfoComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [RankInfoComponent],
+      imports: [HttpClientTestingModule],
     }).compileComponents();
   });
 

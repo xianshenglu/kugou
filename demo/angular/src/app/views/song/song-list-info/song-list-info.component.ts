@@ -29,9 +29,10 @@ export class SongListInfoComponent implements OnInit {
   }
 
   get getMusicList() {
+    // todo remove ? and fix type
     // @ts-ignore
     // eslint-disable-next-line
-    return this.songListInfo.songs.list.info;
+    return this.songListInfo.songs?.list.info;
   }
 
   async ngOnInit(): Promise<void> {

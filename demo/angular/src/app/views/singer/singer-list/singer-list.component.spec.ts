@@ -1,3 +1,5 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SingerListComponent } from './singer-list.component';
@@ -9,6 +11,7 @@ describe('SingerListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SingerListComponent],
+      imports: [HttpClientTestingModule],
     }).compileComponents();
   });
 
