@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
 
 type SingerInfoResponse = {
   info: {
-    singerid: string;
+    singerid: number;
     singername: string;
-    songcount: string;
+    songcount: number;
     albumcount: number;
     imgurl: string;
     intro: string;
@@ -21,13 +21,13 @@ type SingerInfoResponse = {
   providedIn: 'root',
 })
 export class SingerInfoService {
+  singerInfoUrl = `${BASE_ORIGIN}/singer/info`;
+
   constructor(private http: HttpClient) {}
 
   async fetchSingerInfo(singerId: string) {
     const response = await this.http
-      .get<SingerInfoResponse>(
-        `${BASE_ORIGIN}/singer/info/${singerId}&json=true`
-      )
+      .get<SingerInfoResponse>(`${this.singerInfoUrl  }/${singerId}&json=true`)
       .toPromise();
     const { info, songs } = response;
 

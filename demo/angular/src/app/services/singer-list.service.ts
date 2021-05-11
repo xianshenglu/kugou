@@ -4,15 +4,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 type SingerListResponse = {
-  classid: string;
+  classid: number;
   classname: string;
   singers: {
     list: {
+      total: number;
       info: {
-        singerid: string;
+        singerid: number;
         singername: string;
         imgurl: string;
-        id: string;
+        id: number;
         name: string;
         imgUrl: string;
         path: string;
@@ -25,13 +26,13 @@ type SingerListResponse = {
   providedIn: 'root',
 })
 export class SingerListService {
+  singerListUrl = `${BASE_ORIGIN}/singer/list/&json=true&singerListId=`;
+
   constructor(private http: HttpClient) {}
 
   async fetchSingerList(singerListId: string) {
     const response = await this.http
-      .get<SingerListResponse>(
-        `${BASE_ORIGIN}/singer/list/&json=true&singerListId=${singerListId}`
-      )
+      .get<SingerListResponse>(`${this.singerListUrl}${singerListId}`)
       .toPromise();
     const {
       classid,
@@ -49,7 +50,7 @@ export class SingerListService {
       info: {
         id: classid,
         name: classname,
-        count: singers.total,
+        count: singers.list.total,
       },
       data: singers.list.info,
     };

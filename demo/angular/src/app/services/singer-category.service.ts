@@ -4,8 +4,7 @@ import { BASE_ORIGIN } from '../constants/index';
 
 export type SingerCategory = {
   path: string;
-  classid: string;
-  category: string;
+  classid: number;
   classname: string;
 };
 type SingerCategoryResponse = {
@@ -15,11 +14,13 @@ type SingerCategoryResponse = {
   providedIn: 'root',
 })
 export class SingerCategoryService {
+  singerCategoryUrl = `${BASE_ORIGIN}/singer/class&json=true`;
+
   constructor(private http: HttpClient) {}
 
   async fetchSingerCategory() {
     const { list } = await this.http
-      .get<SingerCategoryResponse>(`${BASE_ORIGIN}/singer/class&json=true`)
+      .get<SingerCategoryResponse>(this.singerCategoryUrl)
       .toPromise();
 
     const singerCategories = list.reduce(
