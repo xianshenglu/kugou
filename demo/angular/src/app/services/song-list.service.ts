@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 type SongItem = {
   imgurl: string;
   imgUrl: string;
-  specialid: string;
+  specialid: number;
   path: string;
   specialname: string;
   title: string;
@@ -25,11 +25,13 @@ type SongListResponse = {
   providedIn: 'root',
 })
 export class SongListService {
+  songListUrl = `${BASE_ORIGIN}/plist/index&json=true`;
+
   constructor(private http: HttpClient) {}
 
   async fetchSongList() {
     const response = await this.http
-      .get<SongListResponse>(`${BASE_ORIGIN}/plist/index&json=true`)
+      .get<SongListResponse>(this.songListUrl)
       .toPromise();
     const {
       plist: {
