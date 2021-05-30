@@ -35,19 +35,21 @@ export class MyNavComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.setActiveIndexByRouter();
+    this.setActiveIndexByPathname(window.location.pathname);
     // todo need unsubscribe?
     this.router.events.subscribe((event) => {
       if (!(event instanceof NavigationEnd)) {
         return;
       }
-      this.setActiveIndexByRouter();
+      this.setActiveIndexByPathname(window.location.pathname);
     });
   }
 
-  setActiveIndexByRouter() {
-    const path = window.location.pathname;
-    const index = this.navs.findIndex((nav) => nav.path === path);
+  setActiveIndexByPathname(pathname: string) {
+    const index = this.navs.findIndex((nav) => nav.path === pathname);
+    if (index < 0) {
+      return;
+    }
     this.activeIndex = index;
   }
 }
