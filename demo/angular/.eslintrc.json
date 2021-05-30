@@ -42,7 +42,17 @@
         "no-useless-constructor": "off",
         "@typescript-eslint/no-useless-constructor": ["error"],
         "@typescript-eslint/no-floating-promises":["off"],
-        "array-callback-return": ["error", { "checkForEach": false}]
+        "array-callback-return": ["error", { "checkForEach": false}],
+        "class-methods-use-this":["off"],
+        "prefer-arrow/prefer-arrow-functions":["off"],
+        "no-use-before-define": ["error", { "functions": false, "classes": false }]
+      }
+    },
+    {
+      "files": ["*.spec.ts"],
+      "rules": {
+        "@typescript-eslint/unbound-method":["off"],
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
       }
     },
     {

@@ -10,9 +10,6 @@ import { EventBusService } from '../../services/event-bus.service';
 export class MyHeaderComponent {
   constructor(private player: PlayerService, private bus: EventBusService) {}
 
-  // computed: {
-  //   ...mapState('images', ['logo__text']),
-  // }
   goBack() {
     if (this.player.curPlayerId === 1) {
       this.player.togglePlayers(1);
