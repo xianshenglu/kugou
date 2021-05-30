@@ -40,6 +40,8 @@ export class MyCardListComponent implements OnChanges {
     if (this.pubList.length === 0 || this.lazyImages === undefined) {
       return;
     }
+    // console.log(lazyLoad,123,);
+
     lazyLoad(
       // @ts-ignore
       // eslint-disable-next-line
