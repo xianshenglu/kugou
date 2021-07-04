@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "precommit:angular": "cd demo/angular && npm run precommit",
-    "precommit": "npm-run-all precommit:*"
+    "precommit": "npm-run-all precommit:*",
+    "postinstall": "husky install"
   },
   "repository": {
     "type": "git",
