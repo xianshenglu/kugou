@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
@@ -28,6 +29,14 @@ module.exports = function (config) {
       dir: require("path").join(__dirname, "./coverage/angular"),
       subdir: ".",
       reporters: [{ type: "html" }, { type: "text-summary" }],
+      check: {
+        global: {
+          statements: 60,
+          branches: 30,
+          functions: 60,
+          lines: 60,
+        },
+      },
     },
     reporters: ["progress", "kjhtml"],
     port: 9876,
