@@ -1,0 +1,26 @@
+@import "src/app/styles/constant";
+.singer_list {
+  font-size: 19px;
+}
+.singer_list__list {
+  overflow: scroll;
+
+  box-sizing: border-box;
+  height: calc(100% - #{$module_title_height});
+}
+.singer_list__item {
+  height: 88px;
+}
+.singer_list__link {
+  display: flex;
+  align-items: center;
+
+  height: 100%;
+}
+.singer_list__img {
+  display: block;
+
+  width: 61px;
+  height: 61px;
+  margin: 0 18px 0 $padding_width;
+}

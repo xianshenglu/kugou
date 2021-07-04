@@ -1,0 +1,74 @@
+@import "src/app/styles/constant";
+.search {
+  box-sizing: border-box;
+}
+.search__cont {
+  overflow: scroll;
+
+  box-sizing: border-box;
+  height: calc(100vh - #{$module_title_height});
+}
+.search__form {
+  box-sizing: border-box;
+  height: $search_form_height;
+  padding: $padding_width;
+
+  background-color: $white-1;
+}
+.search__input,
+.search__btn {
+  box-sizing: border-box;
+  height: 100%;
+
+  border-radius: 5px;
+}
+
+.search__input {
+  width: 277px;
+  margin-right: 10px;
+  padding: 7px 1px 7px 31px;
+
+  border: 1px solid $white-2;
+  background-color: $white;
+}
+.search__btn {
+  width: 60px;
+
+  color: $white-to-black;
+  background-color: $white-2;
+}
+.search__btn--active {
+  color: $white;
+  background: $theme;
+}
+.search__type {
+  height: 51px;
+  padding-left: 16px;
+
+  color: $theme;
+  border-bottom: 1px solid $white-3;
+
+  font-size: 16px;
+  line-height: 51px;
+}
+.search__item {
+  height: 64px;
+  margin-left: 16px;
+
+  font-size: 20px;
+  line-height: 64px;
+}
+.search__count {
+  box-sizing: border-box;
+  width: 100%;
+  padding-left: 16px;
+
+  color: $white-to-black;
+  background-color: $white-2;
+
+  font-size: 14px;
+  line-height: 28px;
+}
+.search__res-list {
+  overflow-y: scroll;
+}

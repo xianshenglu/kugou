@@ -1,0 +1,27 @@
+<ul class="list" #lazyLoadRoot>
+  <li
+    class="list__item main_border_bottom"
+    test-class="list"
+    *ngFor="let item of pubList"
+  >
+    <a [routerLink]="item.path" class="list__link" test-class="link">
+      <img
+        class="list__img lazy_image"
+        #lazyImages
+        src="assets/images/logo__grey.png"
+        [attr.data-src]="item.imgUrl"
+      />
+      <ng-template
+        [ngTemplateOutlet]="template"
+        [ngTemplateOutletContext]="{ $implicit: item }"
+      >
+      </ng-template>
+      <ng-content [data]="item"> </ng-content>
+      <button class="list__btn">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-arrow-right"></use>
+        </svg>
+      </button>
+    </a>
+  </li>
+</ul>

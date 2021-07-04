@@ -1,0 +1,7 @@
+<section class="rank_list" test-id="page-rank-list">
+  <app-my-card-list [pubList]="rankList" class="rank_list__cont">
+    <ng-template class="rank_list__info" let-item>
+      <div class="rank_list__info">{{ item.title }}</div>
+    </ng-template>
+  </app-my-card-list>
+</section>

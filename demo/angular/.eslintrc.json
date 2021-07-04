@@ -1,0 +1,81 @@
+{
+  "root": true,
+  "ignorePatterns": ["projects/**/*"],
+  "extends": ["eslint-config-prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2015
+  },
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["./tsconfig.json", "./e2e/tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "@xianshenglu/eslint-config/typescript",
+        "plugin:@angular-eslint/ng-cli-compat",
+        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "eslint-config-prettier"
+      ],
+      "rules": {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@typescript-eslint/explicit-module-boundary-types":["off"],
+        "@typescript-eslint/ban-ts-comment":["off"],
+        "lines-between-class-members":["off"],
+        "no-useless-constructor": "off",
+        "@typescript-eslint/no-useless-constructor": ["error"],
+        "@typescript-eslint/no-floating-promises":["off"],
+        "array-callback-return": ["error", { "checkForEach": false}],
+        "class-methods-use-this":["off"],
+        "prefer-arrow/prefer-arrow-functions":["off"],
+        "no-use-before-define": ["error", { "functions": false, "classes": false }]
+      }
+    },
+    {
+      "files": ["*.spec.ts"],
+      "rules": {
+        "@typescript-eslint/unbound-method":["off"],
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+      }
+    },
+    {
+      "files": ["*.html"],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "eslint-config-prettier"
+      ],
+      "rules": {}
+    },
+    {
+      "files": ["*.js"],
+      "parserOptions": {
+        "ecmaVersion": 2020
+      },
+      "extends": [
+        "@xianshenglu/eslint-config/javascript",
+        "eslint-config-prettier"
+      ],
+      "env": {
+        "node": true,
+        "es6": true
+      }
+    }
+  ]
+}

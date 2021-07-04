@@ -1,0 +1,46 @@
+<section class="search">
+  <app-my-module-title
+    [title]="title"
+    class="search__title"
+    (titleClick)="scrollTopSearchCont()"
+  >
+  </app-my-module-title>
+  <div class="search__cont" #searchCont>
+    <form class="search__form" (submit)="$event.preventDefault()">
+      <input
+        type="text"
+        [attr.placeholder]="placeholder"
+        class="search__input"
+        [(ngModel)]="keyword"
+        name="keyword"
+        (keyup.enter)="getSearchRes()"
+      />
+      <button
+        [class]="
+          isSearchResShow ? 'search__btn search__btn--active' : 'search__btn'
+        "
+        type="button"
+        (click)="getSearchRes()"
+      >
+        {{ title }}
+      </button>
+    </form>
+    <div class="search__rec" *ngIf="isSearchRecShow">
+      <h6 class="search__type">{{ searchType }}</h6>
+      <ul class="search__list">
+        <li
+          class="search__item main_border_bottom"
+          *ngFor="let item of searchRecArr"
+          (click)="keyword = item.keyword; getSearchRes()"
+        >
+          {{ item.keyword }}
+        </li>
+      </ul>
+    </div>
+    <div class="search__res" ng-show="isSearchResShow">
+      <div class="search__count">共有{{ searchResInfo.length }}条结果</div>
+      <app-my-music-list [musicList]="searchResInfo" class="search__res-list">
+      </app-my-music-list>
+    </div>
+  </div>
+</section>
