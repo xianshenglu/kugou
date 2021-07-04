@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test --code-coverage",
+    "test:headless": "ng test --code-coverage --browsers=ChromeHeadless --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "e2e:headless": "cross-env E2E_HEADLESS=true ng e2e",
