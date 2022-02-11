@@ -26,7 +26,7 @@
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "mockjs": "^1.0.1-beta3",
-    "node-sass": "^4.11.0",
+    "node-sass": "^7.0.0",
     "postcss-pixel-to-viewport": "^1.0.2",
     "postcss-plugin-pxtoviewport": "0.0.5",
     "postcss-pxtorem": "^4.0.1",
