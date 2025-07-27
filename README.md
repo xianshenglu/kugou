@@ -17,10 +17,10 @@
 
 ## 示例
 
-![kugou](https://xianshenglu.github.io/kugou/demo/img-displayed/kugou-1.jpg) ![kugou](https://xianshenglu.github.io/kugou/demo/img-displayed/kugou-2.jpg) ![kugou](https://xianshenglu.github.io/kugou/demo/img-displayed/kugou-3.jpg) ![kugou](https://xianshenglu.github.io/kugou/demo/img-displayed/kugou-5.jpg) ![kugou](https://xianshenglu.github.io/kugou/demo/img-displayed/kugou-6.jpg) ![kugou](https://xianshenglu.github.io/kugou/demo/img-displayed/kugou-7.jpg) ![kugou](https://xianshenglu.github.io/kugou/demo/img-displayed/kugou-8.jpg) ![kugou](https://xianshenglu.github.io/kugou/demo/img-displayed/kugou-9.jpg)
+![kugou](https://xianshenglu.github.io/kugou/public/images/kugou-1.jpg) ![kugou](https://xianshenglu.github.io/kugou/public/images/kugou-2.jpg) ![kugou](https://xianshenglu.github.io/kugou/public/images/kugou-3.jpg) ![kugou](https://xianshenglu.github.io/kugou/public/images/kugou-5.jpg) ![kugou](https://xianshenglu.github.io/kugou/public/images/kugou-6.jpg) ![kugou](https://xianshenglu.github.io/kugou/public/images/kugou-7.jpg) ![kugou](https://xianshenglu.github.io/kugou/public/images/kugou-8.jpg) ![kugou](https://xianshenglu.github.io/kugou/public/images/kugou-9.jpg)
 
 ## 遗留项目
 
 - [multi-cascader-ant-design-vue](https://xianshenglu.github.io/kugou/demo/multi-cascader-ant-design-vue/dist/index.html)
 
-  ![multi-cascader-ant-design-vue](https://xianshenglu.github.io/kugou/demo/img-displayed/multi-cascader-ant-design-vue.gif)
+  ![multi-cascader-ant-design-vue](https://xianshenglu.github.io/kugou/public/images/multi-cascader-ant-design-vue.gif)
