@@ -1,4 +1,4 @@
-import { getHotSearch, getSearchResult } from '../api/search'
+import { getHotSearch, getSearchResult } from '@shared/api/search'
 import http from './http'
 
 export const fetchHotSearch = ({ params = {} } = {}) => {

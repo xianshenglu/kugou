@@ -1,4 +1,4 @@
-import { getSongLyric, getSongInfo } from '../api/player'
+import { getSongLyric, getSongInfo } from '@shared/api/player'
 import http from './http'
 
 export const fetchSongLyric = ({ params = {} } = {}) => {
