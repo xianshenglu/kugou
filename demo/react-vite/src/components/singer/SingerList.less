@@ -1,0 +1,26 @@
+@import (reference) '../../assets/css/constant.less';
+.SingerList {
+  font-size: 19px;
+}
+.SingerList__list {
+  overflow: scroll;
+
+  box-sizing: border-box;
+  height: calc(100% - @module_title_height);
+}
+.SingerList__item {
+  height: 88px;
+}
+.SingerList__link {
+  display: flex;
+  align-items: center;
+
+  height: 100%;
+}
+.SingerList__img {
+  display: block;
+
+  width: 61px;
+  height: 61px;
+  margin: 0 18px 0 @padding_width;
+}
