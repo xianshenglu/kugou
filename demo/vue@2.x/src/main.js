@@ -8,7 +8,7 @@ import './styles/index.less'
 
 // use mock instead of real http request when in development
 
-// import './mock/index'
+import '@shared/mock/index'
 
 Vue.config.productionTip = false
 Vue.prototype.window = window

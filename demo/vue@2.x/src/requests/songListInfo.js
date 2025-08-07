@@ -1,5 +1,5 @@
 import http from './http'
-import { getSongListInfo } from '../api/songListInfo'
+import { getSongListInfo } from '@shared/api/songListInfo'
 
 export const fetchSongListInfo = ({ songListId, params = {} } = {}) => {
   let { url, ...props } = getSongListInfo
