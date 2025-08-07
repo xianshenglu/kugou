@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { Route } from "react-router-dom";
 import classNames from "classnames";
 import "./App.less";
@@ -25,7 +25,7 @@ import RankInfoContainer from "./containers/rank/RankInfoContainer";
 import SongListInfoContainer from "./containers/song/SongListInfoContainer";
 import SingerListContainer from "./containers/singer/SingerListContainer";
 import SingerInfoContainer from "./containers/singer/SingerInfoContainer";
-import searchContainer from "./containers/search/searchContainer";
+import SearchContainer from "./containers/search/searchContainer";
 import PlayerMaxContainer from "./containers/player/PlayerMaxContainer";
 import AppNavContainer from "./containers/public/AppNavContainer";
 
@@ -41,32 +41,25 @@ class App extends Component {
         <AppNavContainer />
         {isPlayerMedShow ? <PlayerMedContainer /> : undefined}
         <main className={mainClassName}>
-          <Route path={player} exact component={PlayerMaxContainer} />
-          <Route path={newSongs} exact component={NewSongsContainer} />
-          <Route path={rankList} exact component={RankListContainer} />
-          <Route path={songList} exact component={SongListContainer} />
+          <Route path={player} element={<PlayerMaxContainer />} />
+          <Route path={newSongs} element={<NewSongsContainer />} />
+          <Route path={rankList} element={<RankListContainer />} />
+          <Route path={songList} element={<SongListContainer />} />
           <Route
             path={singerCategories}
-            exact
-            component={SingerCategoriesContainer}
+            element={<SingerCategoriesContainer />}
           />
-          <Route path={rankInfo + ":id"} exact component={RankInfoContainer} />
+          <Route path={rankInfo + ":id"} element={<RankInfoContainer />} />
           <Route
             path={songListInfo + ":id"}
-            exact
-            component={SongListInfoContainer}
+            element={<SongListInfoContainer />}
           />
-          <Route
-            path={singerList + ":id"}
-            exact
-            component={SingerListContainer}
-          />
+          <Route path={singerList + ":id"} element={<SingerListContainer />} />
           <Route
             path={singerInfo + ":singerListId/:id"}
-            exact
-            component={SingerInfoContainer}
+            element={<SingerInfoContainer />}
           />
-          <Route path={search} exact component={searchContainer} />
+          <Route path={search} element={<SearchContainer />} />
         </main>
       </div>
     );
