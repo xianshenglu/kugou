@@ -1,13 +1,12 @@
 import {
   FETCH_MUSIC,
   RECEIVE_MUSIC,
-  TOGGLE_MUSIC,
   PLAY_MUSIC,
   PAUSE_MUSIC,
   SHOW_MUSIC_LOADING,
   HIDE_MUSIC_LOADING,
-  SWITCH_PLAYER_MED
-} from '../../constants/actionType'
+  SWITCH_PLAYER_MED,
+} from "../../constants/actionType";
 import axios from 'axios'
 import api from '../../constants/api'
 export const fetchMusic = (id, songIndex, songList) => ({

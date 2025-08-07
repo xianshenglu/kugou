@@ -4,7 +4,7 @@ import "./index.css";
 // import "@babel/polyfill";
 import { createRoot } from "react-dom/client";
 import "./assets/css/index.less";
-import * as serviceWorker from "./serviceWorker";
+// import * as serviceWorker from "./serviceWorker";
 import { HashRouter } from "react-router-dom";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
@@ -28,4 +28,4 @@ root.render(
   </StrictMode>
 );
 
-serviceWorker.unregister();
+// serviceWorker.unregister();
