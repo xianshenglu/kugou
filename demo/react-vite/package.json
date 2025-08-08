@@ -15,6 +15,7 @@
     "prop-types": "^15.8.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-error-boundary": "^6.0.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.7.1",
     "react-slick": "^0.31.0",
