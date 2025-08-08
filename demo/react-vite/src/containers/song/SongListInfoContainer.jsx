@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import SongListInfo from '../../components/song/SongListInfo'
 import { connect } from 'react-redux'
 import { fetchSongListInfoIfNeeded } from '../../redux/actions/songListInfo'
+import { useParams } from 'react-router-dom'
 
 class SongListInfoContainer extends Component {
   componentDidMount() {
     const {
       dispatch,
-      match: {
-        params: { id }
-      }
+      params: { id }
     } = this.props
     dispatch(fetchSongListInfoIfNeeded(id))
   }
@@ -24,7 +23,12 @@ const mapStateToProps = ({ songListInfo: { songsData, listInfo } }) => ({
 })
 const mapDispatchToProps = null
 
+function SongListInfoContainerWrapper(props) {
+  const params = useParams()
+  return <SongListInfoContainer {...props} params={params} />
+}
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SongListInfoContainer)
+)(SongListInfoContainerWrapper)
