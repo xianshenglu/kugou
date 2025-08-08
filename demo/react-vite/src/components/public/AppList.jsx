@@ -6,6 +6,7 @@ import logo__grey from '../../assets/images/logo__grey.png'
 import './AppList.less'
 import { $_xsl__loadImgLazy } from '../../assets/js/utils'
 class AppList extends Component {
+  lazyImageRefs = []
   componentDidMount() {
     this.initLazyImgLoad()
   }
@@ -13,26 +14,24 @@ class AppList extends Component {
     this.initLazyImgLoad()
   }
   initLazyImgLoad() {
-    this.lazyImages = this.lazyImageRefs.map(ref => ref.current)
+    this.lazyImages = this.lazyImageRefs.map((ref) => ref.current)
     $_xsl__loadImgLazy(this.lazyImages)
   }
   render() {
-    this.lazyImageRefs = []
     const { data, render, className } = this.props
+    this.createLazyImgRef(data)
     return (
       <ul
         className={classNames('AppList', className)}
         onScroll={() => $_xsl__loadImgLazy(this.lazyImages)}
       >
-        {data.map(item => {
-          const lazyImageRef = React.createRef()
-          this.lazyImageRefs.push(lazyImageRef)
+        {data.map((item, index) => {
           return (
             <li className="AppList__item main_border_bottom" key={item.path}>
               <NavLink to={item.path} className="AppList__link">
                 <img
                   className="AppList__img lazyImage"
-                  ref={lazyImageRef}
+                  ref={this.lazyImageRefs[index]}
                   src={logo__grey}
                   data-src={item.imgurl}
                   alt={item.name}
@@ -49,6 +48,15 @@ class AppList extends Component {
         })}
       </ul>
     )
+  }
+
+  createLazyImgRef(data) {
+    this.lazyImageRefs = data.map((item, index) => {
+      if (this.lazyImageRefs[index]) {
+        return this.lazyImageRefs[index]
+      }
+      return React.createRef()
+    })
   }
 }
 AppList.propTypes = {
