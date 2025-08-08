@@ -11,6 +11,7 @@ import { thunk } from 'redux-thunk'
 import logger from 'redux-logger'
 import rootReducer from './redux/reducers'
 import AppContainer from './AppContainer'
+import '@shared/mock/index'
 const store = createStore(rootReducer, applyMiddleware(thunk, logger))
 const root = createRoot(document.getElementById('root')!)
 root.render(
