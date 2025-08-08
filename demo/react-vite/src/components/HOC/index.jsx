@@ -34,15 +34,14 @@ export function withNextPrevSong(WrappedComponent, data) {
       )
     }
     dispatchAndRedirect(hash, songIndex, songList) {
-      // todo: fix history and location
       const {
         dispatch,
-        history,
+        navigate,
         location: { pathname }
       } = this.props
       dispatch(fetchMusicIfNeeded(hash, songIndex, songList))
       if (pathname === player) {
-        history.replace(pathname + '?musicHash=' + hash)
+        navigate(pathname + '?musicHash=' + hash, { replace: true })
       }
     }
     render() {

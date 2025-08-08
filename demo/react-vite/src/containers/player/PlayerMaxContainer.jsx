@@ -3,6 +3,7 @@ import PlayerMax from '../../components/player/PlayerMax'
 import { connect } from 'react-redux'
 import { fetchMusicIfNeeded } from '../../redux/actions/player'
 import { withNextPrevSong } from '../../components/HOC'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 class PlayerMaxContainer extends Component {
   componentDidMount() {
@@ -40,7 +41,19 @@ const mapStateToProps = ({
 })
 const mapDispatchToProps = null
 
+const EnhancedPlayerMaxContainer = withNextPrevSong(PlayerMaxContainer)
+function PlayerMaxContainerWrapper(props) {
+  const location = useLocation()
+  const navigate = useNavigate()
+  return (
+    <EnhancedPlayerMaxContainer
+      {...props}
+      location={location}
+      navigate={navigate}
+    />
+  )
+}
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withNextPrevSong(PlayerMaxContainer))
+)(PlayerMaxContainerWrapper)
