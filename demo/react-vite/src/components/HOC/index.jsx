@@ -34,6 +34,7 @@ export function withNextPrevSong(WrappedComponent, data) {
       )
     }
     dispatchAndRedirect(hash, songIndex, songList) {
+      // todo: fix history and location
       const {
         dispatch,
         history,

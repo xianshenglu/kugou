@@ -1,6 +1,6 @@
+import { useNavigate, useLocation, useParams } from 'react-router-dom'
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 // import classNames from 'classnames'
 import logo__theme from './assets/images/logo__theme.png'
 import { player } from './constants/router'
@@ -15,22 +15,22 @@ import {
 class AppContainer extends Component {
   constructor(props) {
     super(props)
-    this.historyListener = this.historyListener.bind(this)
     this.setCssCustomVar = this.setCssCustomVar.bind(this)
     this.canPlayCb = this.canPlayCb.bind(this)
     this.setBackupImg = this.setBackupImg.bind(this)
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      this.onLocationChange(this.props.location)
+    }
+  }
   componentDidMount() {
-    const {
-      history,
-      history: { location }
-    } = this.props
-    this.unlistenHistory = history.listen(this.historyListener)
-    this.historyListener(location)
+    const { location } = this.props
+    this.onLocationChange(location)
     this.setCssCustomVar()
     window.addEventListener('error', this.setBackupImg, true)
   }
-  historyListener({ pathname }) {
+  onLocationChange({ pathname }) {
     const {
       player: {
         songInfo: { play_url },
@@ -56,7 +56,6 @@ class AppContainer extends Component {
     }
   }
   componentWillUnmount() {
-    this.unlistenHistory()
     window.removeEventListener('error', this.setBackupImg, true)
   }
   canPlayCb(e) {
@@ -81,7 +80,7 @@ class AppContainer extends Component {
     return (
       <Fragment>
         <audio
-          src={play_url}
+          src={play_url || null}
           className="hidden"
           ref={audioElRef}
           loop
@@ -96,16 +95,10 @@ const mapStateToProps = ({ player, appNav: { isShow: isAppNavShow } }) => ({
   player,
   isAppNavShow
 })
-export default withRouter(
-  connect(
-    mapStateToProps,
-    null
-  )(AppContainer)
-)
-// different with, think about it
-// export default withRouter(
-//   connect(
-//     mapStateToProps,
-//     null
-//   )(AppContainer)
-// )
+
+function AppContainerWrapper(props) {
+  const navigate = useNavigate()
+  const location = useLocation()
+  return <AppContainer {...props} location={location} />
+}
+export default connect(mapStateToProps, null)(AppContainerWrapper)

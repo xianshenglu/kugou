@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom'
 import classNames from "classnames";
 import "./App.less";
 import AppHeader from "./components/public/AppHeader";
@@ -41,28 +41,33 @@ class App extends Component {
         <AppNavContainer />
         {isPlayerMedShow ? <PlayerMedContainer /> : undefined}
         <main className={mainClassName}>
-          <Route path={player} element={<PlayerMaxContainer />} />
-          <Route path={newSongs} element={<NewSongsContainer />} />
-          <Route path={rankList} element={<RankListContainer />} />
-          <Route path={songList} element={<SongListContainer />} />
-          <Route
-            path={singerCategories}
-            element={<SingerCategoriesContainer />}
-          />
-          <Route path={rankInfo + ":id"} element={<RankInfoContainer />} />
-          <Route
-            path={songListInfo + ":id"}
-            element={<SongListInfoContainer />}
-          />
-          <Route path={singerList + ":id"} element={<SingerListContainer />} />
-          <Route
-            path={singerInfo + ":singerListId/:id"}
-            element={<SingerInfoContainer />}
-          />
-          <Route path={search} element={<SearchContainer />} />
+          <Routes>
+            <Route path={player} element={<PlayerMaxContainer />} />
+            <Route path={newSongs} element={<NewSongsContainer />} />
+            <Route path={rankList} element={<RankListContainer />} />
+            <Route path={songList} element={<SongListContainer />} />
+            <Route
+              path={singerCategories}
+              element={<SingerCategoriesContainer />}
+            />
+            <Route path={rankInfo + ':id'} element={<RankInfoContainer />} />
+            <Route
+              path={songListInfo + ':id'}
+              element={<SongListInfoContainer />}
+            />
+            <Route
+              path={singerList + ':id'}
+              element={<SingerListContainer />}
+            />
+            <Route
+              path={singerInfo + ':singerListId/:id'}
+              element={<SingerInfoContainer />}
+            />
+            <Route path={search} element={<SearchContainer />} />
+          </Routes>
         </main>
       </div>
-    );
+    )
   }
 }
 

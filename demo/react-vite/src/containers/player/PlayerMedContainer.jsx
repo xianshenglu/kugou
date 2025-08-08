@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
 import PlayerMed from '../../components/player/PlayerMed'
 import { connect } from 'react-redux'
 import { withNextPrevSong } from '../../components/HOC'
+import { useLocation } from 'react-router-dom'
 
 class PlayerMedContainer extends Component {
   render() {
@@ -28,10 +28,11 @@ const mapStateToProps = ({
   songList
 })
 const mapDispatchToProps = null
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(withNextPrevSong(PlayerMedContainer))
-)
+function PlayerMedContainerWrapper(props) {
+  const location = useLocation()
+  return <PlayerMedContainer {...props} location={location} />
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withNextPrevSong(PlayerMedContainerWrapper))

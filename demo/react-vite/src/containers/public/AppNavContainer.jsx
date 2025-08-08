@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import AppNav from '../../components/public/AppNav'
 import {
   newSongs,
@@ -9,6 +8,7 @@ import {
   singerCategories
 } from '../../constants/router'
 import { setActiveNavIndex, switchNav } from '../../redux/actions/appNav'
+import { useLocation, useNavigate } from 'react-router-dom'
 const navList = [
   {
     text: '新歌',
@@ -30,24 +30,23 @@ const navList = [
 class AppNavContainer extends Component {
   constructor(props) {
     super(props)
-    this.historyListener = this.historyListener.bind(this)
     this.toggleBetweenPages = this.toggleBetweenPages.bind(this)
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      this.onLocationChange(this.props.location)
+    }
+  }
   componentDidMount() {
-    const {
-      history,
-      history: { location }
-    } = this.props
-    this.unlistenHistory = history.listen(this.historyListener)
-    this.historyListener(location)
+    const { location } = this.props
+    this.onLocationChange(location)
     window.addEventListener('touchstart', this.toggleBetweenPages)
   }
   componentWillUnmount() {
-    this.unlistenHistory()
     window.removeEventListener('touchstart', this.toggleBetweenPages)
   }
-  historyListener({ pathname }) {
-    const activeIndex = navList.findIndex(nav => nav.path === pathname)
+  onLocationChange({ pathname }) {
+    const activeIndex = navList.findIndex((nav) => nav.path === pathname)
     const { dispatch } = this.props
     if (activeIndex >= 0) {
       dispatch(switchNav(true))
@@ -64,7 +63,7 @@ class AppNavContainer extends Component {
     let startClientX = event.touches[0].clientX
     let startClientY = event.touches[0].clientY
 
-    const detectToSwipe = event => {
+    const detectToSwipe = (event) => {
       window.removeEventListener('touchend', detectToSwipe, true)
 
       let endClientX = event.changedTouches[0].clientX
@@ -81,13 +80,13 @@ class AppNavContainer extends Component {
       let isFastMoveEnough = !isSlow && offsetX > minOffset
       const {
         appNav: { activeIndex, isShow: isAppNavShow },
-        history
+        navigate
       } = this.props
       if (isAppNavShow && (isSlowMoveEnough || isFastMoveEnough)) {
         let nextRouteIndex = direction ? activeIndex + 1 : activeIndex - 1
         let nextRoute = navList[nextRouteIndex]
         if (nextRoute !== undefined) {
-          history.push(nextRoute.path)
+          navigate(nextRoute.path)
         }
       }
     }
@@ -106,9 +105,13 @@ const mapStateToProps = ({ appNav }) => ({
 })
 const mapDispatchToProps = null
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(AppNavContainer)
-)
+function AppNavContainerWrapper(props) {
+  const location = useLocation()
+  const navigate = useNavigate()
+  return <AppNavContainer {...props} location={location} navigate={navigate} />
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AppNavContainerWrapper)

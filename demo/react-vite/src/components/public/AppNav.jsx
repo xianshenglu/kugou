@@ -10,10 +10,11 @@ class AppNav extends Component {
         <nav className="AppNav__box">
           {navList.map((nav, index) => (
             <NavLink
-              className="AppNav__link"
               key={nav.path}
               to={nav.path}
-              activeClassName="AppNav__link--active"
+              className={({ isActive, isPending }) =>
+                'AppNav__link' + (isActive ? ' AppNav__link--active' : '')
+              }
             >
               {nav.text}
             </NavLink>

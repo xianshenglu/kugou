@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import './AppMusicList.less'
 import { fetchMusicIfNeeded, switchPlayerMed } from '../../redux/actions/player'
 import { player } from '../../constants/router'
+import { useLocation } from 'react-router-dom'
 class AppMusicList extends Component {
   render() {
     const {
@@ -19,7 +19,7 @@ class AppMusicList extends Component {
           <li
             className="AppMusicList__item main_border_bottom"
             key={music.hash}
-            onClick={e => {
+            onClick={(e) => {
               dispatch(fetchMusicIfNeeded(music.hash, index, data))
               dispatch(switchPlayerMed(pathname !== player))
             }}
@@ -30,7 +30,7 @@ class AppMusicList extends Component {
             </div>
             <button
               className="AppMusicList__download"
-              onClick={e => e.stopPropagation}
+              onClick={(e) => e.stopPropagation}
             >
               <svg className="icon" aria-hidden="true">
                 <use xlinkHref="#icon-download" />
@@ -54,9 +54,8 @@ AppMusicList.propTypes = {
 AppMusicList.defaultProps = {
   renderMusicSequence: () => undefined
 }
-export default withRouter(
-  connect(
-    null,
-    null
-  )(AppMusicList)
-)
+function AppMusicListWrapper(props) {
+  const location = useLocation()
+  return <AppMusicList {...props} location={location} />
+}
+export default connect(null, null)(AppMusicListWrapper)

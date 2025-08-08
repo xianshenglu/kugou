@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchHotSearchIfNeeded } from '../../redux/actions/hotSearch'
 import { fetchKeywordSearchIfNeeded } from '../../redux/actions/keywordSearch'
 import Search from '../../components/search/Search'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 class SearchContainer extends Component {
   constructor(props) {
@@ -14,20 +15,16 @@ class SearchContainer extends Component {
     }
     this.searchKeyword = this.searchKeyword.bind(this)
     this.updateKeyword = this.updateKeyword.bind(this)
-    this.historyListener = this.historyListener.bind(this)
   }
   componentDidMount() {
-    const {
-      history,
-      history: { location }
-    } = this.props
+    const { location } = this.props
     this.historyListener(location)
-    this.unlistenHistory = history.listen(this.historyListener)
     // console.log('mount')
   }
-  componentWillUnmount() {
-    // console.log('unmount')
-    this.unlistenHistory()
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      this.historyListener(this.props.location)
+    }
   }
   historyListener({ search }) {
     search = new URLSearchParams(search)
@@ -55,11 +52,11 @@ class SearchContainer extends Component {
   searchKeyword() {
     let {
       location: { search, pathname },
-      history
+      navigate
     } = this.props
     const { keyword: curKeyword } = this.state
     if (curKeyword === '') {
-      history.push(pathname)
+      navigate(pathname)
       return
     }
     search = new URLSearchParams(search)
@@ -67,9 +64,9 @@ class SearchContainer extends Component {
     search.set('keyword', curKeyword)
 
     if (isFromKeyword) {
-      history.replace(pathname + '?' + search.toString())
+      navigate(pathname + '?' + search.toString(), { replace: true })
     } else {
-      history.push(pathname + '?' + search.toString())
+      navigate(pathname + '?' + search.toString())
     }
   }
   render() {
@@ -85,8 +82,12 @@ const mapStateToProps = ({ hotSearch, keywordSearch }) => ({
   keywordSearch
 })
 const mapDispatchToProps = null
-
+function SearchContainerWrapper(props) {
+  const location = useLocation()
+  const navigate = useNavigate()
+  return <SearchContainer {...props} location={location} navigate={navigate} />
+}
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SearchContainer)
+)(SearchContainerWrapper)
