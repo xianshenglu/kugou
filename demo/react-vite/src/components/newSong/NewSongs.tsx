@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import PropTypes from 'prop-types'
 import AppMusicList from '../public/AppMusicList'
-import NewSongsSlider from './NewSongsSlider'
+const NewSongsSlider = lazy(() => import('./NewSongsSlider'))
 import './NewSongs.less'
 function NewSongs({ songs, sliderData }) {
   return (
