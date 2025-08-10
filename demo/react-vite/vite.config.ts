@@ -9,6 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // todo: installing @types/node can fix the type issue for path and url, but it will also make __dirname works? which may be incorrect?
 // todo: remove @types/node and check all the questions
 export default defineConfig({
+  base: './',
   plugins: [react()],
   server: {
     fs: {
