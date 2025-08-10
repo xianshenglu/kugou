@@ -1,0 +1,59 @@
+import React, { Component } from 'react'
+import PlayerMax from '../../components/player/PlayerMax'
+import { connect } from 'react-redux'
+import { fetchMusicIfNeeded } from '../../redux/actions/player'
+import { withNextPrevSong } from '../../components/HOC'
+import { useLocation, useNavigate } from 'react-router-dom'
+
+class PlayerMaxContainer extends Component {
+  componentDidMount() {
+    const {
+      dispatch,
+      location,
+      songInfo: { play_url }
+    } = this.props
+    if (play_url === '') {
+      const musicHash = new URLSearchParams(location.search).get('musicHash')
+      dispatch(fetchMusicIfNeeded(musicHash, 0, [{ hash: musicHash }]))
+    }
+  }
+  render() {
+    const {
+      songInfo: { play_url },
+      dispatch,
+      audioElRef
+    } = this.props
+    const playerProps = {
+      ...this.props
+    }
+    return <PlayerMax {...playerProps} />
+  }
+}
+
+const mapStateToProps = ({
+  player: { musicStatus, songInfo, audioElRef, songIndex, songList }
+}) => ({
+  musicStatus,
+  songInfo,
+  audioElRef,
+  songIndex,
+  songList
+})
+const mapDispatchToProps = null
+
+const EnhancedPlayerMaxContainer = withNextPrevSong(PlayerMaxContainer)
+function PlayerMaxContainerWrapper(props) {
+  const location = useLocation()
+  const navigate = useNavigate()
+  return (
+    <EnhancedPlayerMaxContainer
+      {...props}
+      location={location}
+      navigate={navigate}
+    />
+  )
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PlayerMaxContainerWrapper)

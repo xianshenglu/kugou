@@ -1,0 +1,73 @@
+@import (reference) '../../assets/css/constant';
+
+.PlayerMed,
+.PlayerMed__link {
+  display: flex;
+  align-items: center;
+}
+.PlayerMed {
+  background: @black90p;
+  box-sizing: border-box;
+  height: 75px;
+  // max-height: calc(100% - @header_height);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.PlayerMed__link {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /* transparent is for some old android browser */
+  -webkit-tap-highlight-color: transparent;
+}
+.PlayerMed__singerImg {
+  flex: 0 0 auto;
+  width: 68px;
+  height: 68px;
+  margin: 0 10px 0 4px;
+  transition: border-radius 0.5s ease;
+  border-radius: 5px;
+}
+.PlayerMed__singerImg--PlayerMed_min {
+  margin: 0;
+  border-radius: 50%;
+}
+.PlayerMed__songInfo {
+  display: flex;
+  overflow: hidden;
+  flex-flow: column;
+
+  box-sizing: border-box;
+  width: 158px;
+  height: 42px;
+}
+.PlayerMed__singerName,
+.PlayerMed__songName {
+  white-space: nowrap;
+}
+.PlayerMed__singerName {
+  color: @white-to-black;
+
+  font-size: @font_size_small;
+}
+
+.PlayerMed__songName {
+  color: @white;
+  font-size: @font_size_med;
+  line-height: 1.7;
+}
+.PlayerMed__buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 150px;
+  margin: auto 10px;
+}
+.PlayerMed__prevBtn,
+.PlayerMed__nextBtn,
+.PlayerMed__playBtn {
+  width: 28px;
+  height: 28px;
+  font-size: 20px;
+}
