@@ -18,9 +18,6 @@ export default defineConfig({
       ] // or path.resolve(__dirname, '../shared')
     }
   },
-  optimizeDeps: {
-    include: ['mockjs']
-  },
   resolve: {
     alias: {
       '@shared': path.resolve(__dirname, '../shared')
