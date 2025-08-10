@@ -1,11 +1,20 @@
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
 import InfoHeader from '../public/InfoHeader'
 import AppMusicList from '../public/AppMusicList'
 import './RankInfo.less'
 import { formatDate } from '../../assets/js/utils'
 
-class RankInfo extends Component {
+interface RankInfoProps {
+  songsData: {
+    list: unknown[];
+    timestamp: number;
+    page: number;
+    pagesize: number;
+  };
+  listInfo: object;
+}
+
+class RankInfo extends Component<RankInfoProps> {
   renderUpdatedTime(updatedTime) {
     return () => (
       <time className="RankInfo__updatedTime">
@@ -48,14 +57,5 @@ class RankInfo extends Component {
       </Fragment>
     )
   }
-}
-RankInfo.propTypes = {
-  songsData: PropTypes.shape({
-    list: PropTypes.array.isRequired,
-    timestamp: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-    pagesize: PropTypes.number.isRequired
-  }).isRequired,
-  listInfo: PropTypes.object.isRequired
 }
 export default RankInfo

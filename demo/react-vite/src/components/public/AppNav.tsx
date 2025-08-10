@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import './AppNav.less'
-class AppNav extends Component {
+
+interface AppNavProps {
+  navList: {
+    path: string;
+    text: string;
+  }[];
+  activeIndex: number;
+}
+
+class AppNav extends Component<AppNavProps> {
   render() {
     const { navList, activeIndex } = this.props
     return (
@@ -29,14 +37,5 @@ class AppNav extends Component {
       </section>
     )
   }
-}
-AppNav.propTypes = {
-  navList: PropTypes.arrayOf(
-    PropTypes.shape({
-      path: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  activeIndex: PropTypes.number.isRequired
 }
 export default AppNav

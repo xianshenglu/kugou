@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
-import PropTypes from 'prop-types'
 import './PlayerLyric.less'
-class PlayerLyric extends Component {
+
+interface PlayerLyricProps {
+  lyrics: {
+    text: string;
+  }[];
+  prevLyricIndex: number;
+  toggleIsTouching(...args: unknown[]): unknown;
+}
+
+class PlayerLyric extends Component<PlayerLyricProps> {
   constructor(props) {
     super(props)
     this.lyricsRef = []
@@ -39,14 +47,5 @@ class PlayerLyric extends Component {
       </div>
     )
   }
-}
-PlayerLyric.propTypes = {
-  lyrics: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  prevLyricIndex: PropTypes.number.isRequired,
-  toggleIsTouching: PropTypes.func.isRequired
 }
 export default PlayerLyric

@@ -1,11 +1,27 @@
 import React, { Component, Fragment } from 'react'
 import classNames from 'classnames'
-import PropTypes from 'prop-types'
 import './Search.less'
 import AppMusicList from '../public/AppMusicList'
 import { isEnterKey } from '../../assets/js/utils'
 
-class Search extends Component {
+interface SearchProps {
+  isKeywordSearchShow: boolean;
+  isHotSearchShow: boolean;
+  keyword: string;
+  updateKeyword(...args: unknown[]): unknown;
+  searchKeyword(...args: unknown[]): unknown;
+  hotSearch: {
+    list: {
+      keyword: string;
+    }[];
+  };
+  keywordSearch: {
+    list: unknown[];
+    total: number;
+  };
+}
+
+class Search extends Component<SearchProps> {
   render() {
     const {
       isKeywordSearchShow,
@@ -61,21 +77,5 @@ class Search extends Component {
       </Fragment>
     )
   }
-}
-Search.propTypes = {
-  isKeywordSearchShow: PropTypes.bool.isRequired,
-  isHotSearchShow: PropTypes.bool.isRequired,
-  keyword: PropTypes.string.isRequired,
-  updateKeyword: PropTypes.func.isRequired,
-  searchKeyword: PropTypes.func.isRequired,
-  hotSearch: PropTypes.shape({
-    list: PropTypes.arrayOf(
-      PropTypes.shape({ keyword: PropTypes.string.isRequired })
-    ).isRequired
-  }).isRequired,
-  keywordSearch: PropTypes.shape({
-    list: PropTypes.array.isRequired,
-    total: PropTypes.number.isRequired
-  }).isRequired
 }
 export default Search

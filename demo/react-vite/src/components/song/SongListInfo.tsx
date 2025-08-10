@@ -1,10 +1,20 @@
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
 import InfoHeader from '../public/InfoHeader'
 import AppMusicList from '../public/AppMusicList'
 import InfoDescription from '../public/InfoDescription'
 
-class SongListInfo extends Component {
+interface SongListInfoProps {
+  songsData: {
+    // page pagesize total was prepared for load more
+    page: number;
+    pagesize: number;
+    total: number;
+    list: unknown[];
+  };
+  listInfo: object;
+}
+
+class SongListInfo extends Component<SongListInfoProps> {
   render() {
     const {
       songsData: { list: songs },
@@ -22,15 +32,5 @@ class SongListInfo extends Component {
       </Fragment>
     )
   }
-}
-SongListInfo.propTypes = {
-  songsData: PropTypes.shape({
-    // page pagesize total was prepared for load more
-    page: PropTypes.number.isRequired,
-    pagesize: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    list: PropTypes.array.isRequired
-  }).isRequired,
-  listInfo: PropTypes.object.isRequired
 }
 export default SongListInfo

@@ -1,7 +1,13 @@
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
 import './InfoHeader.less'
-class InfoHeader extends Component {
+
+interface InfoHeaderProps {
+  name: string;
+  imgurl: string;
+  renderUpdatedTime?(...args: unknown[]): unknown;
+}
+
+class InfoHeader extends Component<InfoHeaderProps> {
   render() {
     const { name, imgurl, renderUpdatedTime } = this.props
     return (
@@ -16,11 +22,6 @@ class InfoHeader extends Component {
       </Fragment>
     )
   }
-}
-InfoHeader.propTypes = {
-  name: PropTypes.string.isRequired,
-  imgurl: PropTypes.string.isRequired,
-  renderUpdatedTime: PropTypes.func
 }
 InfoHeader.defaultProps = {
   renderUpdatedTime: () => undefined

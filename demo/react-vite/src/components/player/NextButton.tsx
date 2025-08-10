@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-class NextButton extends Component {
+
+interface NextButtonProps {
+  next(...args: unknown[]): unknown;
+  className?: string;
+}
+
+class NextButton extends Component<NextButtonProps> {
   render() {
     const { next, className } = this.props
     return (
@@ -11,9 +16,5 @@ class NextButton extends Component {
       </button>
     )
   }
-}
-NextButton.propTypes = {
-  next: PropTypes.func.isRequired,
-  className: PropTypes.string
 }
 export default NextButton

@@ -1,8 +1,15 @@
 import { useState } from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import './InfoDescription.less'
-const InfoDescription = ({ description, title }) => {
+
+interface InfoDescriptionProps {
+  description: string;
+}
+
+const InfoDescription = ({
+  description,
+  title
+}: InfoDescriptionProps) => {
   const [showMore, setShowMore] = useState(false)
 
   const toggleShowMore = () => {
@@ -39,8 +46,5 @@ const InfoDescription = ({ description, title }) => {
       </button>
     </div>
   )
-}
-InfoDescription.propTypes = {
-  description: PropTypes.string.isRequired
 }
 export default InfoDescription
