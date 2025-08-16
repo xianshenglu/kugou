@@ -1,22 +1,20 @@
 <template>
-  <div id="app" class="app" ref="app">
-    <AppLoading/>
-    <!-- //todo 3. add download for download button when user is admin-->
-    <!-- //todo 4. add download, songInfo, comments in PlayerMax -->
-    <AppHeader class="app__header"/>
-    <router-view class="app__cont"></router-view>
-    <audio
-      :src="song?song.play_url:''"
-      class="hidden"
-      ref="audioEl"
-      loop
-      @canplay="togglePlay(true)"
-    ></audio>
-    <PlayerMed
-      v-show="isPlayerMedShow&&$route.path!=='/player/max'"
-      :class="isPlayerMedSmall?'app__player app__player--min':'app__player app__player--med'"
-    />
-  </div>
+  <AppLoading/>
+  <!-- //todo 3. add download for download button when user is admin-->
+  <!-- //todo 4. add download, songInfo, comments in PlayerMax -->
+  <AppHeader class="app__header"/>
+  <router-view class="app__cont"></router-view>
+  <audio
+    :src="song?song.play_url:''"
+    class="hidden"
+    ref="audioEl"
+    loop
+    @canplay="togglePlay(true)"
+  ></audio>
+  <PlayerMed
+    v-show="isPlayerMedShow&&$route.path!=='/player/max'"
+    :class="isPlayerMedSmall?'app__player app__player--min':'app__player app__player--med'"
+  />
 </template>
 
 <script>
@@ -66,17 +64,7 @@ export default defineComponent({
 
 <style lang="less" scoped>
 @import (reference) '~@/styles/constant';
-.app {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  font-family: 'Microsoft Yahei', 'Avenir', Helvetica, Arial, sans-serif;
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: @font_size_main;
-  overflow: hidden;
-}
+
 .app__header {
   height: @header_height;
   width: 100%;
