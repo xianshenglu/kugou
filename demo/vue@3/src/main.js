@@ -1,4 +1,4 @@
-import Vue, { h } from 'vue';
+import Vue, { h, createApp } from 'vue'
 import App from './App.vue'
 import router from './router/index'
 import store from './store/index'
@@ -13,8 +13,9 @@ import '@shared/mock/index'
 Vue.config.productionTip = false
 Vue.prototype.window = window
 
-new Vue({
+const app = createApp({
   router,
   store,
   render: () => h(App)
-}).$mount('#app')
+})
+app.mount('#app')
