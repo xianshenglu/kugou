@@ -18,25 +18,25 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@vue/cli-plugin-babel": "~5.0.8",
     "@vue/cli-plugin-eslint": "~5.0.8",
     "@vue/cli-service": "~5.0.8",
+    "eslint": "^7.32.0",
     "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-vue": "^8.0.3",
     "less": "^3.8.1",
-    "less-loader": "^4.1.0",
+    "less-loader": "^12.3.0",
     "mockjs": "^1.0.1-beta3",
     "postcss-pixel-to-viewport": "^1.0.2",
     "postcss-plugin-pxtoviewport": "0.0.5",
     "postcss-pxtorem": "^4.0.1",
     "prettier": "^1.14.3",
     "vconsole": "^3.2.0",
-    "vue-template-compiler": "^2.5.16",
-    "eslint": "^7.32.0",
-    "@babel/eslint-parser": "^7.12.16",
-    "eslint-plugin-vue": "^8.0.3",
-    "@babel/core": "^7.12.16"
+    "vue-template-compiler": "^2.5.16"
   },
   "eslintConfig": {
     "root": true,
