@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-class PrevButton extends Component {
+
+interface PrevButtonProps {
+  prev(...args: unknown[]): unknown;
+  className?: string;
+}
+
+class PrevButton extends Component<PrevButtonProps> {
   render() {
     const { prev, className } = this.props
     return (
@@ -11,9 +16,5 @@ class PrevButton extends Component {
       </button>
     )
   }
-}
-PrevButton.propTypes = {
-  prev: PropTypes.func.isRequired,
-  className: PropTypes.string
 }
 export default PrevButton

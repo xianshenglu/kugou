@@ -1,8 +1,17 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import './PlayerProgress.less'
 import { secondToMin } from '../../assets/js/utils'
-class PlayerProgress extends Component {
+
+interface PlayerProgressProps {
+  audioElRef: object;
+  progressBarRef: object;
+  currentTime: number;
+  currentProgress: number;
+  loadProgress: number;
+  onTouchStart(...args: unknown[]): unknown;
+}
+
+class PlayerProgress extends Component<PlayerProgressProps> {
   render() {
     const {
       audioElRef: { current: audioElRefCur },
@@ -39,13 +48,5 @@ class PlayerProgress extends Component {
       </div>
     )
   }
-}
-PlayerProgress.propTypes = {
-  audioElRef: PropTypes.object.isRequired,
-  progressBarRef: PropTypes.object.isRequired,
-  currentTime: PropTypes.number.isRequired,
-  currentProgress: PropTypes.number.isRequired,
-  loadProgress: PropTypes.number.isRequired,
-  onTouchStart: PropTypes.func.isRequired
 }
 export default PlayerProgress

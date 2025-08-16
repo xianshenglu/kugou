@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import './SongList.less'
 import AppList from '../public/AppList'
-class SongList extends Component {
+
+interface SongListProps {
+  songList: {
+    name: string;
+    popularity: number;
+  }[];
+}
+
+class SongList extends Component<SongListProps> {
   getChildren({ name, popularity }) {
     return (
       <div className="SongList__info">
@@ -22,13 +29,5 @@ class SongList extends Component {
       <AppList data={songList} render={this.getChildren} className="SongList" />
     )
   }
-}
-SongList.propTypes = {
-  songList: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      popularity: PropTypes.number.isRequired
-    })
-  ).isRequired
 }
 export default SongList

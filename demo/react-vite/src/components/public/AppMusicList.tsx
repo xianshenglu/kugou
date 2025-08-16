@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import './AppMusicList.less'
 import { fetchMusicIfNeeded, switchPlayerMed } from '../../redux/actions/player'
 import { player } from '../../constants/router'
 import { useLocation } from 'react-router-dom'
-class AppMusicList extends Component {
+
+interface AppMusicListProps {
+  data: {
+    hash: string;
+    filename: string;
+  }[];
+  renderMusicSequence?(...args: unknown[]): unknown;
+}
+
+class AppMusicList extends Component<AppMusicListProps> {
   render() {
     const {
       data,
@@ -41,15 +49,6 @@ class AppMusicList extends Component {
       </ul>
     )
   }
-}
-AppMusicList.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      hash: PropTypes.string.isRequired,
-      filename: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  renderMusicSequence: PropTypes.func
 }
 AppMusicList.defaultProps = {
   renderMusicSequence: () => undefined

@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
 import './PlayButton.less'
-import PropTypes from 'prop-types'
-class PlayButton extends Component {
+
+interface PlayButtonProps {
+  togglePlay(...args: unknown[]): unknown;
+  isLoading: boolean;
+  isPlaying: boolean;
+  className?: string;
+}
+
+class PlayButton extends Component<PlayButtonProps> {
   render() {
     const { togglePlay, isLoading, isPlaying, className } = this.props
     return (
@@ -35,11 +42,5 @@ class PlayButton extends Component {
       </button>
     )
   }
-}
-PlayButton.propTypes = {
-  togglePlay: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
-  className: PropTypes.string
 }
 export default PlayButton

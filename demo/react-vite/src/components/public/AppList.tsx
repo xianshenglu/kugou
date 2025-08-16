@@ -1,12 +1,25 @@
 import React, { useRef, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
 import logo__grey from '../../assets/images/logo__grey.png'
 import './AppList.less'
 import { $_xsl__loadImgLazy } from '../../assets/js/utils'
 
-const AppList = ({ data, render, className }) => {
+interface AppListProps {
+  data: {
+    path: string;
+    imgurl: string;
+    name: string;
+  }[];
+  render?(...args: unknown[]): unknown;
+  className?: string;
+}
+
+const AppList = ({
+  data,
+  render,
+  className
+}: AppListProps) => {
   const lazyImageRefs = useRef([])
   const lazyImages = useRef([])
 
@@ -53,18 +66,6 @@ const AppList = ({ data, render, className }) => {
       })}
     </ul>
   )
-}
-
-AppList.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      path: PropTypes.string.isRequired,
-      imgurl: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  render: PropTypes.func,
-  className: PropTypes.string
 }
 
 AppList.defaultProps = {

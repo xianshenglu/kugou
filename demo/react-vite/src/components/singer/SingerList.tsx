@@ -1,11 +1,29 @@
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import logo__grey from '../../assets/images/logo__grey.png'
 import './SingerList.less'
 import { $_xsl__loadImgLazy } from '../../assets/js/utils'
 
-class SingerList extends Component {
+interface SingerListProps {
+  singersData: {
+    // page, pagesize was prepared for load more button
+    page: number;
+    pagesize: number;
+    list: {
+      singerid: number;
+      path: string;
+      imgurl: string;
+      singername: string;
+    }[];
+    total: number;
+  };
+  listInfo: {
+    // classid: PropTypes.number.isRequired,
+    classname: string;
+  };
+}
+
+class SingerList extends Component<SingerListProps> {
   componentDidMount() {
     this.initLazyImgLoad()
   }
@@ -51,25 +69,5 @@ class SingerList extends Component {
       </Fragment>
     )
   }
-}
-SingerList.propTypes = {
-  singersData: PropTypes.shape({
-    // page, pagesize was prepared for load more button
-    page: PropTypes.number.isRequired,
-    pagesize: PropTypes.number.isRequired,
-    list: PropTypes.arrayOf(
-      PropTypes.shape({
-        singerid: PropTypes.number.isRequired,
-        path: PropTypes.string.isRequired,
-        imgurl: PropTypes.string.isRequired,
-        singername: PropTypes.string.isRequired
-      })
-    ).isRequired,
-    total: PropTypes.number.isRequired
-  }).isRequired,
-  listInfo: PropTypes.shape({
-    // classid: PropTypes.number.isRequired,
-    classname: PropTypes.string.isRequired
-  }).isRequired
 }
 export default SingerList

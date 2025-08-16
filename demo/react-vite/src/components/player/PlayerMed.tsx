@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import { NavLink } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import logo__theme from '../../assets/images/logo__theme.png'
 import './PlayerMed.less'
 import { player } from '../../constants/router'
@@ -9,7 +8,22 @@ import PlayButton from './PlayButton'
 import NextButton from './NextButton'
 import { togglePlay } from '../../redux/actions/player'
 
-class PlayerMed extends Component {
+interface PlayerMedProps {
+  musicStatus: {
+    isPlaying: boolean;
+    isLoading: boolean;
+  };
+  songInfo: {
+    song_name: string;
+    author_name: string;
+    img: string;
+  };
+  dispatch(...args: unknown[]): unknown;
+  nextSong(...args: unknown[]): unknown;
+  prevSong(...args: unknown[]): unknown;
+}
+
+class PlayerMed extends Component<PlayerMedProps> {
   render() {
     const {
       songInfo: { song_name, author_name, img: singerImg, hash },
@@ -49,19 +63,5 @@ class PlayerMed extends Component {
       </Fragment>
     )
   }
-}
-PlayerMed.propTypes = {
-  musicStatus: PropTypes.shape({
-    isPlaying: PropTypes.bool.isRequired,
-    isLoading: PropTypes.bool.isRequired
-  }).isRequired,
-  songInfo: PropTypes.shape({
-    song_name: PropTypes.string.isRequired,
-    author_name: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired
-  }).isRequired,
-  dispatch: PropTypes.func.isRequired,
-  nextSong: PropTypes.func.isRequired,
-  prevSong: PropTypes.func.isRequired
 }
 export default PlayerMed

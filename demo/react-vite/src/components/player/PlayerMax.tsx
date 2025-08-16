@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import classNames from 'classnames'
-import PropTypes from 'prop-types'
 import './PlayerMax.less'
 import PrevButton from './PrevButton'
 import PlayButton from './PlayButton'
@@ -9,7 +8,22 @@ import { togglePlay } from '../../redux/actions/player'
 import PlayerLyricContainer from '../../containers/player/PlayerLyricContainer'
 import PlayerProgressContainer from '../../containers/player/PlayerProgressContainer'
 
-class PlayerMax extends Component {
+interface PlayerMaxProps {
+  songInfo: {
+    song_name: string;
+    author_name: string;
+    img: string;
+  };
+  musicStatus: {
+    isPlaying: boolean;
+    isLoading: boolean;
+  };
+  dispatch(...args: unknown[]): unknown;
+  nextSong(...args: unknown[]): unknown;
+  prevSong(...args: unknown[]): unknown;
+}
+
+class PlayerMax extends Component<PlayerMaxProps> {
   render() {
     // console.log(this.props)
     const {
@@ -53,19 +67,5 @@ class PlayerMax extends Component {
       </Fragment>
     )
   }
-}
-PlayerMax.propTypes = {
-  songInfo: PropTypes.shape({
-    song_name: PropTypes.string.isRequired,
-    author_name: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired
-  }).isRequired,
-  musicStatus: PropTypes.shape({
-    isPlaying: PropTypes.bool.isRequired,
-    isLoading: PropTypes.bool.isRequired
-  }).isRequired,
-  dispatch: PropTypes.func.isRequired,
-  nextSong: PropTypes.func.isRequired,
-  prevSong: PropTypes.func.isRequired
 }
 export default PlayerMax
