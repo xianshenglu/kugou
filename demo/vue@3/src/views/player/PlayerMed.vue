@@ -1,7 +1,7 @@
 <template>
   <section class="player" v-if="music">
     <router-link
-      :to="{name:'PlayerMax', params: { fromPlayerMed: 1},query:{musicHash:music.hash }}"
+      :to="{name:'PlayerMax', meta: { fromPlayerMed: 1},query:{musicHash:music.hash }}"
       class="player__link"
     >
       <img

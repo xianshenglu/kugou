@@ -65,7 +65,7 @@ export default defineComponent({
     if (!musicHash) {
       return
     }
-    if (to.params.fromPlayerMed) {
+    if (to.meta.fromPlayerMed) {
       return next()
     }
     //? just commit player/wantPlay is enough?
