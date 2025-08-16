@@ -70,9 +70,13 @@ export default defineComponent({
     }
     //? just commit player/wantPlay is enough?
     return fetchSongLyric({ params: { hash: musicHash } }).then(res => {
-      let data = res.data
-      data.filename = data.fileName
-      store.commit('player/wantPlay', { music: data, musicList: [data] })
+      let musicData = res.data.data
+      musicData.filename = musicData.audio_name
+      store.commit('player/wantPlay', {
+        music: musicData,
+        musicList: [musicData]
+      })
+      store.commit('player/wantPlay', { music: musicData, musicList: [musicData] })
       next()
     })
   },
