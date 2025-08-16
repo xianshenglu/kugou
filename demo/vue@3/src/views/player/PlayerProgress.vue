@@ -9,10 +9,13 @@
 </template>
 
 <script>
+import { defineComponent, nextTick } from 'vue';
+
 import { mapState } from 'vuex'
 import { secondToMin } from '@/utils'
-export default {
+export default defineComponent({
   name: 'PlayerProgress',
+
   data() {
     return {
       secondToMin,
@@ -23,6 +26,7 @@ export default {
       progressBarRect: null
     }
   },
+
   computed: {
     ...mapState('player', ['song', 'audioEl']),
     currentProgress() {
@@ -38,16 +42,19 @@ export default {
       }%, transparent ${this.loadProgress}%)`
     }
   },
+
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       this.audioEl.addEventListener('progress', this.progressCb)
       this.audioEl.addEventListener('timeupdate', this.timeUpdateCb)
     })
   },
-  destroyed() {
+
+  unmounted() {
     this.audioEl.removeEventListener('progress', this.progressCb)
     this.audioEl.removeEventListener('timeupdate', this.timeUpdateCb)
   },
+
   methods: {
     progressCb() {
       // todo songs wouldn't download all now or user jumped. They all make the progress bar wouldn't continuous. So, the style may need change.
@@ -107,8 +114,8 @@ export default {
       }
       return currentTime
     }
-  }
-}
+  },
+});
 </script>
 <style lang="less" scoped>
 @import (reference) '~@/styles/constant';

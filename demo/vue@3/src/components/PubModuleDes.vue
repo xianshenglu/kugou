@@ -17,8 +17,11 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'PubModuleDes',
+
   props: {
     description: {
       type: String,
@@ -27,13 +30,15 @@ export default {
       }
     }
   },
+
   data() {
     return {
       showMore: false
     }
   },
-  methods: {}
-}
+
+  methods: {},
+});
 </script>
 
 <style scoped lang="less">

@@ -12,10 +12,13 @@
 </template>
 
 <script>
+import { defineComponent, nextTick } from 'vue';
+
 import { mapState, mapGetters } from 'vuex'
 import { getVBindObj } from '@/utils'
-export default {
+export default defineComponent({
   name: 'PlayerLyrics',
+
   data() {
     return {
       getVBindObj,
@@ -23,6 +26,7 @@ export default {
       isTouching: false
     }
   },
+
   computed: {
     ...mapState('player', ['audioEl']),
     ...mapGetters('player', ['lyricItems']),
@@ -30,14 +34,17 @@ export default {
       return this.lyricItems.map(o => o.millisecond)
     }
   },
+
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       this.audioEl.addEventListener('timeupdate', this.timeUpdateCb)
     })
   },
-  destroyed() {
+
+  unmounted() {
     this.audioEl.removeEventListener('timeupdate', this.timeUpdateCb)
   },
+
   methods: {
     timeUpdateCb(event) {
       if (this.isTouching) {
@@ -55,8 +62,8 @@ export default {
       }
       this.prevLyricIndex = prevLyricIndex
     }
-  }
-}
+  },
+});
 </script>
 
 <style scoped lang="less">

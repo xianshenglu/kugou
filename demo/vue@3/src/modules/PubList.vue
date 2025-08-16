@@ -20,10 +20,13 @@
 </template>
 
 <script>
+import { defineComponent, nextTick } from 'vue';
+
 import { lazyLoad } from '@/utils'
 import { mapState } from 'vuex'
-export default {
+export default defineComponent({
   name: 'PubList',
+
   props: {
     pubList: {
       type: Array,
@@ -32,23 +35,27 @@ export default {
       }
     }
   },
+
   watch: {
     pubList: {
       handler: function(newArray) {
         if (newArray.length === 0) {
           return
         }
-        this.$nextTick(() =>
+        nextTick(() =>
           lazyLoad(this.$refs.lazyImages, { root: this.$refs.lazyLoadRoot })
         )
       },
-      immediate: true
+
+      immediate: true,
+      deep: true,
     }
   },
+
   computed: {
     ...mapState('images', ['logo__grey'])
-  }
-}
+  },
+});
 </script>
 
 <style lang="less" scoped>

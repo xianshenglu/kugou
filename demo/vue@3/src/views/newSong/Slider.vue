@@ -23,34 +23,42 @@
 </template>
 
 <script>
+import { defineComponent, nextTick } from 'vue';
+
 import Glide, {
   Controls,
   Autoplay,
   Swipe
 } from '@glidejs/glide/dist/glide.modular.esm'
 let glide
-export default {
+export default defineComponent({
   name: 'Slider',
+
   props: {
     data: {
       type: Array,
       default: () => []
     }
   },
+
   watch: {
     data: {
       handler: function(newArray) {
         if (newArray.length === 0) {
           return
         }
-        this.$nextTick(() => this.initGlideVm())
+        nextTick(() => this.initGlideVm())
       },
-      immediate: true
+
+      immediate: true,
+      deep: true,
     }
   },
-  destroyed() {
+
+  unmounted() {
     glide.destroy()
   },
+
   methods: {
     initGlideVm() {
       glide = new Glide('.slider__body', {
@@ -63,8 +71,8 @@ export default {
         Swipe
       })
     }
-  }
-}
+  },
+});
 </script>
 
 <style lang="css" scoped>

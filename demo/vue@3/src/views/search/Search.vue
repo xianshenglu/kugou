@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+
 import PubModuleTitle from '@/components/PubModuleTitle'
 import AppMusicList from '@/components/AppMusicList'
 import { fetchHotSearch, fetchSearchResult } from '../../requests/search'
@@ -43,13 +45,15 @@ import bus from '@/eventBus'
 import loading from '../../mixins/loading.js'
 import { mapState, mapMutations } from 'vuex'
 
-export default {
+export default defineComponent({
   name: 'Search',
   mixins: [loading],
+
   components: {
     PubModuleTitle,
     AppMusicList
   },
+
   data() {
     return {
       title: '搜索',
@@ -57,6 +61,7 @@ export default {
       placeholder: '歌手/歌名/拼音'
     }
   },
+
   computed: {
     ...mapState('search', [
       'searchRecArr',
@@ -89,16 +94,20 @@ export default {
       }
     }
   },
+
   created() {
     this.init()
   },
+
   mounted() {
     bus.$on('searchBtnClicked', this.scrollTopSearchCont)
     this.initQqBugDetect()
   },
-  destroyed() {
+
+  unmounted() {
     bus.$off('searchBtnClicked', this.scrollTopSearchCont)
   },
+
   methods: {
     ...mapMutations(['replaceProperty']),
     init() {
@@ -175,8 +184,8 @@ export default {
         this.$refs.searchCont.scrollTop = 0
       }
     }
-  }
-}
+  },
+});
 </script>
 
 <style scoped lang="less">

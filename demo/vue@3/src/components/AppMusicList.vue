@@ -15,8 +15,11 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'AppMusicList',
+
   props: {
     musicList: {
       type: Array,
@@ -25,6 +28,7 @@ export default {
       }
     }
   },
+
   methods: {
     wantPlay(music) {
       this.$store.commit('player/wantPlay', {
@@ -32,8 +36,8 @@ export default {
         musicList: this.$props.musicList
       })
     }
-  }
-}
+  },
+});
 </script>
 
 <style lang="less" scoped>

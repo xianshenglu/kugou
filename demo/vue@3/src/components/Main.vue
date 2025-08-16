@@ -6,14 +6,18 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+
 import AppNav from '@/components/AppNav'
-export default {
+export default defineComponent({
   name: 'Main',
+
   components: {
     AppNav
   },
-  methods: {}
-}
+
+  methods: {},
+});
 </script>
 
 <style lang="less" scoped>

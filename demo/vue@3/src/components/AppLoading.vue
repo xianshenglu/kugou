@@ -7,17 +7,20 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+
 import { mapState } from 'vuex'
-export default {
+export default defineComponent({
   name: 'AppLoading',
+
   computed: {
     ...mapState('loading', ['isShow', 'sizeClassName']),
     className() {
       let className = this.isShow ? 'loading' : 'loading loading--fade_out'
       return className + ' ' + this.sizeClassName
     }
-  }
-}
+  },
+});
 </script>
 
 <style lang="less" scoped>

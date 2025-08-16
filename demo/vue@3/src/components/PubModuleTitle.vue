@@ -3,8 +3,12 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  emits: ['click'],
   name: 'PubModuleTitle',
+
   props: {
     title: {
       type: String,
@@ -12,8 +16,8 @@ export default {
         return ''
       }
     }
-  }
-}
+  },
+});
 </script>
 
 <style scoped lang="less">

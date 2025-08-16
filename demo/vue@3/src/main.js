@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue, { h } from 'vue';
 import App from './App.vue'
 import router from './router/index'
 import store from './store/index'
@@ -16,5 +16,5 @@ Vue.prototype.window = window
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: () => h(App)
 }).$mount('#app')

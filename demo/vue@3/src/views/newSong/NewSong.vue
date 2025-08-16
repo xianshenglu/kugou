@@ -6,17 +6,21 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+
 import AppMusicList from '@/components/AppMusicList'
 import Slider from './Slider.vue'
 import { fetchNewSong } from '@/requests/newSong'
 import { mapState, mapMutations } from 'vuex'
 import loading from '../../mixins/loading'
-export default {
+export default defineComponent({
   name: 'NewSong',
   mixins: [loading],
+
   computed: {
     ...mapState('newSong', ['newSongs', 'sliderData'])
   },
+
   created() {
     if (this.newSongs.length === 0) {
       this.setLoadingExcludeNav()
@@ -24,6 +28,7 @@ export default {
       this.getNewSong()
     }
   },
+
   methods: {
     ...mapMutations(['replaceProperty']),
     getNewSong() {
@@ -41,11 +46,12 @@ export default {
       })
     }
   },
+
   components: {
     AppMusicList,
     Slider
-  }
-}
+  },
+});
 </script>
 
 <style lang="less" scoped>

@@ -22,18 +22,22 @@
 </template>
 
 <script>
+import { defineComponent, nextTick } from 'vue';
+
 import PubModuleTitle from '@/components/PubModuleTitle'
 import { fetchSingerList } from '../../requests/singerList'
 import loading from '../../mixins/loading'
 import { lazyLoad } from '@/utils'
 import { mapState, mapMutations } from 'vuex'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
-export default {
+export default defineComponent({
   name: 'SingerList',
   mixins: [loading],
+
   components: {
     PubModuleTitle
   },
+
   computed: {
     ...mapState('images', ['logo__grey']),
     ...mapState('singer', ['singerList']),
@@ -41,19 +45,21 @@ export default {
       isLoadingShow: 'isShow'
     })
   },
+
   watch: {
     'singerList.data': {
       handler: function(newArray) {
         if (newArray.length === 0) {
           return
         }
-        this.$nextTick(() =>
+        nextTick(() =>
           lazyLoad(this.$refs.lazyImages, { root: this.$refs.lazyLoadRoot })
         )
       },
       immediate: true
     }
   },
+
   created() {
     // todo add scrollRemember
     let singerListId = this.$route.path.split('/').pop()
@@ -63,6 +69,7 @@ export default {
       this.getSingerList(singerListId)
     }
   },
+
   methods: {
     ...mapMutations(['replaceProperty']),
     getSingerList(singerListId) {
@@ -88,8 +95,8 @@ export default {
         this.stopLoading()
       })
     }
-  }
-}
+  },
+});
 </script>
 
 <style scoped lang="less">

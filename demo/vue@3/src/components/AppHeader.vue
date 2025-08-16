@@ -11,7 +11,7 @@
     <router-link
       class="header__search_btn"
       to="/search/index"
-      @click.native="bus.$emit('searchBtnClicked')"
+      @click="bus.$emit('searchBtnClicked')"
     >
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-search"></use>
@@ -21,19 +21,24 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+
 import { mapState, mapMutations } from 'vuex'
 import bus from '@/eventBus'
-export default {
+export default defineComponent({
   name: 'AppHeader',
+
   data() {
     return {
       bus: bus
     }
   },
+
   computed: {
     ...mapState('images', ['logo__text']),
     ...mapState('player', ['curPlayerId'])
   },
+
   methods: {
     ...mapMutations('player', ['togglePlayers']),
     goBack() {
@@ -43,8 +48,8 @@ export default {
       }
       history.go(-1)
     }
-  }
-}
+  },
+});
 </script>
 
 <style lang="less" scoped>

@@ -15,20 +15,25 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+
 import PubList from '@/modules/PubList'
 import { fetchSongList } from '../../requests/songList'
 import { mapState, mapMutations } from 'vuex'
 import loading from '../../mixins/loading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
-export default {
+export default defineComponent({
   name: 'SongList',
   mixins: [loading],
+
   components: {
     PubList
   },
+
   computed: {
     ...mapState('song', ['songList'])
   },
+
   created() {
     if (this.songList.length === 0) {
       this.setLoadingExcludeNav()
@@ -36,6 +41,7 @@ export default {
       this.getSongList()
     }
   },
+
   methods: {
     ...mapMutations(['replaceProperty']),
     getSongList() {
@@ -53,8 +59,8 @@ export default {
         this.stopLoading()
       })
     }
-  }
-}
+  },
+});
 </script>
 
 <style lang="less" scoped>

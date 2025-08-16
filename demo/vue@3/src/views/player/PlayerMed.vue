@@ -23,26 +23,31 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+
 import { mapState, mapGetters, mapMutations } from 'vuex'
 import PlayButton from './PlayButton'
 import NextButton from './NextButton'
 import PrevButton from './PrevButton'
-export default {
+export default defineComponent({
   name: 'PlayerMed',
+
   components: {
     PlayButton,
     NextButton,
     PrevButton
   },
+
   computed: {
     ...mapState('images', ['logo__theme']),
     ...mapState('player', ['music', 'song', 'isPlayerMedSmall']),
     ...mapGetters('player', ['songName', 'singerName', 'singerImg'])
   },
+
   methods: {
     ...mapMutations('player', ['togglePlayers'])
-  }
-}
+  },
+});
 </script>
 
 <style scoped lang="less">

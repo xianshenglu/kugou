@@ -20,24 +20,29 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+
 import AppHeader from '@/components/AppHeader'
 import AppNav from './components/AppNav'
 import AppLoading from './components/AppLoading'
 import PlayerMed from './views/player/PlayerMed'
 import { mapState, mapMutations } from 'vuex'
 
-export default {
+export default defineComponent({
   name: 'App',
+
   components: {
     AppLoading,
     AppHeader,
     AppNav,
     PlayerMed
   },
+
   mounted() {
     document.documentElement.style.setProperty('--vh', this.vh / 100 + 'px')
     this.findAudioEl(this.$refs.audioEl)
   },
+
   computed: {
     ...mapState('player', {
       isPlayerMedShow: 'isPlayerMedShow',
@@ -49,13 +54,14 @@ export default {
       vh: 'vh'
     })
   },
+
   methods: {
     ...mapMutations('player', {
       findAudioEl: 'findAudioEl',
       togglePlay: 'togglePlay'
     })
-  }
-}
+  },
+});
 </script>
 
 <style lang="less" scoped>

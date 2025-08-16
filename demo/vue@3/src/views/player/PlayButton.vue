@@ -13,18 +13,22 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+
 import { mapState } from 'vuex'
-export default {
+export default defineComponent({
   name: 'PlayButton',
+
   computed: {
     ...mapState('player', ['isPlaying', 'isLoading'])
   },
+
   methods: {
     togglePlay() {
       this.$store.commit('player/togglePlay', undefined, { root: true })
     }
-  }
-}
+  },
+});
 </script>
 
 <style scoped lang="less">

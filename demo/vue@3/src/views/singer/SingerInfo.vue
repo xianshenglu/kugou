@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+
 import PubModuleHead from '@/components/PubModuleHead'
 import PubModuleDes from '@/components/PubModuleDes'
 import AppMusicList from '@/components/AppMusicList'
@@ -15,14 +17,16 @@ import { fetchSingerInfo } from '../../requests/singerInfo'
 import loading from '../../mixins/loading'
 import { mapState, mapMutations } from 'vuex'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
-export default {
+export default defineComponent({
   name: 'SingerInfo',
   mixins: [loading],
+
   components: {
     PubModuleHead,
     AppMusicList,
     PubModuleDes
   },
+
   computed: {
     ...mapState('singer', ['singerInfo']),
     getModuleHeadInfo() {
@@ -32,12 +36,14 @@ export default {
       return this.singerInfo.data
     }
   },
+
   created() {
     let singerId = this.$route.path.split('/').pop()
     this.setLoadingExcludeHeader()
     this.startLoading()
     this.getSingerInfo(singerId)
   },
+
   methods: {
     ...mapMutations(['replaceProperty']),
     getSingerInfo(singerId) {
@@ -64,8 +70,8 @@ export default {
         this.stopLoading()
       })
     }
-  }
-}
+  },
+});
 </script>
 
 <style scoped lang="less">

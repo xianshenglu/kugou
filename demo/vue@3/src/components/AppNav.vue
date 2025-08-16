@@ -14,8 +14,11 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'AppNav',
+
   data() {
     return {
       navs: [
@@ -42,12 +45,13 @@ export default {
       ]
     }
   },
+
   computed: {
     activeIndex() {
       return this.navs.findIndex(nav => nav.path === this.$route.path)
     }
-  }
-}
+  },
+});
 </script>
 
 <style lang="less" scoped>

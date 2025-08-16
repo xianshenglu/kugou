@@ -7,20 +7,25 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+
 import PubList from '@/modules/PubList'
 import { fetchRankList } from '@/requests/rankList'
 import { mapState, mapMutations } from 'vuex'
 import loading from '../../mixins/loading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
-export default {
+export default defineComponent({
   name: 'RankList',
   mixins: [loading],
+
   components: {
     PubList
   },
+
   computed: {
     ...mapState('rank', ['rankList'])
   },
+
   created() {
     if (this.rankList.length === 0) {
       this.setLoadingExcludeNav()
@@ -28,6 +33,7 @@ export default {
       this.getRank()
     }
   },
+
   methods: {
     ...mapMutations(['replaceProperty']),
     getRank() {
@@ -44,8 +50,8 @@ export default {
         this.stopLoading()
       })
     }
-  }
-}
+  },
+});
 </script>
 
 <style lang="less" scoped>

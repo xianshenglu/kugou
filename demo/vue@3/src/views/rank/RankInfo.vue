@@ -14,24 +14,29 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+
 import PubModuleHead from '@/components/PubModuleHead'
 import AppMusicList from '@/components/AppMusicList'
 import { fetchRankInfo } from '@/requests/rankInfo'
 import { mapState, mapMutations } from 'vuex'
 import loading from '../../mixins/loading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
-export default {
+export default defineComponent({
   name: 'RankInfo',
   mixins: [loading],
+
   components: {
     PubModuleHead,
     AppMusicList
   },
+
   data() {
     return {
       msg: '上次更新时间'
     }
   },
+
   computed: {
     ...mapState('rank', ['rankInfo']),
     getModuleHeadInfo() {
@@ -54,12 +59,14 @@ export default {
       )
     }
   },
+
   created() {
     let rankId = this.$route.path.split('/').pop()
     this.setLoadingExcludeHeader()
     this.startLoading()
     this.getRankInfo(rankId)
   },
+
   methods: {
     ...mapMutations(['replaceProperty']),
     getRankInfo(rankId) {
@@ -75,8 +82,8 @@ export default {
         this.stopLoading()
       })
     }
-  }
-}
+  },
+});
 </script>
 
 <style lang="less" scoped>

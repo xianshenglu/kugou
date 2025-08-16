@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+
 import PlayerLyrics from './PlayerLyrics'
 import PlayerProgress from './PlayerProgress'
 import PlayButton from './PlayButton'
@@ -29,8 +31,9 @@ import PrevButton from './PrevButton'
 import { mapState, mapGetters, mapMutations } from 'vuex'
 import { fetchSongLyric } from '@/requests/player'
 import store from '../../store/index'
-export default {
+export default defineComponent({
   name: 'PlayerMax',
+
   components: {
     PlayerLyrics,
     PlayerProgress,
@@ -38,6 +41,7 @@ export default {
     NextButton,
     PrevButton
   },
+
   computed: {
     ...mapState('images', ['logo__theme']),
     ...mapState('player', ['audioEl', 'isPlaying', 'song', 'music']),
@@ -48,11 +52,13 @@ export default {
       }),linear-gradient(to right, rgb(48, 67, 82), rgb(215, 210, 204));`
     }
   },
+
   watch: {
     'music.hash': function(newHash) {
       this.$router.replace({ query: { musicHash: newHash } })
     }
   },
+
   beforeRouteEnter(to, from, next) {
     //play music if musicHash exists which means this page was loaded directly
     let musicHash = to.query.musicHash
@@ -70,13 +76,15 @@ export default {
       next()
     })
   },
+
   mounted() {
     this.replaceProperty({
       paths: 'player.isPlayerMedShow',
       data: false
     })
   },
-  destroyed() {
+
+  unmounted() {
     this.replaceProperty({
       paths: 'player.isPlayerMedShow',
       data: true
@@ -86,10 +94,11 @@ export default {
       data: false
     })
   },
+
   methods: {
     ...mapMutations(['replaceProperty'])
-  }
-}
+  },
+});
 </script>
 
 <style scoped lang="less">
@@ -179,10 +188,10 @@ export default {
   height: .calc_on_app_cont(42) [ @result];
   font-size: .calc_on_app_cont(16) [ @result];
 }
-.player__btn_prev /deep/ .icon {
+.player__btn_prev :deep(.icon) {
   transform: translate(0, 0px);
 }
-.play__btn_next /deep/ .icon {
+.play__btn_next :deep(.icon) {
   transform: translate(1px, 0px);
 }
 .player__btn_status {

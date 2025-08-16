@@ -24,15 +24,19 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+
 import { fetchSingerCategory } from '../../requests/singerCategory'
 import { mapState, mapMutations } from 'vuex'
 import loading from '../../mixins/loading'
-export default {
+export default defineComponent({
   name: 'SingerCategory',
   mixins: [loading],
+
   computed: {
     ...mapState('singer', ['singerCategories'])
   },
+
   created() {
     if (this.singerCategories.length === 0) {
       this.setLoadingExcludeNav()
@@ -40,6 +44,7 @@ export default {
       this.getSingerCategories()
     }
   },
+
   methods: {
     ...mapMutations(['replaceProperty']),
     getSingerCategories() {
@@ -66,8 +71,8 @@ export default {
         this.stopLoading()
       })
     }
-  }
-}
+  },
+});
 </script>
 
 <style lang="less" scoped>

@@ -7,14 +7,17 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'nextButton',
+
   methods: {
     next() {
       this.$store.commit('player/next')
     }
-  }
-}
+  },
+});
 </script>
 
 <style scoped>

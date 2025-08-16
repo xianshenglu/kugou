@@ -7,14 +7,17 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'PrevButton',
+
   methods: {
     prev() {
       this.$store.commit('player/prev')
     }
-  }
-}
+  },
+});
 </script>
 
 <style scoped>
