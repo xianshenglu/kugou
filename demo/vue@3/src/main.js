@@ -9,7 +9,6 @@ import './styles/index.less'
 // use mock instead of real http request when in development
 
 import '@shared/mock/index'
-Vue.config.productionTip = false
 const app = createApp({
   render: () => h(App)
 })
