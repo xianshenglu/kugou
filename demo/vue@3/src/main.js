@@ -15,7 +15,7 @@ Vue.prototype.window = window
 
 const app = createApp({
   router,
-  store,
   render: () => h(App)
 })
+app.use(store)
 app.mount('#app')

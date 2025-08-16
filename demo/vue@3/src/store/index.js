@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 
 import device from './device'
 import loading from './loading'
@@ -11,8 +10,7 @@ import search from './search'
 import newSong from './newSong'
 import images from './images'
 
-Vue.use(Vuex)
-let store = new Vuex.Store({
+let store = createStore({
   modules: {
     device,
     loading,
