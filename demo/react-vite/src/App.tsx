@@ -1,9 +1,8 @@
-import { Component, lazy } from 'react'
+import { Component } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ErrorBoundary } from 'react-error-boundary'
 import classNames from 'classnames'
 import './App.less'
-const AppHeader = lazy(() => import('./components/public/AppHeader'))
 import {
   // root,
   newSongs,
@@ -31,7 +30,10 @@ import {
   PlayerMaxContainer,
   AppNavContainer
 } from './containers/lazyContainers'
-
+import { lazyWithPrefetch } from './assets/hoc/lazyWithPrefetch'
+const AppHeader = lazyWithPrefetch(
+  () => import('./components/public/AppHeader')
+)
 class App extends Component {
   render() {
     const { isPlayerMedShow, isAppNavShow } = this.props as any

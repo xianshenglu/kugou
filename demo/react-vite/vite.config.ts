@@ -2,6 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import tsconfigPaths from 'vite-tsconfig-paths'
+import { analyzer } from 'vite-bundle-analyzer'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // https://vite.dev/config/
@@ -10,7 +12,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // todo: remove @types/node and check all the questions
 export default defineConfig({
   base: './',
-  plugins: [react()],
+  plugins: [tsconfigPaths(), react(), analyzer({ openAnalyzer: false })],
   server: {
     fs: {
       allow: [
@@ -21,7 +23,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@shared': path.resolve(__dirname, '../shared')
+      '@shared': path.resolve(__dirname, '../shared'),
+      src: path.resolve(__dirname, './src')
     }
   }
 })
