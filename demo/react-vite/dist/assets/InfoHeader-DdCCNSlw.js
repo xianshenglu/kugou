@@ -1,0 +1,1 @@
+import{r,j as e}from"./index-CaPGCRQz.js";class n extends r.Component{render(){const{name:s,imgurl:a,renderUpdatedTime:d}=this.props;return e.jsx(r.Fragment,{children:e.jsxs("div",{className:"InfoHeader__head",style:{backgroundImage:"url("+a+")"},children:[e.jsx("h6",{className:"InfoHeader__title",children:s}),d()]})})}}n.defaultProps={renderUpdatedTime:()=>{}};export{n as I};
