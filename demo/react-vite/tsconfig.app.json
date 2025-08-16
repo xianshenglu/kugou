@@ -16,7 +16,7 @@
     "jsx": "react-jsx",
     "allowJs": true,
     "baseUrl": ".",
-    "paths": { "@shared/*": ["../shared/*"] },
+    "paths": { "@shared/*": ["../shared/*"], "src/*": ["src/*"] },
 
     /* Linting */
     "strict": true,

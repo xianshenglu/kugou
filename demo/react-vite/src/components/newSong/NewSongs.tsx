@@ -1,17 +1,15 @@
-import React, { lazy } from 'react'
+import React from 'react'
 import AppMusicList from '../public/AppMusicList'
-const NewSongsSlider = lazy(() => import('./NewSongsSlider'))
 import './NewSongs.less'
+import { lazyWithPrefetch } from 'src/assets/hoc/lazyWithPrefetch'
+const NewSongsSlider = lazyWithPrefetch(() => import('./NewSongsSlider'))
 
 interface NewSongsProps {
-  songs: unknown[];
-  sliderData: unknown[];
+  songs: unknown[]
+  sliderData: unknown[]
 }
 
-function NewSongs({
-  songs,
-  sliderData
-}: NewSongsProps) {
+function NewSongs({ songs, sliderData }: NewSongsProps) {
   return (
     <React.Fragment>
       <NewSongsSlider banners={sliderData} />
