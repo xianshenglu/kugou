@@ -67,9 +67,9 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-@import 'node_modules/@glidejs/glide/src/assets/sass/glide.core';
-@import "node_modules/@glidejs/glide/src/assets/sass/glide.theme";
+<style lang="css" scoped>
+@import '../../../node_modules/@glidejs/glide/dist/css/glide.core.min.css';
+@import "../../../node_modules/@glidejs/glide/dist/css/glide.theme.min.css";
 </style>
 <style scoped lang="less">
 @import (reference) '~@/styles/constant';
