@@ -52,7 +52,9 @@ function toggleBetweenPages(event) {
     let staticLikePagesPath = router.options.routes[0].children.map(
       child => child.path
     )
-    let curRouteIndex = staticLikePagesPath.indexOf(router.currentRoute.path)
+    let curRouteIndex = staticLikePagesPath.indexOf(
+      router.currentRoute.value.path
+    )
 
     if (curRouteIndex >= 0 && (isSlowMoveEnough || isFastMoveEnough)) {
       let nextRouteIndex = direction ? curRouteIndex + 1 : curRouteIndex - 1

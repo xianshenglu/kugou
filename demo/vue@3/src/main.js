@@ -14,8 +14,8 @@ Vue.config.productionTip = false
 Vue.prototype.window = window
 
 const app = createApp({
-  router,
   render: () => h(App)
 })
 app.use(store)
+app.use(router)
 app.mount('#app')

@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 import store from '../store/index'
 import Main from '../components/Main'
@@ -11,7 +10,9 @@ const RankList = () =>
 const SongList = () =>
   import(/* webpackChunkName: "SongList" */ '../views/song/SongList')
 const SingerCategory = () =>
-  import(/* webpackChunkName: "SingerCategory" */ '../views/singer/SingerCategory')
+  import(
+    /* webpackChunkName: "SingerCategory" */ '../views/singer/SingerCategory'
+  )
 const RankInfo = () =>
   import(/* webpackChunkName: "RankInfo" */ '../views/rank/RankInfo')
 const SongListInfo = () =>
@@ -25,9 +26,8 @@ const Search = () =>
 const PlayerMax = () =>
   import(/* webpackChunkName: "PlayerMax" */ '../views/player/PlayerMax')
 
-Vue.use(VueRouter)
-
-const router = new VueRouter({
+const router = createRouter({
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',
