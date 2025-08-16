@@ -1,21 +1,25 @@
 <template>
   <section class="song_list">
     <PubList :pub-list="songList" class="song_list__cont">
-      <div class="song_list__info" slot-scope="props" slot="cont">
-        <div class="song_list__title">{{props.data.title}}</div>
-        <div class="song_list__star">
-          <svg class="icon song_list__icon" aria-hidden="true">
-            <use xlink:href="#icon-music"></use>
-          </svg>
-          <span class="song_list__popularity">{{props.data.popularity}}</span>
+      <template v-slot:cont="props">
+        <div class="song_list__info">
+          <div class="song_list__title">{{ props.data.title }}</div>
+          <div class="song_list__star">
+            <svg class="icon song_list__icon" aria-hidden="true">
+              <use xlink:href="#icon-music"></use>
+            </svg>
+            <span class="song_list__popularity">{{
+              props.data.popularity
+            }}</span>
+          </div>
         </div>
-      </div>
+      </template>
     </PubList>
   </section>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 
 import PubList from '@/modules/PubList'
 import { fetchSongList } from '../../requests/songList'
@@ -59,8 +63,8 @@ export default defineComponent({
         this.stopLoading()
       })
     }
-  },
-});
+  }
+})
 </script>
 
 <style lang="less" scoped>

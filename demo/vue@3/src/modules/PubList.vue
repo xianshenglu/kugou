@@ -1,13 +1,17 @@
 <template>
   <ul class="list" ref="lazyLoadRoot">
-    <li class="list__item main_border_bottom" v-for="(item,index) in pubList" :key="index">
+    <li
+      class="list__item main_border_bottom"
+      v-for="(item, index) in pubList"
+      :key="index"
+    >
       <router-link :to="item.path" class="list__link">
         <img
           class="list__img lazy_image"
           ref="lazyImages"
           :src="logo__grey"
           :data-src="item.imgUrl"
-        >
+        />
         <slot :data="item" name="cont"></slot>
         <button class="list__btn">
           <svg class="icon" aria-hidden="true">
@@ -20,7 +24,7 @@
 </template>
 
 <script>
-import { defineComponent, nextTick } from 'vue';
+import { defineComponent, nextTick } from 'vue'
 
 import { lazyLoad } from '@/utils'
 import { mapState } from 'vuex'
@@ -48,14 +52,14 @@ export default defineComponent({
       },
 
       immediate: true,
-      deep: true,
+      deep: true
     }
   },
 
   computed: {
     ...mapState('images', ['logo__grey'])
-  },
-});
+  }
+})
 </script>
 
 <style lang="less" scoped>

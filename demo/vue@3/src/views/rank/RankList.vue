@@ -1,13 +1,17 @@
 <template>
   <section class="rank_list">
     <PubList :pub-list="rankList" class="rank_list__cont">
-      <div class="rank_list__info" slot-scope="props" slot="cont">{{props.data.title}}</div>
+      <template v-slot:cont="props">
+        <div class="rank_list__info">
+          {{ props.data.title }}
+        </div>
+      </template>
     </PubList>
   </section>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 
 import PubList from '@/modules/PubList'
 import { fetchRankList } from '@/requests/rankList'
@@ -50,8 +54,8 @@ export default defineComponent({
         this.stopLoading()
       })
     }
-  },
-});
+  }
+})
 </script>
 
 <style lang="less" scoped>

@@ -1,20 +1,24 @@
 <template>
   <section class="rank_info">
     <PubModuleHead :module-head-info="getModuleHeadInfo">
-      <time class="rank_info__update_time" slot="moduleUpdateTime">{{msg}} {{formatDate}}</time>
+      <template v-slot:moduleUpdateTime>
+        <time class="rank_info__update_time">{{ msg }} {{ formatDate }}</time>
+      </template>
     </PubModuleHead>
     <AppMusicList :music-list="getMusicList">
-      <div
-        :class="'rank_info__index '+'rank_info__index'+(props.data+1)"
-        slot-scope="props"
-        slot="index"
-      >{{props.data+1}}</div>
+      <template v-slot:index="props">
+        <div
+          :class="'rank_info__index ' + 'rank_info__index' + (props.data + 1)"
+        >
+          {{ props.data + 1 }}
+        </div>
+      </template>
     </AppMusicList>
   </section>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 
 import PubModuleHead from '@/components/PubModuleHead'
 import AppMusicList from '@/components/AppMusicList'
@@ -82,8 +86,8 @@ export default defineComponent({
         this.stopLoading()
       })
     }
-  },
-});
+  }
+})
 </script>
 
 <style lang="less" scoped>

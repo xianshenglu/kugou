@@ -1,14 +1,16 @@
 <template>
   <section class="singer_info">
     <PubModuleHead :module-head-info="getModuleHeadInfo">
-      <PubModuleDes slot="moduleDes" :description="getModuleHeadInfo.intro"/>
+      <template v-slot:moduleDes>
+        <PubModuleDes :description="getModuleHeadInfo.intro" />
+      </template>
     </PubModuleHead>
-    <AppMusicList :music-list="getMusicList"/>
+    <AppMusicList :music-list="getMusicList" />
   </section>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 
 import PubModuleHead from '@/components/PubModuleHead'
 import PubModuleDes from '@/components/PubModuleDes'
@@ -70,9 +72,8 @@ export default defineComponent({
         this.stopLoading()
       })
     }
-  },
-});
+  }
+})
 </script>
 
-<style scoped lang="less">
-</style>
+<style scoped lang="less"></style>
