@@ -3,7 +3,7 @@
     <p
       v-for="(item,index) in lyricItems"
       :key="item.millisecond"
-      :ref="item.millisecond"
+      :ref="el => (lyricElements[item.millisecond] = el)"
       v-bind="getVBindObj('millisecond-'+item.millisecond)"
       :class="index===prevLyricIndex+1?'player_lyric_text player_lyric_text--active ':'player_lyric_text'"
     >{{ item.text }}</p>
@@ -23,7 +23,8 @@ export default defineComponent({
     return {
       getVBindObj,
       prevLyricIndex: 0,
-      isTouching: false
+      isTouching: false,
+      lyricElements: []
     }
   },
 
@@ -34,7 +35,18 @@ export default defineComponent({
       return this.lyricItems.map(o => o.millisecond)
     }
   },
-
+  watch: {
+    lyricItems: {
+      handler: function(newLyricItems) {
+        if (newLyricItems.length === 0) {
+          return
+        }
+        this.lyricElements = newLyricItems.map(() => null)
+      },
+      immediate: true,
+      deep: true,
+    }
+  },
   mounted() {
     nextTick(() => {
       this.audioEl.addEventListener('timeupdate', this.timeUpdateCb)
