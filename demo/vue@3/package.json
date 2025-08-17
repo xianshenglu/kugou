@@ -1,0 +1,92 @@
+{
+  "name": "kugou",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "analyze": "vue-cli-service build --report"
+  },
+  "dependencies": {
+    "@glidejs/glide": "^3.2.7",
+    "@vue/compat": "^3.2.0",
+    "@vue/compiler-sfc": "^3.2.0",
+    "axios": "^0.18.0",
+    "core-js": "^3.8.3",
+    "css-vars-ponyfill": "^1.15.3",
+    "mitt": "^3.0.1",
+    "vue": "^3.2.0",
+    "vue-router": "^4.5.1",
+    "vuex": "^4.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@vue/cli-plugin-babel": "~5.0.8",
+    "@vue/cli-plugin-eslint": "~5.0.8",
+    "@vue/cli-service": "~5.0.8",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "less": "^3.8.1",
+    "less-loader": "^12.3.0",
+    "mockjs": "^1.0.1-beta3",
+    "postcss-pixel-to-viewport": "^1.0.2",
+    "postcss-plugin-pxtoviewport": "0.0.5",
+    "postcss-pxtorem": "^4.0.1",
+    "prettier": "^1.14.3",
+    "vconsole": "^3.2.0",
+    "vue-template-compiler": "^2.5.16"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended",
+      "plugin:prettier/recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {},
+      "postcss-pixel-to-viewport": {
+        "viewportWidth": 375,
+        "viewportUnit": "vw",
+        "propertyBlacklist": [
+          "letter-spacing"
+        ],
+        "minPixelValue": 2,
+        "enableConvertComment": "on",
+        "disableConvertComment": "off",
+        "mediaQuery": false
+      },
+      "postcss-pxtorem": {
+        "rootValue": 16,
+        "unitPrecision": 5,
+        "propList": [],
+        "selectorBlackList": [],
+        "replace": false,
+        "mediaQuery": false,
+        "minPixelValue": 0
+      }
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
