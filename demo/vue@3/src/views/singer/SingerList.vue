@@ -10,7 +10,7 @@
         <router-link :to="item.path" class="singer_list__link">
           <img
             class="singer_list__img lazy_image"
-            ref="lazyImages"
+            :ref="el => saveImageRef(index, el)"
             :src="logo__grey"
             :data-src="item.imgUrl"
           >
@@ -45,15 +45,20 @@ export default defineComponent({
       isLoadingShow: 'isShow'
     })
   },
-
+  data() {
+    return {
+      lazyImageElements: []
+    }
+  },
   watch: {
     'singerList.data': {
       handler: function(newArray) {
         if (newArray.length === 0) {
           return
         }
+        this.lazyImageElements = newArray.map(() => null)
         nextTick(() =>
-          lazyLoad(this.$refs.lazyImages, { root: this.$refs.lazyLoadRoot })
+          lazyLoad(this.lazyImageElements, { root: this.$refs.lazyLoadRoot })
         )
       },
       immediate: true,
@@ -73,6 +78,12 @@ export default defineComponent({
 
   methods: {
     ...mapMutations(['replaceProperty']),
+    /**
+     * @description  similar way not working in React. The el may not be updated to the DOM in React.
+     */
+    saveImageRef(index, el) {
+      this.lazyImageElements[index] = el
+    },
     getSingerList(singerListId) {
       fetchSingerList({ params: { singerListId } }).then(({ data }) => {
         let singerList = {

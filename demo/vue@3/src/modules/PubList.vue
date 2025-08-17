@@ -8,7 +8,7 @@
       <router-link :to="item.path" class="list__link">
         <img
           class="list__img lazy_image"
-          ref="lazyImages"
+          :ref="el => saveImageRef(index, el)"
           :src="logo__grey"
           :data-src="item.imgUrl"
         />
@@ -40,15 +40,22 @@ export default defineComponent({
     }
   },
 
+  data() {
+    return {
+      lazyImageElements: []
+    }
+  },
+
   watch: {
     pubList: {
       handler: function(newArray) {
         if (newArray.length === 0) {
           return
         }
-        nextTick(() =>
-          lazyLoad(this.$refs.lazyImages, { root: this.$refs.lazyLoadRoot })
-        )
+        this.lazyImageElements = newArray.map(() => null)
+        nextTick(() => {
+          lazyLoad(this.lazyImageElements, { root: this.$refs.lazyLoadRoot })
+        })
       },
 
       immediate: true,
@@ -58,12 +65,18 @@ export default defineComponent({
 
   computed: {
     ...mapState('images', ['logo__grey'])
+  },
+  methods: {
+    saveImageRef(index, el) {
+      this.lazyImageElements[index] = el
+    }
   }
 })
 </script>
 
 <style lang="less" scoped>
 @import (reference) '~@/styles/constant';
+
 .list {
   padding-left: @padding_width;
 }
