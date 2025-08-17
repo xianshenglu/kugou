@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@glidejs/glide": "^3.2.7",
-    "@vue/compat": "^3.2.0",
     "@vue/compiler-sfc": "^3.2.0",
     "axios": "^0.18.0",
     "core-js": "^3.8.3",
