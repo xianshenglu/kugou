@@ -3,28 +3,18 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import store from '../store/index'
 import Main from '../components/Main'
 
-const NewSong = () =>
-  import(/* webpackChunkName: "NewSong" */ '../views/newSong/NewSong')
-const RankList = () =>
-  import(/* webpackChunkName: "RankList" */ '../views/rank/RankList')
-const SongList = () =>
-  import(/* webpackChunkName: "SongList" */ '../views/song/SongList')
+const NewSong = () => import(/* vitePrefetch: true */ '../views/newSong/NewSong')
+const RankList = () => import(/* vitePrefetch: true */ '../views/rank/RankList')
+const SongList = () => import(/* vitePrefetch: true */ '../views/song/SongList')
 const SingerCategory = () =>
-  import(
-    /* webpackChunkName: "SingerCategory" */ '../views/singer/SingerCategory'
-  )
-const RankInfo = () =>
-  import(/* webpackChunkName: "RankInfo" */ '../views/rank/RankInfo')
+  import(/* vitePrefetch: true */ '../views/singer/SingerCategory')
+const RankInfo = () => import(/* vitePrefetch: true */ '../views/rank/RankInfo')
 const SongListInfo = () =>
-  import(/* webpackChunkName: "SongListInfo" */ '../views/song/SongListInfo')
-const SingerList = () =>
-  import(/* webpackChunkName: "SingerList" */ '../views/singer/SingerList')
-const SingerInfo = () =>
-  import(/* webpackChunkName: "SingerInfo" */ '../views/singer/SingerInfo')
-const Search = () =>
-  import(/* webpackChunkName: "Search" */ '../views/search/Search')
-const PlayerMax = () =>
-  import(/* webpackChunkName: "PlayerMax" */ '../views/player/PlayerMax')
+  import(/* vitePrefetch: true */ '../views/song/SongListInfo')
+const SingerList = () => import(/* vitePrefetch: true */ '../views/singer/SingerList')
+const SingerInfo = () => import(/* vitePrefetch: true */ '../views/singer/SingerInfo')
+const Search = () => import(/* vitePrefetch: true */ '../views/search/Search')
+const PlayerMax = () => import(/* vitePrefetch: true */ '../views/player/PlayerMax')
 
 const router = createRouter({
   history: createWebHashHistory(),

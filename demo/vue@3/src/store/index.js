@@ -22,7 +22,7 @@ let store = createStore({
     search,
     images
   },
-  strict: process.env.NODE_ENV !== 'production',
+  strict: import.meta.env.DEV,
   mutations: {
     replaceProperty(state, { paths, data }) {
       if (typeof paths !== 'string') {
