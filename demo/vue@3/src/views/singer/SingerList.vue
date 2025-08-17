@@ -56,7 +56,8 @@ export default defineComponent({
           lazyLoad(this.$refs.lazyImages, { root: this.$refs.lazyLoadRoot })
         )
       },
-      immediate: true
+      immediate: true,
+      deep: true
     }
   },
 
