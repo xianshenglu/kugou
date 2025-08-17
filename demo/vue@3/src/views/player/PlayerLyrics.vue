@@ -2,9 +2,9 @@
   <div class="player_lyric" @touchstart="isTouching=true" @touchend="isTouching=false">
     <p
       v-for="(item,index) in lyricItems"
+      v-bind="getVBindObj('millisecond-'+item.millisecond)"
       :key="item.millisecond"
       :ref="el => (lyricElements[item.millisecond] = el)"
-      v-bind="getVBindObj('millisecond-'+item.millisecond)"
       :class="index===prevLyricIndex+1?'player_lyric_text player_lyric_text--active ':'player_lyric_text'"
     >{{ item.text }}</p>
     <!-- //todo make it width: 100% -->
