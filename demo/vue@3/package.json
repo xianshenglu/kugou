@@ -15,6 +15,7 @@
     "axios": "^0.18.0",
     "core-js": "^3.8.3",
     "css-vars-ponyfill": "^1.15.3",
+    "mitt": "^3.0.1",
     "vue": "^3.2.0",
     "vue-router": "^4.5.1",
     "vuex": "^4.1.0"
