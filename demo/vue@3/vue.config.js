@@ -4,7 +4,7 @@ module.exports = {
   lintOnSave: false,
   publicPath:
     process.env.NODE_ENV === 'production'
-      ? 'https://cdn.jsdelivr.net/gh/xianshenglu/vue@master/demo/vue@2.x/dist/'
+      ? 'https://cdn.jsdelivr.net/gh/xianshenglu/kugou@master/demo/vue@3/dist/'
       : './',
 
   // devServer: {
