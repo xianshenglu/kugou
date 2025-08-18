@@ -6,20 +6,18 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 
-import { mapState } from 'vuex'
-export default defineComponent({
-  name: 'AppLoading',
+const store = useStore();
 
-  computed: {
-    ...mapState('loading', ['isShow', 'sizeClassName']),
-    className() {
-      let className = this.isShow ? 'loading' : 'loading loading--fade_out'
-      return className + ' ' + this.sizeClassName
-    }
-  },
+const isShow = computed(() => store.state.loading.isShow);
+const sizeClassName = computed(() => store.state.loading.sizeClassName);
+
+const className = computed(() => {
+  let name = isShow.value ? 'loading' : 'loading loading--fade_out';
+  return name + ' ' + sizeClassName.value;
 });
 </script>
 

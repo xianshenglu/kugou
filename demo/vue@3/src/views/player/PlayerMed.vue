@@ -22,32 +22,22 @@
   </section>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
-import { mapState, mapGetters, mapMutations } from 'vuex'
 import PlayButton from './PlayButton'
 import NextButton from './NextButton'
 import PrevButton from './PrevButton'
-export default defineComponent({
-  name: 'PlayerMed',
 
-  components: {
-    PlayButton,
-    NextButton,
-    PrevButton
-  },
+const store = useStore()
 
-  computed: {
-    ...mapState('images', ['logo__theme']),
-    ...mapState('player', ['music', 'song', 'isPlayerMedSmall']),
-    ...mapGetters('player', ['songName', 'singerName', 'singerImg'])
-  },
-
-  methods: {
-    ...mapMutations('player', ['togglePlayers'])
-  },
-});
+const logo__theme = computed(() => store.state.images.logo__theme)
+const music = computed(() => store.state.player.music)
+const isPlayerMedSmall = computed(() => store.state.player.isPlayerMedSmall)
+const songName = computed(() => store.getters['player/songName'])
+const singerName = computed(() => store.getters['player/singerName'])
+const singerImg = computed(() => store.getters['player/singerImg'])
 </script>
 
 <style scoped lang="less">

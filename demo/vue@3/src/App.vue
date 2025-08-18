@@ -17,49 +17,29 @@
   />
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { ref, onMounted, computed } from 'vue'
+import { useStore } from 'vuex'
 
 import AppHeader from '@/components/AppHeader'
-import AppNav from './components/AppNav'
 import AppLoading from './components/AppLoading'
 import PlayerMed from './views/player/PlayerMed'
-import { mapState, mapMutations } from 'vuex'
 
-export default defineComponent({
-  name: 'App',
+const audioEl = ref(null)
+const store = useStore()
 
-  components: {
-    AppLoading,
-    AppHeader,
-    AppNav,
-    PlayerMed
-  },
+const isPlayerMedShow = computed(() => store.state.player.isPlayerMedShow)
+const isPlayerMedSmall = computed(() => store.state.player.isPlayerMedSmall)
+const song = computed(() => store.state.player.song)
+const vh = computed(() => store.state.device.vh)
 
-  mounted() {
-    document.documentElement.style.setProperty('--vh', this.vh / 100 + 'px')
-    this.findAudioEl(this.$refs.audioEl)
-  },
+const findAudioEl = (el) => store.commit('player/findAudioEl', el)
+const togglePlay = (status) => store.commit('player/togglePlay', status)
 
-  computed: {
-    ...mapState('player', {
-      isPlayerMedShow: 'isPlayerMedShow',
-      isPlayerMedSmall: 'isPlayerMedSmall',
-      music: 'music',
-      song: 'song'
-    }),
-    ...mapState('device', {
-      vh: 'vh'
-    })
-  },
-
-  methods: {
-    ...mapMutations('player', {
-      findAudioEl: 'findAudioEl',
-      togglePlay: 'togglePlay'
-    })
-  },
-});
+onMounted(() => {
+  document.documentElement.style.setProperty('--vh', vh.value / 100 + 'px')
+  findAudioEl(audioEl.value)
+})
 </script>
 
 <style lang="less" scoped>

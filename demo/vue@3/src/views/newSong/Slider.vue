@@ -22,57 +22,53 @@
   </section>
 </template>
 
-<script>
-import { defineComponent, nextTick } from 'vue';
+<script setup>
+import { ref, watch, nextTick, onUnmounted } from 'vue';
 
 import Glide, {
   Controls,
   Autoplay,
   Swipe
-} from '@glidejs/glide/dist/glide.modular.esm'
-let glide
-export default defineComponent({
-  name: 'Slider',
+} from '@glidejs/glide/dist/glide.modular.esm';
 
-  props: {
-    data: {
-      type: Array,
-      default: () => []
-    }
-  },
-
-  watch: {
-    data: {
-      handler: function(newArray) {
-        if (newArray.length === 0) {
-          return
-        }
-        nextTick(() => this.initGlideVm())
-      },
-
-      immediate: true,
-      deep: true,
-    }
-  },
-
-  unmounted() {
-    glide.destroy()
-  },
-
-  methods: {
-    initGlideVm() {
-      glide = new Glide('.slider__body', {
-        type: 'carousel',
-        autoplay: 3000,
-        animationDuration: 1000
-      }).mount({
-        Autoplay,
-        Controls,
-        Swipe
-      })
-    }
-  },
+const props = defineProps({
+  data: {
+    type: Array,
+    default: () => []
+  }
 });
+
+const glide = ref(null);
+const glideElement = ref(null);
+
+const initGlideVm = () => {
+  glideElement.value = new Glide(glide.value, {
+    type: 'carousel',
+    autoplay: 3000,
+    animationDuration: 1000
+  }).mount({
+    Autoplay,
+    Controls,
+    Swipe
+  });
+};
+
+watch(() => props.data, (newArray) => {
+  if (newArray.length === 0) {
+    return;
+  }
+  nextTick(initGlideVm);
+}, {
+  immediate: true,
+  deep: true
+});
+
+onUnmounted(() => {
+  if (glideElement.value) {
+    glideElement.value.destroy();
+  }
+});
+
 </script>
 
 <style lang="css" scoped>

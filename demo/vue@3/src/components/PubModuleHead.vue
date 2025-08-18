@@ -8,20 +8,12 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'PubModuleHead',
-
-  props: {
-    moduleHeadInfo: {
-      type: Object,
-      default() {
-        return {}
-      }
-    }
-  },
+<script setup>
+const props = defineProps({
+  moduleHeadInfo: {
+    type: Object,
+    default: () => ({})
+  }
 });
 </script>
 

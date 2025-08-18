@@ -17,77 +17,64 @@
   </section>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
 
 import PubModuleHead from '@/components/PubModuleHead'
 import AppMusicList from '@/components/AppMusicList'
 import { fetchRankInfo } from '@/requests/rankInfo'
-import { mapState, mapMutations } from 'vuex'
-import loading from '../../mixins/loading'
+import { useLoading } from '@/composables/useLoading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
-export default defineComponent({
-  name: 'RankInfo',
-  mixins: [loading],
 
-  components: {
-    PubModuleHead,
-    AppMusicList
-  },
+const store = useStore()
+const route = useRoute()
+const { startLoading, stopLoading, setLoadingExcludeHeader } = useLoading()
 
-  data() {
-    return {
-      msg: '上次更新时间'
-    }
-  },
+const msg = ref('上次更新时间')
+const rankInfo = computed(() => store.state.rank.rankInfo)
 
-  computed: {
-    ...mapState('rank', ['rankInfo']),
-    getModuleHeadInfo() {
-      return {
-        imgUrl: replaceSizeInUrl(this.rankInfo.info.banner7url),
-        name: this.rankInfo.info.rankname
-      }
-    },
-    getMusicList() {
-      return this.rankInfo.songs.list
-    },
-    formatDate() {
-      let date = new Date(this.rankInfo.songs.timestamp * 1000)
-      return (
-        date.getFullYear() +
-        '-' +
-        String(date.getMonth() + 1).padStart(2, '0') +
-        '-' +
-        String(date.getDate()).padStart(2, '0')
-      )
-    }
-  },
-
-  created() {
-    let rankId = this.$route.path.split('/').pop()
-    this.setLoadingExcludeHeader()
-    this.startLoading()
-    this.getRankInfo(rankId)
-  },
-
-  methods: {
-    ...mapMutations(['replaceProperty']),
-    getRankInfo(rankId) {
-      fetchRankInfo({ params: { rankid: rankId } }).then(res => {
-        let rankInfo = {
-          info: res.data.info,
-          songs: res.data.songs
-        }
-        this.replaceProperty({
-          paths: 'rank.rankInfo',
-          data: rankInfo
-        })
-        this.stopLoading()
-      })
-    }
+const getModuleHeadInfo = computed(() => {
+  return {
+    imgUrl: replaceSizeInUrl(rankInfo.value.info.banner7url),
+    name: rankInfo.value.info.rankname
   }
 })
+
+const getMusicList = computed(() => {
+  return rankInfo.value.songs.list
+})
+
+const formatDate = computed(() => {
+  const date = new Date(rankInfo.value.songs.timestamp * 1000)
+  return (
+    date.getFullYear() +
+    '-' +
+    String(date.getMonth() + 1).padStart(2, '0') +
+    '-' +
+    String(date.getDate()).padStart(2, '0')
+  )
+})
+
+const getRankInfo = (rankId) => {
+  fetchRankInfo({ params: { rankid: rankId } }).then(res => {
+    const rankInfoData = {
+      info: res.data.info,
+      songs: res.data.songs
+    }
+    store.commit('replaceProperty', {
+      paths: 'rank.rankInfo',
+      data: rankInfoData
+    })
+    stopLoading()
+  })
+}
+
+const rankId = route.path.split('/').pop()
+setLoadingExcludeHeader()
+startLoading()
+getRankInfo(rankId)
 </script>
 
 <style lang="less" scoped>

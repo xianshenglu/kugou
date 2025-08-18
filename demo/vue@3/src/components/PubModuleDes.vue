@@ -16,29 +16,17 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { ref } from 'vue';
 
-export default defineComponent({
-  name: 'PubModuleDes',
-
-  props: {
-    description: {
-      type: String,
-      default() {
-        return ''
-      }
-    }
-  },
-
-  data() {
-    return {
-      showMore: false
-    }
-  },
-
-  methods: {},
+const props = defineProps({
+  description: {
+    type: String,
+    default: ''
+  }
 });
+
+const showMore = ref(false);
 </script>
 
 <style scoped lang="less">

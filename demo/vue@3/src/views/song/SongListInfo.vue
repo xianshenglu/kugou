@@ -9,65 +9,55 @@
   </section>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+import { computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
 
 import PubModuleHead from '@/components/PubModuleHead'
 import PubModuleDes from '@/components/PubModuleDes'
 import AppMusicList from '@/components/AppMusicList'
 import { fetchSongListInfo } from '../../requests/songListInfo'
-import loading from '../../mixins/loading'
-import { mapState, mapMutations } from 'vuex'
+import { useLoading } from '@/composables/useLoading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
-export default defineComponent({
-  name: 'SongListInfo',
-  mixins: [loading],
 
-  components: {
-    PubModuleHead,
-    AppMusicList,
-    PubModuleDes
-  },
+const store = useStore()
+const route = useRoute()
+const { startLoading, stopLoading, setLoadingExcludeHeader } = useLoading()
 
-  computed: {
-    ...mapState('song', ['songListInfo']),
-    getModuleHeadInfo() {
-      let data = this.songListInfo.info.list
-      return {
-        imgUrl: replaceSizeInUrl(data.imgurl),
-        name: data.specialname,
-        intro: data.intro
-      }
-    },
-    getMusicList() {
-      return this.songListInfo.songs.list.info
-    }
-  },
+const songListInfo = computed(() => store.state.song.songListInfo)
 
-  created() {
-    let songListId = this.$route.path.split('/').pop()
-    this.setLoadingExcludeHeader()
-    this.startLoading()
-    this.getSongListInfo(songListId)
-  },
-
-  methods: {
-    ...mapMutations(['replaceProperty']),
-    getSongListInfo(songListId) {
-      fetchSongListInfo({ songListId }).then(({ data }) => {
-        let songListInfo = {
-          info: data.info,
-          songs: data.list
-        }
-        this.replaceProperty({
-          paths: 'song.songListInfo',
-          data: songListInfo
-        })
-        this.stopLoading()
-      })
-    }
+const getModuleHeadInfo = computed(() => {
+  const data = songListInfo.value.info.list
+  return {
+    imgUrl: replaceSizeInUrl(data.imgurl),
+    name: data.specialname,
+    intro: data.intro
   }
 })
+
+const getMusicList = computed(() => {
+  return songListInfo.value.songs.list.info
+})
+
+const getSongListInfo = (songListId) => {
+  fetchSongListInfo({ songListId }).then(({ data }) => {
+    const songListInfoData = {
+      info: data.info,
+      songs: data.list
+    }
+    store.commit('replaceProperty', {
+      paths: 'song.songListInfo',
+      data: songListInfoData
+    })
+    stopLoading()
+  })
+}
+
+const songListId = route.path.split('/').pop()
+setLoadingExcludeHeader()
+startLoading()
+getSongListInfo(songListId)
 </script>
 
 <style lang="less" scoped></style>

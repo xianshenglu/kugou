@@ -21,94 +21,74 @@
   </section>
 </template>
 
-<script>
-import { defineComponent, nextTick } from 'vue';
+<script setup>
+import { ref, computed, watch, nextTick, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
 
 import PubModuleTitle from '@/components/PubModuleTitle'
 import { fetchSingerList } from '../../requests/singerList'
-import loading from '../../mixins/loading'
+import { useLoading } from '@/composables/useLoading'
 import { lazyLoad } from '@/utils'
-import { mapState, mapMutations } from 'vuex'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
-export default defineComponent({
-  name: 'SingerList',
-  mixins: [loading],
 
-  components: {
-    PubModuleTitle
-  },
+const store = useStore()
+const route = useRoute()
+const { startLoading, stopLoading, setLoadingExcludeHeader } = useLoading()
 
-  computed: {
-    ...mapState('images', ['logo__grey']),
-    ...mapState('singer', ['singerList']),
-    ...mapState('loading', {
-      isLoadingShow: 'isShow'
-    })
-  },
-  data() {
-    return {
-      lazyImageElements: []
-    }
-  },
-  watch: {
-    'singerList.data': {
-      handler: function(newArray) {
-        if (newArray.length === 0) {
-          return
-        }
-        this.lazyImageElements = newArray.map(() => null)
-        nextTick(() =>
-          lazyLoad(this.lazyImageElements, { root: this.$refs.lazyLoadRoot })
-        )
+const lazyLoadRoot = ref(null)
+const lazyImageElements = ref([])
+
+const logo__grey = computed(() => store.state.images.logo__grey)
+const singerList = computed(() => store.state.singer.singerList)
+
+watch(()=>singerList.value.data, (newArray) => {
+  if (newArray.length === 0) {
+    return
+  }
+  lazyImageElements.value = newArray.map(() => null)
+  nextTick(() =>
+    lazyLoad(lazyImageElements.value, { root: lazyLoadRoot.value })
+  )
+}, {
+  immediate: true
+})
+
+
+  // todo add scrollRemember
+const singerListId = route.path.split('/').pop()
+if (Number(singerListId) !== singerList.value.info.id) {
+  setLoadingExcludeHeader()
+  startLoading()
+  getSingerList(singerListId)
+}
+const saveImageRef = (index, el) => {
+  lazyImageElements.value[index] = el
+}
+
+function getSingerList(singerListId) {
+  fetchSingerList({ params: { singerListId } }).then(({ data }) => {
+    const singerListData = {
+      info: {
+        id: data.classid,
+        name: data.classname,
+        count: data.singers.total
       },
-      immediate: true,
-      deep: true
+      data: data.singers.list.info
     }
-  },
-
-  created() {
-    // todo add scrollRemember
-    let singerListId = this.$route.path.split('/').pop()
-    if (Number(singerListId) !== this.singerList.info.id) {
-      this.setLoadingExcludeHeader()
-      this.startLoading()
-      this.getSingerList(singerListId)
-    }
-  },
-
-  methods: {
-    ...mapMutations(['replaceProperty']),
-    /**
-     * @description  similar way not working in React. The el may not be updated to the DOM in React.
-     */
-    saveImageRef(index, el) {
-      this.lazyImageElements[index] = el
-    },
-    getSingerList(singerListId) {
-      fetchSingerList({ params: { singerListId } }).then(({ data }) => {
-        let singerList = {
-          info: {
-            id: data.classid,
-            name: data.classname,
-            count: data.singers.total
-          },
-          data: data.singers.list.info
-        }
-        data.singers.list.info.forEach(obj => {
-          obj.id = obj.singerid
-          obj.name = obj.singername
-          obj.imgUrl = replaceSizeInUrl(obj.imgurl)
-          obj.path = '/singer/info/' + obj.id
-        })
-        this.replaceProperty({
-          paths: 'singer.singerList',
-          data: singerList
-        })
-        this.stopLoading()
-      })
-    }
-  },
-});
+    data.singers.list.info.forEach(obj => {
+      obj.id = obj.singerid
+      obj.name = obj.singername
+      obj.imgUrl = replaceSizeInUrl(obj.imgurl)
+      obj.path = '/singer/info/' + obj.id
+    })
+    store.commit('replaceProperty', {
+      paths: 'singer.singerList',
+      data: singerListData
+    })
+    stopLoading()
+  })
+}
 </script>
 
 <style scoped lang="less">

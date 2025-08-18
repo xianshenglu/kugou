@@ -35,157 +35,145 @@
   </section>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useStore } from 'vuex'
+import { useRoute, useRouter } from 'vue-router'
 
 import PubModuleTitle from '@/components/PubModuleTitle'
 import AppMusicList from '@/components/AppMusicList'
 import { fetchHotSearch, fetchSearchResult } from '../../requests/search'
 import bus from '@/eventBus'
-import loading from '../../mixins/loading.js'
-import { mapState, mapMutations } from 'vuex'
+import { useLoading } from '@/composables/useLoading'
 
-export default defineComponent({
-  name: 'Search',
-  mixins: [loading],
+const store = useStore()
+const route = useRoute()
+const router = useRouter()
+const { startLoading, stopLoading, setLoadingExcludeSearchForm } = useLoading()
 
-  components: {
-    PubModuleTitle,
-    AppMusicList
+const searchCont = ref(null)
+
+const title = ref('搜索')
+const searchType = ref('最近热门')
+const placeholder = ref('歌手/歌名/拼音')
+
+const searchRecArr = computed(() => store.state.search.searchRecArr)
+const searchRes = computed(() => store.state.search.searchRes)
+const keyword = computed({
+  get() {
+    return store.state.search.keyword
   },
-
-  data() {
-    return {
-      title: '搜索',
-      searchType: '最近热门',
-      placeholder: '歌手/歌名/拼音'
-    }
+  set(value) {
+    store.commit('replaceProperty', { paths: 'search.keyword', data: value })
+  }
+})
+const isSearchRecShow = computed({
+  get() {
+    return store.state.search.isSearchRecShow
   },
-
-  computed: {
-    ...mapState('search', [
-      'searchRecArr',
-      'searchRes',
-      'isSearchRecShow',
-      'isSearchResShow'
-    ]),
-    keyword: {
-      get() {
-        return this.$store.state.search.keyword
-      },
-      set(value) {
-        this.replaceProperty({ paths: 'search.keyword', data: value })
-      }
-    },
-    isSearchRecShow: {
-      get() {
-        return this.$store.state.search.isSearchRecShow
-      },
-      set(data) {
-        this.replaceProperty({ paths: 'search.isSearchRecShow', data })
-      }
-    },
-    isSearchResShow: {
-      get() {
-        return this.$store.state.search.isSearchResShow
-      },
-      set(data) {
-        this.replaceProperty({ paths: 'search.isSearchResShow', data })
-      }
-    }
+  set(data) {
+    store.commit('replaceProperty', { paths: 'search.isSearchRecShow', data })
+  }
+})
+const isSearchResShow = computed({
+  get() {
+    return store.state.search.isSearchResShow
   },
+  set(data) {
+    store.commit('replaceProperty', { paths: 'search.isSearchResShow', data })
+  }
+})
 
-  created() {
-    this.init()
-  },
+init()
+onMounted(() => {
+  initQqBugDetect()
+  bus.$on('searchBtnClicked', scrollTopSearchCont)
+})
 
-  mounted() {
-    bus.$on('searchBtnClicked', this.scrollTopSearchCont)
-    this.initQqBugDetect()
-  },
+onUnmounted(() => {
+  window.removeEventListener('touchstart', initQqBugDetect)
+  window.removeEventListener('touchmove', initQqBugDetect)
+  bus.$off('searchBtnClicked', scrollTopSearchCont)
+})
 
-  unmounted() {
-    bus.$off('searchBtnClicked', this.scrollTopSearchCont)
-  },
+function init () {
+  const queryKeyword = route.query.keyword
+  const isKeywordValid = typeof keyword.value === 'string' && keyword.value !== ''
+  const isQueryKeywordValid = typeof queryKeyword === 'string' && queryKeyword !== ''
+  if (isQueryKeywordValid && queryKeyword !== keyword.value) {
+    keyword.value = queryKeyword
+    getSearchRes()
+  } else if (isKeywordValid) {
+    isSearchRecShow.value = false
+    isSearchResShow.value = true
+  } else {
+    getSearchRec()
+  }
+}
 
-  methods: {
-    ...mapMutations(['replaceProperty']),
-    init() {
-      let queryKeyword = this.$route.query.keyword
-      let isKeywordValid =
-        typeof this.keyword === 'string' && this.keyword !== ''
-      let isQueryKeywordValid =
-        typeof queryKeyword === 'string' && queryKeyword !== ''
-      if (isQueryKeywordValid && queryKeyword !== this.keyword) {
-        this.keyword = queryKeyword
-        this.getSearchRes()
-      } else if (isKeywordValid) {
-        this.isSearchRecShow = false
-        this.isSearchResShow = true
-      } else {
-        this.getSearchRec()
-      }
-    },
-    getSearchRec() {
-      if (this.searchRecArr.length !== 0) {
-        this.isSearchResShow = false
-        this.isSearchRecShow = true
-        return
-      }
-      this.setLoadingExcludeSearchForm()
-      this.startLoading()
-      fetchHotSearch()
-        .then(({ data }) => {
-          this.replaceProperty({
-            paths: 'search.searchRecArr',
-            data: data.data.info
-          })
-          this.stopLoading()
-          this.isSearchResShow = false
-          this.isSearchRecShow = true
-        })
-        .catch(err => {
-          alert(err)
-        })
-    },
-    getSearchRes() {
-      if (this.keyword === '') {
-        return
-      }
-      this.$router.replace({ query: { keyword: this.keyword } })
-      this.setLoadingExcludeSearchForm()
-      this.startLoading()
-      fetchSearchResult({ params: { keyword: this.keyword } }).then(res => {
-        let data = res.data.data
-        this.replaceProperty({
-          paths: 'search.searchRes',
-          data
-        })
-        this.isSearchRecShow = false
-        this.isSearchResShow = true
-        this.stopLoading()
+function getSearchRec() {
+  if (searchRecArr.value.length !== 0) {
+    isSearchResShow.value = false
+    isSearchRecShow.value = true
+    return
+  }
+  setLoadingExcludeSearchForm()
+  startLoading()
+  fetchHotSearch()
+    .then(({ data }) => {
+      store.commit('replaceProperty', {
+        paths: 'search.searchRecArr',
+        data: data.data.info
       })
-    },
-    initQqBugDetect() {
-      let search__cont = document.getElementsByClassName('search__cont')[0]
-      window.search__cont = search__cont
-      //! bug with qq browser
-      let listener = function() {
-        if (search__cont.scrollTop) {
-          // console.log(event.type, search__cont.scrollTop)
-        }
-      }
-      window.addEventListener('touchstart', listener)
-      window.addEventListener('touchmove', listener)
-    },
-    scrollTopSearchCont() {
-      if (this.$refs.searchCont) {
-        //todo smooth scroll
-        this.$refs.searchCont.scrollTop = 0
-      }
+      stopLoading()
+      isSearchResShow.value = false
+      isSearchRecShow.value = true
+    })
+    .catch(err => {
+      alert(err)
+    })
+}
+
+function getSearchRes() {
+  if (keyword.value === '') {
+    return
+  }
+  router.replace({ query: { keyword: keyword.value } })
+  setLoadingExcludeSearchForm()
+  startLoading()
+  fetchSearchResult({ params: { keyword: keyword.value } }).then(res => {
+    const data = res.data.data
+    store.commit('replaceProperty', {
+      paths: 'search.searchRes',
+      data
+    })
+    isSearchRecShow.value = false
+    isSearchResShow.value = true
+    stopLoading()
+  })
+}
+
+function initQqBugDetect() {
+  const search__cont = document.getElementsByClassName('search__cont')[0]
+  window.search__cont = search__cont
+  //! bug with qq browser
+  const listener = function() {
+    if (search__cont.scrollTop) {
+      // console.log(event.type, search__cont.scrollTop)
     }
-  },
-});
+  }
+  window.addEventListener('touchstart', listener)
+  window.addEventListener('touchmove', listener)
+}
+
+function scrollTopSearchCont() {
+  if (searchCont.value) {
+    //todo smooth scroll
+    searchCont.value.scrollTop = 0
+  }
+}
+
+
 </script>
 
 <style scoped lang="less">

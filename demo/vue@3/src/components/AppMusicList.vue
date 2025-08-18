@@ -14,30 +14,24 @@
   </ul>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { useStore } from 'vuex';
 
-export default defineComponent({
-  name: 'AppMusicList',
-
-  props: {
-    musicList: {
-      type: Array,
-      default() {
-        return []
-      }
-    }
-  },
-
-  methods: {
-    wantPlay(music) {
-      this.$store.commit('player/wantPlay', {
-        music,
-        musicList: this.$props.musicList
-      })
-    }
-  },
+const props = defineProps({
+  musicList: {
+    type: Array,
+    default: () => []
+  }
 });
+
+const store = useStore();
+
+const wantPlay = (music) => {
+  store.commit('player/wantPlay', {
+    music,
+    musicList: props.musicList
+  });
+};
 </script>
 
 <style lang="less" scoped>

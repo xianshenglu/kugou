@@ -6,18 +6,14 @@
   </button>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { useStore } from 'vuex';
 
-export default defineComponent({
-  name: 'nextButton',
+const store = useStore();
 
-  methods: {
-    next() {
-      this.$store.commit('player/next')
-    }
-  },
-});
+const next = () => {
+  store.commit('player/next');
+};
 </script>
 
 <style scoped>
