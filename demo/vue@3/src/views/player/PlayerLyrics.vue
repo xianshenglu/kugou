@@ -11,70 +11,58 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, nextTick } from 'vue';
+<script setup>
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue';
+import { useStore } from 'vuex';
+import { getVBindObj } from '@/utils';
 
-import { mapState, mapGetters } from 'vuex'
-import { getVBindObj } from '@/utils'
-export default defineComponent({
-  name: 'PlayerLyrics',
+const store = useStore();
 
-  data() {
-    return {
-      getVBindObj,
-      prevLyricIndex: 0,
-      isTouching: false,
-      lyricElements: []
-    }
-  },
+const prevLyricIndex = ref(0);
+const isTouching = ref(false);
+const lyricElements = ref({});
 
-  computed: {
-    ...mapState('player', ['audioEl']),
-    ...mapGetters('player', ['lyricItems']),
-    lyricMillisecond() {
-      return this.lyricItems.map(o => o.millisecond)
-    }
-  },
-  watch: {
-    lyricItems: {
-      handler: function(newLyricItems) {
-        if (newLyricItems.length === 0) {
-          return
-        }
-        this.lyricElements = newLyricItems.map(() => null)
-      },
-      immediate: true,
-      deep: true,
-    }
-  },
-  mounted() {
-    nextTick(() => {
-      this.audioEl.addEventListener('timeupdate', this.timeUpdateCb)
-    })
-  },
+const audioEl = computed(() => store.state.player.audioEl);
+const lyricItems = computed(() => store.getters['player/lyricItems']);
+const lyricMillisecond = computed(() => {
+  return lyricItems.value.map(o => o.millisecond);
+});
 
-  unmounted() {
-    this.audioEl.removeEventListener('timeupdate', this.timeUpdateCb)
-  },
+watch(lyricItems, (newLyricItems) => {
+  if (newLyricItems.length === 0) {
+    return;
+  }
+  lyricElements.value = {};
+}, {
+  immediate: true,
+  deep: true
+});
 
-  methods: {
-    timeUpdateCb(event) {
-      if (this.isTouching) {
-        return
-      }
-      let curMillisecond = Math.floor(event.target.currentTime * 1000)
-      let nextLyricIndex = this.lyricMillisecond.findIndex(
-        time => time > curMillisecond * 1.005
-      )
-      let prevLyricIndex = nextLyricIndex > 1 ? nextLyricIndex - 2 : 0
-      let isRefAvailable =
-        this.$refs && this.$refs[this.lyricMillisecond[prevLyricIndex]]
-      if (isRefAvailable) {
-        this.$refs[this.lyricMillisecond[prevLyricIndex]][0].scrollIntoView()
-      }
-      this.prevLyricIndex = prevLyricIndex
-    }
-  },
+const timeUpdateCb = (event) => {
+  if (isTouching.value) {
+    return;
+  }
+  let curMillisecond = Math.floor(event.target.currentTime * 1000);
+  let nextLyricIndex = lyricMillisecond.value.findIndex(
+    time => time > curMillisecond * 1.005
+  );
+  let prevLyricIndex = nextLyricIndex > 1 ? nextLyricIndex - 2 : 0;
+  
+  // Check if ref is available
+  if (lyricElements.value[lyricMillisecond.value[prevLyricIndex]]) {
+    lyricElements.value[lyricMillisecond.value[prevLyricIndex]].scrollIntoView();
+  }
+  prevLyricIndex.value = prevLyricIndex;
+};
+
+onMounted(() => {
+  nextTick(() => {
+    audioEl.value.addEventListener('timeupdate', timeUpdateCb);
+  });
+});
+
+onUnmounted(() => {
+  audioEl.value.removeEventListener('timeupdate', timeUpdateCb);
 });
 </script>
 

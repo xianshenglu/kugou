@@ -1,23 +1,18 @@
 <template>
-  <h4 class="module_title main_box_shadow" @click="$emit('click',arguments[0])">{{title}}</h4>
+  <h4 class="module_title main_box_shadow" @click="emit('click',arguments[0])">{{title}}</h4>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { defineEmits } from 'vue';
 
-export default defineComponent({
-  emits: ['click'],
-  name: 'PubModuleTitle',
-
-  props: {
-    title: {
-      type: String,
-      default() {
-        return ''
-      }
-    }
-  },
+const props = defineProps({
+  title: {
+    type: String,
+    default: ''
+  }
 });
+
+const emit = defineEmits(['click']);
 </script>
 
 <style scoped lang="less">

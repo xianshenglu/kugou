@@ -18,53 +18,41 @@
   </section>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 import PubList from '@/modules/PubList'
 import { fetchSongList } from '../../requests/songList'
-import { mapState, mapMutations } from 'vuex'
-import loading from '../../mixins/loading'
+import { useLoading } from '@/composables/useLoading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
-export default defineComponent({
-  name: 'SongList',
-  mixins: [loading],
 
-  components: {
-    PubList
-  },
+const store = useStore()
+const { startLoading, stopLoading, setLoadingExcludeNav } = useLoading()
 
-  computed: {
-    ...mapState('song', ['songList'])
-  },
+const songList = computed(() => store.state.song.songList)
 
-  created() {
-    if (this.songList.length === 0) {
-      this.setLoadingExcludeNav()
-      this.startLoading()
-      this.getSongList()
-    }
-  },
+const getSongList = () => {
+  fetchSongList().then(({ data }) => {
+    data.plist.list.info.forEach(obj => {
+      obj.imgUrl = replaceSizeInUrl(obj.imgurl)
+      obj.path = '/song/list/' + obj.specialid
+      obj.title = obj.specialname
+      obj.popularity = obj.playcount
+    })
+    store.commit('replaceProperty', {
+      paths: 'song.songList',
+      data: data.plist.list.info
+    })
+    stopLoading()
+  })
+}
 
-  methods: {
-    ...mapMutations(['replaceProperty']),
-    getSongList() {
-      fetchSongList().then(({ data }) => {
-        data.plist.list.info.forEach(obj => {
-          obj.imgUrl = replaceSizeInUrl(obj.imgurl)
-          obj.path = '/song/list/' + obj.specialid
-          obj.title = obj.specialname
-          obj.popularity = obj.playcount
-        })
-        this.replaceProperty({
-          paths: 'song.songList',
-          data: data.plist.list.info
-        })
-        this.stopLoading()
-      })
-    }
-  }
-})
+if (songList.value.length === 0) {
+  setLoadingExcludeNav()
+  startLoading()
+  getSongList()
+}
 </script>
 
 <style lang="less" scoped>

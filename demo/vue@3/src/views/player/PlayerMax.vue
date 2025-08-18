@@ -18,47 +18,9 @@
     </div>
   </section>
 </template>
-
 <script>
-import { defineComponent } from 'vue';
-
-import PlayerLyrics from './PlayerLyrics'
-import PlayerProgress from './PlayerProgress'
-import PlayButton from './PlayButton'
-import NextButton from './NextButton'
-import PrevButton from './PrevButton'
-
-import { mapState, mapGetters, mapMutations } from 'vuex'
-import { fetchSongLyric } from '@/requests/player'
 import store from '../../store/index'
-export default defineComponent({
-  name: 'PlayerMax',
-
-  components: {
-    PlayerLyrics,
-    PlayerProgress,
-    PlayButton,
-    NextButton,
-    PrevButton
-  },
-
-  computed: {
-    ...mapState('images', ['logo__theme']),
-    ...mapState('player', ['audioEl', 'isPlaying', 'song', 'music']),
-    ...mapGetters('player', ['songName', 'singerName', 'singerImg']),
-    playerBgImg() {
-      return `background-image:url(${
-        this.singerImg
-      }),linear-gradient(to right, rgb(48, 67, 82), rgb(215, 210, 204));`
-    }
-  },
-
-  watch: {
-    'music.hash': function(newHash) {
-      this.$router.replace({ query: { musicHash: newHash } })
-    }
-  },
-
+export default {
   beforeRouteEnter(to, from, next) {
     //play music if musicHash exists which means this page was loaded directly
     let musicHash = to.query.musicHash
@@ -80,29 +42,53 @@ export default defineComponent({
       next()
     })
   },
+}
+</script>
+<script setup>
+import { computed, watch, onMounted, onUnmounted } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
-  mounted() {
-    this.replaceProperty({
-      paths: 'player.isPlayerMedShow',
-      data: false
-    })
-  },
+import PlayerLyrics from './PlayerLyrics'
+import PlayerProgress from './PlayerProgress'
+import PlayButton from './PlayButton'
+import NextButton from './NextButton'
+import PrevButton from './PrevButton'
+import { fetchSongLyric } from '@/requests/player'
 
-  unmounted() {
-    this.replaceProperty({
-      paths: 'player.isPlayerMedShow',
-      data: true
-    })
-    this.replaceProperty({
-      paths: 'player.isPlayerMedSmall',
-      data: false
-    })
-  },
+const store = useStore()
+const router = useRouter()
 
-  methods: {
-    ...mapMutations(['replaceProperty'])
-  },
-});
+const music = computed(() => store.state.player.music)
+const isPlaying = computed(() => store.state.player.isPlaying)
+const singerImg = computed(() => store.getters['player/singerImg'])
+const songName = computed(() => store.getters['player/songName'])
+
+const playerBgImg = computed(() => {
+  return `background-image:url(${singerImg.value}),linear-gradient(to right, rgb(48, 67, 82), rgb(215, 210, 204));`
+})
+
+watch(()=>music?.hash, (newHash) => {
+    router.replace({ query: { musicHash: newHash } })
+})
+
+onMounted(() => {
+  store.commit('replaceProperty', {
+    paths: 'player.isPlayerMedShow',
+    data: false
+  })
+})
+
+onUnmounted(() => {
+  store.commit('replaceProperty', {
+    paths: 'player.isPlayerMedShow',
+    data: true
+  })
+  store.commit('replaceProperty', {
+    paths: 'player.isPlayerMedSmall',
+    data: false
+  })
+})
 </script>
 
 <style scoped lang="less">

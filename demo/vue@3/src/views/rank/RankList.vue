@@ -10,52 +10,40 @@
   </section>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+import { computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
 
 import PubList from '@/modules/PubList'
 import { fetchRankList } from '@/requests/rankList'
-import { mapState, mapMutations } from 'vuex'
-import loading from '../../mixins/loading'
+import { useLoading } from '@/composables/useLoading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
-export default defineComponent({
-  name: 'RankList',
-  mixins: [loading],
 
-  components: {
-    PubList
-  },
+const store = useStore()
+const { startLoading, stopLoading, setLoadingExcludeNav } = useLoading()
 
-  computed: {
-    ...mapState('rank', ['rankList'])
-  },
+const rankList = computed(() => store.state.rank.rankList)
 
-  created() {
-    if (this.rankList.length === 0) {
-      this.setLoadingExcludeNav()
-      this.startLoading()
-      this.getRank()
-    }
-  },
+const getRank = () => {
+  fetchRankList().then(({ data }) => {
+    data.rank.list.forEach(obj => {
+      obj.imgUrl = replaceSizeInUrl(obj.imgurl)
+      obj.path = '/rank/info/' + obj.rankid
+      obj.title = obj.rankname
+    })
+    store.commit('replaceProperty', {
+      paths: 'rank.rankList',
+      data: data.rank.list
+    })
+    stopLoading()
+  })
+}
 
-  methods: {
-    ...mapMutations(['replaceProperty']),
-    getRank() {
-      fetchRankList().then(({ data }) => {
-        data.rank.list.forEach(obj => {
-          obj.imgUrl = replaceSizeInUrl(obj.imgurl)
-          obj.path = '/rank/info/' + obj.rankid
-          obj.title = obj.rankname
-        })
-        this.replaceProperty({
-          paths: 'rank.rankList',
-          data: data.rank.list
-        })
-        this.stopLoading()
-      })
-    }
-  }
-})
+if (rankList.value.length === 0) {
+  setLoadingExcludeNav()
+  startLoading()
+  getRank()
+}
 </script>
 
 <style lang="less" scoped>

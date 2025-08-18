@@ -12,23 +12,18 @@
   </button>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 
-import { mapState } from 'vuex'
-export default defineComponent({
-  name: 'PlayButton',
+const store = useStore();
 
-  computed: {
-    ...mapState('player', ['isPlaying', 'isLoading'])
-  },
+const isPlaying = computed(() => store.state.player.isPlaying);
+const isLoading = computed(() => store.state.player.isLoading);
 
-  methods: {
-    togglePlay() {
-      this.$store.commit('player/togglePlay', undefined, { root: true })
-    }
-  },
-});
+const togglePlay = () => {
+  store.commit('player/togglePlay', undefined, { root: true });
+};
 </script>
 
 <style scoped lang="less">

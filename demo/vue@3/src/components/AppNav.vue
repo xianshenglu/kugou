@@ -13,44 +13,37 @@
   </section>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { ref, computed } from 'vue';
+import { useRoute } from 'vue-router';
 
-export default defineComponent({
-  name: 'AppNav',
+const route = useRoute();
 
-  data() {
-    return {
-      navs: [
-        {
-          text: '新歌',
-          name: 'new',
-          path: '/'
-        },
-        {
-          text: '排行',
-          name: 'rank',
-          path: '/rank/list'
-        },
-        {
-          text: '歌单',
-          name: 'song',
-          path: '/song/list'
-        },
-        {
-          text: '歌手',
-          name: 'singer',
-          path: '/singer/category'
-        }
-      ]
-    }
+const navs = ref([
+  {
+    text: '新歌',
+    name: 'new',
+    path: '/'
   },
-
-  computed: {
-    activeIndex() {
-      return this.navs.findIndex(nav => nav.path === this.$route.path)
-    }
+  {
+    text: '排行',
+    name: 'rank',
+    path: '/rank/list'
   },
+  {
+    text: '歌单',
+    name: 'song',
+    path: '/song/list'
+  },
+  {
+    text: '歌手',
+    name: 'singer',
+    path: '/singer/category'
+  }
+]);
+
+const activeIndex = computed(() => {
+  return navs.value.findIndex(nav => nav.path === route.path);
 });
 </script>
 

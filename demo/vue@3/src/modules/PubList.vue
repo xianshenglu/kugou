@@ -23,55 +23,40 @@
   </ul>
 </template>
 
-<script>
-import { defineComponent, nextTick } from 'vue'
+<script setup>
+import { ref, watch, nextTick, computed } from 'vue';
+import { useStore } from 'vuex';
+import { lazyLoad } from '@/utils';
 
-import { lazyLoad } from '@/utils'
-import { mapState } from 'vuex'
-export default defineComponent({
-  name: 'PubList',
-
-  props: {
-    pubList: {
-      type: Array,
-      default() {
-        return []
-      }
-    }
-  },
-
-  data() {
-    return {
-      lazyImageElements: []
-    }
-  },
-
-  watch: {
-    pubList: {
-      handler: function(newArray) {
-        if (newArray.length === 0) {
-          return
-        }
-        this.lazyImageElements = newArray.map(() => null)
-        nextTick(() => {
-          lazyLoad(this.lazyImageElements, { root: this.$refs.lazyLoadRoot })
-        })
-      },
-
-      immediate: true,
-      deep: true
-    }
-  },
-
-  computed: {
-    ...mapState('images', ['logo__grey'])
-  },
-  methods: {
-    saveImageRef(index, el) {
-      this.lazyImageElements[index] = el
-    }
+const props = defineProps({
+  pubList: {
+    type: Array,
+    default: () => []
   }
-})
+});
+
+const store = useStore();
+const lazyImageElements = ref([]);
+const lazyLoadRoot = ref(null);
+
+const logo__grey = computed(() => store.state.images.logo__grey);
+
+watch(() => props.pubList, (newArray) => {
+  if (newArray.length === 0) {
+    return;
+  }
+  lazyImageElements.value = newArray.map(() => null);
+  nextTick(() => {
+    lazyLoad(lazyImageElements.value, { root: lazyLoadRoot.value });
+  });
+}, {
+  immediate: true,
+  deep: true
+});
+
+const saveImageRef = (index, el) => {
+  lazyImageElements.value[index] = el;
+};
 </script>
 
 <style lang="less" scoped>

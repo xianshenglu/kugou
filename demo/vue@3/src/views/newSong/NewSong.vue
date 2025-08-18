@@ -5,53 +5,39 @@
   </section>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { ref, computed, onMounted } from 'vue';
+import { useStore } from 'vuex';
+import AppMusicList from '@/components/AppMusicList';
+import Slider from './Slider.vue';
+import { fetchNewSong } from '@/requests/newSong';
+import { useLoading } from '@/composables/useLoading';
 
-import AppMusicList from '@/components/AppMusicList'
-import Slider from './Slider.vue'
-import { fetchNewSong } from '@/requests/newSong'
-import { mapState, mapMutations } from 'vuex'
-import loading from '../../mixins/loading'
-export default defineComponent({
-  name: 'NewSong',
-  mixins: [loading],
+const store = useStore();
 
-  computed: {
-    ...mapState('newSong', ['newSongs', 'sliderData'])
-  },
+const newSongs = computed(() => store.state.newSong.newSongs);
+const sliderData = computed(() => store.state.newSong.sliderData);
 
-  created() {
-    if (this.newSongs.length === 0) {
-      this.setLoadingExcludeNav()
-      this.startLoading()
-      this.getNewSong()
-    }
-  },
-
-  methods: {
-    ...mapMutations(['replaceProperty']),
-    getNewSong() {
-      fetchNewSong().then(({ data }) => {
-        this.replaceProperty({
-          paths: 'newSong.newSongs',
-          data: data.data
-        })
-        let banners = data.banner
-        this.replaceProperty({
-          paths: 'newSong.sliderData',
-          data: banners
-        })
-        this.stopLoading()
-      })
-    }
-  },
-
-  components: {
-    AppMusicList,
-    Slider
-  },
-});
+const { startLoading, stopLoading, setLoadingExcludeNav } = useLoading();
+const getNewSong = () => {
+  fetchNewSong().then(({ data }) => {
+    store.commit('replaceProperty', {
+      paths: 'newSong.newSongs',
+      data: data.data
+    });
+    let banners = data.banner;
+    store.commit('replaceProperty', {
+      paths: 'newSong.sliderData',
+      data: banners
+    });
+    stopLoading()
+  });
+};
+if (newSongs.value.length === 0) {
+  setLoadingExcludeNav();
+  startLoading();
+  getNewSong();
+}
 </script>
 
 <style lang="less" scoped>

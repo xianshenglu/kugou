@@ -23,56 +23,47 @@
   </section>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
-
+<script setup>
+import { computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
 import { fetchSingerCategory } from '../../requests/singerCategory'
-import { mapState, mapMutations } from 'vuex'
-import loading from '../../mixins/loading'
-export default defineComponent({
-  name: 'SingerCategory',
-  mixins: [loading],
+import { useLoading } from '@/composables/useLoading'
 
-  computed: {
-    ...mapState('singer', ['singerCategories'])
-  },
+const store = useStore()
+const { startLoading, stopLoading, setLoadingExcludeNav } = useLoading()
 
-  created() {
-    if (this.singerCategories.length === 0) {
-      this.setLoadingExcludeNav()
-      this.startLoading()
-      this.getSingerCategories()
-    }
-  },
+const singerCategories = computed(() => store.state.singer.singerCategories)
 
-  methods: {
-    ...mapMutations(['replaceProperty']),
-    getSingerCategories() {
-      fetchSingerCategory().then(({ data }) => {
-        let singerCategories = data.list.reduce((re, obj) => {
-          obj.path = '/singer/list/' + obj.classid
-          let findCategories = re.find(
-            o => o.category === obj.classname.substring(0, 2)
-          )
-          if (findCategories) {
-            findCategories.data.push(obj)
-          } else {
-            re.push({
-              category: obj.classname.substring(0, 2),
-              data: [obj]
-            })
-          }
-          return re
-        }, [])
-        this.replaceProperty({
-          paths: 'singer.singerCategories',
-          data: singerCategories
+if (singerCategories.value.length === 0) {
+  setLoadingExcludeNav()
+  startLoading()
+  getSingerCategories()
+}
+function getSingerCategories() {
+  fetchSingerCategory().then(({ data }) => {
+    const singerCategoriesData = data.list.reduce((re, obj) => {
+      obj.path = '/singer/list/' + obj.classid
+      const findCategories = re.find(
+        o => o.category === obj.classname.substring(0, 2)
+      )
+      if (findCategories) {
+        findCategories.data.push(obj)
+      } else {
+        re.push({
+          category: obj.classname.substring(0, 2),
+          data: [obj]
         })
-        this.stopLoading()
-      })
-    }
-  },
-});
+      }
+      return re
+    }, [])
+    store.commit('replaceProperty', {
+      paths: 'singer.singerCategories',
+      data: singerCategoriesData
+    })
+    stopLoading()
+  })
+}
+
 </script>
 
 <style lang="less" scoped>

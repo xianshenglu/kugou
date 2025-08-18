@@ -6,18 +6,14 @@
   </button>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { useStore } from 'vuex'
 
-export default defineComponent({
-  name: 'PrevButton',
+const store = useStore()
 
-  methods: {
-    prev() {
-      this.$store.commit('player/prev')
-    }
-  },
-});
+const prev = () => {
+  store.commit('player/prev')
+}
 </script>
 
 <style scoped>

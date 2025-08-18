@@ -20,36 +20,23 @@
   </header>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
-
-import { mapState, mapMutations } from 'vuex'
+<script setup>
 import bus from '@/eventBus'
-export default defineComponent({
-  name: 'AppHeader',
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 
-  data() {
-    return {
-      bus: bus
-    }
-  },
+const store = useStore();
+const logo__text = computed(() => store.state.images.logo__text);
+const curPlayerId = computed(() => store.state.player.curPlayerId);
 
-  computed: {
-    ...mapState('images', ['logo__text']),
-    ...mapState('player', ['curPlayerId'])
-  },
+function goBack() {
+  if (curPlayerId.value === 1) {
+    store.commit('player/togglePlayers', 1);
+    return;
+  }
+  history.go(-1);
+}
 
-  methods: {
-    ...mapMutations('player', ['togglePlayers']),
-    goBack() {
-      if (this.curPlayerId === 1) {
-        this.togglePlayers(1)
-        return
-      }
-      history.go(-1)
-    }
-  },
-});
 </script>
 
 <style lang="less" scoped>
