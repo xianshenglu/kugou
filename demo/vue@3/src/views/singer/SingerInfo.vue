@@ -9,25 +9,39 @@
   </section>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 
-import PubModuleHead from '@/components/PubModuleHead'
-import PubModuleDes from '@/components/PubModuleDes'
-import AppMusicList from '@/components/AppMusicList'
+import PubModuleHead from '@/components/PubModuleHead.vue'
+import PubModuleDes from '@/components/PubModuleDes.vue'
+import AppMusicList from '@/components/AppMusicList.vue'
 import { fetchSingerInfo } from '../../requests/singerInfo'
 import { useLoading } from '@/composables/useLoading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
+
+// 定义歌手信息接口
+interface SingerInfoData {
+  info: {
+    id: string;
+    name: string;
+    count: number;
+    albumcount: number;
+    imgUrl: string;
+    intro: string;
+    [key: string]: any;
+  };
+  data: any[];
+}
 
 const store = useStore()
 const route = useRoute()
 const { startLoading, stopLoading, setLoadingExcludeHeader } = useLoading()
 
-const singerInfo = computed(() => store.state.singer.singerInfo)
+const singerInfo = computed<SingerInfoData>(() => store.state.singer.singerInfo)
 
-const singerId = route.path.split('/').pop()
+const singerId = route.path.split('/').pop() || ''
 setLoadingExcludeHeader()
 startLoading()
 getSingerInfo(singerId)
@@ -40,9 +54,9 @@ const getMusicList = computed(() => {
   return singerInfo.value.data
 })
 
-function getSingerInfo (singerId) {
+function getSingerInfo (singerId: string): void {
   fetchSingerInfo({ singerId }).then(({ data }) => {
-    const singerInfoData = {
+    const singerInfoData: SingerInfoData = {
       info: {
         id: data.info.singerid,
         name: data.info.singername,
@@ -53,7 +67,7 @@ function getSingerInfo (singerId) {
       },
       data: data.songs.list
     }
-    data.songs.list.forEach(obj => {
+    data.songs.list.forEach((obj: any) => {
       obj.name = obj.filename
       // obj.path='/singer/info/'+obj.id
     })

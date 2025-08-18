@@ -23,7 +23,7 @@
   </ul>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref, watch, nextTick, computed } from 'vue';
 import { useStore } from 'vuex';
 import { lazyLoad } from '@/utils';

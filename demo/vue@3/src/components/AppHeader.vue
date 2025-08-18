@@ -20,7 +20,7 @@
   </header>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import bus from '@/eventBus'
 import { computed } from 'vue';
 import { useStore } from 'vuex';

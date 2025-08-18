@@ -5,8 +5,8 @@
   </main>
 </template>
 
-<script setup>
-import AppNav from '@/components/AppNav'
+<script lang="ts" setup>
+import AppNav from '@/components/AppNav.vue'
 </script>
 
 <style lang="less" scoped>

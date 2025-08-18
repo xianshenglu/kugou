@@ -2,17 +2,22 @@
   <h4 class="module_title main_box_shadow" @click="emit('click',arguments[0])">{{title}}</h4>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { defineEmits } from 'vue';
 
-const props = defineProps({
-  title: {
-    type: String,
-    default: ''
-  }
+// 定义props类型
+interface Props {
+  title: string;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  title: ''
 });
 
-const emit = defineEmits(['click']);
+// 定义事件类型
+const emit = defineEmits<{
+  (e: 'click', event: Event): void;
+}>();
 </script>
 
 <style scoped lang="less">

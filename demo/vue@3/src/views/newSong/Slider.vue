@@ -22,24 +22,36 @@
   </section>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref, watch, nextTick, onUnmounted } from 'vue';
-
 import Glide, {
   Controls,
   Autoplay,
   Swipe
+// @ts-ignore
 } from '@glidejs/glide/dist/glide.modular.esm';
 
-const props = defineProps({
-  data: {
-    type: Array,
-    default: () => []
-  }
+// 定义滑块数据项接口
+interface SliderItem {
+  extra: {
+    tourl: string;
+  };
+  imgurl: string;
+  title: string;
+  [key: string]: any;
+}
+
+// 定义props类型
+interface Props {
+  data: SliderItem[];
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  data: () => [] as SliderItem[]
 });
 
-const glide = ref(null);
-const glideElement = ref(null);
+const glide = ref<HTMLElement | null>(null);
+const glideElement = ref<any>(null);
 
 const initGlideVm = () => {
   glideElement.value = new Glide(glide.value, {
@@ -53,7 +65,7 @@ const initGlideVm = () => {
   });
 };
 
-watch(() => props.data, (newArray) => {
+watch(() => props.data, (newArray: SliderItem[]) => {
   if (newArray.length === 0) {
     return;
   }

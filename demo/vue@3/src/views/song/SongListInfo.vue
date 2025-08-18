@@ -9,23 +9,44 @@
   </section>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 
-import PubModuleHead from '@/components/PubModuleHead'
-import PubModuleDes from '@/components/PubModuleDes'
-import AppMusicList from '@/components/AppMusicList'
+import PubModuleHead from '@/components/PubModuleHead.vue'
+import PubModuleDes from '@/components/PubModuleDes.vue'
+import AppMusicList from '@/components/AppMusicList.vue'
 import { fetchSongListInfo } from '../../requests/songListInfo'
 import { useLoading } from '@/composables/useLoading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
+
+// 定义歌单信息接口
+interface SongListInfoData {
+  info: {
+    list: {
+      imgurl: string;
+      specialname: string;
+      intro: string;
+      [key: string]: any;
+    };
+    [key: string]: any;
+  };
+  songs: {
+    list: {
+      info: any[];
+      [key: string]: any;
+    };
+    [key: string]: any;
+  };
+  [key: string]: any;
+}
 
 const store = useStore()
 const route = useRoute()
 const { startLoading, stopLoading, setLoadingExcludeHeader } = useLoading()
 
-const songListInfo = computed(() => store.state.song.songListInfo)
+const songListInfo = computed<SongListInfoData>(() => store.state.song.songListInfo)
 
 const getModuleHeadInfo = computed(() => {
   const data = songListInfo.value.info.list
@@ -40,9 +61,9 @@ const getMusicList = computed(() => {
   return songListInfo.value.songs.list.info
 })
 
-const getSongListInfo = (songListId) => {
+const getSongListInfo = (songListId: string) => {
   fetchSongListInfo({ songListId }).then(({ data }) => {
-    const songListInfoData = {
+    const songListInfoData: SongListInfoData = {
       info: data.info,
       songs: data.list
     }
