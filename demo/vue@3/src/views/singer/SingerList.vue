@@ -26,7 +26,7 @@ import { ref, computed, watch, nextTick, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 
-import PubModuleTitle from '@/components/PubModuleTitle'
+import PubModuleTitle from '@/components/PubModuleTitle.vue'
 import { fetchSingerList } from '../../requests/singerList'
 import { useLoading } from '@/composables/useLoading'
 import { lazyLoad } from '@/utils'

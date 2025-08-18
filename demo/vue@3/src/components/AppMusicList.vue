@@ -14,19 +14,27 @@
   </ul>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useStore } from 'vuex';
 
-const props = defineProps({
-  musicList: {
-    type: Array,
-    default: () => []
-  }
+// 定义音乐项接口
+interface MusicItem {
+  filename: string;
+  [key: string]: any;
+}
+
+// 定义props类型
+interface Props {
+  musicList: MusicItem[];
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  musicList: () => [] as MusicItem[]
 });
 
 const store = useStore();
 
-const wantPlay = (music) => {
+const wantPlay = (music: MusicItem) => {
   store.commit('player/wantPlay', {
     music,
     musicList: props.musicList

@@ -8,12 +8,21 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  moduleHeadInfo: {
-    type: Object,
-    default: () => ({})
-  }
+<script lang="ts" setup>
+// 定义模块头部信息接口
+interface ModuleHeadInfo {
+  name: string;
+  imgUrl: string;
+  [key: string]: any;
+}
+
+// 定义props类型
+interface Props {
+  moduleHeadInfo: ModuleHeadInfo;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  moduleHeadInfo: () => ({}) as ModuleHeadInfo
 });
 </script>
 

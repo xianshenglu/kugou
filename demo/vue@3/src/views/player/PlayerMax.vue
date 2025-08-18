@@ -18,7 +18,7 @@
     </div>
   </section>
 </template>
-<script>
+<script lang="ts">
 import store from '../../store/index'
 export default {
   beforeRouteEnter(to, from, next) {
@@ -44,16 +44,16 @@ export default {
   },
 }
 </script>
-<script setup>
+<script lang="ts" setup>
 import { computed, watch, onMounted, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
-import PlayerLyrics from './PlayerLyrics'
-import PlayerProgress from './PlayerProgress'
-import PlayButton from './PlayButton'
-import NextButton from './NextButton'
-import PrevButton from './PrevButton'
+import PlayerLyrics from './PlayerLyrics.vue'
+import PlayerProgress from './PlayerProgress.vue'
+import PlayButton from './PlayButton.vue'
+import NextButton from './NextButton.vue'
+import PrevButton from './PrevButton.vue'
 import { fetchSongLyric } from '@/requests/player'
 
 const store = useStore()

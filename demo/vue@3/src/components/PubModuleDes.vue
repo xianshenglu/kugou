@@ -16,14 +16,16 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from 'vue';
 
-const props = defineProps({
-  description: {
-    type: String,
-    default: ''
-  }
+// 定义props类型
+interface Props {
+  description: string;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  description: ''
 });
 
 const showMore = ref(false);

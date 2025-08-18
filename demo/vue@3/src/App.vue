@@ -17,15 +17,15 @@
   />
 </template>
 
-<script setup>
-import { ref, onMounted, computed } from 'vue'
+<script lang="ts" setup>
+import { ref, onMounted, computed, Ref } from 'vue'
 import { useStore } from 'vuex'
 
-import AppHeader from '@/components/AppHeader'
-import AppLoading from './components/AppLoading'
-import PlayerMed from './views/player/PlayerMed'
+import AppHeader from '@/components/AppHeader.vue'
+import AppLoading from './components/AppLoading.vue'
+import PlayerMed from './views/player/PlayerMed.vue'
 
-const audioEl = ref(null)
+const audioEl: Ref<HTMLAudioElement | null> = ref(null)
 const store = useStore()
 
 const isPlayerMedShow = computed(() => store.state.player.isPlayerMedShow)
@@ -33,8 +33,8 @@ const isPlayerMedSmall = computed(() => store.state.player.isPlayerMedSmall)
 const song = computed(() => store.state.player.song)
 const vh = computed(() => store.state.device.vh)
 
-const findAudioEl = (el) => store.commit('player/findAudioEl', el)
-const togglePlay = (status) => store.commit('player/togglePlay', status)
+const findAudioEl = (el: HTMLAudioElement | null) => store.commit('player/findAudioEl', el)
+const togglePlay = (status: boolean) => store.commit('player/togglePlay', status)
 
 onMounted(() => {
   document.documentElement.style.setProperty('--vh', vh.value / 100 + 'px')

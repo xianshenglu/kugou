@@ -22,13 +22,13 @@
   </section>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
-import PlayButton from './PlayButton'
-import NextButton from './NextButton'
-import PrevButton from './PrevButton'
+import PlayButton from './PlayButton.vue'
+import NextButton from './NextButton.vue'
+import PrevButton from './PrevButton.vue'
 
 const store = useStore()
 

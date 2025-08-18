@@ -6,7 +6,7 @@
   </button>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useStore } from 'vuex';
 
 const store = useStore();

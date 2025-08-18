@@ -5,10 +5,10 @@
   </section>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
-import AppMusicList from '@/components/AppMusicList';
+import AppMusicList from '@/components/AppMusicList.vue';
 import Slider from './Slider.vue';
 import { fetchNewSong } from '@/requests/newSong';
 import { useLoading } from '@/composables/useLoading';

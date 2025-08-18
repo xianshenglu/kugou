@@ -35,13 +35,13 @@
   </section>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute, useRouter } from 'vue-router'
 
-import PubModuleTitle from '@/components/PubModuleTitle'
-import AppMusicList from '@/components/AppMusicList'
+import PubModuleTitle from '@/components/PubModuleTitle.vue'
+import AppMusicList from '@/components/AppMusicList.vue'
 import { fetchHotSearch, fetchSearchResult } from '../../requests/search'
 import bus from '@/eventBus'
 import { useLoading } from '@/composables/useLoading'
@@ -51,7 +51,7 @@ const route = useRoute()
 const router = useRouter()
 const { startLoading, stopLoading, setLoadingExcludeSearchForm } = useLoading()
 
-const searchCont = ref(null)
+const searchCont = ref<HTMLElement | null>(null)
 
 const title = ref('搜索')
 const searchType = ref('最近热门')
@@ -63,23 +63,23 @@ const keyword = computed({
   get() {
     return store.state.search.keyword
   },
-  set(value) {
+  set(value: string) {
     store.commit('replaceProperty', { paths: 'search.keyword', data: value })
   }
 })
-const isSearchRecShow = computed({
+const isSearchRecShow = computed<boolean>({
   get() {
     return store.state.search.isSearchRecShow
   },
-  set(data) {
+  set(data: boolean) {
     store.commit('replaceProperty', { paths: 'search.isSearchRecShow', data })
   }
 })
-const isSearchResShow = computed({
+const isSearchResShow = computed<boolean>({
   get() {
     return store.state.search.isSearchResShow
   },
-  set(data) {
+  set(data: boolean) {
     store.commit('replaceProperty', { paths: 'search.isSearchResShow', data })
   }
 })
@@ -129,7 +129,7 @@ function getSearchRec() {
       isSearchResShow.value = false
       isSearchRecShow.value = true
     })
-    .catch(err => {
+    .catch((err: any) => {
       alert(err)
     })
 }
@@ -153,20 +153,23 @@ function getSearchRes() {
   })
 }
 
-function initQqBugDetect() {
-  const search__cont = document.getElementsByClassName('search__cont')[0]
-  window.search__cont = search__cont
-  //! bug with qq browser
-  const listener = function() {
-    if (search__cont.scrollTop) {
-      // console.log(event.type, search__cont.scrollTop)
+function initQqBugDetect () {
+  const search__cont = document.getElementsByClassName('search__cont')[0] as HTMLElement | undefined
+  if (search__cont) {
+    window.search__cont = search__cont
+    
+    //! bug with qq browser
+    const listener = function() {
+      if (search__cont.scrollTop) {
+        // console.log(event.type, search__cont.scrollTop)
+      }
     }
+    window.addEventListener('touchstart', listener)
+    window.addEventListener('touchmove', listener)
   }
-  window.addEventListener('touchstart', listener)
-  window.addEventListener('touchmove', listener)
 }
 
-function scrollTopSearchCont() {
+function scrollTopSearchCont () {
   if (searchCont.value) {
     //todo smooth scroll
     searchCont.value.scrollTop = 0

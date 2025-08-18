@@ -17,23 +17,37 @@
   </section>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 
-import PubModuleHead from '@/components/PubModuleHead'
-import AppMusicList from '@/components/AppMusicList'
+import PubModuleHead from '@/components/PubModuleHead.vue'
+import AppMusicList from '@/components/AppMusicList.vue'
 import { fetchRankInfo } from '@/requests/rankInfo'
 import { useLoading } from '@/composables/useLoading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
+
+// 定义排行榜信息接口
+interface RankInfoData {
+  info: {
+    banner7url: string;
+    rankname: string;
+    [key: string]: any;
+  };
+  songs: {
+    timestamp: number;
+    list: any[];
+    [key: string]: any;
+  };
+}
 
 const store = useStore()
 const route = useRoute()
 const { startLoading, stopLoading, setLoadingExcludeHeader } = useLoading()
 
 const msg = ref('上次更新时间')
-const rankInfo = computed(() => store.state.rank.rankInfo)
+const rankInfo = computed<RankInfoData>(() => store.state.rank.rankInfo)
 
 const getModuleHeadInfo = computed(() => {
   return {
@@ -57,9 +71,9 @@ const formatDate = computed(() => {
   )
 })
 
-const getRankInfo = (rankId) => {
+const getRankInfo = (rankId: string) => {
   fetchRankInfo({ params: { rankid: rankId } }).then(res => {
-    const rankInfoData = {
+    const rankInfoData: RankInfoData = {
       info: res.data.info,
       songs: res.data.songs
     }

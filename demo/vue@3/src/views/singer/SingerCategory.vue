@@ -23,25 +23,40 @@
   </section>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { fetchSingerCategory } from '../../requests/singerCategory'
 import { useLoading } from '@/composables/useLoading'
 
+// 定义歌手分类项接口
+interface SingerCategoryItem {
+  classid: string;
+  classname: string;
+  path: string;
+  [key: string]: any;
+}
+
+// 定义歌手分类数据接口
+interface SingerCategoryData {
+  category: string;
+  data: SingerCategoryItem[];
+}
+
 const store = useStore()
 const { startLoading, stopLoading, setLoadingExcludeNav } = useLoading()
 
-const singerCategories = computed(() => store.state.singer.singerCategories)
+const singerCategories = computed<SingerCategoryData[]>(() => store.state.singer.singerCategories)
 
 if (singerCategories.value.length === 0) {
   setLoadingExcludeNav()
   startLoading()
   getSingerCategories()
 }
-function getSingerCategories() {
+
+function getSingerCategories(): void {
   fetchSingerCategory().then(({ data }) => {
-    const singerCategoriesData = data.list.reduce((re, obj) => {
+    const singerCategoriesData: SingerCategoryData[] = data.list.reduce((re: SingerCategoryData[], obj: SingerCategoryItem) => {
       obj.path = '/singer/list/' + obj.classid
       const findCategories = re.find(
         o => o.category === obj.classname.substring(0, 2)
