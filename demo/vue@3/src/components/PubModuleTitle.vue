@@ -1,5 +1,5 @@
 <template>
-  <h4 class="module_title main_box_shadow" @click="emit('click',arguments[0])">{{title}}</h4>
+  <h4 class="module_title main_box_shadow" @click="emit('click',$event)">{{title}}</h4>
 </template>
 
 <script lang="ts" setup>
