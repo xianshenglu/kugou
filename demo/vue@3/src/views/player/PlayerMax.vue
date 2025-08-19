@@ -19,16 +19,19 @@
   </section>
 </template>
 <script lang="ts">
+// @ts-ignore, vue-tsc bug https://github.com/vuejs/language-tools/issues/5604
 import store from '../../store/index'
 export default {
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter(to, _from, next) {
     //play music if musicHash exists which means this page was loaded directly
     let musicHash = to.query.musicHash
     if (!musicHash) {
       return
     }
-    if (to.meta.fromPlayerMed) {
-      return next()
+    // todo move it from query which may require move the logic out of beforeRouteEnter.
+    const { fromPlayerMed, ...otherQuery} = to.query
+    if (fromPlayerMed) {
+      return next({...to, query: otherQuery})
     }
     //? just commit player/wantPlay is enough?
     return fetchSongLyric({ params: { hash: musicHash } }).then(res => {
@@ -68,7 +71,7 @@ const playerBgImg = computed(() => {
   return `background-image:url(${singerImg.value}),linear-gradient(to right, rgb(48, 67, 82), rgb(215, 210, 204));`
 })
 
-watch(()=>music?.hash, (newHash) => {
+watch(()=>music.value?.hash, (newHash) => {
     router.replace({ query: { musicHash: newHash } })
 })
 
@@ -89,6 +92,7 @@ onUnmounted(() => {
     data: false
   })
 })
+
 </script>
 
 <style scoped lang="less">

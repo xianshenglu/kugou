@@ -1,12 +1,12 @@
 <template>
   <section class="player" v-if="music">
     <router-link
-      :to="{name:'PlayerMax', meta: { fromPlayerMed: 1},query:{musicHash:music.hash }}"
+      :to="{name:'PlayerMax',query:{musicHash:music.hash,fromPlayerMed: 1 }}"
       class="player__link"
     >
       <img
         :src="singerImg?singerImg:logo__theme"
-        alt
+        alt="singer image"
         :class="isPlayerMedSmall?'player__singer_img player__singer_img--player_min':'player__singer_img'"
       >
       <div class="player__song_info">
