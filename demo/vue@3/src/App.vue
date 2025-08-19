@@ -18,14 +18,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, computed, type Ref } from 'vue'
+import { onMounted, computed, useTemplateRef } from 'vue'
 import { useStore } from 'vuex'
 
 import AppHeader from '@/components/AppHeader.vue'
 import AppLoading from './components/AppLoading.vue'
 import PlayerMed from './views/player/PlayerMed.vue'
 
-const audioEl: Ref<HTMLAudioElement | null> = ref(null)
+const audioEl = useTemplateRef<HTMLAudioElement | null>('audioEl')
 const store = useStore()
 
 const isPlayerMedShow = computed(() => store.state.player.isPlayerMedShow)

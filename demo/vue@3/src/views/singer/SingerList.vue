@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, nextTick, onMounted } from 'vue'
+import { ref, computed, watch, nextTick, onMounted, useTemplateRef } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 
@@ -36,7 +36,7 @@ const store = useStore()
 const route = useRoute()
 const { startLoading, stopLoading, setLoadingExcludeHeader } = useLoading()
 
-const lazyLoadRoot = ref(null)
+const lazyLoadRoot = useTemplateRef<HTMLUListElement | null>('lazyLoadRoot')
 const lazyImageElements = ref([])
 
 const logo__grey = computed(() => store.state.images.logo__grey)
