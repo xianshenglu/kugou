@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, useTemplateRef } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -51,7 +51,7 @@ const route = useRoute()
 const router = useRouter()
 const { startLoading, stopLoading, setLoadingExcludeSearchForm } = useLoading()
 
-const searchCont = ref<HTMLElement | null>(null)
+const searchCont = useTemplateRef<HTMLElement | null>('searchCont')
 
 const title = ref('搜索')
 const searchType = ref('最近热门')

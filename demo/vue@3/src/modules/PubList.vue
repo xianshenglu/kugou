@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup generic="Item extends { imgUrl: string; title: string; path: string }">
-import { ref, watch, nextTick, computed } from 'vue';
+import { ref, watch, nextTick, computed, useTemplateRef } from 'vue';
 import { useStore } from 'vuex';
 import { lazyLoad } from '@/utils';
 interface Props {
@@ -36,7 +36,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const store = useStore();
 const lazyImageElements = ref<(HTMLImageElement | null)[]>([]);
-const lazyLoadRoot = ref(null);
+const lazyLoadRoot = useTemplateRef<HTMLUListElement | null>('lazyLoadRoot');
 
 const logo__grey = computed(() => store.state.images.logo__grey);
 
