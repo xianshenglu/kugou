@@ -15,15 +15,18 @@
 import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue';
 import { useStore } from 'vuex';
 import { getVBindObj } from '@/utils';
-
+interface LyricItem {
+  millisecond: number;
+  text: string;
+}
 const store = useStore();
 
 const prevLyricIndex = ref(0);
 const isTouching = ref(false);
-const lyricElements = ref({});
+const lyricElements = ref<Record<string, HTMLParagraphElement | null>>({});
 
 const audioEl = computed(() => store.state.player.audioEl);
-const lyricItems = computed(() => store.getters['player/lyricItems']);
+const lyricItems = computed<LyricItem[]>(() => store.getters['player/lyricItems']);
 const lyricMillisecond = computed(() => {
   return lyricItems.value.map(o => o.millisecond);
 });
@@ -38,21 +41,22 @@ watch(lyricItems, (newLyricItems) => {
   deep: true
 });
 
-const timeUpdateCb = (event) => {
+const timeUpdateCb = (event: Event) => {
   if (isTouching.value) {
     return;
   }
-  let curMillisecond = Math.floor(event.target.currentTime * 1000);
+  let curMillisecond = Math.floor((event.target as HTMLMediaElement).currentTime * 1000);
   let nextLyricIndex = lyricMillisecond.value.findIndex(
     time => time > curMillisecond * 1.005
   );
-  let prevLyricIndex = nextLyricIndex > 1 ? nextLyricIndex - 2 : 0;
+  let newPrevLyricIndex = nextLyricIndex > 1 ? nextLyricIndex - 2 : 0;
   
   // Check if ref is available
-  if (lyricElements.value[lyricMillisecond.value[prevLyricIndex]]) {
-    lyricElements.value[lyricMillisecond.value[prevLyricIndex]].scrollIntoView();
+  const lyricTime = lyricMillisecond.value[newPrevLyricIndex] as any as string;
+  if (lyricElements.value[lyricTime]) {
+    lyricElements.value[lyricTime].scrollIntoView();
   }
-  prevLyricIndex.value = prevLyricIndex;
+  prevLyricIndex.value = newPrevLyricIndex;
 };
 
 onMounted(() => {
