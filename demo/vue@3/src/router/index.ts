@@ -72,7 +72,7 @@ const router = createRouter({
 })
 
 router.beforeEach(
-  (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+  (_to: RouteLocationNormalized, _from: RouteLocationNormalized, next: NavigationGuardNext) => {
     store.commit('replaceProperty', { paths: 'loading.isShow', data: false })
     next()
   }

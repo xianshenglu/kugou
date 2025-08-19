@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 
@@ -88,7 +88,7 @@ const getRankInfo = (rankId: string) => {
 const rankId = route.path.split('/').pop()
 setLoadingExcludeHeader()
 startLoading()
-getRankInfo(rankId)
+getRankInfo(rankId!)
 </script>
 
 <style lang="less" scoped>

@@ -14,7 +14,7 @@ import { useStore } from 'vuex'
 import { secondToMin } from '@/utils'
 
 const store = useStore()
-const progressBar = ref(null)
+const progressBar = ref<HTMLDivElement | null>(null)
 
 const audioEl = computed(() => store.state.player.audioEl)
 
@@ -22,7 +22,7 @@ const currentTime = ref(0)
 const loadProgress = ref(0)
 const isTouching = ref(false)
 const touchStartX = ref(0)
-const progressBarRect = ref(null)
+const progressBarRect = ref<DOMRect | null>(null)
 
 const currentProgress = computed(() => {
   return Math.floor((100 * currentTime.value) / audioEl.value.duration)
@@ -50,27 +50,27 @@ const progressCb = () => {
   )
 }
 
-const timeUpdateCb = (event) => {
+const timeUpdateCb = (event: Event) => {
   if (isTouching.value) {
     return
   }
-  currentTime.value = event.target.currentTime
+  currentTime.value = (event.target as HTMLMediaElement).currentTime
 }
 
-const setCurTime = (event) => {
+const setCurTime = (event: TouchEvent) => {
   isTouching.value = true
   if (!progressBarRect.value) {
-    progressBarRect.value = progressBar.value.getBoundingClientRect()
+    progressBarRect.value = progressBar.value!.getBoundingClientRect()
   }
-  const clientX = event.touches[0].clientX
+  const clientX = event.touches[0]!.clientX
   currentTime.value = calcCurTime(clientX, progressBarRect.value.left, 0)
   touchStartX.value = clientX
   window.addEventListener('touchmove', setCurTimeOnMove)
   window.addEventListener('touchend', touchEndCb)
 }
 
-const setCurTimeOnMove = (event) => {
-  const clientX = event.touches[0].clientX
+const setCurTimeOnMove = (event: TouchEvent) => {
+  const clientX = event.touches[0]!.clientX
   currentTime.value = calcCurTime(clientX, touchStartX.value, 1)
   touchStartX.value = clientX
 }
@@ -82,24 +82,24 @@ const touchEndCb = () => {
   window.removeEventListener('touchend', touchEndCb)
 }
 
-const calcCurTime = (end, start, type) => {
+const calcCurTime = (end: number, start: number, type: 0|1) => {
   const offsetX = end - start
-  const percent = offsetX / progressBarRect.value.width
-  let currentTime
+  const percent = offsetX / progressBarRect.value!.width
+  let curTime: number;
   switch (type) {
     case 0:
-      currentTime = audioEl.value.duration * percent
+      curTime = audioEl.value.duration * percent
       break
     case 1:
-      currentTime = currentTime.value + audioEl.value.duration * percent
+      curTime = currentTime.value + audioEl.value.duration * percent
       break
   }
-  if (currentTime < 0) {
-    currentTime = 0
-  } else if (currentTime > audioEl.value.duration) {
-    currentTime = audioEl.value.duration
+  if (curTime < 0) {
+    curTime = 0
+  } else if (curTime > audioEl.value.duration) {
+    curTime = audioEl.value.duration
   }
-  return currentTime
+  return curTime
 }
 
 onMounted(() => {

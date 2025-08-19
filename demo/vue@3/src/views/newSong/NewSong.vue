@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, onMounted } from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
 import AppMusicList from '@/components/AppMusicList.vue';
 import Slider from './Slider.vue';

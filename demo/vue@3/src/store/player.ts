@@ -64,13 +64,13 @@ const player: {
       if (state.song === null || !state.song.img) {
         return undefined
       }
-      return replaceSizeInUrl(state.song.img, 400)
+      return replaceSizeInUrl(state.song.img, '400')
     },
-    singerName(state: PlayerState): string | undefined {
-      return state.music && state.music.filename?.split('-')[0].trim()
+    singerName(state: PlayerState) {
+      return state.music && state.music.filename?.split('-')[0]!.trim()
     },
-    songName(state: PlayerState): string | undefined {
-      return state.music && state.music.filename?.split('-')[1].trim()
+    songName(state: PlayerState) {
+      return state.music && state.music.filename?.split('-')[1]!.trim()
     },
     lyricItems(state: PlayerState): LyricItem[] {
       if (!state.lyrics) return []
@@ -79,10 +79,10 @@ const player: {
       lyricsArr.pop()
       return lyricsArr.map(text => {
         const arr = text.replace('[', '').split(']')
-        const time = arr[0]
+        const time = arr[0]!
         const min = time.split(':')[0]
-        const sec = time.split(':')[1].split('.')[0]
-        const millisecond = time.split(':')[1].split('.')[1]
+        const sec = time.split(':')[1]!.split('.')[0]
+        const millisecond = time.split(':')[1]!.split('.')[1]
         return {
           millisecond: Number(min) * 60 * 1000 + Number(sec) * 1000 + Number(millisecond),
           text: arr[1]?.trim().replace(/(男[:：]\s*)|(女[:：]\s*)/, '') || ''

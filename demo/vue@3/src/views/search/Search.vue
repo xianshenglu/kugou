@@ -156,7 +156,7 @@ function getSearchRes() {
 function initQqBugDetect () {
   const search__cont = document.getElementsByClassName('search__cont')[0] as HTMLElement | undefined
   if (search__cont) {
-    window.search__cont = search__cont
+    (window as any).search__cont = search__cont
     
     //! bug with qq browser
     const listener = function() {

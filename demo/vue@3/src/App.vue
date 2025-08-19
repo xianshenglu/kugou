@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, computed, Ref } from 'vue'
+import { ref, onMounted, computed, type Ref } from 'vue'
 import { useStore } from 'vuex'
 
 import AppHeader from '@/components/AppHeader.vue'

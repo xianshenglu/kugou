@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 
@@ -78,7 +78,7 @@ const getSongListInfo = (songListId: string) => {
 const songListId = route.path.split('/').pop()
 setLoadingExcludeHeader()
 startLoading()
-getSongListInfo(songListId)
+getSongListInfo(songListId!)
 </script>
 
 <style lang="less" scoped></style>
