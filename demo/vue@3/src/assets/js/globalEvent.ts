@@ -1,8 +1,6 @@
 import store from '../../store/index'
 import router from '../../router/index'
 
-type TouchEvent = TouchEvent & { changedTouches: TouchList }
-
 // 设置备用图片
 function setBackupImg(event: ErrorEvent): void {
   const target = event.target as HTMLElement
@@ -35,16 +33,16 @@ function toggleBetweenPages(event: TouchEvent): void {
   const startTime = Date.now()
   const minOffset = window.innerWidth * 0.1
   const maxOffset = window.innerWidth * 0.4
-  const startClientX = event.touches[0].clientX
-  const startClientY = event.touches[0].clientY
+  const startClientX = event.touches[0]!.clientX
+  const startClientY = event.touches[0]!.clientY
   
   window.addEventListener('touchend', detectToSwipe, true)
   
   function detectToSwipe(event: TouchEvent): void {
     window.removeEventListener('touchend', detectToSwipe, true)
 
-    const endClientX = event.changedTouches[0].clientX
-    const endClientY = event.changedTouches[0].clientY
+    const endClientX = event.changedTouches[0]!.clientX
+    const endClientY = event.changedTouches[0]!.clientY
     const offsetX = Math.abs(endClientX - startClientX)
     const offsetY = Math.abs(endClientY - startClientY)
     
@@ -58,7 +56,7 @@ function toggleBetweenPages(event: TouchEvent): void {
     const isSlowMoveEnough = isSlow && offsetX > maxOffset
     const isFastMoveEnough = !isSlow && offsetX > minOffset
     
-    const staticLikePagesPath = router.options.routes[0].children.map(
+    const staticLikePagesPath = router.options.routes[0]!.children!.map(
       child => child.path
     )
     

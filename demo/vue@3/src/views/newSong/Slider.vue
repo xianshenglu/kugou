@@ -13,7 +13,7 @@
       <div class="glide__bullets slider__bullets" data-glide-el="controls[nav]">
         <button
           class="glide__bullet"
-          v-for="(item,index) in data"
+          v-for="(_item,index) in data"
           :key="index"
           :data-glide-dir="'='+index"
         ></button>

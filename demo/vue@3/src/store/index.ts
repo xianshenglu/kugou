@@ -33,9 +33,9 @@ let store = createStore<RootState>({
       if (typeof paths !== 'string') {
         return
       }
-      paths = paths.split('.')
-      let targetObj = paths.slice(0, -1).reduce((re: any, key: string) => re[key], state)
-      targetObj[paths.pop()!] = data
+      const pathList = paths.split('.')
+      let targetObj = pathList.slice(0, -1).reduce((re: any, key: string) => re[key], state)
+      targetObj[pathList.pop()!] = data
     }
   }
 })

@@ -7,7 +7,7 @@ interface SingerInfoParams {
 }
 
 // 定义获取歌手信息函数
-export const fetchSingerInfo = ({ singerId, params = {} }: { singerId: string; params?: SingerInfoParams } = {}) => {
+export const fetchSingerInfo = ({ singerId, params = {} }: { singerId?: string; params?: SingerInfoParams } = {}) => {
   let { url, ...props } = getSingerInfo
   url += '/' + singerId + '&json=true'
   return http({ ...props, url, params })

@@ -32,11 +32,16 @@ const developmentConfig = {
   base: './',
   plugins: []
 }
+const testingConfig = {
+  ...productionConfig,
+  base: developmentConfig.base,
+}
 function getConfig(mode: string) {
-  if (mode === 'development') {
-    return developmentConfig
-  }
-  return productionConfig
+  return {
+    development: developmentConfig,
+    production: productionConfig,
+    testing: testingConfig
+  }[mode] || productionConfig
 }
 export default defineConfig(({ mode }) => {
   const config = getConfig(mode)

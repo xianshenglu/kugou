@@ -8,7 +8,7 @@
       <router-link :to="item.path" class="list__link">
         <img
           class="list__img lazy_image"
-          :ref="el => saveImageRef(index, el)"
+          :ref="el => saveImageRef(index, el as HTMLImageElement)"
           :src="logo__grey"
           :data-src="item.imgUrl"
         />
@@ -23,20 +23,19 @@
   </ul>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup generic="Item extends { imgUrl: string; title: string; path: string }">
 import { ref, watch, nextTick, computed } from 'vue';
 import { useStore } from 'vuex';
 import { lazyLoad } from '@/utils';
-
-const props = defineProps({
-  pubList: {
-    type: Array,
-    default: () => []
-  }
+interface Props {
+  pubList: Array<Item>;
+}
+const props = withDefaults(defineProps<Props>(), {
+  pubList: () => []
 });
 
 const store = useStore();
-const lazyImageElements = ref([]);
+const lazyImageElements = ref<(HTMLImageElement | null)[]>([]);
 const lazyLoadRoot = ref(null);
 
 const logo__grey = computed(() => store.state.images.logo__grey);
@@ -47,14 +46,14 @@ watch(() => props.pubList, (newArray) => {
   }
   lazyImageElements.value = newArray.map(() => null);
   nextTick(() => {
-    lazyLoad(lazyImageElements.value, { root: lazyLoadRoot.value });
+    lazyLoad(lazyImageElements.value as any, { root: lazyLoadRoot.value });
   });
 }, {
   immediate: true,
   deep: true
 });
 
-const saveImageRef = (index, el) => {
+const saveImageRef = (index: number, el: HTMLImageElement) => {
   lazyImageElements.value[index] = el;
 };
 </script>

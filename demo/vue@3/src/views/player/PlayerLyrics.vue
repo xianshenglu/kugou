@@ -4,7 +4,7 @@
       v-for="(item,index) in lyricItems"
       v-bind="getVBindObj('millisecond-'+item.millisecond)"
       :key="item.millisecond"
-      :ref="el => (lyricElements[item.millisecond] = el)"
+      :ref="el => (lyricElements[item.millisecond] = el as HTMLElement)"
       :class="index===prevLyricIndex+1?'player_lyric_text player_lyric_text--active ':'player_lyric_text'"
     >{{ item.text }}</p>
     <!-- //todo make it width: 100% -->
@@ -23,7 +23,7 @@ const store = useStore();
 
 const prevLyricIndex = ref(0);
 const isTouching = ref(false);
-const lyricElements = ref<Record<string, HTMLParagraphElement | null>>({});
+const lyricElements = ref<Record<string, HTMLElement | null>>({});
 
 const audioEl = computed(() => store.state.player.audioEl);
 const lyricItems = computed<LyricItem[]>(() => store.getters['player/lyricItems']);

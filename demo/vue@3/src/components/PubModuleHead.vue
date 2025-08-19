@@ -21,7 +21,7 @@ interface Props {
   moduleHeadInfo: ModuleHeadInfo;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   moduleHeadInfo: () => ({}) as ModuleHeadInfo
 });
 </script>

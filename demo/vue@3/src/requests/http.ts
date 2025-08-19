@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
+import axios, { type AxiosInstance, type AxiosResponse, type AxiosError } from 'axios'
 import { isObject } from '../utils'
 
 // 定义API响应数据接口
