@@ -68,7 +68,7 @@ const playerBgImg = computed(() => {
   return `background-image:url(${singerImg.value}),linear-gradient(to right, rgb(48, 67, 82), rgb(215, 210, 204));`
 })
 
-watch(()=>music?.hash, (newHash) => {
+watch(()=>music.value?.hash, (newHash) => {
     router.replace({ query: { musicHash: newHash } })
 })
 
