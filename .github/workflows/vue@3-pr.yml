@@ -7,10 +7,14 @@ on:
   pull_request:
     types: [opened, synchronize]
     paths:
-      - 'demo/vue@3'
+      - demo/vue@3/**
 jobs:
   build:
     runs-on: ubuntu-18.04
+
+    defaults:
+      run:
+        working-directory: demo/vue@3
 
     strategy:
       matrix:
