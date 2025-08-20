@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from 'react'
+import type { ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
 import logo__grey from '../../assets/images/logo__grey.png'
-import './AppList.less'
+import styles from './AppList.module.less'
 import { $_xsl__loadImgLazy } from '../../assets/js/utils'
 
 interface AppListProps {
@@ -20,8 +21,8 @@ const AppList = ({
   render,
   className
 }: AppListProps) => {
-  const lazyImageRefs = useRef([])
-  const lazyImages = useRef([])
+  const lazyImageRefs = useRef<Array<HTMLImageElement | null>>([])
+  const lazyImages = useRef<Array<HTMLImageElement | null>>([])
 
   const initLazyImgLoad = () => {
     lazyImages.current = lazyImageRefs.current.map((el) => el)
@@ -38,15 +39,15 @@ const AppList = ({
 
   return (
     <ul
-      className={classNames('AppList', className)}
+      className={classNames(styles.AppList, className)}
       onScroll={() => $_xsl__loadImgLazy(lazyImages.current)}
     >
       {data.map((item, index) => {
         return (
-          <li className="AppList__item main_border_bottom" key={item.path}>
-            <NavLink to={item.path} className="AppList__link">
+          <li className={classNames(styles.AppList__item, 'main_border_bottom')} key={item.path}>
+            <NavLink to={item.path} className={styles.AppList__link}>
               <img
-                className="AppList__img lazyImage"
+                className={classNames(styles.AppList__img, 'lazyImage')}
                 ref={(el) => {
                   lazyImageRefs.current[index] = el
                 }}
@@ -54,8 +55,8 @@ const AppList = ({
                 data-src={item.imgurl}
                 alt={item.name}
               />
-              {render(item)}
-              <button className="AppList__btn">
+              {render ? (render(item) as ReactNode) : null}
+              <button className={styles.AppList__btn}>
                 <svg className="icon" aria-hidden="true">
                   <use xlinkHref="#icon-arrow-right" />
                 </svg>

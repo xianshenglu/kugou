@@ -2,7 +2,7 @@ import { Component } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ErrorBoundary } from 'react-error-boundary'
 import classNames from 'classnames'
-import './App.less'
+import styles from './App.module.less'
 import {
   // root,
   newSongs,
@@ -37,8 +37,8 @@ const AppHeader = lazyWithPrefetch(
 class App extends Component {
   render() {
     const { isPlayerMedShow, isAppNavShow } = this.props as any
-    const mainClassName = classNames('App__main', {
-      'App__main--underNav': isAppNavShow
+    const mainClassName = classNames(styles.App__main, {
+      [styles['App__main--underNav']]: isAppNavShow
     })
     return (
       <div className="App">

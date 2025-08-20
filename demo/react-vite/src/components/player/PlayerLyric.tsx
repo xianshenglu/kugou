@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
-import './PlayerLyric.less'
+import './PlayerLyric.module.less'
+import styles from './PlayerLyric.module.less'
 
 interface PlayerLyricProps {
   lyrics: {
@@ -25,7 +26,7 @@ class PlayerLyric extends Component<PlayerLyricProps> {
     const { lyrics, prevLyricIndex, toggleIsTouching } = this.props
     return (
       <div
-        className="PlayerLyric"
+        className={styles.PlayerLyric}
         onTouchStart={() => toggleIsTouching(true)}
         onTouchEnd={() => toggleIsTouching(false)}
       >
@@ -36,8 +37,8 @@ class PlayerLyric extends Component<PlayerLyricProps> {
             <p
               key={index}
               ref={lyricRef}
-              className={classNames('PlayerLyric_text', {
-                'PlayerLyric_text--active': index === prevLyricIndex + 1
+              className={classNames(styles.PlayerLyric_text, {
+                [styles['PlayerLyric_text--active']]: index === prevLyricIndex + 1
               })}
             >
               {lyric.text}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import './AppNav.less'
+import styles from './AppNav.module.less'
 
 interface AppNavProps {
   navList: {
@@ -14,14 +14,14 @@ class AppNav extends Component<AppNavProps> {
   render() {
     const { navList, activeIndex } = this.props
     return (
-      <section className="AppNav">
-        <nav className="AppNav__box">
+      <section className={styles.AppNav}>
+        <nav className={styles.AppNav__box}>
           {navList.map((nav, index) => (
             <NavLink
               key={nav.path}
               to={nav.path}
               className={({ isActive, isPending }) =>
-                'AppNav__link' + (isActive ? ' AppNav__link--active' : '')
+                styles.AppNav__link + (isActive ? ' ' + styles['AppNav__link--active'] : '')
               }
             >
               {nav.text}
@@ -29,7 +29,7 @@ class AppNav extends Component<AppNavProps> {
           ))}
         </nav>
         <div
-          className="AppNav__underline"
+          className={styles.AppNav__underline}
           style={{
             transform: `translateX(${activeIndex * 100}%)`
           }}

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import classNames from 'classnames'
-import './PlayerMax.less'
+import styles from './PlayerMax.module.less'
 import PrevButton from './PrevButton'
 import PlayButton from './PlayButton'
 import NextButton from './NextButton'
@@ -36,33 +36,33 @@ class PlayerMax extends Component<PlayerMaxProps> {
     return (
       <Fragment>
         <div
-          className="PlayerMax__mask"
+          className={styles.PlayerMax__mask}
           style={{
             backgroundImage: `url(${singerImg}),linear-gradient(to right, rgb(48, 67, 82), rgb(215, 210, 204))`
           }}
         />
-        <div className="PlayerMax__container">
-          <h6 className="PlayerMax__songName">{song_name}</h6>
+        <div className={styles.PlayerMax__container}>
+          <h6 className={styles.PlayerMax__songName}>{song_name}</h6>
           <img
             src={singerImg}
-            className={classNames('PlayerMax__singerImg', {
-              'PlayerMax__singerImg--active': isPlaying
+            className={classNames(styles.PlayerMax__singerImg, {
+              [styles['PlayerMax__singerImg--active']]: isPlaying
             })}
             alt={author_name}
           />
           <PlayerLyricContainer />
           <PlayerProgressContainer />
-          <div className="PlayerMax__buttonContainer">
-            <PrevButton className="PlayerMax__prevBtn" prev={prevSong} />
+          <div className={styles.PlayerMax__buttonContainer}>
+            <PrevButton className={styles.PlayerMax__prevBtn} prev={prevSong} />
             <PlayButton
-              className="PlayerMax__playBtn"
+              className={styles.PlayerMax__playBtn}
               isLoading={isLoading}
               isPlaying={isPlaying}
               togglePlay={e => dispatch(togglePlay())}
             />
-            <NextButton className="PlayerMax__nextBtn" next={nextSong} />
+            <NextButton className={styles.PlayerMax__nextBtn} next={nextSong} />
           </div>
-          <button className="PlayerMax__download" />
+          <button className={styles.PlayerMax__download} />
         </div>
       </Fragment>
     )

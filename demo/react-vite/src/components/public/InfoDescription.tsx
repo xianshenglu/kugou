@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import classNames from 'classnames'
-import './InfoDescription.less'
+import styles from './InfoDescription.module.less'
 
 interface InfoDescriptionProps {
   description: string;
@@ -18,14 +18,14 @@ const InfoDescription = ({
 
   return (
     <div
-      className={classNames('InfoDescription__intro main_box_shadow', {
-        'InfoDescription__intro--more': showMore
+      className={classNames(styles.InfoDescription__intro, 'main_box_shadow', {
+        [styles['InfoDescription__intro--more']]: showMore
       })}
     >
-      <p className="InfoDescription__text">{description}</p>
+      <p className={styles.InfoDescription__text}>{description}</p>
       <button
         v-show="showMore"
-        className={classNames('InfoDescription__button', {
+        className={classNames(styles.InfoDescription__button, {
           hidden: !showMore
         })}
         onClick={toggleShowMore}
@@ -35,7 +35,7 @@ const InfoDescription = ({
         </svg>
       </button>
       <button
-        className={classNames('InfoDescription__button', {
+        className={classNames(styles.InfoDescription__button, {
           hidden: showMore
         })}
         onClick={toggleShowMore}

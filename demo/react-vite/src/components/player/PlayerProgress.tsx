@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './PlayerProgress.less'
+import styles from './PlayerProgress.module.less'
 import { secondToMin } from '../../assets/js/utils'
 
 interface PlayerProgressProps {
@@ -28,21 +28,21 @@ class PlayerProgress extends Component<PlayerProgressProps> {
     }
 
     return (
-      <div className="PlayerProgress" onTouchStart={onTouchStart}>
-        <div className="PlayerProgress__songCurTime">
+      <div className={styles.PlayerProgress} onTouchStart={onTouchStart}>
+        <div className={styles.PlayerProgress__songCurTime}>
           {secondToMin(currentTime)}
         </div>
         <div
-          className="PlayerProgress__progressBar"
+          className={styles.PlayerProgress__progressBar}
           ref={progressBarRef}
           style={progressBarStyle}
         >
           <div
-            className="PlayerProgress__progressBarPointer"
+            className={styles.PlayerProgress__progressBarPointer}
             style={{ left: currentProgress + '%' }}
           />
         </div>
-        <div className="PlayerProgress__songDuration">
+        <div className={styles.PlayerProgress__songDuration}>
           {secondToMin(audioEl.duration)}
         </div>
       </div>

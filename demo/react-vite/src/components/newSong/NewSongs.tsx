@@ -1,6 +1,6 @@
 import React from 'react'
 import AppMusicList from '../public/AppMusicList'
-import './NewSongs.less'
+import './NewSongs.module.less'
 import { lazyWithPrefetch } from 'src/assets/hoc/lazyWithPrefetch'
 const NewSongsSlider = lazyWithPrefetch(() => import('./NewSongsSlider'))
 

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import './InfoHeader.less'
+import styles from './InfoHeader.module.less'
 
 interface InfoHeaderProps {
   name: string;
@@ -13,10 +13,10 @@ class InfoHeader extends Component<InfoHeaderProps> {
     return (
       <Fragment>
         <div
-          className="InfoHeader__head"
+          className={styles.InfoHeader__head}
           style={{ backgroundImage: 'url(' + imgurl + ')' }}
         >
-          <h6 className="InfoHeader__title">{name}</h6>
+          <h6 className={styles.InfoHeader__title}>{name}</h6>
           {renderUpdatedTime()}
         </div>
       </Fragment>
