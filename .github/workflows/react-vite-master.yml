@@ -4,13 +4,11 @@
 name: React-Vite-Master
 
 on:
-  pull_request:
-    types: [opened]
+  push:
     branches:
       - master
     paths:
-      - 'demo/react-vite'
-
+      - 'demo/react-vite/**'
 jobs:
   build:
     runs-on: ubuntu-18.04
@@ -18,7 +16,11 @@ jobs:
     strategy:
       matrix:
         node-version: [22.x]
-
+    
+    defaults:
+      run:
+        working-directory: demo/react-vite
+    
     steps:
       - uses: actions/checkout@v2
 

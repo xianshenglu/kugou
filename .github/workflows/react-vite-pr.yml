@@ -1,0 +1,51 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: React-Vite-PR
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - master
+    paths:
+      - 'demo/react-vite/**'
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+
+    defaults:
+      run:
+        working-directory: demo/react-vite
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Merge master into current branch
+        run: |
+          git fetch master
+          git merge master
+      
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install
+        run: npm ci
+
+      # - name: Lint
+      #   run: npm run lint
+
+      # - name: Unit Test
+      #   run: npm run test
+
+      # - name: EndToEnd Test
+      #   run: npm run e2e:headless
+
+      - name: Build
+        run: npm run build
