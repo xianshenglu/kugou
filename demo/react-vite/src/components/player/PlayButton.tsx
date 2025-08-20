@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
-import './PlayButton.less'
+import styles from './PlayButton.module.less'
 
 interface PlayButtonProps {
   togglePlay(...args: unknown[]): unknown;
@@ -23,7 +23,7 @@ class PlayButton extends Component<PlayButtonProps> {
           <use xlinkHref="#icon-pause" />
         </svg>
         <svg
-          className={classNames('icon', 'PlayButton__loading', {
+          className={classNames('icon', styles.PlayButton__loading, {
             hidden: !isLoading
           })}
           aria-hidden="true"

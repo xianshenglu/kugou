@@ -13,6 +13,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 export default defineConfig({
   base: './',
   plugins: [tsconfigPaths(), react(), analyzer({ openAnalyzer: false })],
+  css: {
+    modules: {
+      generateScopedName: '[name]__[local]__[hash:base64:5]' 
+    }
+  },
   server: {
     fs: {
       allow: [

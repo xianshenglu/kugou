@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import './SongList.less'
+import classNames from 'classnames'
+import styles from './SongList.module.less'
 import AppList from '../public/AppList'
 
 interface SongListProps {
@@ -10,15 +11,15 @@ interface SongListProps {
 }
 
 class SongList extends Component<SongListProps> {
-  getChildren({ name, popularity }) {
+  getChildren({ name, popularity }: { name: string; popularity: number }) {
     return (
-      <div className="SongList__info">
-        <div className="SongList__name">{name}</div>
-        <div className="SongList__star">
-          <svg className="icon SongList__icon" aria-hidden="true">
+      <div className={styles.SongList__info}>
+        <div className={styles.SongList__name}>{name}</div>
+        <div className={styles.SongList__star}>
+          <svg className={classNames('icon', styles.SongList__icon)} aria-hidden="true">
             <use xlinkHref="#icon-music" />
           </svg>
-          <span className="SongList__popularity">{popularity}</span>
+          <span className={styles.SongList__popularity}>{popularity}</span>
         </div>
       </div>
     )
@@ -26,7 +27,7 @@ class SongList extends Component<SongListProps> {
   render() {
     const { songList } = this.props
     return (
-      <AppList data={songList} render={this.getChildren} className="SongList" />
+      <AppList data={songList as any} render={this.getChildren} className={styles.SongList} />
     )
   }
 }

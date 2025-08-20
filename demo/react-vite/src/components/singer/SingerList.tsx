@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react'
+import styles from './SingerList.module.less'
 import { NavLink } from 'react-router-dom'
 import logo__grey from '../../assets/images/logo__grey.png'
-import './SingerList.less'
+import classNames from 'classnames'
 import { $_xsl__loadImgLazy } from '../../assets/js/utils'
 
 interface SingerListProps {
@@ -24,6 +25,8 @@ interface SingerListProps {
 }
 
 class SingerList extends Component<SingerListProps> {
+  lazyImages: Array<Element> = []
+
   componentDidMount() {
     this.initLazyImgLoad()
   }
@@ -44,27 +47,25 @@ class SingerList extends Component<SingerListProps> {
       <Fragment>
         <h4 className="module_title main_box_shadow">{classname}</h4>
         <ul
-          className="SingerList__list"
+          className={styles.SingerList__list}
           onScroll={() => $_xsl__loadImgLazy(this.lazyImages)}
         >
-          {singers.map(singer => {
-            return (
-              <li
-                className="SingerList__item main_border_bottom"
-                key={singer.singerid}
-              >
-                <NavLink to={singer.path} className="SingerList__link">
-                  <img
-                    className="SingerList__img lazyImage"
-                    src={logo__grey}
-                    data-src={singer.imgurl}
-                    alt={singer.singername}
-                  />
-                  <div className="SingerList__name">{singer.singername}</div>
-                </NavLink>
-              </li>
-            )
-          })}
+          {singers.map((singer) => (
+            <li
+              className={classNames(styles.SingerList__item, 'main_border_bottom')}
+              key={singer.singerid}
+            >
+              <NavLink to={singer.path} className={styles.SingerList__link}>
+                <img
+                  className={classNames(styles.SingerList__img, 'lazyImage')}
+                  src={logo__grey}
+                  data-src={singer.imgurl}
+                  alt={singer.singername}
+                />
+                <div className={styles.SingerList__name}>{singer.singername}</div>
+              </NavLink>
+            </li>
+          ))}
         </ul>
       </Fragment>
     )

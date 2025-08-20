@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import './AppMusicList.less'
+import styles from './AppMusicList.module.less'
 import { fetchMusicIfNeeded, switchPlayerMed } from '../../redux/actions/player'
 import { player } from '../../constants/router'
 import { useLocation } from 'react-router-dom'
+import classNames from 'classnames'
 
 interface AppMusicListProps {
   data: {
@@ -22,22 +23,22 @@ class AppMusicList extends Component<AppMusicListProps> {
       location: { pathname }
     } = this.props
     return (
-      <ul className="AppMusicList">
+      <ul className={styles.AppMusicList}>
         {data.map((music, index) => (
           <li
-            className="AppMusicList__item main_border_bottom"
+            className={classNames(styles.AppMusicList__item, 'main_border_bottom')}
             key={music.hash}
             onClick={(e) => {
               dispatch(fetchMusicIfNeeded(music.hash, index, data))
               dispatch(switchPlayerMed(pathname !== player))
             }}
           >
-            <div className="AppMusicList__info">
+            <div className={styles.AppMusicList__info}>
               {renderMusicSequence(index)}
-              <div className="AppMusicList__name">{music.filename}</div>
+              <div className={styles.AppMusicList__name}>{music.filename}</div>
             </div>
             <button
-              className="AppMusicList__download"
+              className={styles.AppMusicList__download}
               onClick={(e) => e.stopPropagation}
             >
               <svg className="icon" aria-hidden="true">

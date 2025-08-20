@@ -1,6 +1,6 @@
 import React from 'react'
 import Slider from 'react-slick'
-import './NewSongsSlider.less'
+import styles from './NewSongsSlider.module.less'
 const settings = {
   dots: true,
   autoplay: true,
@@ -20,14 +20,14 @@ function NewSongsSlider({
   banners
 }: NewSongsSliderProps) {
   return (
-    <div className="newSongsSlider" onTouchStart={e => e.stopPropagation()}>
+    <div className={styles.newSongsSlider} onTouchStart={e => e.stopPropagation()}>
       <Slider {...settings}>
         {banners.map(banner => (
           <div key={banner.id}>
             <img
               src={banner.imgurl}
               alt={banner.title}
-              className="newSongsSlider__img"
+              className={styles.newSongsSlider__img}
             />
           </div>
         ))}

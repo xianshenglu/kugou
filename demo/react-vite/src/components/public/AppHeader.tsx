@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import logo__text from '../../assets/images/logo__text.png'
 import { NavLink } from 'react-router-dom'
-import './AppHeader.less'
+import styles from './AppHeader.module.less'
 import { root, search } from '../../constants/router'
-class AppHeader extends Component {
-  constructor(props) {
+class AppHeader extends Component<Record<string, unknown>> {
+  constructor(props: Record<string, unknown>) {
     super(props)
     this.goBack = this.goBack.bind(this)
   }
@@ -13,17 +13,17 @@ class AppHeader extends Component {
   }
   render() {
     return (
-      <header className="AppHeader">
-        <button className="AppHeader__back" onClick={this.goBack}>
+        <header className={styles.AppHeader}>
+          <button className={styles.AppHeader__back} onClick={this.goBack}>
           <svg className="icon" aria-hidden="true">
             <use xlinkHref="#icon-arrow-left" />
           </svg>
         </button>
         <NavLink to={root}>
-          <img className="AppHeader__logo" src={logo__text} alt="logo" />
+            <img className={styles.AppHeader__logo} src={logo__text} alt="logo" />
         </NavLink>
         <NavLink
-          className="AppHeader__searchBtn"
+            className={styles.AppHeader__searchBtn}
           to={search}
           // @click.native="bus.$emit('searchBtnClicked')"
         >

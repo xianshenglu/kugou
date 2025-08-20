@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import './SingerCategories.less'
+import styles from './SingerCategories.module.less'
+import classNames from 'classnames'
 
 interface SingerCategoriesProps {
   singerCategories: {
@@ -19,22 +20,22 @@ class SingerCategories extends Component<SingerCategoriesProps> {
       <React.Fragment>
         {singerCategories.map(category => (
           <ul
-            className="singerCategories__list main_border"
+            className={classNames(styles.singerCategories__list, 'main_border')}
             key={category.category}
           >
             {category.children.map(childCategory => (
               <li
-                className="singerCategories__item main_border_bottom"
+                className={classNames(styles.singerCategories__item, 'main_border_bottom')}
                 key={childCategory.path}
               >
                 <NavLink
                   to={childCategory.path}
-                  className="singerCategories__link"
+                  className={styles.singerCategories__link}
                 >
-                  <div className="singerCategories__title">
+                  <div className={styles.singerCategories__title}>
                     {childCategory.name}
                   </div>
-                  <button className="singerCategories_btn">
+                  <button className={styles.singerCategories_btn}>
                     <svg className="icon" aria-hidden="true">
                       <use xlinkHref="#icon-arrow-right" />
                     </svg>

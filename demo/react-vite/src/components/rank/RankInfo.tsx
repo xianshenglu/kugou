@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import InfoHeader from '../public/InfoHeader'
 import AppMusicList from '../public/AppMusicList'
-import './RankInfo.less'
 import { formatDate } from '../../assets/js/utils'
+import styles from './RankInfo.module.less'
+import classNames from 'classnames'
 
 interface RankInfoProps {
   songsData: {
@@ -17,7 +18,7 @@ interface RankInfoProps {
 class RankInfo extends Component<RankInfoProps> {
   renderUpdatedTime(updatedTime) {
     return () => (
-      <time className="RankInfo__updatedTime">
+      <time className={styles.RankInfo__updatedTime}>
         {'上次更新时间: ' + updatedTime}
       </time>
     )
@@ -27,7 +28,7 @@ class RankInfo extends Component<RankInfoProps> {
     return (
       <div
         className={
-          'RankInfo__musicSequence RankInfo__musicSequence--' + sequence
+          classNames(styles.RankInfo__musicSequence, styles['RankInfo__musicSequence--' + sequence])
         }
       >
         {sequence}
