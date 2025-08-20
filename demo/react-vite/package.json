@@ -8,6 +8,7 @@
     "postinstall": "cd ../shared && npm ci",
     "build": "vite build",
     "build:feature": "tsc -b && vite build",
+    "build:analysis": "vite build --mode analysis",
     "lint": "eslint .",
     "preview": "vite preview"
   },
