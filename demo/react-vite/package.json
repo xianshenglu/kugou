@@ -8,6 +8,7 @@
     "postinstall": "cd ../shared && npm ci",
     "build": "vite build",
     "build:feature": "tsc -b && vite build",
+    "type-check": "tsc -b",
     "build:analysis": "vite build --mode analysis",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -33,6 +34,7 @@
     "@types/node": "^24.2.0",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
+    "@types/react-slick": "^0.23.13",
     "@types/redux-logger": "^3.0.13",
     "@vitejs/plugin-react": "^4.7.0",
     "eslint": "^9.32.0",

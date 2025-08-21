@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { getComponentDisplayName } from '../../assets/js/utils'
 import { fetchMusicIfNeeded } from '../../redux/actions/player'
 import { player } from '../../constants/router'
