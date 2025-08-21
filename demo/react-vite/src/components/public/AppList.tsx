@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import type { ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
@@ -22,14 +22,10 @@ const AppList = ({
   className
 }: AppListProps) => {
   const lazyImageRefs = useRef<Array<HTMLImageElement | null>>([])
-  const lazyImages = useRef<Array<HTMLImageElement | null>>([])
-
   const initLazyImgLoad = () => {
-    lazyImages.current = lazyImageRefs.current.map((el) => el)
-    $_xsl__loadImgLazy(lazyImages.current)
+    $_xsl__loadImgLazy(lazyImageRefs.current as any)
   }
   useEffect(() => {
-    lazyImageRefs.current = lazyImageRefs.current.slice(0, data.length)
     initLazyImgLoad()
   }, [data, render, className])
 
@@ -37,10 +33,20 @@ const AppList = ({
     initLazyImgLoad()
   }, [])
 
+  const setLazyImageElement = (
+    index: number,
+    element: HTMLImageElement | null
+  ) => {
+    lazyImageRefs.current[index] = element
+    return () => {
+      lazyImageRefs.current.splice(index, 1)
+    }
+  }
+
   return (
     <ul
       className={classNames(styles.AppList, className)}
-      onScroll={() => $_xsl__loadImgLazy(lazyImages.current)}
+      onScroll={() => $_xsl__loadImgLazy(lazyImageRefs.current  as any)}
     >
       {data.map((item, index) => {
         return (
@@ -48,9 +54,7 @@ const AppList = ({
             <NavLink to={item.path} className={styles.AppList__link}>
               <img
                 className={classNames(styles.AppList__img, 'lazyImage')}
-                ref={(el) => {
-                  lazyImageRefs.current[index] = el
-                }}
+                ref={(el) => setLazyImageElement(index, el)}
                 src={logo__grey}
                 data-src={item.imgurl}
                 alt={item.name}
