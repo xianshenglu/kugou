@@ -7,20 +7,18 @@ import PrevButton from './PrevButton'
 import PlayButton from './PlayButton'
 import NextButton from './NextButton'
 import { togglePlay } from '../../redux/actions/player'
+import type { Song } from '@shared/domains/song/model'
+import type { Dispatch } from 'redux'
 
 interface PlayerMedProps {
   musicStatus: {
     isPlaying: boolean;
     isLoading: boolean;
   };
-  songInfo: {
-    song_name: string;
-    author_name: string;
-    img: string;
-  };
-  dispatch(...args: unknown[]): unknown;
-  nextSong(...args: unknown[]): unknown;
-  prevSong(...args: unknown[]): unknown;
+  songInfo: Song;
+  dispatch?: Dispatch;
+  nextSong?: any;
+  prevSong?: any;
 }
 
 class PlayerMed extends Component<PlayerMedProps> {
@@ -55,7 +53,7 @@ class PlayerMed extends Component<PlayerMedProps> {
               className={styles.PlayerMed__playBtn}
               isLoading={isLoading}
               isPlaying={isPlaying}
-              togglePlay={e => dispatch(togglePlay())}
+              togglePlay={() => dispatch?.(togglePlay())}
             />
             <NextButton className={styles.PlayerMed__nextBtn} next={nextSong} />
           </div>
