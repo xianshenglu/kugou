@@ -1,3 +1,4 @@
+import type { KeyboardEvent } from 'react'
 import { imgSize } from '../../constants/ui'
 
 export function $_xsl__replaceImgUrlSize(str = '', size: string | number = imgSize) {
