@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import { Component, Fragment } from 'react'
 import classNames from 'classnames'
 import styles from './Search.module.less'
 import AppMusicList from '../public/AppMusicList'
@@ -57,7 +57,7 @@ class Search extends Component<SearchProps> {
           </form>
           <div className={classNames({ hidden: !isHotSearchShow })}>
             <h6 className={styles.Search__type}>最近热门</h6>
-            <ul className={styles.Search__list}>
+            <ul>
               {hotList.map(list => (
                 <li
                   className={classNames(styles.Search__item, 'main_border_bottom')}
