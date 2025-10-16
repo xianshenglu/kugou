@@ -21,6 +21,7 @@ import AppMusicList from '@/components/AppMusicList.vue'
 import { fetchSingerInfo } from '../../requests/singerInfo'
 import { useLoading } from '@/composables/useLoading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
+import { mapSingerInfoData } from '@shared/domains/singer/mapper'
 
 const store = useStore<RootState>()
 const route = useRoute()
@@ -43,25 +44,9 @@ const getMusicList = computed(() => {
 
 function getSingerInfo (singerId: string): void {
   fetchSingerInfo({ singerId }).then(({ data }) => {
-    // todo:refactor move the transformation to pipe?
-    const singerInfoData = {
-      info: {
-        id: data.info.singerid,
-        name: data.info.singername,
-        count: data.info.songcount,
-        albumcount: data.info.albumcount,
-        imgUrl: replaceSizeInUrl(data.info.imgurl),
-        intro: data.info.intro
-      },
-      data: data.songs.list
-    }
-    data.songs.list.forEach((obj: any) => {
-      obj.name = obj.filename
-      // obj.path='/singer/info/'+obj.id
-    })
     store.commit('replaceProperty', {
       paths: 'singer.singerInfo',
-      data: singerInfoData
+      data: mapSingerInfoData(data)
     })
     stopLoading()
   })

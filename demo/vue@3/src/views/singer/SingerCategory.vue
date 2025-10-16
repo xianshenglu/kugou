@@ -28,8 +28,8 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 import type { RootState } from '@/store'
 import { fetchSingerCategory } from '../../requests/singerCategory'
+import { mapSingerCategoryData } from '@shared/domains/singer/mapper'
 import { useLoading } from '@/composables/useLoading'
-import type { SingerCategoryData } from 'src/store/singer'
 
 const store = useStore<RootState>()
 const { startLoading, stopLoading, setLoadingExcludeNav } = useLoading()
@@ -44,24 +44,9 @@ if (singerCategories.value.length === 0) {
 
 function getSingerCategories(): void {
   fetchSingerCategory().then(({ data }) => {
-    const singerCategoriesData = data.list.reduce<SingerCategoryData[]>((re, obj) => {
-      (obj as any).path = '/singer/list/' + obj.classid
-      const findCategories = re.find(
-        o => o.category === obj.classname.substring(0, 2)
-      )
-      if (findCategories) {
-        findCategories.data.push(obj)
-      } else {
-        re.push({
-          category: obj.classname.substring(0, 2),
-          data: [obj]
-        })
-      }
-      return re
-    }, [])
     store.commit('replaceProperty', {
       paths: 'singer.singerCategories',
-      data: singerCategoriesData
+      data: mapSingerCategoryData(data)
     })
     stopLoading()
   })

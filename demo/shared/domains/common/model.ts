@@ -1,4 +1,5 @@
 // Shared interfaces used across domain models
+export const IMG_SIZE__DEFAULT: string = '400'
 
 export interface Pagination {
   total?: number

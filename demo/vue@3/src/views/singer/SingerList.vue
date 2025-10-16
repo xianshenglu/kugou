@@ -32,6 +32,7 @@ import { fetchSingerList } from '../../requests/singerList'
 import { useLoading } from '@/composables/useLoading'
 import { lazyLoad } from '@/utils'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
+import { mapSingerListData } from '@shared/domains/singer/mapper'
 
 const store = useStore<RootState>()
 const route = useRoute()
@@ -69,25 +70,9 @@ const saveImageRef = (index: number, el: HTMLImageElement) => {
 
 function getSingerList(singerListId: string) {
   fetchSingerList({ params: { singerListId } }).then(({ data }) => {
-    const mappedList = (data.singers.list.info).map((raw) => ({
-      ...raw,
-      id: raw.singerid,
-      name: raw.singername,
-      imgUrl: replaceSizeInUrl(raw.imgurl),
-      path: '/singer/info/' + raw.singerid
-    }))
-
-    const singerListData = {
-      info: {
-        id: data.classid,
-        name: data.classname,
-        count: data.singers.total
-      },
-      data: mappedList
-    }
     store.commit('replaceProperty', {
       paths: 'singer.singerList',
-      data: singerListData
+      data: mapSingerListData(data)
     })
     stopLoading()
   })

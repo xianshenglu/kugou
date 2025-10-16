@@ -1,7 +1,7 @@
 import http from './http'
 import { getSingerInfo } from '@shared/api/singerInfo'
 import type { AxiosPromise } from 'axios'
-import type { SingerInfoResponse } from '@shared/domains/singer/model'
+import type { SingerInfoResponseDto } from '@shared/domains/singer/dto'
 
 // 定义参数接口
 interface SingerInfoParams {
@@ -9,7 +9,7 @@ interface SingerInfoParams {
 }
 
 // 定义获取歌手信息函数
-export const fetchSingerInfo = ({ singerId, params = {} }: { singerId?: string; params?: SingerInfoParams } = {}): AxiosPromise<SingerInfoResponse> => {
+export const fetchSingerInfo = ({ singerId, params = {} }: { singerId?: string; params?: SingerInfoParams } = {}): AxiosPromise<SingerInfoResponseDto> => {
   let { url, ...props } = getSingerInfo
   url += '/' + singerId + '&json=true'
   return http({ ...props, url, params })
