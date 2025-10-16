@@ -12,8 +12,9 @@ import AppMusicList from '@/components/AppMusicList.vue';
 import Slider from './Slider.vue';
 import { fetchNewSong } from '@/requests/newSong';
 import { useLoading } from '@/composables/useLoading';
+import type { RootState } from '@/store';
 
-const store = useStore();
+const store = useStore<RootState>();
 
 const newSongs = computed(() => store.state.newSong.newSongs);
 const sliderData = computed(() => store.state.newSong.sliderData);

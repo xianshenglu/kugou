@@ -26,6 +26,7 @@
 <script lang="ts" setup generic="Item extends { imgUrl: string; title: string; path: string }">
 import { ref, watch, nextTick, computed, useTemplateRef } from 'vue';
 import { useStore } from 'vuex';
+import type { RootState } from '@/store';
 import { lazyLoad } from '@/utils';
 interface Props {
   pubList: Array<Item>;
@@ -34,7 +35,7 @@ const props = withDefaults(defineProps<Props>(), {
   pubList: () => []
 });
 
-const store = useStore();
+const store = useStore<RootState>();
 const lazyImageElements = ref<(HTMLImageElement | null)[]>([]);
 const lazyLoadRoot = useTemplateRef<HTMLUListElement | null>('lazyLoadRoot');
 

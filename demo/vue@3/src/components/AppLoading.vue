@@ -9,8 +9,9 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
+import type { RootState } from '@/store';
 
-const store = useStore();
+const store = useStore<RootState>();
 
 const isShow = computed(() => store.state.loading.isShow);
 const sizeClassName = computed(() => store.state.loading.sizeClassName);

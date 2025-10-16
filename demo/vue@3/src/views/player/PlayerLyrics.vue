@@ -14,18 +14,19 @@
 <script lang="ts" setup>
 import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue';
 import { useStore } from 'vuex';
+import type { RootState } from '@/store';
 import { getVBindObj } from '@/utils';
 interface LyricItem {
   millisecond: number;
   text: string;
 }
-const store = useStore();
+const store = useStore<RootState>();
 
 const prevLyricIndex = ref(0);
 const isTouching = ref(false);
 const lyricElements = ref<Record<string, HTMLElement | null>>({});
 
-const audioEl = computed(() => store.state.player.audioEl);
+const audioEl = computed(() => store.state.player.audioEl!);
 const lyricItems = computed<LyricItem[]>(() => store.getters['player/lyricItems']);
 const lyricMillisecond = computed(() => {
   return lyricItems.value.map(o => o.millisecond);

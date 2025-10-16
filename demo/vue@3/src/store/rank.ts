@@ -1,14 +1,16 @@
-// 定义排行榜状态接口
+import type { RoutableItem } from '@shared/domains/common/model'
+import type { RankSummary, RankSong } from '@shared/domains/rank/model'
+export interface RankSummaryWithRoute extends RankSummary, RoutableItem {}
 interface RankInfo {
-  info: Record<string, any>
+  info: RankSummary | null
   songs: {
     timestamp: number
-    list: any[]
+    list: RankSong[]
   }
 }
 
-interface RankState {
-  rankList: any[]
+export interface RankState {
+  rankList: RankSummaryWithRoute[]
   rankInfo: RankInfo
 }
 
@@ -20,7 +22,7 @@ const rank: {
   state: (): RankState => ({
     rankList: [],
     rankInfo: {
-      info: {},
+      info: null,
       songs: {
         timestamp: Date.now(),
         list: []

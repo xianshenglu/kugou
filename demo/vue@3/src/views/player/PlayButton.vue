@@ -15,8 +15,9 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
+import type { RootState } from '@/store';
 
-const store = useStore();
+const store = useStore<RootState>();
 
 const isPlaying = computed(() => store.state.player.isPlaying);
 const isLoading = computed(() => store.state.player.isLoading);

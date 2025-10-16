@@ -21,29 +21,17 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import type { RootState } from '@/store'
 
 import PubList from '@/modules/PubList.vue'
 import { fetchSongList } from '../../requests/songList'
 import { useLoading } from '@/composables/useLoading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 
-// 定义歌单信息接口
-interface SongListItem {
-  specialid: string;
-  imgurl: string;
-  specialname: string;
-  playcount: number;
-  imgUrl: string;
-  path: string;
-  title: string;
-  popularity: number;
-  [key: string]: any;
-}
-
-const store = useStore()
+const store = useStore<RootState>()
 const { startLoading, stopLoading, setLoadingExcludeNav } = useLoading()
 
-const songList = computed<SongListItem[]>(() => store.state.song.songList)
+const songList = computed(() => store.state.song.songList)
 
 const getSongList = () => {
   fetchSongList().then(({ data }) => {

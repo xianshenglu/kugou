@@ -1,8 +1,8 @@
 <template>
   <section class="singer_info">
-    <PubModuleHead :module-head-info="getModuleHeadInfo">
+    <PubModuleHead v-if="getModuleHeadInfo" :module-head-info="getModuleHeadInfo">
       <template v-slot:moduleDes>
-        <PubModuleDes :description="getModuleHeadInfo.intro" />
+        <PubModuleDes :description="getModuleHeadInfo.intro!" />
       </template>
     </PubModuleHead>
     <AppMusicList :music-list="getMusicList" />
@@ -12,6 +12,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import type { RootState } from '@/store'
 import { useRoute } from 'vue-router'
 
 import PubModuleHead from '@/components/PubModuleHead.vue'
@@ -21,25 +22,11 @@ import { fetchSingerInfo } from '../../requests/singerInfo'
 import { useLoading } from '@/composables/useLoading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 
-// 定义歌手信息接口
-interface SingerInfoData {
-  info: {
-    id: string;
-    name: string;
-    count: number;
-    albumcount: number;
-    imgUrl: string;
-    intro: string;
-    [key: string]: any;
-  };
-  data: any[];
-}
-
-const store = useStore()
+const store = useStore<RootState>()
 const route = useRoute()
 const { startLoading, stopLoading, setLoadingExcludeHeader } = useLoading()
 
-const singerInfo = computed<SingerInfoData>(() => store.state.singer.singerInfo)
+const singerInfo = computed(() => store.state.singer.singerInfo)
 
 const singerId = route.path.split('/').pop() || ''
 setLoadingExcludeHeader()
@@ -51,12 +38,13 @@ const getModuleHeadInfo = computed(() => {
 })
 
 const getMusicList = computed(() => {
-  return singerInfo.value.data
+  return singerInfo.value.data as any // todo:refactor fix the type compatibility issue.
 })
 
 function getSingerInfo (singerId: string): void {
   fetchSingerInfo({ singerId }).then(({ data }) => {
-    const singerInfoData: SingerInfoData = {
+    // todo:refactor move the transformation to pipe?
+    const singerInfoData = {
       info: {
         id: data.info.singerid,
         name: data.info.singername,

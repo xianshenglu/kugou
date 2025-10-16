@@ -24,7 +24,7 @@ import store from '../../store/index'
 export default {
   beforeRouteEnter(to, _from, next) {
     //play music if musicHash exists which means this page was loaded directly
-    let musicHash = to.query.musicHash
+    let musicHash = to.query.musicHash as LocationQueryValue
     if (!musicHash) {
       return
     }
@@ -35,7 +35,7 @@ export default {
     }
     //? just commit player/wantPlay is enough?
     return fetchSongLyric({ params: { hash: musicHash } }).then(res => {
-      let musicData = res.data.data
+      let musicData = res.data.data!
       musicData.filename = musicData.audio_name
       store.commit('player/wantPlay', {
         music: musicData,
@@ -50,7 +50,8 @@ export default {
 <script lang="ts" setup>
 import { computed, watch, onMounted, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
+import { useRouter, type LocationQueryValue } from 'vue-router'
+import type { RootState } from '@/store'
 
 import PlayerLyrics from './PlayerLyrics.vue'
 import PlayerProgress from './PlayerProgress.vue'
@@ -59,7 +60,7 @@ import NextButton from './NextButton.vue'
 import PrevButton from './PrevButton.vue'
 import { fetchSongLyric } from '@/requests/player'
 
-const store = useStore()
+const store = useStore<RootState>()
 const router = useRouter()
 
 const music = computed(() => store.state.player.music)

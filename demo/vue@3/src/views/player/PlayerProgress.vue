@@ -11,12 +11,13 @@
 <script lang="ts" setup>
 import { ref, computed, onMounted, onUnmounted, nextTick, useTemplateRef } from 'vue'
 import { useStore } from 'vuex'
+import type { RootState } from '@/store'
 import { secondToMin } from '@/utils'
 
-const store = useStore()
+const store = useStore<RootState>()
 const progressBar = useTemplateRef<HTMLDivElement | null>('progressBar')
 
-const audioEl = computed(() => store.state.player.audioEl)
+const audioEl = computed(() => store.state.player.audioEl!)
 
 const currentTime = ref(0)
 const loadProgress = ref(0)

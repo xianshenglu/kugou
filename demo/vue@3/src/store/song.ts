@@ -1,17 +1,21 @@
-// 定义歌曲列表信息接口
+import type { RoutableItem } from '@shared/domains/common/model'
+import type { PlaylistSummary, PlaylistInnerInfo, PlaylistItem } from '@shared/domains/playlist/model'
+export interface PlaylistItemInUi extends PlaylistSummary, RoutableItem {
+  popularity?: number
+}
 interface SongListInfo {
   info: {
-    list: Record<string, any>
+    list: PlaylistInnerInfo | null
   }
   songs: {
     list: {
-      info: any[]
+      info: PlaylistItem[]
     }
   }
 }
 
-interface SongState {
-  songList: any[]
+export interface SongState {
+  songList: PlaylistItemInUi[]
   songListInfo: SongListInfo
 }
 
@@ -24,7 +28,7 @@ const song: {
     songList: [],
     songListInfo: {
       info: {
-        list: {}
+        list: null
       },
       songs: {
         list: {

@@ -20,13 +20,14 @@
 <script lang="ts" setup>
 import { onMounted, computed, useTemplateRef } from 'vue'
 import { useStore } from 'vuex'
+import type { RootState } from '@/store'
 
 import AppHeader from '@/components/AppHeader.vue'
 import AppLoading from './components/AppLoading.vue'
 import PlayerMed from './views/player/PlayerMed.vue'
 
 const audioEl = useTemplateRef<HTMLAudioElement | null>('audioEl')
-const store = useStore()
+const store = useStore<RootState>()
 
 const isPlayerMedShow = computed(() => store.state.player.isPlayerMedShow)
 const isPlayerMedSmall = computed(() => store.state.player.isPlayerMedSmall)

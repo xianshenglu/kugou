@@ -7,23 +7,24 @@
         v-for="(item,index) in singerList.data"
         :key="index"
       >
-        <router-link :to="item.path" class="singer_list__link">
+        <router-link :to="'/singer/info/' + item.singerid" class="singer_list__link">
           <img
             class="singer_list__img lazy_image"
-            :ref="el => saveImageRef(index, el)"
+            :ref="el => saveImageRef(index, el as HTMLImageElement)"
             :src="logo__grey"
-            :data-src="item.imgUrl"
+            :data-src="replaceSizeInUrl(item.imgurl)"
           >
-          <div class="singer_list__name">{{item.name}}</div>
+          <div class="singer_list__name">{{item.singername}}</div>
         </router-link>
       </li>
     </ul>
   </section>
 </template>
 
-<script setup>
-import { ref, computed, watch, nextTick, onMounted, useTemplateRef } from 'vue'
+<script lang="ts" setup>
+import { ref, computed, watch, nextTick, useTemplateRef } from 'vue'
 import { useStore } from 'vuex'
+import type { RootState } from '@/store'
 import { useRoute } from 'vue-router'
 
 import PubModuleTitle from '@/components/PubModuleTitle.vue'
@@ -32,12 +33,12 @@ import { useLoading } from '@/composables/useLoading'
 import { lazyLoad } from '@/utils'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 
-const store = useStore()
+const store = useStore<RootState>()
 const route = useRoute()
 const { startLoading, stopLoading, setLoadingExcludeHeader } = useLoading()
 
 const lazyLoadRoot = useTemplateRef<HTMLUListElement | null>('lazyLoadRoot')
-const lazyImageElements = ref([])
+const lazyImageElements = ref<(HTMLImageElement | null)[]>([])
 
 const logo__grey = computed(() => store.state.images.logo__grey)
 const singerList = computed(() => store.state.singer.singerList)
@@ -48,7 +49,7 @@ watch(()=>singerList.value.data, (newArray) => {
   }
   lazyImageElements.value = newArray.map(() => null)
   nextTick(() =>
-    lazyLoad(lazyImageElements.value, { root: lazyLoadRoot.value })
+    lazyLoad(lazyImageElements.value as HTMLImageElement[], { root: lazyLoadRoot.value })
   )
 }, {
   immediate: true
@@ -60,28 +61,30 @@ const singerListId = route.path.split('/').pop()
 if (Number(singerListId) !== singerList.value.info.id) {
   setLoadingExcludeHeader()
   startLoading()
-  getSingerList(singerListId)
+  getSingerList(singerListId as string)
 }
-const saveImageRef = (index, el) => {
+const saveImageRef = (index: number, el: HTMLImageElement) => {
   lazyImageElements.value[index] = el
 }
 
-function getSingerList(singerListId) {
+function getSingerList(singerListId: string) {
   fetchSingerList({ params: { singerListId } }).then(({ data }) => {
+    const mappedList = (data.singers.list.info).map((raw) => ({
+      ...raw,
+      id: raw.singerid,
+      name: raw.singername,
+      imgUrl: replaceSizeInUrl(raw.imgurl),
+      path: '/singer/info/' + raw.singerid
+    }))
+
     const singerListData = {
       info: {
         id: data.classid,
         name: data.classname,
         count: data.singers.total
       },
-      data: data.singers.list.info
+      data: mappedList
     }
-    data.singers.list.info.forEach(obj => {
-      obj.id = obj.singerid
-      obj.name = obj.singername
-      obj.imgUrl = replaceSizeInUrl(obj.imgurl)
-      obj.path = '/singer/info/' + obj.id
-    })
     store.commit('replaceProperty', {
       paths: 'singer.singerList',
       data: singerListData

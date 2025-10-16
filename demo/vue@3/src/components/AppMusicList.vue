@@ -16,6 +16,7 @@
 
 <script lang="ts" setup>
 import { useStore } from 'vuex';
+import type { RootState } from '@/store';
 
 // 定义音乐项接口
 interface MusicItem {
@@ -32,7 +33,7 @@ const props = withDefaults(defineProps<Props>(), {
   musicList: () => [] as MusicItem[]
 });
 
-const store = useStore();
+const store = useStore<RootState>();
 
 const wantPlay = (music: MusicItem) => {
   store.commit('player/wantPlay', {

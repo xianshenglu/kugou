@@ -1,5 +1,4 @@
-// 定义设备状态接口
-interface DeviceState {
+export interface DeviceState {
   vh: number
   vMax: number
 }
