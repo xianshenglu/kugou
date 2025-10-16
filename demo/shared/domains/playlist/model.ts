@@ -1,4 +1,5 @@
 import type { MediaItem } from '../common/model'
+import type { Song } from '../song/model'
 
 export interface PlaylistItem extends MediaItem {
   audio_id: number
@@ -7,20 +8,46 @@ export interface PlaylistItem extends MediaItem {
   hash: string
 }
 
-export interface Playlist {
+interface PlaylistBase {
+  collectcount?: number
+  imgurl: string
+  intro: string
+  playcount?: number
+  singername: string
+  slid: number
   specialid: number
   specialname: string
-  playcount?: number
+  suid: number
+}
+
+export interface PlaylistSummary extends PlaylistBase {
   collectcount?: number
   songs?: PlaylistItem[]
+  username: string
+}
+export interface PlaylistInnerInfo extends PlaylistBase {
+  nickname: string
+  songcount: number
+  tags: any[]
 }
 
 export interface PlaylistListResponse {
   plist: {
     list: {
       timestamp?: number
-      info: Playlist[]
+      info: PlaylistSummary[]
       total?: number
     }
+  }
+}
+
+export interface PlaylistInfoResponse {
+  list: {
+    list: {
+      info: Song[]
+    }
+  }
+  info: {
+    list: PlaylistInnerInfo
   }
 }

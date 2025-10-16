@@ -6,6 +6,11 @@ export interface Pagination {
   pagesize?: number
 }
 
+export interface PaginationQuery {
+  page?: number
+  pagesize?: number
+}
+
 export interface APIResponse<T = any> {
   status?: number
   errcode?: number
@@ -28,4 +33,10 @@ export interface MediaItem {
   filename?: string
   duration?: number
   extname?: string
+}
+
+export interface RoutableItem {
+  path: string
+  title: string
+  imgUrl: string
 }

@@ -6,6 +6,7 @@ export interface RankSummary {
   rankname: string
   update_frequency?: string
   intro?: string
+  banner7url: string;
 }
 
 export interface RankSong extends MediaItem {

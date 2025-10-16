@@ -18,18 +18,21 @@ export interface SingerInfo {
   intro?: string
   songcount?: number
   albumcount?: number
+  imgurl: string
 }
 
 export interface SingerListResponse {
   classid?: number
   classname?: string
-  singers?: {
+  singers: {
     total?: number
     list: { info: SingerSummary[] }
   }
 }
-
+export interface SingerCategoryListResponse {
+  list: SingerCategory[]
+}
 export interface SingerInfoResponse {
   info: SingerInfo
-  songs?: { total?: number; list?: MediaItem[] }
+  songs: { total: number; list: MediaItem[] }
 }
