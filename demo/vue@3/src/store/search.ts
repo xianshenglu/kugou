@@ -1,12 +1,8 @@
-import type { SearchResultItem, HotSearchItem } from '@shared/domains/search/model'
-
-interface SearchRes {
-  info: SearchResultItem[]
-}
+import type { HotSearchItem, SearchResultData } from '@shared/domains/search/model'
 
 export interface SearchState {
   searchRecArr: HotSearchItem[]
-  searchRes: SearchRes
+  searchRes: SearchResultData
   keyword: string
   isSearchRecShow: boolean
   isSearchResShow: boolean

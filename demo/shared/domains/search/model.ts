@@ -1,22 +1,12 @@
-import type { MediaItem } from '../common/model'
+import type {
+  HotSearchItemDto,
+  SearchResultItemDto,
+  SearchResultDataDto,
+} from './dto'
 
-export interface HotSearchItem {
-  sort: number
-  keyword: string
-  jumpurl?: string
-}
+export type HotSearchItem = HotSearchItemDto
 
-export interface HotSearchResponse {
-  status: number
-  data: { timestamp?: number; info: HotSearchItem[] }
-}
+export type SearchResultItem = SearchResultItemDto
 
-export interface SearchResultItem extends MediaItem {
-  songname?: string
-  singername?: string
-}
+export type SearchResultData = Pick<SearchResultDataDto, 'info'>
 
-export interface SearchResultResponse {
-  status: number
-  data: { total?: number; info: SearchResultItem[] }
-}

@@ -1,12 +1,10 @@
-export interface SongDto {
+export interface SongBaseDto {
     pay_type_320:     number;
     m4afilesize:      number;
     price_sq:         number;
     filesize:         number;
     bitrate:          number;
-    identity:         number;
     price:            number;
-    inlist:           number;
     old_cpy:          number;
     pkg_price_sq:     number;
     pay_type:         number;
@@ -21,8 +19,7 @@ export interface SongDto {
     audio_id:         number;
     sqfilesize:       number;
     privilege:        number;
-    topic_url_320:    string;
-    trans_param:      {
+    trans_param: {
         roaming_astrict:   number;
         pay_block_tpl:     number;
         musicpack_advance: number;
@@ -33,14 +30,11 @@ export interface SongDto {
     album_audio_id:   number;
     "320hash":        string;
     fail_process_320: number;
-    has_accompany:    number;
     fail_process_sq:  number;
     "320filesize":    number;
     rp_publish:       number;
     duration:         number;
-    topic_url_sq:     string;
     sqhash:           string;
-    remark:           string;
     "320privilege":   number;
     fail_process:     number;
     pkg_price_320:    number;
@@ -49,3 +43,13 @@ export interface SongDto {
     sqprivilege:      number;
     album_id:         string;
 }
+
+export interface SongDto extends SongBaseDto {
+    identity:         number;
+    inlist:           number;
+    topic_url_320:    string;
+    topic_url_sq:     string;
+    remark:           string;
+    has_accompany:    number;
+}
+
