@@ -21,6 +21,7 @@ import { fetchSongListInfo } from '../../requests/songListInfo'
 import { useLoading } from '@/composables/useLoading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 import type { RootState } from '@/store'
+import { mapPlaylistInfo } from '@shared/domains/playlist/mapper'
 
 const store = useStore<RootState>()
 const route = useRoute()
@@ -43,13 +44,9 @@ const getMusicList = computed(() => {
 
 const getSongListInfo = (songListId: string) => {
   fetchSongListInfo({ songListId }).then(({ data }) => {
-    const songListInfoData = {
-      info: data.info,
-      songs: data.list
-    }
     store.commit('replaceProperty', {
       paths: 'song.songListInfo',
-      data: songListInfoData
+      data: mapPlaylistInfo(data)
     })
     stopLoading()
   })

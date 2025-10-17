@@ -1,53 +1,15 @@
-import type { MediaItem } from '../common/model'
-import type { Song } from '../song/model'
+import type { RoutableItem } from '../common/model'
+import type { PlaylistSummaryDto, PlaylistDetailSummaryDto, PlaylistListResponseDto, PlaylistInfoResponseDto } from './dto'
 
-export interface PlaylistItem extends MediaItem {
-  audio_id: number
-  filename: string
-  duration: number
-  hash: string
+export interface PlaylistSummary extends PlaylistSummaryDto, RoutableItem {
+  popularity: number
 }
 
-interface PlaylistBase {
-  collectcount?: number
-  imgurl: string
-  intro: string
-  playcount?: number
-  singername: string
-  slid: number
-  specialid: number
-  specialname: string
-  suid: number
-}
+export type PlaylistDetailSummary = PlaylistDetailSummaryDto
 
-export interface PlaylistSummary extends PlaylistBase {
-  collectcount?: number
-  songs?: PlaylistItem[]
-  username: string
-}
-export interface PlaylistInnerInfo extends PlaylistBase {
-  nickname: string
-  songcount: number
-  tags: any[]
-}
+export type PlaylistListData = PlaylistSummary[]
 
-export interface PlaylistListResponse {
-  plist: {
-    list: {
-      timestamp?: number
-      info: PlaylistSummary[]
-      total?: number
-    }
-  }
-}
-
-export interface PlaylistInfoResponse {
-  list: {
-    list: {
-      info: Song[]
-    }
-  }
-  info: {
-    list: PlaylistInnerInfo
-  }
+export interface PlaylistInfoData {
+  info: PlaylistInfoResponseDto['info']
+  songs: PlaylistInfoResponseDto['list']
 }

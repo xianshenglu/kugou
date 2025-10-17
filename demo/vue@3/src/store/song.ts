@@ -1,22 +1,8 @@
-import type { RoutableItem } from '@shared/domains/common/model'
-import type { PlaylistSummary, PlaylistInnerInfo, PlaylistItem } from '@shared/domains/playlist/model'
-export interface PlaylistItemInUi extends PlaylistSummary, RoutableItem {
-  popularity?: number
-}
-interface SongListInfo {
-  info: {
-    list: PlaylistInnerInfo | null
-  }
-  songs: {
-    list: {
-      info: PlaylistItem[]
-    }
-  }
-}
+import type { PlaylistInfoData, PlaylistListData } from '@shared/domains/playlist/model'
 
 export interface SongState {
-  songList: PlaylistItemInUi[]
-  songListInfo: SongListInfo
+  songList: PlaylistListData
+  songListInfo: PlaylistInfoData
 }
 
 const song: {
