@@ -9,8 +9,9 @@ import {
 } from "../../constants/actionType";
 import axios, { type AxiosResponse } from 'axios'
 import api from '../../constants/api'
-import type { Song, SongLyricResponse } from "@shared/domains/song/model";
+import type { SongLyricResponseDto } from "@shared/domains/song/dto";
 import type { Dispatch } from "redux";
+import type { Song } from "@shared/domains/song/model";
 export const fetchMusic = (id: any, songIndex: number, songList: Song[]) => ({
   type: FETCH_MUSIC,
   id,
@@ -25,12 +26,12 @@ export const fetchMusicIfNeeded = (id: string | null, songIndex = 0, songList: S
     // }
     dispatch(fetchMusic(id, songIndex, songList))
     dispatch(showMusicLoading())
-    axios.get<SongLyricResponse>(api.songInfoHasLyric + id).then(res => {
+    axios.get<SongLyricResponseDto>(api.songInfoHasLyric + id).then(res => {
       dispatch(receiveMusic(res, id))
     })
   }
 }
-export const receiveMusic = (response: AxiosResponse<SongLyricResponse>, id: any) => ({
+export const receiveMusic = (response: AxiosResponse<SongLyricResponseDto>, id: any) => ({
   type: RECEIVE_MUSIC,
   response,
   id

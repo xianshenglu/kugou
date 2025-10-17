@@ -2,45 +2,11 @@ import type { NewSongDto, SongBaseDto, SongPlayingInfoDto } from './dto'
 
 export type SongBase = SongBaseDto;
 
-export type Song = SongBaseDto;
+export type Song = SongBaseDto; // todo replace with SongBase?
 
 export type NewSong = NewSongDto;
 
-export interface Author {
-  author_id: string
-  author_name: string
-  avatar: string
-  sizable_avatar: string
-  is_publish: string
-}
-
-export interface SongDetail extends MediaItem {
-  hash: string
-  timelength: number
-  filesize: number
-  audio_name: string
-  have_album: number
-  album_name?: string
-  album_id?: string
-  img?: string
-  have_mv: number
-  video_id: number
-  author_name: string
-  song_name: string
-  lyrics: string
-  author_id: string
-  privilege: number
-  privilege2: string
-  play_url: string
-  authors: Author[]
-  bitrate: number
-}
-
-
-export interface SongLyricResponse extends Omit<APIResponse<SongDetail>, 'errcode'> {
-  status: number
-  err_code?: number
-}
+export interface SongPlayingInfo extends SongPlayingInfoDto {}
 
 export interface LyricItem {
   millisecond: number

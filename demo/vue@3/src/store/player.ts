@@ -2,13 +2,13 @@ import { fetchSongLyric } from '../requests/player'
 import store from './index'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 
-import type { Song, LyricItem, SongDetail } from '@shared/domains/song/model'
+import type { Song, LyricItem, SongPlayingInfo } from '@shared/domains/song/model'
 
 
 export interface PlayerState {
   musicList: Song[]
   music: Song | null
-  song: SongDetail | null
+  song: SongPlayingInfo | null
   lyrics: string
   audioEl: HTMLAudioElement | null
   isLoading: boolean

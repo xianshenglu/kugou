@@ -83,3 +83,36 @@ export interface NewSongResponseDto {
   data: NewSongDto[]
   banner: any[]
 }
+export interface AuthorDto {
+  author_id: string
+  author_name: string
+  avatar: string
+  sizable_avatar: string
+  is_publish: string
+}
+export interface SongPlayingInfoDto {
+  hash: string
+  timelength: number
+  filesize: number
+  audio_name: string
+  have_album: number
+  album_name: string
+  album_id: string
+  img: string
+  have_mv: number
+  video_id: number
+  author_name: string
+  song_name: string
+  lyrics: string
+  author_id: string
+  privilege: number
+  privilege2: string
+  play_url: string
+  authors: AuthorDto[]
+  bitrate: number
+}
+export interface SongLyricResponseDto {
+  status: number
+  err_code: number
+  data: SongPlayingInfoDto
+}

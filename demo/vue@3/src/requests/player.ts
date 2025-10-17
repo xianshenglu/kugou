@@ -1,12 +1,14 @@
 import { getSongLyric } from '@shared/api/player'
 import type { 
   SongLyricParams, 
-  SongLyricResponse 
 } from '@shared/domains/song/model'
+import type { 
+  SongLyricResponseDto 
+} from '@shared/domains/song/dto'
 import http from './http'
 import type { AxiosPromise } from 'axios'
 
-export const fetchSongLyric = ({ params = {} as any }: { params?: SongLyricParams } = {}): AxiosPromise<SongLyricResponse> => {
+export const fetchSongLyric = ({ params = {} as any }: { params?: SongLyricParams } = {}): AxiosPromise<SongLyricResponseDto> => {
   return http({ ...getSongLyric, params: { r: 'play/getdata', ...params } })
 }
 
