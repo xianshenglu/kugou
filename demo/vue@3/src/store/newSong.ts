@@ -1,7 +1,7 @@
-import type { Song } from '@shared/domains/song/model'
+import type { NewSong } from '@shared/domains/song/model'
 
 export interface NewSongState {
-  newSongs: Song[]
+  newSongs: NewSong[]
   sliderData: any[]
 }
 

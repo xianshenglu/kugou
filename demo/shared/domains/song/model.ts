@@ -1,17 +1,10 @@
-import type { MediaItem, APIResponse } from '../common/model'
+import type { NewSongDto, SongBaseDto, SongPlayingInfoDto } from './dto'
 
-export interface Song extends MediaItem {
-  audio_id: number
-  hash: string
-  filename: string
-  duration: number
-  bitrate?: number
-  filesize?: number
-  album_id?: string
-  mvhash?: string
-  privilege?: number
-  price?: number
-}
+export type SongBase = SongBaseDto;
+
+export type Song = SongBaseDto;
+
+export type NewSong = NewSongDto;
 
 export interface Author {
   author_id: string
@@ -43,12 +36,6 @@ export interface SongDetail extends MediaItem {
   bitrate: number
 }
 
-export interface NewSongResponse {
-  JS_CSS_DATE?: number
-  kg_domain?: string
-  data: Song[]
-  banner?: any[]
-}
 
 export interface SongLyricResponse extends Omit<APIResponse<SongDetail>, 'errcode'> {
   status: number

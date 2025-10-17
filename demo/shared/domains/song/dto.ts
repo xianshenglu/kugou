@@ -53,3 +53,33 @@ export interface SongDto extends SongBaseDto {
     has_accompany:    number;
 }
 
+export interface NewSongDto extends Omit<SongBaseDto, 'trans_param'> {
+    trans_param: {
+        roaming_astrict:   number;
+        pay_block_tpl:     number;
+        musicpack_advance: number;
+        cid:               number;
+        audio_privilege?:  number;
+        display_rate?:     number;
+        display?:          number;
+    };
+    first:             number;
+    inlist:            number;
+    addtime:           Date;
+    recommend_reason:  string;
+    has_accompany:     number;
+    topic_url_sq:      string;
+    remark:            string;
+    "320hash":         string;
+    "320filesize":     number;
+    "320privilege":    number;
+    topic_url_320:     string;
+    isfirst:           number;
+}
+
+export interface NewSongResponseDto {
+  JS_CSS_DATE: number
+  kg_domain: string
+  data: NewSongDto[]
+  banner: any[]
+}
