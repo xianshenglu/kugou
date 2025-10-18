@@ -1,12 +1,13 @@
 import http from './http'
 import { getNewSong } from '@shared/api/newSong'
+import type { NewSongResponseDto } from '@shared/domains/song/dto'
+import type { PaginationQuery } from '@shared/domains/common/model'
+import type { AxiosPromise } from 'axios'
 
-// 定义参数接口
-interface NewSongParams {
-  [key: string]: any
+interface NewSongParams extends PaginationQuery {
+  json?: boolean
 }
 
-// 定义新歌请求函数
-export const fetchNewSong = ({ params = {} }: { params?: NewSongParams } = {}) => {
+export const fetchNewSong = ({ params = {} }: { params?: NewSongParams } = {}): AxiosPromise<NewSongResponseDto> => {
   return http({ ...getNewSong, params: { json: true, ...params } })
 }

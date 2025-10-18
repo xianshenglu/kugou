@@ -1,11 +1,8 @@
-// 定义搜索状态接口
-interface SearchRes {
-  info: any[]
-}
+import type { HotSearchItem, SearchResultData } from '@shared/domains/search/model'
 
-interface SearchState {
-  searchRecArr: any[]
-  searchRes: SearchRes
+export interface SearchState {
+  searchRecArr: HotSearchItem[]
+  searchRes: SearchResultData
   keyword: string
   isSearchRecShow: boolean
   isSearchResShow: boolean

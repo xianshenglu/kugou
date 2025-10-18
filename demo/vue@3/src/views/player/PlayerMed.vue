@@ -25,12 +25,13 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import type { RootState } from '@/store'
 
 import PlayButton from './PlayButton.vue'
 import NextButton from './NextButton.vue'
 import PrevButton from './PrevButton.vue'
 
-const store = useStore()
+const store = useStore<RootState>()
 
 const logo__theme = computed(() => store.state.images.logo__theme)
 const music = computed(() => store.state.player.music)

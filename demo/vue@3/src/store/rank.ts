@@ -1,15 +1,8 @@
-// 定义排行榜状态接口
-interface RankInfo {
-  info: Record<string, any>
-  songs: {
-    timestamp: number
-    list: any[]
-  }
-}
+import type { RankItem, RankInfoData } from '@shared/domains/rank/model'
 
-interface RankState {
-  rankList: any[]
-  rankInfo: RankInfo
+export interface RankState {
+  rankList: RankItem[]
+  rankInfo: RankInfoData
 }
 
 const rank: {
@@ -20,7 +13,7 @@ const rank: {
   state: (): RankState => ({
     rankList: [],
     rankInfo: {
-      info: {},
+      info: null,
       songs: {
         timestamp: Date.now(),
         list: []

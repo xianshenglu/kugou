@@ -1,5 +1,6 @@
 import { onUpdated } from 'vue'
 import { useStore } from 'vuex'
+import type { RootState } from '@/store'
 
 // 定义加载控制函数返回类型
 interface LoadingFunctions {
@@ -12,7 +13,7 @@ interface LoadingFunctions {
 }
 
 export function useLoading(): LoadingFunctions {
-  const store = useStore()
+  const store = useStore<RootState>()
 
   const startLoading = (): void => {
     store.commit('replaceProperty', {

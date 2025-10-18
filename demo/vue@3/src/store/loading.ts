@@ -1,5 +1,4 @@
-// 定义加载状态接口
-interface LoadingState {
+export interface LoadingState {
   isShow: boolean
   sizeClassName: string
 }

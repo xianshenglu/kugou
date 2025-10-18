@@ -1,6 +1,6 @@
 <template>
   <section class="song_list_info">
-    <PubModuleHead :module-head-info="getModuleHeadInfo">
+    <PubModuleHead v-if="songListInfo.info.list" :module-head-info="getModuleHeadInfo">
       <template v-slot:moduleDes>
         <PubModuleDes :description="getModuleHeadInfo.intro" />
       </template>
@@ -20,36 +20,17 @@ import AppMusicList from '@/components/AppMusicList.vue'
 import { fetchSongListInfo } from '../../requests/songListInfo'
 import { useLoading } from '@/composables/useLoading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
+import type { RootState } from '@/store'
+import { mapPlaylistInfo } from '@shared/domains/playlist/mapper'
 
-// 定义歌单信息接口
-interface SongListInfoData {
-  info: {
-    list: {
-      imgurl: string;
-      specialname: string;
-      intro: string;
-      [key: string]: any;
-    };
-    [key: string]: any;
-  };
-  songs: {
-    list: {
-      info: any[];
-      [key: string]: any;
-    };
-    [key: string]: any;
-  };
-  [key: string]: any;
-}
-
-const store = useStore()
+const store = useStore<RootState>()
 const route = useRoute()
 const { startLoading, stopLoading, setLoadingExcludeHeader } = useLoading()
 
-const songListInfo = computed<SongListInfoData>(() => store.state.song.songListInfo)
+const songListInfo = computed(() => store.state.song.songListInfo)
 
 const getModuleHeadInfo = computed(() => {
-  const data = songListInfo.value.info.list
+  const data = songListInfo.value.info.list!
   return {
     imgUrl: replaceSizeInUrl(data.imgurl),
     name: data.specialname,
@@ -63,13 +44,9 @@ const getMusicList = computed(() => {
 
 const getSongListInfo = (songListId: string) => {
   fetchSongListInfo({ songListId }).then(({ data }) => {
-    const songListInfoData: SongListInfoData = {
-      info: data.info,
-      songs: data.list
-    }
     store.commit('replaceProperty', {
       paths: 'song.songListInfo',
-      data: songListInfoData
+      data: mapPlaylistInfo(data)
     })
     stopLoading()
   })

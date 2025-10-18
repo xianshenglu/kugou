@@ -2,27 +2,13 @@ import { fetchSongLyric } from '../requests/player'
 import store from './index'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 
-// 定义音乐接口
-interface Music {
-  hash: string
-  filename?: string
-  img?: string
-  play_url?: string
-  lyrics?: string
-  [key: string]: any
-}
+import type { Song, LyricItem, SongPlayingInfo } from '@shared/domains/song/model'
 
-// 定义歌词项接口
-interface LyricItem {
-  millisecond: number
-  text: string
-}
 
-// 定义Vuex模块状态
-interface PlayerState {
-  musicList: Music[]
-  music: Music | null
-  song: Music | null
+export interface PlayerState {
+  musicList: Song[]
+  music: Song | null
+  song: SongPlayingInfo | null
   lyrics: string
   audioEl: HTMLAudioElement | null
   isLoading: boolean
@@ -94,7 +80,7 @@ const player: {
     findAudioEl(state: PlayerState, el: HTMLAudioElement | null) {
       state.audioEl = el
     },
-    wantPlay(state: PlayerState, { music, musicList = state.musicList }: { music: Music; musicList?: Music[] }) {
+    wantPlay(state: PlayerState, { music, musicList = state.musicList }: { music: Song; musicList?: Song[] }) {
       if (state.music && music.hash === state.music.hash) {
         return
       }
@@ -160,10 +146,10 @@ const player: {
     }
   },
   actions: {
-    async fetchMusic({ commit }: { commit: Function }, { musicHash, musicList }: { musicHash: string; musicList: Music[] }) {
+    async fetchMusic({ commit }: { commit: Function }, { musicHash, musicList }: { musicHash: string; musicList: Song[] }) {
       try {
         const res = await fetchSongLyric({ params: { hash: musicHash } })
-        const data = res.data.data
+        const data = res.data.data!
         const updatedMusicList = musicList.length === 0 ? [data] : musicList
         commit(
           'replaceProperty',

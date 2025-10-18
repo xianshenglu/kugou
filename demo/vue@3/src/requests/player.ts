@@ -1,17 +1,17 @@
-import { getSongLyric, getSongInfo } from '@shared/api/player'
+import { getSongLyric } from '@shared/api/player'
+import type { 
+  SongLyricParams, 
+} from '@shared/domains/song/model'
+import type { 
+  SongLyricResponseDto 
+} from '@shared/domains/song/dto'
 import http from './http'
+import type { AxiosPromise } from 'axios'
 
-// 定义参数接口
-interface PlayerParams {
-  [key: string]: any
-}
-
-// 定义获取歌词函数
-export const fetchSongLyric = ({ params = {} }: { params?: PlayerParams } = {}) => {
+export const fetchSongLyric = ({ params = {} as any }: { params?: SongLyricParams } = {}): AxiosPromise<SongLyricResponseDto> => {
   return http({ ...getSongLyric, params: { r: 'play/getdata', ...params } })
 }
 
-// 定义获取歌曲信息函数
-export const fetchSongInfo = ({ params = {} }: { params?: PlayerParams } = {}) => {
-  return http({ ...getSongInfo, params: { cmd: 'playInfo', ...params } })
-}
+// export const fetchSongInfo = ({ params = {} }: { params?: PlayerParams } = {}) => {
+//   return http({ ...getSongInfo, params: { cmd: 'playInfo', ...params } })
+// }

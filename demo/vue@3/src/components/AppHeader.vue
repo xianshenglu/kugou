@@ -24,8 +24,9 @@
 import bus from '@/eventBus'
 import { computed } from 'vue';
 import { useStore } from 'vuex';
+import type { RootState } from '@/store';
 
-const store = useStore();
+const store = useStore<RootState>();
 const logo__text = computed(() => store.state.images.logo__text);
 const curPlayerId = computed(() => store.state.player.curPlayerId);
 

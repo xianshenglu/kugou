@@ -1,6 +1,7 @@
-// 定义新歌状态接口
-interface NewSongState {
-  newSongs: any[]
+import type { NewSong } from '@shared/domains/song/model'
+
+export interface NewSongState {
+  newSongs: NewSong[]
   sliderData: any[]
 }
 

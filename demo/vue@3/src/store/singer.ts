@@ -1,13 +1,9 @@
-// 定义歌手状态接口
-interface SingerData {
-  info: Record<string, any>
-  data: any[]
-}
+import type { SingerInfoData, SingerListData, SingerCategoryData } from '@shared/domains/singer/model'
 
-interface SingerState {
-  singerCategories: any[]
-  singerInfo: SingerData
-  singerList: SingerData
+export interface SingerState {
+  singerCategories: SingerCategoryData[]
+  singerInfo: SingerInfoData
+  singerList: SingerListData
 }
 
 const singer: {
@@ -18,11 +14,11 @@ const singer: {
   state: (): SingerState => ({
     singerCategories: [],
     singerInfo: {
-      info: {},
+      info: null as any,
       data: []
     },
     singerList: {
-      info: {},
+      info: {} as any,
       data: []
     }
   })

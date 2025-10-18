@@ -13,38 +13,25 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import type { RootState } from '@/store'
 
 import PubList from '@/modules/PubList.vue'
 import { fetchRankList } from '@/requests/rankList'
 import { useLoading } from '@/composables/useLoading'
-import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
+import { mapRankListResponse } from '@shared/domains/rank/mapper'
 
-// 定义排行榜项接口
-interface RankItem {
-  rankid: string;
-  imgurl: string;
-  rankname: string;
-  imgUrl: string;
-  path: string;
-  title: string;
-  [key: string]: any;
-}
 
-const store = useStore()
+const store = useStore<RootState>()
 const { startLoading, stopLoading, setLoadingExcludeNav } = useLoading()
 
-const rankList = computed<RankItem[]>(() => store.state.rank.rankList)
+const rankList = computed(() => store.state.rank.rankList)
 
 const getRank = () => {
   fetchRankList().then(({ data }) => {
-    data.rank.list.forEach((obj: any) => {
-      obj.imgUrl = replaceSizeInUrl(obj.imgurl)
-      obj.path = '/rank/info/' + obj.rankid
-      obj.title = obj.rankname
-    })
+    const mappedList = mapRankListResponse(data)
     store.commit('replaceProperty', {
       paths: 'rank.rankList',
-      data: data.rank.list
+      data: mappedList
     })
     stopLoading()
   })

@@ -1,6 +1,6 @@
 <template>
   <section class="rank_info">
-    <PubModuleHead :module-head-info="getModuleHeadInfo">
+    <PubModuleHead v-if="rankInfo.info" :module-head-info="getModuleHeadInfo">
       <template v-slot:moduleUpdateTime>
         <time class="rank_info__update_time">{{ msg }} {{ formatDate }}</time>
       </template>
@@ -27,32 +27,20 @@ import AppMusicList from '@/components/AppMusicList.vue'
 import { fetchRankInfo } from '@/requests/rankInfo'
 import { useLoading } from '@/composables/useLoading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
+import type { RootState } from '@/store'
+import { mapRankInfoResponse } from '@shared/domains/rank/mapper'
 
-// 定义排行榜信息接口
-interface RankInfoData {
-  info: {
-    banner7url: string;
-    rankname: string;
-    [key: string]: any;
-  };
-  songs: {
-    timestamp: number;
-    list: any[];
-    [key: string]: any;
-  };
-}
-
-const store = useStore()
+const store = useStore<RootState>()
 const route = useRoute()
 const { startLoading, stopLoading, setLoadingExcludeHeader } = useLoading()
 
 const msg = ref('上次更新时间')
-const rankInfo = computed<RankInfoData>(() => store.state.rank.rankInfo)
+const rankInfo = computed(() => store.state.rank.rankInfo)
 
 const getModuleHeadInfo = computed(() => {
   return {
-    imgUrl: replaceSizeInUrl(rankInfo.value.info.banner7url),
-    name: rankInfo.value.info.rankname
+    imgUrl: replaceSizeInUrl(rankInfo.value.info!.banner7url),
+    name: rankInfo.value.info!.rankname
   }
 })
 
@@ -72,11 +60,8 @@ const formatDate = computed(() => {
 })
 
 const getRankInfo = (rankId: string) => {
-  fetchRankInfo({ params: { rankid: rankId } }).then(res => {
-    const rankInfoData: RankInfoData = {
-      info: res.data.info,
-      songs: res.data.songs
-    }
+  fetchRankInfo({ params: { rankid: Number(rankId) } }).then(res => {
+    const rankInfoData = mapRankInfoResponse(res.data)
     store.commit('replaceProperty', {
       paths: 'rank.rankInfo',
       data: rankInfoData

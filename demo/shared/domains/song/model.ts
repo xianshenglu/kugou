@@ -1,37 +1,25 @@
-import type { MediaItem } from '../common/model'
+import type { NewSongDto, SongBaseDto, SongPlayingInfoDto } from './dto'
 
-export interface Song extends MediaItem {
-  audio_id: number
+export type SongBase = SongBaseDto;
+
+export type Song = SongBaseDto; // todo replace with SongBase?
+
+export type NewSong = NewSongDto;
+
+export interface SongPlayingInfo extends SongPlayingInfoDto {}
+
+export interface LyricItem {
+  millisecond: number
+  text: string
+}
+
+export interface SongLyricParams {
   hash: string
-  filename: string
-  duration: number
-  bitrate?: number
-  filesize?: number
-  album_id?: string
-  mvhash?: string
-  privilege?: number
-  price?: number
+  r?: string
 }
 
-export interface NewSongResponse {
-  JS_CSS_DATE?: number
-  kg_domain?: string
-  data: Song[]
-  banner?: any[]
-}
-
-export interface Lyric {
+export interface SongInfoParams {
   hash: string
-  timelength: number
-  filesize: number
-  audio_name: string
-  lyrics: string
-  play_url?: string
-}
-
-export interface SongLyricResponse {
-  status: number
-  err_code?: number
-  data: Lyric
+  cmd?: string
 }
 

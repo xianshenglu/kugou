@@ -10,7 +10,7 @@
         v-for="(item,index) in list.data"
         :key="'1'+index"
       >
-        <router-link :to="item.path" class="singer_category__link">
+        <router-link :to="(item as any).path" class="singer_category__link">
           <div class="singer_category__title">{{item.classname}}</div>
           <button class="singer_category_btn">
             <svg class="icon" aria-hidden="true">
@@ -26,27 +26,15 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import type { RootState } from '@/store'
 import { fetchSingerCategory } from '../../requests/singerCategory'
+import { mapSingerCategoryData } from '@shared/domains/singer/mapper'
 import { useLoading } from '@/composables/useLoading'
 
-// 定义歌手分类项接口
-interface SingerCategoryItem {
-  classid: string;
-  classname: string;
-  path: string;
-  [key: string]: any;
-}
-
-// 定义歌手分类数据接口
-interface SingerCategoryData {
-  category: string;
-  data: SingerCategoryItem[];
-}
-
-const store = useStore()
+const store = useStore<RootState>()
 const { startLoading, stopLoading, setLoadingExcludeNav } = useLoading()
 
-const singerCategories = computed<SingerCategoryData[]>(() => store.state.singer.singerCategories)
+const singerCategories = computed(() => store.state.singer.singerCategories)
 
 if (singerCategories.value.length === 0) {
   setLoadingExcludeNav()
@@ -56,24 +44,9 @@ if (singerCategories.value.length === 0) {
 
 function getSingerCategories(): void {
   fetchSingerCategory().then(({ data }) => {
-    const singerCategoriesData: SingerCategoryData[] = data.list.reduce((re: SingerCategoryData[], obj: SingerCategoryItem) => {
-      obj.path = '/singer/list/' + obj.classid
-      const findCategories = re.find(
-        o => o.category === obj.classname.substring(0, 2)
-      )
-      if (findCategories) {
-        findCategories.data.push(obj)
-      } else {
-        re.push({
-          category: obj.classname.substring(0, 2),
-          data: [obj]
-        })
-      }
-      return re
-    }, [])
     store.commit('replaceProperty', {
       paths: 'singer.singerCategories',
-      data: singerCategoriesData
+      data: mapSingerCategoryData(data)
     })
     stopLoading()
   })

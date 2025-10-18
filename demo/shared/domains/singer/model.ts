@@ -1,35 +1,40 @@
-import type { MediaItem } from '../common/model'
+import type {
+  SingerCategoryDto,
+  SingerSummaryDto,
+  SingerInfoDto,
+  SingerSongDto,
+} from './dto'
 
-export interface SingerCategory {
-  classid: number
-  classname: string
-  imgurl?: string
+export interface SingerCategory extends SingerCategoryDto {
+  path: string
+}
+export interface SingerSummary extends SingerSummaryDto {
+  id: number
+  name: string
+  imgUrl: string
+  path: string
+}
+export interface SingerInfoShort {
+  id: SingerInfoDto['singerid']
+  name: SingerInfoDto['singername']
+  count: SingerInfoDto['songcount']
+}
+export interface SingerInfo extends SingerInfoShort, Pick<SingerInfoDto, 'albumcount' | 'intro'> {
+  imgUrl: SingerInfoDto['imgurl']
+  path: string;
 }
 
-export interface SingerSummary {
-  singerid: number
-  singername: string
-  imgurl?: string
+export interface SingerListData {
+  info: SingerInfoShort;
+  data: SingerSummary[]
 }
 
-export interface SingerInfo {
-  singerid: number
-  singername: string
-  intro?: string
-  songcount?: number
-  albumcount?: number
-}
-
-export interface SingerListResponse {
-  classid?: number
-  classname?: string
-  singers?: {
-    total?: number
-    list: { info: SingerSummary[] }
-  }
-}
-
-export interface SingerInfoResponse {
+export interface SingerInfoData {
   info: SingerInfo
-  songs?: { total?: number; list?: MediaItem[] }
+  data: SingerSongDto[]
+}
+
+export interface SingerCategoryData {
+  category: string;
+  data: SingerCategory[];
 }

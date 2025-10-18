@@ -1,12 +1,12 @@
 import http from './http'
 import { getRankList } from '@shared/api/rankList'
+import type { AxiosPromise } from 'axios'
+import type { RankListResponseDto } from '@shared/domains/rank/dto'
 
-// 定义参数接口
 interface RankListParams {
   [key: string]: any
 }
 
-// 定义获取排行榜列表函数
-export const fetchRankList = ({ params = {} }: { params?: RankListParams } = {}) => {
+export const fetchRankList = ({ params = {} }: { params?: RankListParams } = {}): AxiosPromise<RankListResponseDto> => {
   return http({ ...getRankList, params: { ...params } })
 }

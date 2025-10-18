@@ -10,9 +10,26 @@ import search from './search'
 import newSong from './newSong'
 import images from './images'
 
-// 定义Vuex store状态接口
-interface RootState {
-  [key: string]: any
+import type { DeviceState } from './device'
+import type { LoadingState } from './loading'
+import type { PlayerState } from './player'
+import type { RankState } from './rank'
+import type { SingerState } from './singer'
+import type { SongState } from './song'
+import type { SearchState } from './search'
+import type { NewSongState } from './newSong'
+import type { ImagesState } from './images'
+
+export interface RootState {
+  device: DeviceState
+  loading: LoadingState
+  player: PlayerState
+  rank: RankState
+  singer: SingerState
+  song: SongState
+  search: SearchState
+  newSong: NewSongState
+  images: ImagesState
 }
 
 let store = createStore<RootState>({

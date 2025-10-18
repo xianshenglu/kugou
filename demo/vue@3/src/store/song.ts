@@ -1,18 +1,8 @@
-// 定义歌曲列表信息接口
-interface SongListInfo {
-  info: {
-    list: Record<string, any>
-  }
-  songs: {
-    list: {
-      info: any[]
-    }
-  }
-}
+import type { PlaylistInfoData, PlaylistListData } from '@shared/domains/playlist/model'
 
-interface SongState {
-  songList: any[]
-  songListInfo: SongListInfo
+export interface SongState {
+  songList: PlaylistListData
+  songListInfo: PlaylistInfoData
 }
 
 const song: {
@@ -24,7 +14,7 @@ const song: {
     songList: [],
     songListInfo: {
       info: {
-        list: {}
+        list: null as any
       },
       songs: {
         list: {

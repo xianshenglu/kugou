@@ -39,14 +39,16 @@
 import { ref, computed, onMounted, onUnmounted, useTemplateRef } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute, useRouter } from 'vue-router'
+import type { RootState } from '@/store'
 
 import PubModuleTitle from '@/components/PubModuleTitle.vue'
 import AppMusicList from '@/components/AppMusicList.vue'
 import { fetchHotSearch, fetchSearchResult } from '../../requests/search'
+import { mapSearchResultData, mapHotSearchData } from '@shared/domains/search/mapper'
 import bus from '@/eventBus'
 import { useLoading } from '@/composables/useLoading'
 
-const store = useStore()
+const store = useStore<RootState>()
 const route = useRoute()
 const router = useRouter()
 const { startLoading, stopLoading, setLoadingExcludeSearchForm } = useLoading()
@@ -123,7 +125,7 @@ function getSearchRec() {
     .then(({ data }) => {
       store.commit('replaceProperty', {
         paths: 'search.searchRecArr',
-        data: data.data.info
+        data: mapHotSearchData( data )
       })
       stopLoading()
       isSearchResShow.value = false
@@ -142,10 +144,9 @@ function getSearchRes() {
   setLoadingExcludeSearchForm()
   startLoading()
   fetchSearchResult({ params: { keyword: keyword.value } }).then(res => {
-    const data = res.data.data
     store.commit('replaceProperty', {
       paths: 'search.searchRes',
-      data
+      data: mapSearchResultData(res.data)
     })
     isSearchRecShow.value = false
     isSearchResShow.value = true

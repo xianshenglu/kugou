@@ -8,8 +8,9 @@
 
 <script lang="ts" setup>
 import { useStore } from 'vuex'
+import type { RootState } from '@/store'
 
-const store = useStore()
+const store = useStore<RootState>()
 
 const prev = () => {
   store.commit('player/prev')
