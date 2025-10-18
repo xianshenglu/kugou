@@ -14,7 +14,7 @@ const song: {
     songList: [],
     songListInfo: {
       info: {
-        list: null
+        list: null as any
       },
       songs: {
         list: {

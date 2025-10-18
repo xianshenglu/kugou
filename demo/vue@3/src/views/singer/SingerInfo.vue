@@ -20,7 +20,6 @@ import PubModuleDes from '@/components/PubModuleDes.vue'
 import AppMusicList from '@/components/AppMusicList.vue'
 import { fetchSingerInfo } from '../../requests/singerInfo'
 import { useLoading } from '@/composables/useLoading'
-import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 import { mapSingerInfoData } from '@shared/domains/singer/mapper'
 
 const store = useStore<RootState>()

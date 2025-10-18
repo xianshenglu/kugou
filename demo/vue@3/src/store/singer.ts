@@ -14,11 +14,11 @@ const singer: {
   state: (): SingerState => ({
     singerCategories: [],
     singerInfo: {
-      info: null,
+      info: null as any,
       data: []
     },
     singerList: {
-      info: {},
+      info: {} as any,
       data: []
     }
   })

@@ -35,8 +35,8 @@ export default {
     }
     //? just commit player/wantPlay is enough?
     return fetchSongLyric({ params: { hash: musicHash } }).then(res => {
-      let musicData = res.data.data!
-      musicData.filename = musicData.audio_name
+      let musicData = res.data.data!;
+      (musicData as any).filename = musicData.audio_name
       store.commit('player/wantPlay', {
         music: musicData,
         musicList: [musicData]
