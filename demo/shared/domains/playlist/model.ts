@@ -1,5 +1,5 @@
 import type { RoutableItem } from '../common/model'
-import type { PlaylistSummaryDto, PlaylistDetailSummaryDto, PlaylistListResponseDto, PlaylistInfoResponseDto } from './dto'
+import type { PlaylistSummaryDto, PlaylistDetailSummaryDto, PlaylistInfoResponseDto } from './dto'
 
 export interface PlaylistSummary extends PlaylistSummaryDto, RoutableItem {
   popularity: number
