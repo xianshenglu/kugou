@@ -1,4 +1,5 @@
 import type { MediaItem } from '../common/model'
+import type { RankItemDto } from './dto'
 
 export interface RankSummary {
   rankid: number
@@ -16,13 +17,11 @@ export interface RankSong extends MediaItem {
   duration?: number
 }
 
-export interface RankListResponse {
-  rank: {
-    total?: number
-    list: RankSummary[]
-  }
+export interface RankItem extends RankItemDto {
+  imgUrl: string
+  path: string
+  title: string
 }
-
 export interface RankInfoResponse {
   info: RankSummary
   songs: {

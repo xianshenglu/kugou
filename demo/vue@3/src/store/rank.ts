@@ -1,6 +1,4 @@
-import type { RoutableItem } from '@shared/domains/common/model'
-import type { RankSummary, RankSong } from '@shared/domains/rank/model'
-export interface RankSummaryWithRoute extends RankSummary, RoutableItem {}
+import type { RankSummary, RankSong, RankItem } from '@shared/domains/rank/model'
 interface RankInfo {
   info: RankSummary | null
   songs: {
@@ -10,7 +8,7 @@ interface RankInfo {
 }
 
 export interface RankState {
-  rankList: RankSummaryWithRoute[]
+  rankList: RankItem[]
   rankInfo: RankInfo
 }
 
