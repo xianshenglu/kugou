@@ -1,15 +1,8 @@
-import type { RankSummary, RankSong, RankItem } from '@shared/domains/rank/model'
-interface RankInfo {
-  info: RankSummary | null
-  songs: {
-    timestamp: number
-    list: RankSong[]
-  }
-}
+import type { RankItem, RankInfoData } from '@shared/domains/rank/model'
 
 export interface RankState {
   rankList: RankItem[]
-  rankInfo: RankInfo
+  rankInfo: RankInfoData
 }
 
 const rank: {

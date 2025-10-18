@@ -28,6 +28,7 @@ import { fetchRankInfo } from '@/requests/rankInfo'
 import { useLoading } from '@/composables/useLoading'
 import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 import type { RootState } from '@/store'
+import { mapRankInfoResponse } from '@shared/domains/rank/mapper'
 
 const store = useStore<RootState>()
 const route = useRoute()
@@ -60,10 +61,7 @@ const formatDate = computed(() => {
 
 const getRankInfo = (rankId: string) => {
   fetchRankInfo({ params: { rankid: Number(rankId) } }).then(res => {
-    const rankInfoData = {
-      info: res.data.info,
-      songs: res.data.songs
-    }
+    const rankInfoData = mapRankInfoResponse(res.data)
     store.commit('replaceProperty', {
       paths: 'rank.rankInfo',
       data: rankInfoData

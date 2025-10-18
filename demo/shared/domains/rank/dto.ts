@@ -1,3 +1,5 @@
+import type { SongBaseDto } from '../song/dto'
+
 export interface RankItemDto {
   rankid: number
   id: number
@@ -24,5 +26,35 @@ export interface RankListResponseDto {
     total: number
     list: RankItemDto[]
   }
+  __Tpl: string
+}
+
+export interface RankSongDto extends SongBaseDto {
+  first: number
+  addtime: string
+  recommend_reason: string
+  isfirst: number
+  inlist:           number;
+  topic_url_320:    string;
+  topic_url_sq:     string;
+  remark:           string;
+  has_accompany:    number;
+}
+
+export interface RankInfoResponseDto {
+  JS_CSS_DATE: number
+  kg_domain: string
+  src: string
+  fr: string | null
+  ver: string
+  info: RankItemDto
+  songs: {
+    total: number
+    page: number
+    pagesize: number
+    timestamp: number
+    list: RankSongDto[]
+  }
+  pagesize: number
   __Tpl: string
 }
