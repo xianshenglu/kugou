@@ -90,6 +90,7 @@ const PlayerProgressContainer = () => {
     setIsTouching(false)
     audioEl.currentTime = currentTime
     window.removeEventListener('touchmove', setCurTimeOnMove)
+    // eslint-disable-next-line
     window.removeEventListener('touchend', touchEndCb)
   })
 

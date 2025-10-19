@@ -25,6 +25,7 @@ const RankInfo: FC<RankInfoProps> = ({ songsData, listInfo }) => {
     return (
       <div
         className={
+           // eslint-disable-next-line
           classNames(styles.RankInfo__musicSequence, styles['RankInfo__musicSequence--' + sequence])
         }
       >

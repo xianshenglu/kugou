@@ -2,7 +2,6 @@ import React from 'react'
 import {
   FETCH_MUSIC,
   RECEIVE_MUSIC,
-  TOGGLE_PLAY,
   PLAY_MUSIC,
   PAUSE_MUSIC,
   SHOW_MUSIC_LOADING,

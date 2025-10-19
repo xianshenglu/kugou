@@ -19,7 +19,7 @@ const AppNav: FC<AppNavProps> = ({ navList, activeIndex }) => {
             key={nav.path}
             to={nav.path}
             className={({ isActive, isPending }) =>
-              styles.AppNav__link + (isActive ? ' ' + styles['AppNav__link--active'] : '')
+              styles.AppNav__link
             }
           >
             {nav.text}

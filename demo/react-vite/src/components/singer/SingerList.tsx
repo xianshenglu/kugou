@@ -57,7 +57,7 @@ const SingerList: FC<SingerListProps> = ({ singersData, listInfo }) => {
                 data-src={singer.imgurl}
                 alt={singer.singername}
               />
-              <div className={styles.SingerList__name}>{singer.singername}</div>
+              <div>{singer.singername}</div>
             </NavLink>
           </li>
         ))}
