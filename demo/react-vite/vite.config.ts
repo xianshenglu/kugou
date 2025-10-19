@@ -4,6 +4,8 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { analyzer } from 'vite-bundle-analyzer'
+import legacy from '@vitejs/plugin-legacy'
+import browserslist from 'browserslist'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // https://vite.dev/config/
@@ -11,7 +13,14 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // todo: installing @types/node can fix the type issue for path and url, but it will also make __dirname works? which may be incorrect?
 // todo: remove @types/node and check all the questions
 const productionConfig = {
-  plugins: []
+  plugins: [
+    legacy({
+      targets: browserslist(),
+      polyfills: true,
+      modernTargets: browserslist(),
+      modernPolyfills: true,
+    }),
+  ]
 }
 const developmentConfig = {
   plugins: []
