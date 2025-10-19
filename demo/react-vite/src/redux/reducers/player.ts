@@ -41,7 +41,7 @@ const playerHandler = (state = initialState, action) => {
     },
     [RECEIVE_MUSIC]() {
       // console.log(action.response.data)
-      let {
+      const {
         data: {
           author_name,
           song_name,

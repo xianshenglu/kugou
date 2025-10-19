@@ -24,8 +24,8 @@ const PlayerProgressContainer = () => {
   const touchStartXRef = useRef(0)
 
   const calcCurTime = useMemoizedFn((end: number, start: number, type: number) => {
-    let offsetX = end - start
-    let percent = offsetX / (progressBarRectRef.current!.width)
+    const offsetX = end - start
+    const percent = offsetX / (progressBarRectRef.current!.width)
     let newCurrentTime!: number
     const audioEl = audioElRef.current!
     // if (!audioEl) return 0
@@ -52,7 +52,7 @@ const PlayerProgressContainer = () => {
     if (audioEl.readyState < 2) {
       return
     }
-    let bufferedLength = audioEl.buffered.length
+    const bufferedLength = audioEl.buffered.length
     const newLoadProgress = Math.floor(
       (100 * audioEl.buffered.end(bufferedLength - 1)) / audioEl.duration
     )
@@ -74,7 +74,7 @@ const PlayerProgressContainer = () => {
   })
 
   const setCurTimeOnMove = useMemoizedFn((event: TouchEvent) => {
-    let clientX = event.touches[0].clientX
+    const clientX = event.touches[0].clientX
     const newCurrentTime = calcCurTime(clientX, touchStartXRef.current, 1)
     const audioEl = audioElRef.current!
     // if (!audioEl) return
@@ -98,7 +98,7 @@ const PlayerProgressContainer = () => {
     if (!progressBarRectRef.current/* && progressBarRef.current*/) {
       progressBarRectRef.current = progressBarRef.current!.getBoundingClientRect()
     }
-    let clientX = event.touches[0].clientX
+    const clientX = event.touches[0].clientX
     const newCurrentTime = calcCurTime(clientX, progressBarRectRef.current!.left, 0)
     const audioEl = audioElRef.current!
     // if (!audioEl) return

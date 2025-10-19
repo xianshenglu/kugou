@@ -18,9 +18,9 @@ export function $_xsl__loadImgLazy(els: Array<HTMLImageElement>) {
   if (!Array.isArray(els)) {
     return
   }
-  let unloadedImages = els.filter((img) => !img.dataset.isLoaded)
+  const unloadedImages = els.filter((img) => !img.dataset.isLoaded)
   unloadedImages.forEach((img) => {
-    let top = img.getBoundingClientRect().top
+    const top = img.getBoundingClientRect().top
     if (top < window.innerHeight) {
       img.src = img.dataset.src!
       img.dataset.isLoaded = true as any
@@ -31,7 +31,7 @@ export function getComponentDisplayName(WrappedComponent: any): string {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component'
 }
 export function formatDate(milliseconds: number) {
-  let date = new Date(milliseconds)
+  const date = new Date(milliseconds)
   return (
     date.getFullYear() +
     '-' +

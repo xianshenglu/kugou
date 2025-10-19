@@ -18,8 +18,8 @@ const singerCategoriesHandler = (state = initialState, action) => {
       singerCategories = singerCategories.reduce((re, obj) => {
         obj.path = singerList + obj.classid
         obj.name = obj.classname
-        let level1CategoryName = obj.classname.substring(0, 2)
-        let findCategories = re.find(o => o.category === level1CategoryName)
+        const level1CategoryName = obj.classname.substring(0, 2)
+        const findCategories = re.find(o => o.category === level1CategoryName)
         if (findCategories !== undefined) {
           findCategories.children.push(obj)
         } else {

@@ -27,7 +27,7 @@ const singerInfoHandler = (state = initialState, action) => {
       })
     },
     [RECEIVE_SINGER_INFO]() {
-      let { songs: songsData, info: listInfo } = action.response.data
+      const { songs: songsData, info: listInfo } = action.response.data
       Object.assign(listInfo, {
         imgurl: $_xsl__replaceImgUrlSize(listInfo.imgurl, imgSize)
       })

@@ -12,7 +12,7 @@ const rankListHandler = (state = initialState, action) => {
       }
     },
     [RECEIVE_RANK_LIST]() {
-      let rankList = action.response.data.rank.list
+      const rankList = action.response.data.rank.list
       rankList.forEach(obj => {
         obj.imgurl = $_xsl__replaceImgUrlSize(obj.imgurl)
         obj.path = rankInfo + obj.rankid

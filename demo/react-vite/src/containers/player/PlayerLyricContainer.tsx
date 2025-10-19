@@ -23,11 +23,11 @@ const PlayerLyricContainer: FC = () => {
     }
     const lyrics = getFormattedLyrics(lyric)
     const lyricsMillisecond = getLyricsMillisecond(lyrics)
-    let curMillisecond = Math.floor((event.target as HTMLAudioElement).currentTime * 1000)
-    let nextLyricIndex = lyricsMillisecond.findIndex(
+    const curMillisecond = Math.floor((event.target as HTMLAudioElement).currentTime * 1000)
+    const nextLyricIndex = lyricsMillisecond.findIndex(
       (time: number) => time > curMillisecond * 1.005
     )
-    let newPrevLyricIndex = nextLyricIndex > 1 ? nextLyricIndex - 2 : 0
+    const newPrevLyricIndex = nextLyricIndex > 1 ? nextLyricIndex - 2 : 0
     setPrevLyricIndex(newPrevLyricIndex)
   })
 
