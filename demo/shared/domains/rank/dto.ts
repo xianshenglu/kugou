@@ -41,6 +41,14 @@ export interface RankSongDto extends SongBaseDto {
   has_accompany:    number;
 }
 
+export interface RankInfoSongsDto {
+  total: number
+  page: number
+  pagesize: number
+  timestamp: number
+  list: RankSongDto[]
+}
+
 export interface RankInfoResponseDto {
   JS_CSS_DATE: number
   kg_domain: string
@@ -48,13 +56,7 @@ export interface RankInfoResponseDto {
   fr: string | null
   ver: string
   info: RankItemDto
-  songs: {
-    total: number
-    page: number
-    pagesize: number
-    timestamp: number
-    list: RankSongDto[]
-  }
+  songs: RankInfoSongsDto
   pagesize: number
   __Tpl: string
 }
