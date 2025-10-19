@@ -1,22 +1,18 @@
-import React, { Component } from 'react'
+import type { FC } from 'react'
+import { useEffect } from 'react'
 import SingerCategories from '../../components/singer/SingerCategories'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchSingerCategoriesIfNeeded } from '../../redux/actions/singerCategories'
 
-class SingerCategoriesContainer extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props
+const SingerCategoriesContainer: FC = () => {
+  const dispatch = useDispatch()
+  const singerCategories = useSelector((state: any) => state.singerCategories)
+
+  useEffect(() => {
     dispatch(fetchSingerCategoriesIfNeeded())
-  }
-  render() {
-    return <SingerCategories {...this.props} />
-  }
+  }, [])
+
+  return <SingerCategories {...singerCategories} />
 }
 
-const mapStateToProps = ({ singerCategories }) => singerCategories
-const mapDispatchToProps = null
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SingerCategoriesContainer)
+export default SingerCategoriesContainer

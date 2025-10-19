@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import type { FC } from 'react'
 import classNames from 'classnames'
 import styles from './SongList.module.less'
 import AppList from '../public/AppList'
@@ -10,8 +10,8 @@ interface SongListProps {
   }[];
 }
 
-class SongList extends Component<SongListProps> {
-  getChildren({ name, popularity }: { name: string; popularity: number }) {
+const SongList: FC<SongListProps> = ({ songList }) => {
+  const getChildren = ({ name, popularity }: { name: string; popularity: number }) => {
     return (
       <div className={styles.SongList__info}>
         <div className={styles.SongList__name}>{name}</div>
@@ -24,11 +24,10 @@ class SongList extends Component<SongListProps> {
       </div>
     )
   }
-  render() {
-    const { songList } = this.props
-    return (
-      <AppList data={songList as any} render={this.getChildren} className={styles.SongList} />
-    )
-  }
+
+  return (
+    <AppList data={songList as any} render={getChildren} className={styles.SongList} />
+  )
 }
+
 export default SongList

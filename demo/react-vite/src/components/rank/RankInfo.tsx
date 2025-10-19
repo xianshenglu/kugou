@@ -1,29 +1,26 @@
-import React, { Component, Fragment } from 'react'
+import type { FC } from 'react'
+import { Fragment } from 'react'
 import InfoHeader from '../public/InfoHeader'
 import AppMusicList from '../public/AppMusicList'
 import { formatDate } from '../../assets/js/utils'
 import styles from './RankInfo.module.less'
 import classNames from 'classnames'
-
+import type { RankInfoSongsDto, RankItemDto } from '@shared/domains/rank/dto'
 interface RankInfoProps {
-  songsData: {
-    list: unknown[];
-    timestamp: number;
-    page: number;
-    pagesize: number;
-  };
-  listInfo: object;
+  songsData: RankInfoSongsDto;
+  listInfo: RankItemDto;
 }
 
-class RankInfo extends Component<RankInfoProps> {
-  renderUpdatedTime(updatedTime) {
+const RankInfo: FC<RankInfoProps> = ({ songsData, listInfo }) => {
+  const renderUpdatedTime = (updatedTime: string) => {
     return () => (
       <time className={styles.RankInfo__updatedTime}>
         {'上次更新时间: ' + updatedTime}
       </time>
     )
   }
-  renderMusicSequence(index) {
+
+  const renderMusicSequence = (index: number) => {
     const sequence = index + 1
     return (
       <div
@@ -35,28 +32,26 @@ class RankInfo extends Component<RankInfoProps> {
       </div>
     )
   }
-  render() {
-    const {
-      songsData,
-      listInfo: { rankname, imgurl }
-    } = this.props
-    // console.log(this.props)
-    const infoHeaderProps = {
-      name: rankname,
-      imgurl,
-      renderUpdatedTime: this.renderUpdatedTime(
-        formatDate(songsData.timestamp * 1000)
-      )
-    }
-    return (
-      <Fragment>
-        <InfoHeader {...infoHeaderProps} />
-        <AppMusicList
-          data={songsData.list}
-          renderMusicSequence={this.renderMusicSequence}
-        />
-      </Fragment>
+
+  const { rankname, imgurl } = listInfo
+  
+  const infoHeaderProps = {
+    name: rankname,
+    imgurl,
+    renderUpdatedTime: renderUpdatedTime(
+      formatDate(songsData.timestamp * 1000)
     )
   }
+
+  return (
+    <Fragment>
+      <InfoHeader {...infoHeaderProps} />
+      <AppMusicList
+        data={songsData.list}
+        renderMusicSequence={renderMusicSequence}
+      />
+    </Fragment>
+  )
 }
+
 export default RankInfo

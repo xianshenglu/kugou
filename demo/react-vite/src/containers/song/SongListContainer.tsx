@@ -1,22 +1,18 @@
-import React, { Component } from 'react'
+import type { FC } from 'react'
+import { useEffect } from 'react'
 import SongList from '../../components/song/SongList'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchSongListIfNeeded } from '../../redux/actions/songList'
 
-class SongListContainer extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props
+const SongListContainer: FC = () => {
+  const dispatch = useDispatch()
+  const songList = useSelector((state: any) => state.songList)
+
+  useEffect(() => {
     dispatch(fetchSongListIfNeeded())
-  }
-  render() {
-    return <SongList {...this.props} />
-  }
+  }, [])
+
+  return <SongList {...songList} />
 }
 
-const mapStateToProps = ({ songList }) => songList
-const mapDispatchToProps = null
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SongListContainer)
+export default SongListContainer

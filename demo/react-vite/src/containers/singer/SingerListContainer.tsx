@@ -1,32 +1,23 @@
-import React, { Component } from 'react'
+import type { FC } from 'react'
+import { useEffect } from 'react'
 import SingerList from '../../components/singer/SingerList'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchSingerListIfNeeded } from '../../redux/actions/singerList'
 import { useParams } from 'react-router-dom'
 
-class SingerListContainer extends Component {
-  componentDidMount() {
-    const {
-      dispatch,
-      params: { id }
-    } = this.props
-    dispatch(fetchSingerListIfNeeded(id))
-  }
-  render() {
-    return <SingerList {...this.props} />
-  }
+const SingerListContainer: FC = () => {
+  const dispatch = useDispatch()
+  const { id } = useParams<{ id: string }>()
+  const { singersData, listInfo } = useSelector((state: any) => ({
+    singersData: state.singerList.singersData,
+    listInfo: state.singerList.listInfo
+  }))
+
+  useEffect(() => {
+      dispatch(fetchSingerListIfNeeded(id))
+  }, [])
+
+  return <SingerList singersData={singersData} listInfo={listInfo} />
 }
 
-const mapStateToProps = ({ singerList: { singersData, listInfo } }) => ({
-  singersData,
-  listInfo
-})
-const mapDispatchToProps = null
-function SingerListContainerWrapper(props) {
-  const params = useParams()
-  return <SingerListContainer {...props} params={params} />
-}
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SingerListContainerWrapper)
+export default SingerListContainer
