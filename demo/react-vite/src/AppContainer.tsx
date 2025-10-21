@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom'
 import { Fragment } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import useAppNavStore from './stores/useAppNavStore'
 // import classNames from 'classnames'
 import logo__theme from './assets/images/logo__theme.png'
 import { player } from './constants/router'
@@ -16,7 +17,7 @@ import { useMount, useUpdateEffect, useUnmount, useMemoizedFn } from 'ahooks'
 function AppContainer() {
   const dispatch = useDispatch()
   const playerState = useSelector((state: any) => state.player)
-  const isAppNavShow = useSelector((state: any) => state.appNav?.isShow)
+  const isAppNavShow = useAppNavStore((s) => s.isShow)
   const location = useLocation()
 
   const setCssCustomVar = useMemoizedFn(() => {

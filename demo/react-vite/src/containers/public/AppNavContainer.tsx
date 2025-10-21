@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { useEffect } from 'react'
 import { useMemoizedFn, useEventListener } from 'ahooks'
-import { useDispatch, useSelector } from 'react-redux'
+import useAppNavStore from '../../stores/useAppNavStore'
 import AppNav from '../../components/public/AppNav'
 import {
   newSongs,
@@ -9,8 +9,8 @@ import {
   songList,
   singerCategories
 } from '../../constants/router'
-import { setActiveNavIndex, switchNav } from '../../redux/actions/appNav'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useShallow } from 'zustand/shallow'
 const navList = [
   {
     text: '新歌',
@@ -31,21 +31,22 @@ const navList = [
 ]
 
 const AppNavContainer: FC = () => {
-  const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
-  const { activeIndex, isShow } = useSelector((state: any) => ({
-    activeIndex: state.appNav.activeIndex,
-    isShow: state.appNav.isShow
-  }))
+  const { activeIndex, isShow, setActiveNavIndex, switchNav } = useAppNavStore(useShallow((s) => ({
+    activeIndex: s.activeIndex,
+    isShow: s.isShow,
+    setActiveNavIndex: s.setActiveNavIndex,
+    switchNav: s.switchNav
+  })))
 
   const onLocationChange = useMemoizedFn(({ pathname }: { pathname: string }) => {
     const activeIndex = navList.findIndex((nav) => nav.path === pathname)
     if (activeIndex >= 0) {
-      dispatch(switchNav(true))
-      dispatch(setActiveNavIndex(activeIndex))
+      switchNav(true)
+      setActiveNavIndex(activeIndex)
     } else {
-      dispatch(switchNav(false))
+      switchNav(false)
     }
   })
 
