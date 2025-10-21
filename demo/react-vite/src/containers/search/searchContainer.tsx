@@ -2,8 +2,8 @@ import type { FC } from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useMemoizedFn } from 'ahooks'
-import { fetchHotSearchIfNeeded } from '../../redux/actions/hotSearch'
 import { fetchKeywordSearchIfNeeded } from '../../redux/actions/keywordSearch'
+import { useHotSearch } from './useHotSearch'
 import Search from '../../components/search/Search'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -18,8 +18,12 @@ const SearchContainer: FC = () => {
   
   const updateKeywordCallbackRef = useRef<(() => void) | null>(null)
 
-  const { hotSearch, keywordSearch } = useSelector((state: any) => ({
-    hotSearch: state.hotSearch,
+  const {
+    data: hotSearchData,
+    refetch: hotSearchRefetch
+  } = useHotSearch({ enabled: false })
+  
+  const { keywordSearch } = useSelector((state: any) => ({
     keywordSearch: state.keywordSearch
   }))
 
@@ -28,7 +32,7 @@ const SearchContainer: FC = () => {
     const keyword = searchParams.get('keyword')
     
     if (keyword === null || keyword === '') {
-      dispatch(fetchHotSearchIfNeeded())
+      hotSearchRefetch();  
       setIsHotSearchShow(true)
       setIsKeywordSearchShow(false)
       setKeyword('')
@@ -80,7 +84,7 @@ const SearchContainer: FC = () => {
     keyword,
     searchKeyword,
     updateKeyword,
-    hotSearch,
+    hotSearch: hotSearchData,
     keywordSearch
   }
 

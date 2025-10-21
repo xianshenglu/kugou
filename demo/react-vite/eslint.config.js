@@ -6,6 +6,7 @@ import tseslint from 'typescript-eslint'
 import { globalIgnores } from 'eslint/config'
 import { fixupPluginRules } from "@eslint/compat";
 import cssModulesPlugin from "eslint-plugin-css-modules";
+import pluginQuery from '@tanstack/eslint-plugin-query'
 
 export default tseslint.config([
   globalIgnores(["dist"]),
@@ -16,6 +17,7 @@ export default tseslint.config([
       tseslint.configs.recommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
+      ...pluginQuery.configs['flat/recommended'],
     ],
     languageOptions: {
       ecmaVersion: 2020,
