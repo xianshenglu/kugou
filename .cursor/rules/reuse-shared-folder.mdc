@@ -1,0 +1,6 @@
+---
+alwaysApply: true
+---
+Under /demo/shared folder there're domain dedicated dto/model/mapper/mock data.
+
+Try to reuse the code as much as possible if you need domain dedicated data.
