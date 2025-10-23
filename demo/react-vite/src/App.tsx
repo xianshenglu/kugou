@@ -1,4 +1,4 @@
-import type { FC } from 'react'
+import { Suspense, type FC } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ErrorBoundary } from 'react-error-boundary'
 import classNames from 'classnames'
@@ -26,11 +26,12 @@ import {
   SongListInfoContainer,
   SingerListContainer,
   SingerInfoContainer,
-  SearchContainer,
   PlayerMaxContainer,
-  AppNavContainer
+  AppNavContainer,
+  SearchContainer
 } from './containers/lazyContainers'
 import { lazyWithPrefetch } from './assets/hoc/lazyWithPrefetch'
+import { Loading } from './components/loading/Loading'
 const AppHeader = lazyWithPrefetch(
   () => import('./components/public/AppHeader')
 )
@@ -73,7 +74,11 @@ const App: FC<any> = (props) => {
               path={singerInfo + ':singerListId/:id'}
               element={<SingerInfoContainer />}
             />
-            <Route path={search} element={<SearchContainer />} />
+            <Route path={search} element={
+              <Suspense fallback={<Loading />}>
+                <SearchContainer />
+              </Suspense>
+            } />
           </Routes>
         </ErrorBoundary>
       </main>

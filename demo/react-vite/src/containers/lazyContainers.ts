@@ -1,3 +1,4 @@
+import { lazy } from 'react'
 import { lazyWithPrefetch } from 'src/assets/hoc/lazyWithPrefetch'
 
 export const PlayerMedContainer = lazyWithPrefetch(
@@ -24,9 +25,7 @@ export const SingerListContainer = lazyWithPrefetch(
 export const SingerInfoContainer = lazyWithPrefetch(
   () => import('./singer/SingerInfoContainer')
 )
-export const SearchContainer = lazyWithPrefetch(
-  () => import('./search/searchContainer')
-)
+export const SearchContainer = lazy(() => import('./search/searchContainer'))
 export const PlayerMaxContainer = lazyWithPrefetch(
   () => import('./player/PlayerMaxContainer')
 )
