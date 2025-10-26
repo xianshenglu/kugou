@@ -7,9 +7,8 @@ import { player } from '../../constants/router'
 import PrevButton from './PrevButton'
 import PlayButton from './PlayButton'
 import NextButton from './NextButton'
-import { togglePlay } from '../../redux/actions/player'
+import usePlayerStore from '../../stores/usePlayerStore'
 import type { Song } from '@shared/domains/song/model'
-import type { Dispatch } from 'redux'
 
 interface PlayerMedProps {
   musicStatus: {
@@ -17,7 +16,6 @@ interface PlayerMedProps {
     isLoading: boolean;
   };
   songInfo: Song;
-  dispatch?: Dispatch;
   nextSong?: any;
   prevSong?: any;
 }
@@ -25,10 +23,11 @@ interface PlayerMedProps {
 const PlayerMed: FC<PlayerMedProps> = ({
   songInfo: { song_name, author_name, img: singerImg, hash },
   musicStatus: { isPlaying, isLoading },
-  dispatch,
   prevSong,
   nextSong
 }) => {
+  const { togglePlay } = usePlayerStore()
+
   return (
     <Fragment>
       <div className={styles.PlayerMed}>
@@ -52,7 +51,7 @@ const PlayerMed: FC<PlayerMedProps> = ({
             className={styles.PlayerMed__playBtn}
             isLoading={isLoading}
             isPlaying={isPlaying}
-            togglePlay={() => dispatch?.(togglePlay())}
+            togglePlay={togglePlay}
           />
           <NextButton className={styles.PlayerMed__nextBtn} next={nextSong} />
         </div>

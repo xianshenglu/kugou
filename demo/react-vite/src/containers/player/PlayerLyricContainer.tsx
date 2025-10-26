@@ -1,18 +1,14 @@
 import type { FC } from 'react'
 import { useState, useEffect } from 'react'
 import { useMemoizedFn } from 'ahooks'
-import { useSelector } from 'react-redux'
 import PlayerLyric from '../../components/player/PlayerLyric'
 import { getFormattedLyrics, getLyricsMillisecond } from '../../redux/selectors'
-
+import usePlayerStore from '../../stores/usePlayerStore'
 const PlayerLyricContainer: FC = () => {
   const [prevLyricIndex, setPrevLyricIndex] = useState(0)
   const [isTouching, setIsTouching] = useState(false)
 
-  const { lyric, audioElRef } = useSelector((state: any) => ({
-    lyric: state.player.songInfo.lyric,
-    audioElRef: state.player.audioElRef
-  }))
+  const { songInfo: { lyric }, audioElRef } = usePlayerStore()
 
   const toggleIsTouching = useMemoizedFn((touching: boolean) => {
     setIsTouching(touching)

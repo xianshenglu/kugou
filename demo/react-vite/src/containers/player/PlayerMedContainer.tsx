@@ -1,19 +1,13 @@
 import type { FC } from 'react'
 import PlayerMed from '../../components/player/PlayerMed'
-import { useSelector } from 'react-redux'
+import usePlayerStore from '../../stores/usePlayerStore'
 import { useLocation } from 'react-router-dom'
 import { useNextPrevSong } from 'src/hooks/useNextPrevSong'
 
 const PlayerMedContainer: FC = () => {
   const location = useLocation()
   
-  const { musicStatus, songInfo, audioElRef, songIndex, songList } = useSelector((state: any) => ({
-    musicStatus: state.player.musicStatus,
-    songInfo: state.player.songInfo,
-    audioElRef: state.player.audioElRef,
-    songIndex: state.player.songIndex,
-    songList: state.player.songList
-  }))
+  const { musicStatus, songInfo, audioElRef, songIndex, songList } = usePlayerStore()
 
   const playerProps = {
     musicStatus,

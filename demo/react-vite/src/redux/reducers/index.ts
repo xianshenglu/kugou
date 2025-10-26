@@ -6,7 +6,6 @@ import rankInfo from './rankInfo'
 import songListInfo from './songListInfo'
 import singerList from './singerList'
 import singerInfo from './singerInfo'
-import player from './player'
 
 const rootReducer = combineReducers({
   rankList,
@@ -15,8 +14,7 @@ const rootReducer = combineReducers({
   rankInfo,
   songListInfo,
   singerList,
-  singerInfo,
-  player
+  singerInfo
 })
 
 export default rootReducer
