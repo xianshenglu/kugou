@@ -26,7 +26,6 @@ import PubModuleHead from '@/components/PubModuleHead.vue'
 import AppMusicList from '@/components/AppMusicList.vue'
 import { fetchRankInfo } from '@/requests/rankInfo'
 import { useLoading } from '@/composables/useLoading'
-import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 import type { RootState } from '@/store'
 import { mapRankInfoResponse } from '@shared/domains/rank/mapper'
 
@@ -39,8 +38,8 @@ const rankInfo = computed(() => store.state.rank.rankInfo)
 
 const getModuleHeadInfo = computed(() => {
   return {
-    imgUrl: replaceSizeInUrl(rankInfo.value.info!.banner7url),
-    name: rankInfo.value.info!.rankname
+    ...rankInfo.value.info,
+    name: rankInfo.value.info.rankname
   }
 })
 
