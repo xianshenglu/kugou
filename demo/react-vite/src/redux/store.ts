@@ -1,7 +1,6 @@
-import rankList from './reducers/rankList'
+import { baseApi } from './baseApi'
 import songList from './reducers/songList'
 import singerCategories from './reducers/singerCategories'
-import rankInfo from './reducers/rankInfo'
 import songListInfo from './reducers/songListInfo'
 import singerList from './reducers/singerList'
 import singerInfo from './reducers/singerInfo'
@@ -9,14 +8,15 @@ import { configureStore } from '@reduxjs/toolkit'
 
 const store = configureStore({
   reducer: {
-    rankList,
+    [baseApi.reducerPath]: baseApi.reducer,
     songList,
     singerCategories,
-    rankInfo,
     songListInfo,
     singerList,
     singerInfo
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(baseApi.middleware),
 })
 
 export default store

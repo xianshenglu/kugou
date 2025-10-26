@@ -8,8 +8,8 @@ interface RankListProps {
 }
 
 const RankList: FC<RankListProps> = ({ rankList }) => {
-  const getChildren = ({ name }: { name: string }) => {
-    return <div className={styles.RankList__name}>{name}</div>
+  const getChildren = ({ title }: { title: string }) => {
+    return <div className={styles.RankList__name}>{title}</div>
   }
 
   return (

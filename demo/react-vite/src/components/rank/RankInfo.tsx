@@ -5,10 +5,10 @@ import AppMusicList from '../public/AppMusicList'
 import { formatDate } from '../../assets/js/utils'
 import styles from './RankInfo.module.less'
 import classNames from 'classnames'
-import type { RankInfoSongsDto, RankItemDto } from '@shared/domains/rank/dto'
+import type { RankInfoSongs, RankItem } from '@shared/domains/rank/model'
 interface RankInfoProps {
-  songsData: RankInfoSongsDto;
-  listInfo: RankItemDto;
+  songsData: RankInfoSongs;
+  listInfo: RankItem;
 }
 
 const RankInfo: FC<RankInfoProps> = ({ songsData, listInfo }) => {
@@ -34,7 +34,7 @@ const RankInfo: FC<RankInfoProps> = ({ songsData, listInfo }) => {
     )
   }
 
-  const { rankname, imgurl } = listInfo
+  const { rankname, imgUrl: imgurl } = listInfo
   
   const infoHeaderProps = {
     name: rankname,

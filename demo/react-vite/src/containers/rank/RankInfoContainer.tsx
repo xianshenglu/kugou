@@ -1,23 +1,17 @@
 import type { FC } from 'react'
-import { useEffect } from 'react'
 import RankInfo from '../../components/rank/RankInfo'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchRankInfoIfNeeded } from '../../redux/actions/rankInfo'
 import { useParams } from 'react-router-dom'
+import { useGetRankInfoQuery } from './rankInfoApi'
+import { Loading } from 'src/components/loading/Loading'
 
 const RankInfoContainer: FC = () => {
-  const dispatch = useDispatch()
   const { id } = useParams<{ id: string }>()
-  const { songsData, listInfo } = useSelector((state: any) => ({
-    songsData: state.rankInfo.songsData,
-    listInfo: state.rankInfo.listInfo
-  }))
+  const { data, isLoading, error } = useGetRankInfoQuery(id!)
+  if (isLoading) return <Loading />
+  if (error) return <div>Error loading rank info</div>
+  if (!data) return null
 
-  useEffect(() => {
-      dispatch(fetchRankInfoIfNeeded(id))
-  }, [])
-
-  return <RankInfo songsData={songsData} listInfo={listInfo} />
+  return <RankInfo songsData={data.songs} listInfo={data.info} />
 }
 
 export default RankInfoContainer
