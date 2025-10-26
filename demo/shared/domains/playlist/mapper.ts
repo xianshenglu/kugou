@@ -1,6 +1,6 @@
 import { replaceSizeInUrl } from '../common/mapper'
-import type { PlaylistListResponseDto, PlaylistInfoResponseDto, PlaylistSummaryDto } from './dto'
-import type { PlaylistListData, PlaylistInfoData, PlaylistSummary } from './model'
+import type { PlaylistListResponseDto, PlaylistInfoResponseDto, PlaylistSummaryDto, PlaylistDetailSummaryDto } from './dto'
+import type { PlaylistListData, PlaylistInfoData, PlaylistSummary, PlaylistInfoDetail } from './model'
 
 function mapPlaylistSummary(dto: PlaylistSummaryDto): PlaylistSummary {
   return {
@@ -17,9 +17,19 @@ export function mapPlaylistList(dto: PlaylistListResponseDto): PlaylistListData 
   return info.map(mapPlaylistSummary)
 }
 
+function mapPlaylistInfoDetail(dto: PlaylistInfoResponseDto['info']): PlaylistInfoDetail {
+  return {
+    ...dto,
+    list: {
+      ...dto.list,
+      imgUrl: replaceSizeInUrl(dto.list.imgurl),
+    }
+  }
+}
+
 export function mapPlaylistInfo(dto: PlaylistInfoResponseDto): PlaylistInfoData {
   return {
-    info: dto.info,
+    info: mapPlaylistInfoDetail(dto.info),
     songs: dto.list,
   }
 }

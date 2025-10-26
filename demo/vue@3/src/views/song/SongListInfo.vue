@@ -32,7 +32,7 @@ const songListInfo = computed(() => store.state.song.songListInfo)
 const getModuleHeadInfo = computed(() => {
   const data = songListInfo.value.info.list!
   return {
-    imgUrl: replaceSizeInUrl(data.imgurl),
+    ...data,
     name: data.specialname,
     intro: data.intro
   }
