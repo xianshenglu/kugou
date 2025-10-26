@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-import newSongs from './newSongs'
 import rankList from './rankList'
 import songList from './songList'
 import singerCategories from './singerCategories'
@@ -10,7 +9,6 @@ import singerInfo from './singerInfo'
 import player from './player'
 
 const rootReducer = combineReducers({
-  newSongs,
   rankList,
   songList,
   singerCategories,
