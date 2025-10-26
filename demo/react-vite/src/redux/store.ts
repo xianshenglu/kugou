@@ -1,27 +1,22 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import { thunk } from 'redux-thunk'
-// import logger from 'redux-logger';
-import rootReducer from './reducers'
-// import { composeWithDevTools } from '@redux-devtools/extension'
-const composeEnhancers =
-  (import.meta.env.DEV &&
-    (globalThis as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
-  compose
+import rankList from './reducers/rankList'
+import songList from './reducers/songList'
+import singerCategories from './reducers/singerCategories'
+import rankInfo from './reducers/rankInfo'
+import songListInfo from './reducers/songListInfo'
+import singerList from './reducers/singerList'
+import singerInfo from './reducers/singerInfo'
+import { configureStore } from '@reduxjs/toolkit'
 
-function createStoreInternal() {
-  return createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
-}
-let store: ReturnType<typeof createStoreInternal>
-
-if (import.meta.env.DEV) {
-  if ((globalThis as any).__REDUX_STORE__) {
-    store = (globalThis as any).__REDUX_STORE__
-  } else {
-    store = createStoreInternal()
-    ;(globalThis as any).__REDUX_STORE__ = store
-  }
-} else {
-  store = createStoreInternal()
-}
+const store = configureStore({
+  reducer: {
+    rankList,
+    songList,
+    singerCategories,
+    rankInfo,
+    songListInfo,
+    singerList,
+    singerInfo
+  },
+})
 
 export default store
