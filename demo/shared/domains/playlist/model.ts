@@ -6,11 +6,15 @@ export interface PlaylistSummary extends PlaylistSummaryDto, RoutableItem {
   popularity: number
 }
 export type PlaylistSong = SongDto;
-export type PlaylistDetailSummary = PlaylistDetailSummaryDto
-
+export interface PlaylistDetailSummary extends PlaylistDetailSummaryDto {
+  imgUrl: string;
+}
 export type PlaylistListData = PlaylistSummary[]
 
+export type PlaylistInfoDetail = {
+  list: PlaylistDetailSummary
+}
 export interface PlaylistInfoData {
-  info: PlaylistInfoResponseDto['info']
+  info: PlaylistInfoDetail
   songs: PlaylistInfoResponseDto['list']
 }

@@ -5,8 +5,8 @@ export interface RankItem extends RankItemDto {
   path: string
   title: string
 }
-
+export type RankInfoSongs = Pick<RankInfoResponseDto['songs'], 'list' | 'timestamp'>
 export type RankInfoData = {
-  info: RankInfoResponseDto['info'] | null
-  songs: Pick<RankInfoResponseDto['songs'], 'list' | 'timestamp'>
+  info: RankItem
+  songs: RankInfoSongs
 }
