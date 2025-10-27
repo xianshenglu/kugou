@@ -3,28 +3,21 @@ import { Fragment } from 'react'
 import InfoHeader from '../public/InfoHeader'
 import AppMusicList from '../public/AppMusicList'
 import InfoDescription from '../public/InfoDescription'
-import type { SingerInfoDto, SingerSongsDto } from '@shared/domains/singer/dto'
-interface SingerInfoProps {
-  songsData: SingerSongsDto;
-  listInfo: SingerInfoDto;
-}
+import type { SingerInfoData } from '@shared/domains/singer/model'
 
-const SingerInfo: FC<SingerInfoProps> = ({ songsData, listInfo }) => {
-  const {
-    songsData: { list: songs },
-    listInfo: { singername, imgurl, intro }
-  } = { songsData, listInfo }
+const SingerInfo: FC<SingerInfoData> = ({ info, data }) => {
+  const { name, imgUrl, intro } = info
 
   const infoHeaderProps = {
-    name: singername,
-    imgurl
+    name,
+    imgurl: imgUrl
   }
 
   return (
     <Fragment>
       <InfoHeader {...infoHeaderProps} />
       <InfoDescription description={intro} />
-      <AppMusicList data={songs} />
+      <AppMusicList data={data} />
     </Fragment>
   )
 }

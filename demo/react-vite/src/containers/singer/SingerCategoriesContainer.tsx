@@ -1,18 +1,11 @@
 import type { FC } from 'react'
-import { useEffect } from 'react'
 import SingerCategories from '../../components/singer/SingerCategories'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchSingerCategoriesIfNeeded } from '../../redux/actions/singerCategories'
+import { useGetSingerCategoriesQuery } from './singerCategoriesApi'
 
 const SingerCategoriesContainer: FC = () => {
-  const dispatch = useDispatch()
-  const singerCategories = useSelector((state: any) => state.singerCategories)
+  const { data: singerCategories = [] } = useGetSingerCategoriesQuery()
 
-  useEffect(() => {
-    dispatch(fetchSingerCategoriesIfNeeded())
-  }, [])
-
-  return <SingerCategories {...singerCategories} />
+  return <SingerCategories singerCategories={singerCategories} />
 }
 
 export default SingerCategoriesContainer

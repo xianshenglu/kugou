@@ -71,7 +71,7 @@ const App: FC<any> = (props) => {
               element={<SingerListContainer />}
             />
             <Route
-              path={singerInfo + ':singerListId/:id'}
+              path={singerInfo + ':id'}
               element={<SingerInfoContainer />}
             />
             <Route path={search} element={
