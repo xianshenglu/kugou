@@ -14,18 +14,18 @@ export interface SingerSummary extends SingerSummaryDto {
   imgUrl: string
   path: string
 }
-export interface SingerInfoShort {
-  id: SingerInfoDto['singerid']
-  name: SingerInfoDto['singername']
-  count: SingerInfoDto['songcount']
+export interface SingerCategoryInfo {
+  id: SingerCategoryDto['classid']
+  name: SingerCategoryDto['classname']
+  count: number
 }
-export interface SingerInfo extends SingerInfoShort, Pick<SingerInfoDto, 'albumcount' | 'intro'> {
+export interface SingerInfo extends SingerCategoryInfo, Pick<SingerInfoDto, 'albumcount' | 'intro'> {
   imgUrl: SingerInfoDto['imgurl']
   path: string;
 }
 
 export interface SingerListData {
-  info: SingerInfoShort;
+  info: SingerCategoryInfo;
   data: SingerSummary[]
 }
 
