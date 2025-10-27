@@ -1,22 +1,17 @@
-import React, { Component } from 'react'
+import type { FC } from 'react'
+import { useEffect } from 'react'
 import RankList from '../../components/rank/RankList'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchRankListIfNeeded } from '../../redux/actions/rankList'
 
-class RankListContainer extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props
+const RankListContainer: FC = () => {
+  const dispatch = useDispatch()
+  const rankList = useSelector((state: any) => state.rankList)
+
+  useEffect(() => {
     dispatch(fetchRankListIfNeeded())
-  }
-  render() {
-    return <RankList {...this.props} />
-  }
+  }, [dispatch])
+  return <RankList {...rankList} />
 }
 
-const mapStateToProps = ({ rankList }) => rankList
-const mapDispatchToProps = null
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RankListContainer)
+export default RankListContainer

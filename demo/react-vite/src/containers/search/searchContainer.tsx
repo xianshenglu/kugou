@@ -1,93 +1,90 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import type { FC } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useMemoizedFn } from 'ahooks'
 import { fetchHotSearchIfNeeded } from '../../redux/actions/hotSearch'
 import { fetchKeywordSearchIfNeeded } from '../../redux/actions/keywordSearch'
 import Search from '../../components/search/Search'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-class SearchContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isKeywordSearchShow: false,
-      isHotSearchShow: false,
-      keyword: ''
-    }
-    this.searchKeyword = this.searchKeyword.bind(this)
-    this.updateKeyword = this.updateKeyword.bind(this)
-  }
-  componentDidMount() {
-    const { location } = this.props
-    this.historyListener(location)
-    // console.log('mount')
-  }
-  componentDidUpdate(prevProps) {
-    if (this.props.location !== prevProps.location) {
-      this.historyListener(this.props.location)
-    }
-  }
-  historyListener({ search }) {
-    search = new URLSearchParams(search)
-    const keyword = search.get('keyword')
-    const { dispatch } = this.props
+const SearchContainer: FC = () => {
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const navigate = useNavigate()
+  
+  const [isKeywordSearchShow, setIsKeywordSearchShow] = useState(false)
+  const [isHotSearchShow, setIsHotSearchShow] = useState(false)
+  const [keyword, setKeyword] = useState('')
+  
+  const updateKeywordCallbackRef = useRef<(() => void) | null>(null)
+
+  const { hotSearch, keywordSearch } = useSelector((state: any) => ({
+    hotSearch: state.hotSearch,
+    keywordSearch: state.keywordSearch
+  }))
+
+  const historyListener = useMemoizedFn(({ search }: { search: string }) => {
+    const searchParams = new URLSearchParams(search)
+    const keyword = searchParams.get('keyword')
+    
     if (keyword === null || keyword === '') {
       dispatch(fetchHotSearchIfNeeded())
-      this.setState({
-        isHotSearchShow: true,
-        isKeywordSearchShow: false,
-        keyword: ''
-      })
+      setIsHotSearchShow(true)
+      setIsKeywordSearchShow(false)
+      setKeyword('')
     } else {
       dispatch(fetchKeywordSearchIfNeeded(keyword))
-      this.setState({
-        isHotSearchShow: false,
-        isKeywordSearchShow: true,
-        keyword
-      })
+      setIsHotSearchShow(false)
+      setIsKeywordSearchShow(true)
+      setKeyword(keyword)
     }
-  }
-  updateKeyword(keyword, callback = () => undefined) {
-    this.setState({ keyword }, callback)
-  }
-  searchKeyword() {
-    let {
-      location: { search, pathname },
-      navigate
-    } = this.props
-    const { keyword: curKeyword } = this.state
-    if (curKeyword === '') {
+  })
+
+  const updateKeyword = useMemoizedFn((newKeyword: string, callback = () => undefined) => {
+    setKeyword(newKeyword)
+    updateKeywordCallbackRef.current = callback
+  })
+
+  const searchKeyword = useMemoizedFn(() => {
+    const { search, pathname } = location
+    if (keyword === '') {
       navigate(pathname)
       return
     }
-    search = new URLSearchParams(search)
-    const isFromKeyword = search.get('keyword') !== null
-    search.set('keyword', curKeyword)
+    
+    const searchParams = new URLSearchParams(search)
+    const isFromKeyword = searchParams.get('keyword') !== null
+    searchParams.set('keyword', keyword)
 
     if (isFromKeyword) {
-      navigate(pathname + '?' + search.toString(), { replace: true })
+      navigate(pathname + '?' + searchParams.toString(), { replace: true })
     } else {
-      navigate(pathname + '?' + search.toString())
+      navigate(pathname + '?' + searchParams.toString())
     }
+  })
+
+  useEffect(() => {
+    historyListener(location)
+  }, [location])
+
+  useEffect(() => {
+    if (updateKeywordCallbackRef.current) {
+      updateKeywordCallbackRef.current()
+      updateKeywordCallbackRef.current = null
+    }
+  }, [keyword])
+
+  const otherProps = {
+    isKeywordSearchShow,
+    isHotSearchShow,
+    keyword,
+    searchKeyword,
+    updateKeyword,
+    hotSearch,
+    keywordSearch
   }
-  render() {
-    const { ...otherState } = this.state
-    const { searchKeyword, updateKeyword } = this
-    const otherProps = { ...otherState, searchKeyword, updateKeyword }
-    return <Search {...this.props} {...otherProps} />
-  }
+
+  return <Search {...otherProps} />
 }
 
-const mapStateToProps = ({ hotSearch, keywordSearch }) => ({
-  hotSearch,
-  keywordSearch
-})
-const mapDispatchToProps = null
-function SearchContainerWrapper(props) {
-  const location = useLocation()
-  const navigate = useNavigate()
-  return <SearchContainer {...props} location={location} navigate={navigate} />
-}
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SearchContainerWrapper)
+export default SearchContainer

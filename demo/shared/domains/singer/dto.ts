@@ -34,7 +34,12 @@ export interface SingerSongDto extends SongDto {
   lyrics_info:      any[];
   composer_info:    any[];
 }
+export type SingerSongsDto = {
+  total: number
+  list: SingerSongDto[]
+}
+
 export interface SingerInfoResponseDto {
   info: SingerInfoDto
-  songs: { total: number; list: SingerSongDto[] }
+  songs: SingerSongsDto
 }

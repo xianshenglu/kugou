@@ -1,46 +1,32 @@
-import React, { Component } from 'react'
+import type { FC } from 'react'
 import PlayerMed from '../../components/player/PlayerMed'
-import { connect } from 'react-redux'
-import { withNextPrevSong } from '../../components/HOC'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import { useNextPrevSong } from 'src/hooks/useNextPrevSong'
 
-class PlayerMedContainer extends Component {
-  render() {
-    const {
-      location: { pathname },
-      songInfo: { play_url },
-      dispatch
-    } = this.props
-    const playerProps = {
-      ...this.props
-    }
-    return <PlayerMed {...playerProps} />
-  }
-}
-
-const mapStateToProps = ({
-  player: { musicStatus, songInfo, audioElRef, songIndex, songList }
-}) => ({
-  musicStatus,
-  songInfo,
-  audioElRef,
-  songIndex,
-  songList
-})
-const mapDispatchToProps = null
-const EnhancedPlayerMedContainer = withNextPrevSong(PlayerMedContainer)
-function PlayerMedContainerWrapper(props) {
+const PlayerMedContainer: FC = () => {
   const location = useLocation()
-  const navigate = useNavigate()
-  return (
-    <EnhancedPlayerMedContainer
-      {...props}
-      location={location}
-      navigate={navigate}
-    />
-  )
+  
+  const { musicStatus, songInfo, audioElRef, songIndex, songList } = useSelector((state: any) => ({
+    musicStatus: state.player.musicStatus,
+    songInfo: state.player.songInfo,
+    audioElRef: state.player.audioElRef,
+    songIndex: state.player.songIndex,
+    songList: state.player.songList
+  }))
+
+  const playerProps = {
+    musicStatus,
+    songInfo,
+    audioElRef,
+    songIndex,
+    songList,
+    location
+  }
+
+  const { nextSong, prevSong } = useNextPrevSong(songList, songIndex)
+
+  return <PlayerMed {...playerProps} nextSong={nextSong} prevSong={prevSong} />
 }
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PlayerMedContainerWrapper)
+
+export default PlayerMedContainer

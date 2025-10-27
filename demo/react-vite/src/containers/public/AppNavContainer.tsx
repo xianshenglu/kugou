@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import type { FC } from 'react'
+import { useEffect } from 'react'
+import { useMemoizedFn, useEventListener } from 'ahooks'
+import { useDispatch, useSelector } from 'react-redux'
 import AppNav from '../../components/public/AppNav'
 import {
   newSongs,
@@ -27,35 +29,27 @@ const navList = [
     path: singerCategories
   }
 ]
-class AppNavContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.toggleBetweenPages = this.toggleBetweenPages.bind(this)
-  }
-  componentDidUpdate(prevProps) {
-    if (this.props.location !== prevProps.location) {
-      this.onLocationChange(this.props.location)
-    }
-  }
-  componentDidMount() {
-    const { location } = this.props
-    this.onLocationChange(location)
-    window.addEventListener('touchstart', this.toggleBetweenPages)
-  }
-  componentWillUnmount() {
-    window.removeEventListener('touchstart', this.toggleBetweenPages)
-  }
-  onLocationChange({ pathname }) {
+
+const AppNavContainer: FC = () => {
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { activeIndex, isShow } = useSelector((state: any) => ({
+    activeIndex: state.appNav.activeIndex,
+    isShow: state.appNav.isShow
+  }))
+
+  const onLocationChange = useMemoizedFn(({ pathname }: { pathname: string }) => {
     const activeIndex = navList.findIndex((nav) => nav.path === pathname)
-    const { dispatch } = this.props
     if (activeIndex >= 0) {
       dispatch(switchNav(true))
       dispatch(setActiveNavIndex(activeIndex))
     } else {
       dispatch(switchNav(false))
     }
-  }
-  toggleBetweenPages(event) {
+  })
+
+  const toggleBetweenPages = useMemoizedFn((event: TouchEvent) => {
     let interval = 300
     let startTime = Date.now()
     let minOffset = window.innerWidth * 0.1
@@ -63,7 +57,7 @@ class AppNavContainer extends Component {
     let startClientX = event.touches[0].clientX
     let startClientY = event.touches[0].clientY
 
-    const detectToSwipe = (event) => {
+    const detectToSwipe = (event: TouchEvent) => {
       window.removeEventListener('touchend', detectToSwipe, true)
 
       let endClientX = event.changedTouches[0].clientX
@@ -78,11 +72,8 @@ class AppNavContainer extends Component {
       let isSlow = endTime - startTime > interval
       let isSlowMoveEnough = isSlow && offsetX > maxOffset
       let isFastMoveEnough = !isSlow && offsetX > minOffset
-      const {
-        appNav: { activeIndex, isShow: isAppNavShow },
-        navigate
-      } = this.props
-      if (isAppNavShow && (isSlowMoveEnough || isFastMoveEnough)) {
+      
+      if (isShow && (isSlowMoveEnough || isFastMoveEnough)) {
         let nextRouteIndex = direction ? activeIndex + 1 : activeIndex - 1
         let nextRoute = navList[nextRouteIndex]
         if (nextRoute !== undefined) {
@@ -91,27 +82,15 @@ class AppNavContainer extends Component {
       }
     }
     window.addEventListener('touchend', detectToSwipe, true)
-  }
-  render() {
-    const {
-      appNav: { activeIndex, isShow }
-    } = this.props
-    return isShow ? <AppNav activeIndex={activeIndex} navList={navList} /> : ''
-  }
+  })
+
+  useEffect(() => {
+    onLocationChange(location)
+  }, [location])
+
+  useEventListener('touchstart', toggleBetweenPages, { target: window })
+
+  return isShow ? <AppNav activeIndex={activeIndex} navList={navList} /> : null
 }
 
-const mapStateToProps = ({ appNav }) => ({
-  appNav
-})
-const mapDispatchToProps = null
-
-function AppNavContainerWrapper(props) {
-  const location = useLocation()
-  const navigate = useNavigate()
-  return <AppNavContainer {...props} location={location} navigate={navigate} />
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AppNavContainerWrapper)
+export default AppNavContainer

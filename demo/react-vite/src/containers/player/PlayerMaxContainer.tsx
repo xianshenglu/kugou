@@ -1,59 +1,48 @@
-import React, { Component } from 'react'
+import type { FC } from 'react'
+import { useEffect } from 'react'
 import PlayerMax from '../../components/player/PlayerMax'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchMusicIfNeeded } from '../../redux/actions/player'
-import { withNextPrevSong } from '../../components/HOC'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useNextPrevSong } from 'src/hooks/useNextPrevSong'
 
-class PlayerMaxContainer extends Component {
-  componentDidMount() {
-    const {
-      dispatch,
-      location,
-      songInfo: { play_url }
-    } = this.props
-    if (play_url === '') {
-      const musicHash = new URLSearchParams(location.search).get('musicHash')
-      dispatch(fetchMusicIfNeeded(musicHash, 0, [{ hash: musicHash }]))
-    }
-  }
-  render() {
-    const {
-      songInfo: { play_url },
-      dispatch,
-      audioElRef
-    } = this.props
-    const playerProps = {
-      ...this.props
-    }
-    return <PlayerMax {...playerProps} />
-  }
-}
-
-const mapStateToProps = ({
-  player: { musicStatus, songInfo, audioElRef, songIndex, songList }
-}) => ({
-  musicStatus,
-  songInfo,
-  audioElRef,
-  songIndex,
-  songList
-})
-const mapDispatchToProps = null
-
-const EnhancedPlayerMaxContainer = withNextPrevSong(PlayerMaxContainer)
-function PlayerMaxContainerWrapper(props) {
+const PlayerMaxContainer: FC = () => {
+  const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
-  return (
-    <EnhancedPlayerMaxContainer
-      {...props}
-      location={location}
-      navigate={navigate}
-    />
-  )
+  const { musicStatus, songInfo, audioElRef, songIndex, songList } = useSelector((state: any) => ({
+    musicStatus: state.player.musicStatus,
+    songInfo: state.player.songInfo,
+    audioElRef: state.player.audioElRef,
+    songIndex: state.player.songIndex,
+    songList: state.player.songList
+  }))
+
+  useEffect(() => {
+    const { play_url } = songInfo
+    if (play_url === '') {
+      const musicHash = new URLSearchParams(location.search).get('musicHash')
+      if (musicHash) {
+        ;(dispatch as any)(fetchMusicIfNeeded(musicHash, 0, [{ hash: musicHash }] as any))
+      }
+    }
+    // todo remove deps?
+  }, [location.search, songInfo])
+
+  const playerProps = {
+    musicStatus,
+    songInfo,
+    audioElRef,
+    songIndex,
+    songList,
+    dispatch,
+    location,
+    navigate
+  }
+
+  const { nextSong, prevSong } = useNextPrevSong(songList, songIndex)
+
+  return <PlayerMax {...playerProps} nextSong={nextSong} prevSong={prevSong} />
 }
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PlayerMaxContainerWrapper)
+
+export default PlayerMaxContainer
