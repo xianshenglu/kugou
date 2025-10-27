@@ -1,6 +1,6 @@
 export default {
   plugins: {
-    'postcss-px-to-viewport': {
+    'postcss-pixel-to-viewport': {
       viewportWidth: 375,
       viewportUnit: 'vw',
       propertyBlacklist: [],
