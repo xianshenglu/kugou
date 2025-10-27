@@ -3,15 +3,10 @@ import { Fragment } from 'react'
 import { NavLink } from 'react-router-dom'
 import styles from './SingerCategories.module.less'
 import classNames from 'classnames'
+import type { SingerCategoryData } from '@shared/domains/singer/model'
 
 interface SingerCategoriesProps {
-  singerCategories: {
-    category: string;
-    children?: {
-      path: string;
-      name: string;
-    }[];
-  }[];
+  singerCategories: SingerCategoryData[]
 }
 
 const SingerCategories: FC<SingerCategoriesProps> = ({ singerCategories }) => {
@@ -22,7 +17,7 @@ const SingerCategories: FC<SingerCategoriesProps> = ({ singerCategories }) => {
           className={classNames(styles.singerCategories__list, 'main_border')}
           key={category.category}
         >
-          {category.children.map(childCategory => (
+          {category.data.map(childCategory => (
             <li
               className={classNames(styles.singerCategories__item, 'main_border_bottom')}
               key={childCategory.path}
@@ -32,7 +27,7 @@ const SingerCategories: FC<SingerCategoriesProps> = ({ singerCategories }) => {
                 className={styles.singerCategories__link}
               >
                 <div className={styles.singerCategories__title}>
-                  {childCategory.name}
+                  {childCategory.classname}
                 </div>
                 <button className={styles.singerCategories_btn}>
                   <svg className="icon" aria-hidden="true">

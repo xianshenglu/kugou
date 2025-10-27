@@ -1,19 +1,10 @@
 import { useState, useRef } from 'react'
-import { useSelector } from 'react-redux'
 import { useEventListener, useMemoizedFn } from 'ahooks'
 import PlayerProgress from '../../components/player/PlayerProgress'
-
-interface RootState {
-  player: {
-    audioElRef: {
-      current: HTMLAudioElement | null
-    }
-  }
-}
+import usePlayerStore from '../../stores/usePlayerStore'
 
 const PlayerProgressContainer = () => {
-  const audioElRef = useSelector((state: RootState) => state.player.audioElRef)
-  
+  const { audioElRef } = usePlayerStore()
   const [currentTime, setCurrentTime] = useState(0)
   const [loadProgress, setLoadProgress] = useState(0)
   const [currentProgress, setCurrentProgress] = useState(0)

@@ -1,19 +1,14 @@
 import type { FC } from 'react'
 import { useEffect } from 'react'
 import NewSongs from '../../components/newSong/NewSongs'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchNewSongsIfNeeded } from '../../redux/actions/newSongs'
+import useNewSongsStore from './useNewSongsStore'
 
 const NewSongsContainer: FC = () => {
-  const dispatch = useDispatch()
-  const { songs, sliderData } = useSelector((state: any) => ({
-    songs: state.newSongs.songs,
-    sliderData: state.newSongs.sliderData
-  }))
+  const { songs, sliderData, fetchNewSongsIfNeeded } = useNewSongsStore()
 
   useEffect(() => {
-    dispatch(fetchNewSongsIfNeeded())
-  }, [dispatch])
+    fetchNewSongsIfNeeded()
+  }, [fetchNewSongsIfNeeded])
 
   return <NewSongs songs={songs} sliderData={sliderData} />
 }

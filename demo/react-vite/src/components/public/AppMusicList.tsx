@@ -1,10 +1,9 @@
 import type { FC } from 'react'
-import { useDispatch } from 'react-redux'
 import styles from './AppMusicList.module.less'
-import { fetchMusicIfNeeded, switchPlayerMed } from '../../redux/actions/player'
 import { player } from '../../constants/router'
 import { useLocation } from 'react-router-dom'
 import classNames from 'classnames'
+import usePlayerStore from 'src/stores/usePlayerStore'
 
 interface AppMusicListProps {
   data: {
@@ -18,10 +17,9 @@ const AppMusicList: FC<AppMusicListProps> = ({
   data, 
   renderMusicSequence = () => undefined 
 }) => {
-  const dispatch = useDispatch()
   const location = useLocation()
   const { pathname } = location
-
+  const { fetchMusicIfNeeded, switchPlayerMed } = usePlayerStore()
   return (
     <ul className={styles.AppMusicList}>
       {data.map((music, index) => (
@@ -29,8 +27,8 @@ const AppMusicList: FC<AppMusicListProps> = ({
           className={classNames(styles.AppMusicList__item, 'main_border_bottom')}
           key={music.hash}
           onClick={(e) => {
-            dispatch(fetchMusicIfNeeded(music.hash, index, data))
-            dispatch(switchPlayerMed(pathname !== player))
+            fetchMusicIfNeeded(music.hash, index, data as any)
+            switchPlayerMed(pathname !== player)
           }}
         >
           <div className={styles.AppMusicList__info}>

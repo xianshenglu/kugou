@@ -1,23 +1,18 @@
 import type { FC } from 'react'
-import { useEffect } from 'react'
 import SingerInfo from '../../components/singer/SingerInfo'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchSingerInfoIfNeeded } from '../../redux/actions/singerInfo'
+import { useGetSingerInfoQuery } from './singerInfoApi'
 import { useParams } from 'react-router-dom'
+import { Loading } from 'src/components/loading/Loading'
 
 const SingerInfoContainer: FC = () => {
-  const dispatch = useDispatch()
   const { id } = useParams<{ id: string }>()
-  const { songsData, listInfo } = useSelector((state: any) => ({
-    songsData: state.singerInfo.songsData,
-    listInfo: state.singerInfo.listInfo
-  }))
+  const { data, isLoading, error } = useGetSingerInfoQuery(id!)
 
-  useEffect(() => {
-      dispatch(fetchSingerInfoIfNeeded(id))
-  }, [])
+  if (isLoading) return <Loading />
+  if (error) return <div>Error loading singer info</div>
+  if (!data) return null
 
-  return <SingerInfo songsData={songsData} listInfo={listInfo} />
+  return <SingerInfo {...data} />
 }
 
 export default SingerInfoContainer

@@ -1,22 +1,20 @@
-import type { FC } from 'react'
-import { useEffect } from 'react'
+import { useMemo, type FC } from 'react'
 import SongListInfo from '../../components/song/SongListInfo'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchSongListInfoIfNeeded } from '../../redux/actions/songListInfo'
+import { useGetSongListInfoQuery } from './songListInfoApi'
 import { useParams } from 'react-router-dom'
+import { Loading } from 'src/components/loading/Loading'
 
 const SongListInfoContainer: FC = () => {
-  const dispatch = useDispatch()
   const { id } = useParams<{ id: string }>()
-  const { songsData, listInfo } = useSelector((state: any) => ({
-    songsData: state.songListInfo.songsData,
-    listInfo: state.songListInfo.listInfo
-  }))
-  useEffect(() => {
-      dispatch(fetchSongListInfoIfNeeded(id))
-  }, [])
 
-  return <SongListInfo songsData={songsData} listInfo={listInfo} />
+  const { data, isLoading, error } = useGetSongListInfoQuery(id!)
+  const songsData = useMemo(() => ({ list: data?.songs.list.info! }), [data])
+
+  if (isLoading) return <Loading/>
+  if (error) return <div>Error loading playlist info</div>
+  if (!data) return null
+
+  return <SongListInfo songsData={songsData} listInfo={data.info.list} />
 }
 
 export default SongListInfoContainer

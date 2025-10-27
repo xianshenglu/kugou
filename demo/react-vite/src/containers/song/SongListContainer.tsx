@@ -1,18 +1,11 @@
 import type { FC } from 'react'
-import { useEffect } from 'react'
 import SongList from '../../components/song/SongList'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchSongListIfNeeded } from '../../redux/actions/songList'
+import { useGetSongListQuery } from './songListApi'
 
 const SongListContainer: FC = () => {
-  const dispatch = useDispatch()
-  const songList = useSelector((state: any) => state.songList)
+  const { data: playlistData = [] } = useGetSongListQuery()
 
-  useEffect(() => {
-    dispatch(fetchSongListIfNeeded())
-  }, [])
-
-  return <SongList {...songList} />
+  return <SongList songList={playlistData} />
 }
 
 export default SongListContainer

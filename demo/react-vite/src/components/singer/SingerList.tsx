@@ -5,22 +5,15 @@ import { NavLink } from 'react-router-dom'
 import logo__grey from '../../assets/images/logo__grey.png'
 import classNames from 'classnames'
 import { $_xsl__loadImgLazy } from '../../assets/js/utils'
-import type { SingerSummary } from '@shared/domains/singer/model'
+import type { SingerCategoryInfo, SingerSummary } from '@shared/domains/singer/model'
 interface SingerListProps {
   singersData: {
-    // page, pagesize was prepared for load more button
-    page: number;
-    pagesize: number;
-    list: SingerSummary[];
-    total: number;
-  };
-  listInfo: {
-    // classid: PropTypes.number.isRequired,
-    classname: string;
+    data: SingerSummary[];
+    info: SingerCategoryInfo;
   };
 }
 
-const SingerList: FC<SingerListProps> = ({ singersData, listInfo }) => {
+const SingerList: FC<SingerListProps> = ({ singersData }) => {
   const lazyImagesRef = useRef<HTMLImageElement[]>([])
 
   const initLazyImgLoad = () => {
@@ -34,13 +27,12 @@ const SingerList: FC<SingerListProps> = ({ singersData, listInfo }) => {
   })
 
   const {
-    singersData: { list: singers },
-    listInfo: { classname }
-  } = { singersData, listInfo }
+    singersData: { data: singers, info: { name } },
+  } = { singersData }
 
   return (
     <Fragment>
-      <h4 className="module_title main_box_shadow">{classname}</h4>
+      <h4 className="module_title main_box_shadow">{name}</h4>
       <ul
         className={styles.SingerList__list}
         onScroll={() => $_xsl__loadImgLazy(lazyImagesRef.current)}
@@ -48,16 +40,16 @@ const SingerList: FC<SingerListProps> = ({ singersData, listInfo }) => {
         {singers.map((singer) => (
           <li
             className={classNames(styles.SingerList__item, 'main_border_bottom')}
-            key={singer.singerid}
+            key={singer.id}
           >
             <NavLink to={singer.path} className={styles.SingerList__link}>
               <img
                 className={classNames(styles.SingerList__img, 'lazyImage')}
                 src={logo__grey}
-                data-src={singer.imgurl}
-                alt={singer.singername}
+                data-src={singer.imgUrl}
+                alt={singer.name}
               />
-              <div>{singer.singername}</div>
+              <div>{singer.name}</div>
             </NavLink>
           </li>
         ))}

@@ -6,10 +6,6 @@ import InfoDescription from '../public/InfoDescription'
 import type { PlaylistDetailSummary, PlaylistSong } from '@shared/domains/playlist/model'
 interface SongListInfoProps {
   songsData: {
-    // page pagesize total was prepared for load more
-    page: number;
-    pagesize: number;
-    total: number;
     list: PlaylistSong[];
   };
   listInfo: PlaylistDetailSummary;
@@ -18,7 +14,7 @@ interface SongListInfoProps {
 const SongListInfo: FC<SongListInfoProps> = ({ songsData, listInfo }) => {
   const {
     songsData: { list: songs },
-    listInfo: { specialname, imgurl, intro }
+    listInfo: { specialname, imgUrl: imgurl, intro }
   } = { songsData, listInfo }
 
   const infoHeaderProps = {

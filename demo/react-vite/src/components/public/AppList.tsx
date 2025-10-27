@@ -9,8 +9,8 @@ import { $_xsl__loadImgLazy } from '../../assets/js/utils'
 interface AppListProps {
   data: {
     path: string;
-    imgurl: string;
-    name: string;
+    imgUrl: string;
+    title: string;
   }[];
   render?(...args: unknown[]): unknown;
   className?: string;
@@ -56,8 +56,8 @@ const AppList = ({
                 className={classNames(styles.AppList__img, 'lazyImage')}
                 ref={(el) => setLazyImageElement(index, el)}
                 src={logo__grey}
-                data-src={item.imgurl}
-                alt={item.name}
+                data-src={item.imgUrl}
+                alt={item.title}
               />
               {render ? (render(item) as ReactNode) : null}
               <button className={styles.AppList__btn}>

@@ -1,18 +1,14 @@
 import type { FC } from 'react'
 import { useState, useEffect } from 'react'
 import { useMemoizedFn } from 'ahooks'
-import { useSelector } from 'react-redux'
 import PlayerLyric from '../../components/player/PlayerLyric'
-import { getFormattedLyrics, getLyricsMillisecond } from '../../redux/selectors'
-
+import { getFormattedLyrics } from './helpers/lyric'
+import usePlayerStore from '../../stores/usePlayerStore'
 const PlayerLyricContainer: FC = () => {
   const [prevLyricIndex, setPrevLyricIndex] = useState(0)
   const [isTouching, setIsTouching] = useState(false)
 
-  const { lyric, audioElRef } = useSelector((state: any) => ({
-    lyric: state.player.songInfo.lyric,
-    audioElRef: state.player.audioElRef
-  }))
+  const { songInfo: { lyric }, audioElRef } = usePlayerStore()
 
   const toggleIsTouching = useMemoizedFn((touching: boolean) => {
     setIsTouching(touching)
@@ -22,7 +18,7 @@ const PlayerLyricContainer: FC = () => {
       return
     }
     const lyrics = getFormattedLyrics(lyric)
-    const lyricsMillisecond = getLyricsMillisecond(lyrics)
+    const lyricsMillisecond = lyrics.map(o => o.millisecond)
     const curMillisecond = Math.floor((event.target as HTMLAudioElement).currentTime * 1000)
     const nextLyricIndex = lyricsMillisecond.findIndex(
       (time: number) => time > curMillisecond * 1.005

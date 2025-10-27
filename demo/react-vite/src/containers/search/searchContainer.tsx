@@ -1,16 +1,15 @@
 import type { FC } from 'react'
 import { useState, useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useMemoizedFn } from 'ahooks'
-import { fetchHotSearchIfNeeded } from '../../redux/actions/hotSearch'
-import { fetchKeywordSearchIfNeeded } from '../../redux/actions/keywordSearch'
+import { useHotSearch } from './useHotSearch'
+import { useKeywordSearch } from './useKeywordSearch'
 import Search from '../../components/search/Search'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
 const SearchContainer: FC = () => {
-  const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams();
   
   const [isKeywordSearchShow, setIsKeywordSearchShow] = useState(false)
   const [isHotSearchShow, setIsHotSearchShow] = useState(false)
@@ -18,22 +17,27 @@ const SearchContainer: FC = () => {
   
   const updateKeywordCallbackRef = useRef<(() => void) | null>(null)
 
-  const { hotSearch, keywordSearch } = useSelector((state: any) => ({
-    hotSearch: state.hotSearch,
-    keywordSearch: state.keywordSearch
-  }))
+  const {
+    data: hotSearchData,
+    refetch: hotSearchRefetch
+  } = useHotSearch({ enabled: false })
+
+  const {
+    data: keywordSearchData,
+    refetch: keywordSearchRefetch
+  } = useKeywordSearch({ keyword: searchParams.get('keyword') || '', enabled: false })
 
   const historyListener = useMemoizedFn(({ search }: { search: string }) => {
     const searchParams = new URLSearchParams(search)
     const keyword = searchParams.get('keyword')
     
     if (keyword === null || keyword === '') {
-      dispatch(fetchHotSearchIfNeeded())
+      hotSearchRefetch();  
       setIsHotSearchShow(true)
       setIsKeywordSearchShow(false)
       setKeyword('')
     } else {
-      dispatch(fetchKeywordSearchIfNeeded(keyword))
+      keywordSearchRefetch()
       setIsHotSearchShow(false)
       setIsKeywordSearchShow(true)
       setKeyword(keyword)
@@ -80,8 +84,8 @@ const SearchContainer: FC = () => {
     keyword,
     searchKeyword,
     updateKeyword,
-    hotSearch,
-    keywordSearch
+    hotSearch: hotSearchData,
+    keywordSearch: keywordSearchData
   }
 
   return <Search {...otherProps} />

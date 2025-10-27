@@ -1,27 +1,12 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import { thunk } from 'redux-thunk'
-// import logger from 'redux-logger';
-import rootReducer from './reducers'
-// import { composeWithDevTools } from '@redux-devtools/extension'
-const composeEnhancers =
-  (import.meta.env.DEV &&
-    (globalThis as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
-  compose
+import { baseApi } from './baseApi'
+import { configureStore } from '@reduxjs/toolkit'
 
-function createStoreInternal() {
-  return createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
-}
-let store: ReturnType<typeof createStoreInternal>
-
-if (import.meta.env.DEV) {
-  if ((globalThis as any).__REDUX_STORE__) {
-    store = (globalThis as any).__REDUX_STORE__
-  } else {
-    store = createStoreInternal()
-    ;(globalThis as any).__REDUX_STORE__ = store
-  }
-} else {
-  store = createStoreInternal()
-}
+const store = configureStore({
+  reducer: {
+    [baseApi.reducerPath]: baseApi.reducer
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(baseApi.middleware),
+})
 
 export default store

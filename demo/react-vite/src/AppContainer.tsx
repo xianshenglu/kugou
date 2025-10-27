@@ -1,22 +1,23 @@
 import { useLocation } from 'react-router-dom'
 import { Fragment } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-// import classNames from 'classnames'
+import useAppNavStore from './stores/useAppNavStore'
+import usePlayerStore from './stores/usePlayerStore'
 import logo__theme from './assets/images/logo__theme.png'
 import { player } from './constants/router'
 import App from './App'
-import {
-  hideMusicLoading,
-  playMusic,
-  pauseMusic,
-  switchPlayerMed
-} from './redux/actions/player'
 import { useMount, useUpdateEffect, useUnmount, useMemoizedFn } from 'ahooks'
 
 function AppContainer() {
-  const dispatch = useDispatch()
-  const playerState = useSelector((state: any) => state.player)
-  const isAppNavShow = useSelector((state: any) => state.appNav?.isShow)
+  const { 
+    songInfo, 
+    isPlayerMedShow, 
+    audioElRef, 
+    hideMusicLoading, 
+    playMusic, 
+    pauseMusic, 
+    switchPlayerMed 
+  } = usePlayerStore()
+  const isAppNavShow = useAppNavStore((s) => s.isShow)
   const location = useLocation()
 
   const setCssCustomVar = useMemoizedFn(() => {
@@ -31,21 +32,20 @@ function AppContainer() {
   })
 
   const onLocationChange = useMemoizedFn(({ pathname }: any) => {
-    const play_url = playerState.songInfo.play_url
-    const isPlayerMedShow = playerState.isPlayerMedShow
+    const play_url = songInfo.play_url
     const targetStatus = pathname !== player && play_url !== ''
     if (isPlayerMedShow !== targetStatus) {
-      dispatch(switchPlayerMed(targetStatus))
+      switchPlayerMed(targetStatus)
     }
   })
 
   const canPlayCb = useMemoizedFn((e: any) => {
     // ! play may return a reject error when user haven't interact with page
-    dispatch(hideMusicLoading())
+    hideMusicLoading()
     e.target
       .play()
-      .then(() => dispatch(playMusic()))
-      .catch(() => dispatch(pauseMusic()))
+      .then(() => playMusic())
+      .catch(() => pauseMusic())
   })
 
   useMount(() => {
@@ -62,13 +62,12 @@ function AppContainer() {
     window.removeEventListener('error', setBackupImg, true)
   })
 
-  const { audioElRef, songInfo: { play_url }, isPlayerMedShow } = playerState
   const appProps = { isPlayerMedShow, isAppNavShow }
 
   return (
     <Fragment>
       <audio
-        src={play_url || null}
+        src={songInfo.play_url || undefined}
         className="hidden"
         ref={audioElRef}
         loop

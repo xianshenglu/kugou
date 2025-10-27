@@ -2,19 +2,17 @@ import type { FC } from 'react'
 import classNames from 'classnames'
 import styles from './SongList.module.less'
 import AppList from '../public/AppList'
+import type { PlaylistSummary } from '@shared/domains/playlist/model';
 
 interface SongListProps {
-  songList: {
-    name: string;
-    popularity: number;
-  }[];
+  songList: PlaylistSummary[];
 }
 
 const SongList: FC<SongListProps> = ({ songList }) => {
-  const getChildren = ({ name, popularity }: { name: string; popularity: number }) => {
+  const getChildren = ({ title, popularity }: { title: string; popularity: number }) => {
     return (
       <div className={styles.SongList__info}>
-        <div className={styles.SongList__name}>{name}</div>
+        <div className={styles.SongList__name}>{title}</div>
         <div >
           <svg className={classNames('icon', styles.SongList__icon)} aria-hidden="true">
             <use xlinkHref="#icon-music" />

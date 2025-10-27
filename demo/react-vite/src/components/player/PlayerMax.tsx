@@ -5,7 +5,7 @@ import styles from './PlayerMax.module.less'
 import PrevButton from './PrevButton'
 import PlayButton from './PlayButton'
 import NextButton from './NextButton'
-import { togglePlay } from '../../redux/actions/player'
+import usePlayerStore from '../../stores/usePlayerStore'
 import PlayerLyricContainer from '../../containers/player/PlayerLyricContainer'
 import PlayerProgressContainer from '../../containers/player/PlayerProgressContainer'
 
@@ -19,7 +19,6 @@ interface PlayerMaxProps {
     isPlaying: boolean;
     isLoading: boolean;
   };
-  dispatch(...args: unknown[]): unknown;
   nextSong(...args: unknown[]): unknown;
   prevSong(...args: unknown[]): unknown;
 }
@@ -27,10 +26,11 @@ interface PlayerMaxProps {
 const PlayerMax: FC<PlayerMaxProps> = ({
   songInfo: { song_name, author_name, img: singerImg },
   musicStatus: { isPlaying, isLoading },
-  dispatch,
   prevSong,
   nextSong
 }) => {
+  const { togglePlay } = usePlayerStore()
+
   return (
     <Fragment>
       <div
@@ -56,7 +56,7 @@ const PlayerMax: FC<PlayerMaxProps> = ({
             className={styles.PlayerMax__playBtn}
             isLoading={isLoading}
             isPlaying={isPlaying}
-            togglePlay={e => dispatch(togglePlay())}
+            togglePlay={togglePlay}
           />
           <NextButton className={styles.PlayerMax__nextBtn} next={nextSong} />
         </div>

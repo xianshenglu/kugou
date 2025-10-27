@@ -1,17 +1,15 @@
 import type { FC } from 'react'
-import { useEffect } from 'react'
 import RankList from '../../components/rank/RankList'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchRankListIfNeeded } from '../../redux/actions/rankList'
+import { useGetRankListQuery } from './rankListApi'
+import { Loading } from 'src/components/loading/Loading'
 
 const RankListContainer: FC = () => {
-  const dispatch = useDispatch()
-  const rankList = useSelector((state: any) => state.rankList)
+  const { data, error, isLoading } = useGetRankListQuery()
 
-  useEffect(() => {
-    dispatch(fetchRankListIfNeeded())
-  }, [dispatch])
-  return <RankList {...rankList} />
+  if (isLoading) return <Loading />
+  if (error) return <div>Error loading rank list</div>
+  if (!data) return null
+  return <RankList rankList={data!} />
 }
 
 export default RankListContainer
