@@ -11,7 +11,7 @@ export const fetchKeywordSearch = id => ({
 })
 export const fetchKeywordSearchIfNeeded = id => {
   return function(dispatch, getState) {
-    let keywordSearch = getState().keywordSearch
+    const keywordSearch = getState().keywordSearch
     // console.log(id, keywordSearch)
     if (id === keywordSearch.id) {
       return

@@ -12,7 +12,7 @@ const songListHandler = (state = initialState, action) => {
       }
     },
     [RECEIVE_SONG_LIST]() {
-      let songList = action.response.data.plist.list.info
+      const songList = action.response.data.plist.list.info
       songList.forEach(obj => {
         obj.imgurl = $_xsl__replaceImgUrlSize(obj.imgurl)
         obj.path = songListInfo + obj.specialid

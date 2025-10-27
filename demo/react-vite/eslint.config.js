@@ -14,7 +14,7 @@ export default tseslint.config([
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
-      reactHooks.configs["recommended-latest"],
+      reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
     ],
     languageOptions: {
@@ -27,7 +27,13 @@ export default tseslint.config([
     rules: {
       "@typescript-eslint/no-explicit-any": "off",
       "css-modules/no-unused-class": [2, { "camelCase": true }],
-      "css-modules/no-undef-class": [2, { "camelCase": true }]
+      "css-modules/no-undef-class": [2, { "camelCase": true }],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "args": "none",
+        }
+      ]
     },
   },
 ]);

@@ -1,7 +1,7 @@
 //doc: https://github.com/xCss/JsonBird
-let proxyUrl = 'https://bird.ioliu.cn/v1?url='
-let baseApiHost = 'http://m.kugou.com'
-let api = {
+const proxyUrl = 'https://bird.ioliu.cn/v1?url='
+const baseApiHost = 'http://m.kugou.com'
+const api = {
   newSongs: baseApiHost + '&json=true',
   rankList: baseApiHost + '/rank/list&json=true',
   rankInfo: baseApiHost + '/rank/info/?page=1&json=true&rankid=',

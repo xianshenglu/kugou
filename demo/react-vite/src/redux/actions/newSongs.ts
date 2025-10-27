@@ -4,7 +4,7 @@ import api from '../../constants/api'
 import { SUCCESS, PENDING } from '../../constants/status'
 export const fetchNewSongsIfNeeded = () => {
   return function(dispatch, getState) {
-    let status = getState().newSongs.status
+    const status = getState().newSongs.status
     if (status !== SUCCESS && status !== PENDING) {
       dispatch(fetchNewSongs())
     }

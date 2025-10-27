@@ -50,32 +50,32 @@ const AppNavContainer: FC = () => {
   })
 
   const toggleBetweenPages = useMemoizedFn((event: TouchEvent) => {
-    let interval = 300
-    let startTime = Date.now()
-    let minOffset = window.innerWidth * 0.1
-    let maxOffset = window.innerWidth * 0.4
-    let startClientX = event.touches[0].clientX
-    let startClientY = event.touches[0].clientY
+    const interval = 300
+    const startTime = Date.now()
+    const minOffset = window.innerWidth * 0.1
+    const maxOffset = window.innerWidth * 0.4
+    const startClientX = event.touches[0].clientX
+    const startClientY = event.touches[0].clientY
 
     const detectToSwipe = (event: TouchEvent) => {
       window.removeEventListener('touchend', detectToSwipe, true)
 
-      let endClientX = event.changedTouches[0].clientX
-      let endClientY = event.changedTouches[0].clientY
-      let offsetX = Math.abs(endClientX - startClientX)
-      let offsetY = Math.abs(endClientY - startClientY)
+      const endClientX = event.changedTouches[0].clientX
+      const endClientY = event.changedTouches[0].clientY
+      const offsetX = Math.abs(endClientX - startClientX)
+      const offsetY = Math.abs(endClientY - startClientY)
       if (offsetY > offsetX) {
         return
       }
-      let direction = endClientX - startClientX < 0
-      let endTime = Date.now()
-      let isSlow = endTime - startTime > interval
-      let isSlowMoveEnough = isSlow && offsetX > maxOffset
-      let isFastMoveEnough = !isSlow && offsetX > minOffset
+      const direction = endClientX - startClientX < 0
+      const endTime = Date.now()
+      const isSlow = endTime - startTime > interval
+      const isSlowMoveEnough = isSlow && offsetX > maxOffset
+      const isFastMoveEnough = !isSlow && offsetX > minOffset
       
       if (isShow && (isSlowMoveEnough || isFastMoveEnough)) {
-        let nextRouteIndex = direction ? activeIndex + 1 : activeIndex - 1
-        let nextRoute = navList[nextRouteIndex]
+        const nextRouteIndex = direction ? activeIndex + 1 : activeIndex - 1
+        const nextRoute = navList[nextRouteIndex]
         if (nextRoute !== undefined) {
           navigate(nextRoute.path)
         }

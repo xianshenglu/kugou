@@ -4,7 +4,7 @@ import api from '../../constants/api'
 import { SUCCESS, PENDING } from '../../constants/status'
 export const fetchRankListIfNeeded = () => {
   return function(dispatch, getState) {
-    let status = getState().rankList.status
+    const status = getState().rankList.status
     if (status !== SUCCESS && status !== PENDING) {
       dispatch(fetchRankList())
     }

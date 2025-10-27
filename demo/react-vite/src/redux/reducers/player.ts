@@ -2,7 +2,6 @@ import React from 'react'
 import {
   FETCH_MUSIC,
   RECEIVE_MUSIC,
-  TOGGLE_PLAY,
   PLAY_MUSIC,
   PAUSE_MUSIC,
   SHOW_MUSIC_LOADING,
@@ -41,7 +40,7 @@ const playerHandler = (state = initialState, action) => {
     },
     [RECEIVE_MUSIC]() {
       // console.log(action.response.data)
-      let {
+      const {
         data: {
           author_name,
           song_name,

@@ -23,7 +23,7 @@ const rankInfoHandler = (state = initialState, action) => {
       })
     },
     [RECEIVE_RANK_INFO]() {
-      let {
+      const {
         songs: songsData,
         info: { rankname: name, banner7url },
         info: listInfo

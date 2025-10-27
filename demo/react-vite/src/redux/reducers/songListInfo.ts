@@ -27,7 +27,7 @@ const songListInfoHandler = (state = initialState, action) => {
       })
     },
     [RECEIVE_SONG_LIST_INFO]() {
-      let {
+      const {
         list: {
           list: songsData,
           list: { info: songs },

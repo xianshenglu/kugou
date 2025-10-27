@@ -15,7 +15,7 @@ const SongList: FC<SongListProps> = ({ songList }) => {
     return (
       <div className={styles.SongList__info}>
         <div className={styles.SongList__name}>{name}</div>
-        <div className={styles.SongList__star}>
+        <div >
           <svg className={classNames('icon', styles.SongList__icon)} aria-hidden="true">
             <use xlinkHref="#icon-music" />
           </svg>

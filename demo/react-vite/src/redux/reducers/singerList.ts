@@ -19,7 +19,7 @@ const singerListHandler = (state = initialState, action) => {
       })
     },
     [RECEIVE_SINGER_LIST]() {
-      let {
+      const {
         singers: {
           list: singersData,
           list: { info: singers },
