@@ -1,6 +1,9 @@
+import postcssPixelToViewport from 'postcss-pixel-to-viewport'
+import { getPostCssVwToCalcPlugin } from '../shared/build/postcss-vw-to-calc.js'
+import postcss from 'postcss'
 export default {
-  plugins: {
-    'postcss-pixel-to-viewport': {
+  plugins: [
+    postcssPixelToViewport({
       viewportWidth: 375,
       viewportUnit: 'vw',
       propertyBlacklist: [],
@@ -8,6 +11,7 @@ export default {
       enableConvertComment: 'on',
       disableConvertComment: 'off',
       mediaQuery: false
-    }
-  }
+    }),
+    getPostCssVwToCalcPlugin(postcss)()
+  ]
 }
