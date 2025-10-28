@@ -1,5 +1,5 @@
 import { replaceSizeInUrl } from '../common/mapper'
-import type { PlaylistListResponseDto, PlaylistInfoResponseDto, PlaylistSummaryDto, PlaylistDetailSummaryDto } from './dto'
+import type { PlaylistListResponseDto, PlaylistInfoResponseDto, PlaylistSummaryDto } from './dto'
 import type { PlaylistListData, PlaylistInfoData, PlaylistSummary, PlaylistInfoDetail } from './model'
 
 function mapPlaylistSummary(dto: PlaylistSummaryDto): PlaylistSummary {

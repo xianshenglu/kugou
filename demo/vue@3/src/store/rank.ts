@@ -13,7 +13,7 @@ const rank: {
   state: (): RankState => ({
     rankList: [],
     rankInfo: {
-      info: null,
+      info: null!,
       songs: {
         timestamp: Date.now(),
         list: []
