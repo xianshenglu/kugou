@@ -19,7 +19,6 @@ import PubModuleDes from '@/components/PubModuleDes.vue'
 import AppMusicList from '@/components/AppMusicList.vue'
 import { fetchSongListInfo } from '../../requests/songListInfo'
 import { useLoading } from '@/composables/useLoading'
-import replaceSizeInUrl from '@/utils/replaceSizeInUrl'
 import type { RootState } from '@/store'
 import { mapPlaylistInfo } from '@shared/domains/playlist/mapper'
 
