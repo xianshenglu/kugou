@@ -5,13 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:prepare": "cd ../../ && npx http-server ./ --cors",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@micro-zoe/micro-app": "^1.0.0-rc.27",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-router": "^7.9.4",
+    "wujie-react": "^1.0.29"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
