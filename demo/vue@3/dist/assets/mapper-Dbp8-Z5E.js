@@ -1,0 +1,1 @@
+import{r}from"./mapper-npPNkTNf.js";const s=n=>({...n,imgUrl:r(n.imgurl),path:"/rank/info/"+n.rankid,title:n.rankname}),p=n=>n.rank.list.map(a=>s(a)),o=n=>({...n,...s(n),imgUrl:r(n.banner7url)}),t=n=>({info:o(n.info),songs:n.songs});export{t as a,p as m};

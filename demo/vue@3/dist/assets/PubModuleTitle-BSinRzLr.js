@@ -1,1 +1,0 @@
-import{d as i,c as l,t as n,f as a,_ as c}from"./index-C2WVff5c.js";const r=i({__name:"PubModuleTitle",props:{title:{default:""}},emits:["click"],setup(_,{emit:t}){const o=t;return(s,e)=>(a(),l("h4",{class:"module_title main_box_shadow",onClick:e[0]||(e[0]=m=>o("click",arguments[0]))},n(s.title),1))}}),u=c(r,[["__scopeId","data-v-413434e4"]]);export{u as P};
