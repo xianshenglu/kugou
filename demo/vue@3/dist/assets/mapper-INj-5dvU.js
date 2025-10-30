@@ -1,0 +1,1 @@
+import{r as l}from"./mapper-npPNkTNf.js";function n(i){return{...i,imgUrl:l(i.imgurl),path:"/song/list/".concat(i.specialid),title:i.specialname,popularity:i.playcount}}function r(i){return i.plist.list.info.map(n)}function a(i){return{...i,list:{...i.list,imgUrl:l(i.list.imgurl)}}}function m(i){return{info:a(i.info),songs:i.list}}export{m as a,r as m};
