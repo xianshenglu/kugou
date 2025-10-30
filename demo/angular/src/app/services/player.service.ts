@@ -158,17 +158,17 @@ export class PlayerService {
     }
   }
 
-  fetchMusic({
+  async fetchMusic({
     musicHash,
     musicList,
   }: {
     musicHash: string;
     musicList: Music[];
   }) {
-    const res = this.fetchSongLyric({ hash: musicHash });
+    const res = await this.fetchSongLyric({ hash: musicHash }).toPromise();
     /* eslint-disable */
     //  @ts-ignore
-    const { data } = res.data;
+    const { data } = res;
     musicList = musicList.length === 0 ? [data] : musicList;
     this.musicList = musicList;
     this.lyrics = data.lyrics;

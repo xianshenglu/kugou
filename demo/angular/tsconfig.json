@@ -11,6 +11,7 @@
       "views": ["src/views/*"],
       "services": ["src/services/*"],
       "utils": ["src/utils/*"],
+      "@shared/*": ["../shared/*"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

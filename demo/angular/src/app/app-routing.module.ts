@@ -1,63 +1,45 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SearchComponent } from './views/search/search.component';
-import { SingerInfoComponent } from './views/singer/singer-info/singer-info.component';
-import { SingerListComponent } from './views/singer/singer-list/singer-list.component';
-import { SongListInfoComponent } from './views/song/song-list-info/song-list-info.component';
-import { RankInfoComponent } from './views/rank/rank-info/rank-info.component';
-import { SingerCategoryComponent } from './views/singer/singer-category/singer-category.component';
-import { SongListComponent } from './views/song/song-list/song-list.component';
-import { RankListComponent } from './views/rank/rank-list/rank-list.component';
 import { MyMainComponent } from './components/my-main/my-main.component';
-import { NewSongComponent } from './views/new-song/new-song.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: MyMainComponent,
     children: [
       {
         path: '',
-        component: NewSongComponent,
+        component: MyMainComponent,
+        loadChildren: () =>
+          import('./views/new-song/new-song.module').then(
+            (m) => m.NewSongModule
+          ),
       },
       {
-        path: 'rank/list',
-        component: RankListComponent,
+        path: 'rank',
+        loadChildren: () =>
+          import('./views/rank/rank.module').then((m) => m.RankModule),
       },
       {
-        path: 'song/list',
-        component: SongListComponent,
+        path: 'song',
+        loadChildren: () =>
+          import('./views/song/song.module').then((m) => m.SongModule),
       },
       {
-        path: 'singer/category',
-        component: SingerCategoryComponent,
+        path: 'singer',
+        loadChildren: () =>
+          import('./views/singer/singer.module').then((m) => m.SingerModule),
+      },
+      {
+        path: 'search',
+        loadChildren: () =>
+          import('./views/search/search.module').then((m) => m.SearchModule),
       },
     ],
-  },
-  {
-    path: 'rank/info/:rankId',
-    component: RankInfoComponent,
-  },
-  {
-    path: 'song/list/:songListId',
-    component: SongListInfoComponent,
-  },
-  {
-    path: 'singer/list/:singerListId',
-    component: SingerListComponent,
-  },
-  {
-    path: 'singer/info/:singerId',
-    component: SingerInfoComponent,
-  },
-  {
-    path: 'search/index',
-    component: SearchComponent,
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

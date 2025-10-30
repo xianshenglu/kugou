@@ -5,47 +5,24 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NewSongComponent } from './views/new-song/new-song.component';
-import { SliderComponent } from './views/new-song/slider/slider.component';
-import { MyMusicListComponent } from './components/my-music-list/my-music-list.component';
 import { MyHeaderComponent } from './components/my-header/my-header.component';
 import { MyNavComponent } from './components/my-nav/my-nav.component';
 import { MyMainComponent } from './components/my-main/my-main.component';
-import { RankListComponent } from './views/rank/rank-list/rank-list.component';
-import { MyCardListComponent } from './components/my-card-list/my-card-list.component';
-import { SongListComponent } from './views/song/song-list/song-list.component';
-import { SingerCategoryComponent } from './views/singer/singer-category/singer-category.component';
-import { RankInfoComponent } from './views/rank/rank-info/rank-info.component';
-import { MyModuleHeadComponent } from './components/my-module-head/my-module-head.component';
-import { SongListInfoComponent } from './views/song/song-list-info/song-list-info.component';
-import { MyModuleDescriptionComponent } from './components/my-module-description/my-module-description.component';
-import { SingerListComponent } from './views/singer/singer-list/singer-list.component';
-import { MyModuleTitleComponent } from './components/my-module-title/my-module-title.component';
-import { SingerInfoComponent } from './views/singer/singer-info/singer-info.component';
-import { SearchComponent } from './views/search/search.component';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
-    NewSongComponent,
-    SliderComponent,
-    MyMusicListComponent,
     MyHeaderComponent,
     MyNavComponent,
     MyMainComponent,
-    RankListComponent,
-    MyCardListComponent,
-    SongListComponent,
-    SingerCategoryComponent,
-    RankInfoComponent,
-    MyModuleHeadComponent,
-    SongListInfoComponent,
-    MyModuleDescriptionComponent,
-    SingerListComponent,
-    MyModuleTitleComponent,
-    SingerInfoComponent,
-    SearchComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
+    SharedModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
