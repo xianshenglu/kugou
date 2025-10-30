@@ -1,0 +1,6 @@
+.App__navLink {
+  margin: 10px;
+}
+.App__navLink.active {
+  background: aqua;
+}

@@ -67,22 +67,6 @@
     "semi": false,
     "singleQuote": true
   },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {},
-      "postcss-pixel-to-viewport": {
-        "viewportWidth": 375,
-        "viewportUnit": "vw",
-        "propertyBlacklist": [
-          "letter-spacing"
-        ],
-        "minPixelValue": 2,
-        "enableConvertComment": "on",
-        "disableConvertComment": "off",
-        "mediaQuery": false
-      }
-    }
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",

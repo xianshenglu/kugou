@@ -1,0 +1,23 @@
+micro-app,
+wujie-app {
+  display: block;
+  width: 375px;
+  height: 667px;
+  overflow: hidden;
+  /* for sub-app vw laylout */
+  --vw: calc(375px / 100);
+  --vh: calc(667px / 100);
+  --vh-sub-app: calc(667px / 100);
+  /* for position:fixed in sub-app */
+  transform: translate(0px, 0px);
+}
+
+.subAppsContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.subAppsContainer > * {
+  margin: 10px;
+}
