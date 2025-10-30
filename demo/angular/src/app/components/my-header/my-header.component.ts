@@ -16,6 +16,11 @@ export class MyHeaderComponent {
       return;
     }
     window.history.go(-1);
+    /**
+     * Under micro-app/wujie, the page will not be updated when user clicks the back button or Browser Back button.
+     * So we need to trigger change detection to for the active nav bar update and other pages update after API request
+     */
+    // setTimeout(() => {    }, 1000);
   }
 
   onSearchBtnClick() {
