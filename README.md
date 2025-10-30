@@ -1,19 +1,23 @@
-# [酷狗音乐](https://github.com/xianshenglu/vue/tree/master/demo) 的 [Vue.js](https://vuejs.org/index.html) / [Reactjs](https://reactjs.org/) 实现
+# 酷狗音乐 的 Vue.js / Reactjs / Angular / MicroFrontEnd 实现
 
 ## 主要技术栈
 
-- Vue/React 全家桶
-- Mock
+- [Vue.js](https://vuejs.org/index.html)
+- [Reactjs](https://reactjs.org/)
+- [Angular](https://angular.dev/)
+- [micro-app](https://github.com/jd-opensource/micro-app/)
+- [wujie](https://github.com/Tencent/wujie)
+- [Mockjs](https://github.com/nuysoft/Mock)
 
-## 跨域代理
+<!-- ## 跨域代理
 
 - [Rob--W/cors-anywhere](https://github.com/Rob--W/cors-anywhere/)
 - [connorhudson/crossorigin.me](https://github.com/connorhudson/crossorigin.me)
-- [xCss/JsonBird](https://github.com/xCss/JsonBird)
+- [xCss/JsonBird](https://github.com/xCss/JsonBird) -->
 
 ## 预览
 
-- kugou-music [Vue-version](https://xianshenglu.github.io/kugou/demo/vue@2.x/dist/index.html) [React-version](https://xianshenglu.github.io/kugou/demo/react/build/)
+- kugou-music [Vue-version](https://xianshenglu.github.io/kugou/demo/vue@2.x/dist/index.html) [React-version](https://xianshenglu.github.io/kugou/demo/react/build/) [Angular-Version](https://xianshenglu.github.io/kugou/demo/angular/dist/angular/#/) [MicroFrontEnd](https://xianshenglu.github.io/kugou/demo/micro-front-end/dist/)
 
 ## 示例
 
