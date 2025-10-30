@@ -1,0 +1,317 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["views-song-song-module"],{
+
+/***/ "DQqS":
+/*!***************************************************!*\
+  !*** ./src/app/views/song/song-routing.module.ts ***!
+  \***************************************************/
+/*! exports provided: SongRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SongRoutingModule", function() { return SongRoutingModule; });
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _song_list_song_list_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./song-list/song-list.component */ "TZTk");
+/* harmony import */ var _song_list_info_song_list_info_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./song-list-info/song-list-info.component */ "XQl4");
+/* harmony import */ var _components_my_main_my_main_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/my-main/my-main.component */ "cz6e");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
+
+
+
+
+
+const routes = [
+    {
+        path: 'list',
+        component: _components_my_main_my_main_component__WEBPACK_IMPORTED_MODULE_3__["MyMainComponent"],
+        children: [
+            {
+                path: '',
+                component: _song_list_song_list_component__WEBPACK_IMPORTED_MODULE_1__["SongListComponent"],
+            },
+        ],
+    },
+    {
+        path: 'list/:songListId',
+        component: _song_list_info_song_list_info_component__WEBPACK_IMPORTED_MODULE_2__["SongListInfoComponent"],
+    },
+];
+class SongRoutingModule {
+}
+SongRoutingModule.ɵfac = function SongRoutingModule_Factory(t) { return new (t || SongRoutingModule)(); };
+SongRoutingModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineNgModule"]({ type: SongRoutingModule });
+SongRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineInjector"]({ imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forChild(routes)], _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵsetNgModuleScope"](SongRoutingModule, { imports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]], exports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] }); })();
+
+
+/***/ }),
+
+/***/ "Nxbj":
+/*!***********************************************!*\
+  !*** ./src/app/services/song-list.service.ts ***!
+  \***********************************************/
+/*! exports provided: SongListService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SongListService", function() { return SongListService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var src_app_constants_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/constants/index */ "U7T7");
+/* harmony import */ var src_app_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/utils */ "YMfE");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+
+
+
+
+
+class SongListService {
+    constructor(http) {
+        this.http = http;
+        this.songListUrl = `${src_app_constants_index__WEBPACK_IMPORTED_MODULE_1__["BASE_ORIGIN"]}/plist/index&json=true`;
+    }
+    fetchSongList() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const response = yield this.http
+                .get(this.songListUrl)
+                .toPromise();
+            const { plist: { list: { info }, }, } = response;
+            info.forEach((obj) => {
+                obj.imgUrl = Object(src_app_utils__WEBPACK_IMPORTED_MODULE_2__["replaceSizeInUrl"])(obj.imgurl);
+                obj.path = `/song/list/${obj.specialid}`;
+                obj.title = obj.specialname;
+                obj.popularity = obj.playcount;
+            });
+            return info;
+        });
+    }
+}
+SongListService.ɵfac = function SongListService_Factory(t) { return new (t || SongListService)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"])); };
+SongListService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjectable"]({ token: SongListService, factory: SongListService.ɵfac, providedIn: 'root' });
+
+
+/***/ }),
+
+/***/ "TZTk":
+/*!*************************************************************!*\
+  !*** ./src/app/views/song/song-list/song-list.component.ts ***!
+  \*************************************************************/
+/*! exports provided: SongListComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SongListComponent", function() { return SongListComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var src_app_services_song_list_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/song-list.service */ "Nxbj");
+/* harmony import */ var _components_my_card_list_my_card_list_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/my-card-list/my-card-list.component */ "uIeC");
+
+
+
+
+function SongListComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "div", 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "svg", 5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](5, "use", 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceHTML"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "span", 7);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](7);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const item_r1 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](item_r1.title);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](item_r1.popularity);
+} }
+class SongListComponent {
+    constructor(songListService) {
+        this.songListService = songListService;
+        this.songList = [];
+    }
+    ngOnInit() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            if (this.songList.length === 0) {
+                this.songList = yield this.songListService.fetchSongList();
+            }
+        });
+    }
+}
+SongListComponent.ɵfac = function SongListComponent_Factory(t) { return new (t || SongListComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](src_app_services_song_list_service__WEBPACK_IMPORTED_MODULE_2__["SongListService"])); };
+SongListComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: SongListComponent, selectors: [["app-song-list"]], decls: 3, vars: 1, consts: [["test-id", "page-song-list", 1, "song_list"], [1, "song_list__cont", 3, "pubList"], [1, "song_list__info"], [1, "song_list__title"], [1, "song_list__star"], ["aria-hidden", "true", 1, "icon", "song_list__icon"], [0, "xlink", "href", "#icon-music"], [1, "song_list__popularity"]], template: function SongListComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "section", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "app-my-card-list", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](2, SongListComponent_ng_template_2_Template, 8, 2, "ng-template");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("pubList", ctx.songList);
+    } }, directives: [_components_my_card_list_my_card_list_component__WEBPACK_IMPORTED_MODULE_3__["MyCardListComponent"]], styles: [".song_list__cont[_ngcontent-%COMP%] {\n  overflow: scroll;\n  box-sizing: border-box;\n  width: 100%;\n  height: 100%;\n}\n\n.song_list__info[_ngcontent-%COMP%] {\n  height: 25.86667vw;\n  margin-right: 2.66667vw;\n  padding-left: 4.8vw;\n}\n\n.song_list__title[_ngcontent-%COMP%] {\n  padding-top: 6.93333vw;\n  line-height: 7.2vw;\n}\n\n.song_list__icon[_ngcontent-%COMP%] {\n  margin-right: 1.6vw;\n  vertical-align: baseline;\n  font-size: 3.46667vw;\n}\n\n.song_list__popularity[_ngcontent-%COMP%] {\n  color: #959595;\n  font-size: 4vw;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcc29uZy1saXN0LmNvbXBvbmVudC5zY3NzIiwiLi5cXC4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXC4uXFxzdHlsZXNcXGNvbnN0YW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDRSxnQkFBQTtFQUVBLHNCQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7QUFERjs7QUFHQTtFQUNFLGtCQUFBO0VBQ0EsdUJBQUE7RUFDQSxtQkFBQTtBQUFGOztBQUdBO0VBQ0Usc0JBQUE7RUFFQSxrQkFBQTtBQURGOztBQUlBO0VBQ0UsbUJBQUE7RUFFQSx3QkFBQTtFQUVBLG9CQ1JnQjtBREtsQjs7QUFNQTtFQUNFLGNDekJlO0VEMkJmLGNDZmM7QURXaEIiLCJmaWxlIjoic29uZy1saXN0LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCBcInNyYy9hcHAvc3R5bGVzL2NvbnN0YW50XCI7XHJcbi5zb25nX2xpc3RfX2NvbnQge1xyXG4gIG92ZXJmbG93OiBzY3JvbGw7XHJcblxyXG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAgaGVpZ2h0OiAxMDAlO1xyXG59XHJcbi5zb25nX2xpc3RfX2luZm8ge1xyXG4gIGhlaWdodDogOTdweDtcclxuICBtYXJnaW4tcmlnaHQ6IDEwcHg7XHJcbiAgcGFkZGluZy1sZWZ0OiAxOHB4O1xyXG59XHJcblxyXG4uc29uZ19saXN0X190aXRsZSB7XHJcbiAgcGFkZGluZy10b3A6IDI2cHg7XHJcblxyXG4gIGxpbmUtaGVpZ2h0OiAyN3B4O1xyXG59XHJcblxyXG4uc29uZ19saXN0X19pY29uIHtcclxuICBtYXJnaW4tcmlnaHQ6IDZweDtcclxuXHJcbiAgdmVydGljYWwtYWxpZ246IGJhc2VsaW5lO1xyXG5cclxuICBmb250LXNpemU6ICRmb250X3NpemVfc21hbGw7XHJcbn1cclxuXHJcbi5zb25nX2xpc3RfX3BvcHVsYXJpdHkge1xyXG4gIGNvbG9yOiAkd2hpdGUtdG8tYmxhY2s7XHJcblxyXG4gIGZvbnQtc2l6ZTogJGZvbnRfc2l6ZV9tZWQ7XHJcbn1cclxuIiwiJHdoaXRlOiAjZmZmO1xyXG4kd2hpdGUtMTogI2ZiZmJmYjtcclxuJHdoaXRlLTI6ICNlNWU1ZTU7XHJcbiR3aGl0ZS0zOiAjY2NjO1xyXG4kd2hpdGUtdG8tYmxhY2s6ICM5NTk1OTU7XHJcbiRibGFjay01OiAjNmM2YjcwO1xyXG4kYmxhY2stMzogIzMzMztcclxuJGJsYWNrLTI6ICMyMzIyMjg7XHJcbiRibGFjazkwcDogcmdiYSgwLCAwLCAwLCAwLjkpO1xyXG4kdGhlbWU6ICMyY2EyZjk7XHJcbiRyZWQ6ICNlODAwMDA7XHJcbiRvcmFuZ2U6ICNmZjcyMDA7XHJcbiR5ZWxsb3c6ICNmOGIzMDA7XHJcbiRsZW1vbjogI2QxYzkwZTtcclxuXHJcbiRmb250X3NpemVfbWFpbjogMThweDtcclxuJGZvbnRfc2l6ZV9tZWQ6IDE1cHg7XHJcbiRmb250X3NpemVfc21hbGw6IDEzcHg7XHJcbiRmb250X3NpemVfbWluaTogMTJweDtcclxuXHJcbiRwYWRkaW5nX3dpZHRoOiAxM3B4O1xyXG4kaGVhZGVyX2hlaWdodDogNThweDtcclxuJG5hdl9oZWlnaHQ6IDYycHg7XHJcbiRtb2R1bGVfdGl0bGVfaGVpZ2h0OiA1NHB4O1xyXG4kc2VhcmNoX2Zvcm1faGVpZ2h0OiA2M3B4O1xyXG5cclxuJGFwcF93aWR0aC0tZGV2OiAzNzU7XHJcbiRhcHBfaGVpZ2h0LS1kZXY6IDY2NztcclxuLy8gMTAwdmggZXF1YWwgdmlld3BvcnQgaGVpZ2h0IGFzIGlmIHRoZSBhZGRyZXNzIGJhciB3YXMgaGlkZGVuIG9uIG1vYmlsZS5cclxuLy8gU28gSSBzZXQgaHRtbC5zdHlsZS5zZXRQcm9wZXJ0eSgnLS12aCcsIHdpbmRvdy5pbm5lckhlaWdodCAvIDEwMCArICdweCcpIGFuZCB1c2UgdmFyKC0tdmgpIHRvIHJlcGxhY2UgdGhlIHdyb25nIHZoLlxyXG5cclxuJGFwcF9jb250X2hfZGV2OiAkYXBwX2hlaWdodC0tZGV2IC0gdW5pdCgkaGVhZGVyX2hlaWdodCk7XHJcbiRhcHBfY29udF9oLS1wcm9kOiBcInZhcigtLXZoKSAqIDEwMCAtIDEwMHZ3ICogNTggLyAzNzVcIjtcclxuIl19 */"] });
+
+
+/***/ }),
+
+/***/ "XQl4":
+/*!***********************************************************************!*\
+  !*** ./src/app/views/song/song-list-info/song-list-info.component.ts ***!
+  \***********************************************************************/
+/*! exports provided: SongListInfoComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SongListInfoComponent", function() { return SongListInfoComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var src_app_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/utils */ "YMfE");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var src_app_services_song_list_info_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/song-list-info.service */ "ewhb");
+/* harmony import */ var _components_my_module_head_my_module_head_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../components/my-module-head/my-module-head.component */ "eQYf");
+/* harmony import */ var _components_my_module_description_my_module_description_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/my-module-description/my-module-description.component */ "Goi6");
+/* harmony import */ var _components_my_music_list_my_music_list_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../components/my-music-list/my-music-list.component */ "Lxd1");
+
+
+
+
+
+
+
+class SongListInfoComponent {
+    constructor(songListInfoService) {
+        this.songListInfoService = songListInfoService;
+        this.songListInfo = { info: { list: {}, songs: { list: { info: [] } } } };
+    }
+    get getModuleHeadInfo() {
+        /* eslint-disable */
+        // @ts-ignore
+        const data = this.songListInfo.info.list;
+        return {
+            imgUrl: Object(src_app_utils__WEBPACK_IMPORTED_MODULE_1__["replaceSizeInUrl"])(data.imgurl),
+            name: data.specialname,
+            intro: data.intro,
+        };
+        /* eslint-enable */
+    }
+    get getMusicList() {
+        var _a;
+        // todo remove ? and fix type
+        // @ts-ignore
+        // eslint-disable-next-line
+        return (_a = this.songListInfo.songs) === null || _a === void 0 ? void 0 : _a.list.info;
+    }
+    ngOnInit() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const songListId = window.location.pathname.split('/').pop();
+            if (songListId === undefined) {
+                return;
+            }
+            this.songListInfo = yield this.songListInfoService.fetchSongListInfo(songListId);
+        });
+    }
+}
+SongListInfoComponent.ɵfac = function SongListInfoComponent_Factory(t) { return new (t || SongListInfoComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](src_app_services_song_list_info_service__WEBPACK_IMPORTED_MODULE_3__["SongListInfoService"])); };
+SongListInfoComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: SongListInfoComponent, selectors: [["app-song-list-info"]], decls: 4, vars: 3, consts: [["test-id", "page-song-list-info", 1, "song_list_info"], [3, "moduleHeadInfo"], ["slot", "moduleDes", 3, "description"], [3, "musicList"]], template: function SongListInfoComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "section", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "app-my-module-head", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](2, "app-my-module-description", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](3, "app-my-music-list", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("moduleHeadInfo", ctx.getModuleHeadInfo);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("description", ctx.getModuleHeadInfo.intro);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("musicList", ctx.getMusicList);
+    } }, directives: [_components_my_module_head_my_module_head_component__WEBPACK_IMPORTED_MODULE_4__["MyModuleHeadComponent"], _components_my_module_description_my_module_description_component__WEBPACK_IMPORTED_MODULE_5__["MyModuleDescriptionComponent"], _components_my_music_list_my_music_list_component__WEBPACK_IMPORTED_MODULE_6__["MyMusicListComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzb25nLWxpc3QtaW5mby5jb21wb25lbnQuc2NzcyJ9 */"] });
+
+
+/***/ }),
+
+/***/ "ewhb":
+/*!****************************************************!*\
+  !*** ./src/app/services/song-list-info.service.ts ***!
+  \****************************************************/
+/*! exports provided: SongListInfoService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SongListInfoService", function() { return SongListInfoService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var src_app_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/constants */ "U7T7");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+
+
+
+
+class SongListInfoService {
+    constructor(http) {
+        this.http = http;
+    }
+    fetchSongListInfo(songListId) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const response = yield this.http
+                .get(`${src_app_constants__WEBPACK_IMPORTED_MODULE_1__["BASE_ORIGIN"]}/plist/list/${songListId}&json=true`)
+                .toPromise();
+            const { info, list } = response;
+            return {
+                info,
+                songs: list,
+            };
+        });
+    }
+}
+SongListInfoService.ɵfac = function SongListInfoService_Factory(t) { return new (t || SongListInfoService)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"])); };
+SongListInfoService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({ token: SongListInfoService, factory: SongListInfoService.ɵfac, providedIn: 'root' });
+
+
+/***/ }),
+
+/***/ "fMKX":
+/*!*******************************************!*\
+  !*** ./src/app/views/song/song.module.ts ***!
+  \*******************************************/
+/*! exports provided: SongModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SongModule", function() { return SongModule; });
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _song_list_song_list_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./song-list/song-list.component */ "TZTk");
+/* harmony import */ var _song_list_info_song_list_info_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./song-list-info/song-list-info.component */ "XQl4");
+/* harmony import */ var _song_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./song-routing.module */ "DQqS");
+/* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../shared/shared.module */ "PCNd");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
+
+
+
+
+
+class SongModule {
+}
+SongModule.ɵfac = function SongModule_Factory(t) { return new (t || SongModule)(); };
+SongModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineNgModule"]({ type: SongModule });
+SongModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineInjector"]({ imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"], _shared_shared_module__WEBPACK_IMPORTED_MODULE_4__["SharedModule"], _song_routing_module__WEBPACK_IMPORTED_MODULE_3__["SongRoutingModule"]]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵsetNgModuleScope"](SongModule, { declarations: [_song_list_song_list_component__WEBPACK_IMPORTED_MODULE_1__["SongListComponent"], _song_list_info_song_list_info_component__WEBPACK_IMPORTED_MODULE_2__["SongListInfoComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"], _shared_shared_module__WEBPACK_IMPORTED_MODULE_4__["SharedModule"], _song_routing_module__WEBPACK_IMPORTED_MODULE_3__["SongRoutingModule"]] }); })();
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=views-song-song-module.js.map
