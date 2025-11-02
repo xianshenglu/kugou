@@ -1,0 +1,54 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: micro-front-end-PR
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - master
+    paths:
+      - 'demo/micro-front-end/**'
+      - '.github/workflows/micro-front-end-pr.yml'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+
+    defaults:
+      run:
+        working-directory: demo/micro-front-end
+    
+    steps:
+      - uses: actions/checkout@v5
+        with: 
+          fetch-depth: 0
+
+      - name: Merge master into current branch
+        run: |
+          git fetch origin master
+          git merge origin/master
+      
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      # - name: Unit Test
+      #   run: npm run test
+
+      # - name: EndToEnd Test
+      #   run: npm run e2e:headless
+
+      - name: Build
+        run: npm run build
