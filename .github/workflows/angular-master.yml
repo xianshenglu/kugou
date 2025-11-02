@@ -1,0 +1,66 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Angular-Master
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'demo/angular/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    defaults:
+      run:
+        working-directory: demo/angular
+    
+    steps:
+      - uses: actions/checkout@v5
+        with: 
+          fetch-depth: 0
+
+      - name: Merge master into current branch
+        run: |
+          git fetch origin master
+          git merge origin/master
+      
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit Test
+        run: npm run test:ci
+
+    #   - name: EndToEnd Test
+    #     run: npm run e2e:ci      
+
+      - name: Build
+        run: npm run build
+
+      - name: Release
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"        
+          git checkout $BRANCH_NAME
+          git remote set-url origin https://$PAT_BOT_RELEASE@github.com/xianshenglu/kugou/
+          git fetch && git merge && git add .
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(angular): release" && git push)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAT_BOT_RELEASE: ${{ secrets.PAT_BOT_RELEASE }}
+          BRANCH_NAME: ${{github.ref_name}}
+
