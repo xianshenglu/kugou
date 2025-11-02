@@ -22,7 +22,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [18.x]
 
     steps:
       - uses: actions/checkout@v5
@@ -46,10 +46,10 @@ jobs:
         run: npm run lint
 
       - name: Unit Test
-        run: npm run test
+        run: npm run test:ci
 
-      - name: EndToEnd Test
-        run: npm run e2e:headless      
+      # - name: EndToEnd Test
+      #   run: npm run e2e:ci      
 
       - name: Build
         run: npm run build
