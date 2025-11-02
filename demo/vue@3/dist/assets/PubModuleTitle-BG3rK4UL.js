@@ -1,1 +1,0 @@
-import{d as l,c,t as a,f as n,_}from"./index-D-sx2tSs.js";const p=l({__name:"PubModuleTitle",props:{title:{default:""}},emits:["click"],setup(r,{emit:e}){const o=e;return(s,t)=>(n(),c("h4",{class:"module_title main_box_shadow",onClick:t[0]||(t[0]=i=>o("click",i))},a(s.title),1))}}),d=_(p,[["__scopeId","data-v-c59ecd98"]]);export{d as P};
