@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "postinstall": "cd ../shared && npm ci",
     "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider ng build",
     "test:ci": "cross-env NODE_OPTIONS=--openssl-legacy-provider ng test --watch=false --browsers ChromeHeadless",
     "test": "cross-env NODE_OPTIONS=--openssl-legacy-provider ng test",
