@@ -6,11 +6,14 @@ name: Vue@3-PR
 on:
   pull_request:
     types: [opened, synchronize]
+    branches:
+      - master
     paths:
       - demo/vue@3/**
+      - '.github/workflows/vue@3-pr.yml'
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     defaults:
       run:
@@ -21,12 +24,14 @@ jobs:
         node-version: [22.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
+        with: 
+          fetch-depth: 0
 
       - name: Merge master into current branch
         run: |
-          git fetch master
-          git merge master
+          git fetch origin master
+          git merge origin/master
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
