@@ -10,9 +10,10 @@ on:
       - master
     paths:
       - 'demo/react-vite/**'
+      - '.github/workflows/react-vite-pr.yml'
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -23,12 +24,14 @@ jobs:
         working-directory: demo/react-vite
     
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
+        with: 
+          fetch-depth: 0
 
       - name: Merge master into current branch
         run: |
-          git fetch master
-          git merge master
+          git fetch origin master
+          git merge origin/master
       
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
