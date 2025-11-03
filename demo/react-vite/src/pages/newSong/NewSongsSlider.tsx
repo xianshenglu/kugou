@@ -1,4 +1,5 @@
 import Slider from 'react-slick'
+// eslint-disable-next-line css-modules/no-unused-class
 import styles from './NewSongsSlider.module.less'
 const settings = {
   dots: true,
