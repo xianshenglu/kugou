@@ -41,8 +41,8 @@ jobs:
       - name: Install
         run: npm ci
 
-      # - name: Lint
-      #   run: npm run lint
+      - name: Lint
+        run: npm run lint
 
       # - name: Unit Test
       #   run: npm run test
