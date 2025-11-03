@@ -10,18 +10,20 @@ interface AppMusicListProps {
     hash: string;
     filename: string;
   }[];
-  renderMusicSequence?(...args: unknown[]): unknown;
+  renderMusicSequence?(index: number): React.ReactNode;
+  className?: string;
 }
 
 const AppMusicList: FC<AppMusicListProps> = ({ 
   data, 
-  renderMusicSequence = () => undefined 
+  renderMusicSequence = () => null,
+  className = ''
 }) => {
   const location = useLocation()
   const { pathname } = location
   const { fetchMusicIfNeeded, switchPlayerMed } = usePlayerStore()
   return (
-    <ul className={styles.AppMusicList}>
+    <ul className={classNames(styles.AppMusicList, className)}>
       {data.map((music, index) => (
         <li
           className={classNames(styles.AppMusicList__item, 'main_border_bottom')}

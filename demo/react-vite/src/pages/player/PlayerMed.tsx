@@ -8,14 +8,20 @@ import PrevButton from '../../pages/player/PrevButton'
 import PlayButton from './PlayButton'
 import NextButton from './NextButton'
 import usePlayerStore from '../../stores/usePlayerStore'
-import type { Song } from '@shared/domains/song/model'
+// todo dedupe with @shared
+type PlayerSongInfo = {
+  hash: string
+  author_name: string
+  song_name: string
+  img: string
+}
 
 interface PlayerMedProps {
   musicStatus: {
     isPlaying: boolean;
     isLoading: boolean;
   };
-  songInfo: Song;
+  songInfo: PlayerSongInfo;
   nextSong?: any;
   prevSong?: any;
 }

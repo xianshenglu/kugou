@@ -1,10 +1,10 @@
-import type { FC } from 'react'
+import type { FC, RefObject } from 'react'
 import styles from './PlayerProgress.module.less'
 import { secondToMin } from './helpers/time';
 
 interface PlayerProgressProps {
-  audioElRef: object;
-  progressBarRef: object;
+  audioElRef: RefObject<HTMLAudioElement>;
+  progressBarRef: RefObject<HTMLDivElement>;
   currentTime: number;
   currentProgress: number;
   loadProgress: number;
