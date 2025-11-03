@@ -10,7 +10,7 @@ const PlayerProgressContainer = () => {
   const [currentProgress, setCurrentProgress] = useState(0)
   const [isTouching, setIsTouching] = useState(false)
   
-  const progressBarRef = useRef<HTMLDivElement>(null)
+  const progressBarRef = useRef<HTMLDivElement>(null!)
   const progressBarRectRef = useRef<DOMRect | null>(null)
   const touchStartXRef = useRef(0)
 

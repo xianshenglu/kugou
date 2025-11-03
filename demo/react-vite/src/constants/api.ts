@@ -1,7 +1,7 @@
 //doc: https://github.com/xCss/JsonBird
 const proxyUrl = 'https://bird.ioliu.cn/v1?url='
 const baseApiHost = 'http://m.kugou.com'
-const api = {
+const api: Record<string, string> = {
   newSongs: baseApiHost + '&json=true',
   rankList: baseApiHost + '/rank/list&json=true',
   rankInfo: baseApiHost + '/rank/info/?page=1&json=true&rankid=',
@@ -18,7 +18,7 @@ const api = {
     'http://mobilecdn.kugou.com/api/v3/search/song?format=json&page=1&pagesize=20&showtype=1&keyword='
 }
 
-Reflect.ownKeys(api).forEach(key => {
+Object.keys(api).forEach((key) => {
   api[key] = proxyUrl + api[key]
 })
 export default api

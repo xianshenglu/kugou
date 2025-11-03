@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "vite",
     "postinstall": "cd ../shared && npm ci",
-    "build": "vite build",
-    "build:feature": "tsc -b && vite build",
+    "build": "tsc -b && vite build",
     "type-check": "tsc -b",
     "build:analysis": "vite build --mode analysis",
     "lint": "eslint . --fix",

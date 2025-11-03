@@ -5,13 +5,13 @@ import styles from './InfoHeader.module.less'
 interface InfoHeaderProps {
   name: string;
   imgurl: string;
-  renderUpdatedTime?(...args: unknown[]): unknown;
+  renderUpdatedTime?(): React.ReactNode;
 }
 
 const InfoHeader: FC<InfoHeaderProps> = ({ 
   name, 
   imgurl, 
-  renderUpdatedTime = () => undefined 
+  renderUpdatedTime = () => null 
 }) => {
   return (
     <Fragment>

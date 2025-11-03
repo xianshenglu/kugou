@@ -3,6 +3,7 @@ import { Fragment } from 'react'
 import InfoHeader from '../../components/InfoHeader'
 import AppMusicList from '../../components/AppMusicList'
 import { formatDate } from '../../helpers/utils'
+// eslint-disable-next-line css-modules/no-unused-class
 import styles from './RankInfo.module.less'
 import classNames from 'classnames'
 import type { RankInfoSongs, RankItem } from '@shared/domains/rank/model'
@@ -25,7 +26,7 @@ const RankInfo: FC<RankInfoProps> = ({ songsData, listInfo }) => {
     return (
       <div
         className={
-           // eslint-disable-next-line
+            
           classNames(styles.RankInfo__musicSequence, styles['RankInfo__musicSequence--' + sequence])
         }
       >

@@ -7,8 +7,7 @@ interface InfoDescriptionProps {
 }
 
 const InfoDescription = ({
-  description,
-  title
+  description
 }: InfoDescriptionProps) => {
   const [showMore, setShowMore] = useState(false)
 

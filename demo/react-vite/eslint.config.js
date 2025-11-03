@@ -35,7 +35,8 @@ export default tseslint.config([
         {
           "args": "none",
         }
-      ]
+      ],
+      "@typescript-eslint/no-non-null-asserted-optional-chain": "off"
     },
   },
 ]);
