@@ -16,7 +16,7 @@ import {
   search,
   player
 } from './constants/router'
-import NewSongsContainer from './containers/newSong/NewSongsContainer'
+import NewSongsContainer from './pages/newSong/NewSongsContainer'
 import {
   PlayerMedContainer,
   RankListContainer,
@@ -27,15 +27,16 @@ import {
   SingerListContainer,
   SingerInfoContainer,
   PlayerMaxContainer,
-  AppNavContainer,
   SearchContainer
-} from './containers/lazyContainers'
-import { lazyWithPrefetch } from './assets/hoc/lazyWithPrefetch'
-import { Loading } from './components/loading/Loading'
+} from './pages/lazyContainers'
+import { lazyWithPrefetch } from './helpers/lazyWithPrefetch'
+import { Loading } from './components/Loading'
 const AppHeader = lazyWithPrefetch(
-  () => import('./components/public/AppHeader')
+  () => import('./components/AppHeader')
 )
-
+const AppNavContainer = lazyWithPrefetch(
+  () => import('./components/AppNavContainer')
+)
 const App: FC<any> = (props) => {
   const { isPlayerMedShow, isAppNavShow } = props as any
   const mainClassName = classNames(styles.App__main, {
