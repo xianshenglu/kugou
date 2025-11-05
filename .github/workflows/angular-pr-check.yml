@@ -11,6 +11,7 @@ on:
     paths:
       - 'demo/angular/**'
       - 'demo/shared/**'
+      - 'demo/e2e/**'
       - '.github/workflows/angular-pr-check.yml'
       
 jobs:
@@ -49,8 +50,8 @@ jobs:
       - name: Unit Test
         run: npm run test:ci
 
-      # - name: EndToEnd Test
-      #   run: npm run e2e:ci      
+      - name: EndToEnd Test
+        run: cd ../e2e && npm run test:prepare && npm run test:angular      
 
       - name: Build
         run: npm run build
