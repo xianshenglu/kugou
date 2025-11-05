@@ -9,6 +9,7 @@ on:
       - master
     paths:
       - 'demo/angular/**'
+      - 'demo/shared/**'
 jobs:
   build:
     runs-on: ubuntu-latest

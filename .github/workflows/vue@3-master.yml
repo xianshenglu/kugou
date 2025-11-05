@@ -9,6 +9,7 @@ on:
       - master
     paths:
       - demo/vue@3/**
+      - 'demo/shared/**'
 jobs:
   build:
     runs-on: ubuntu-latest
