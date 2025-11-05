@@ -10,6 +10,7 @@ on:
       - master
     paths:
       - 'demo/angular/**'
+      - 'demo/shared/**'
       - '.github/workflows/angular-pr-check.yml'
       
 jobs:

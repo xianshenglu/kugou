@@ -10,6 +10,7 @@ on:
       - master
     paths:
       - demo/vue@3/**
+      - 'demo/shared/**'
       - '.github/workflows/vue@3-pr.yml'
 jobs:
   build:

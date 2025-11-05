@@ -10,6 +10,7 @@ on:
       - master
     paths:
       - 'demo/react-vite/**'
+      - 'demo/shared/**'
       - '.github/workflows/react-vite-pr.yml'
 jobs:
   build:
