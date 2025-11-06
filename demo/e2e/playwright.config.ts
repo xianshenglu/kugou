@@ -16,9 +16,9 @@ if (existsSync(envLocalPath)) {
 const E2E_HEADLESS = process.env.E2E_HEADLESS !== 'false';
 
 const baseURLs = {
-  angular: process.env.ANGULAR_BASE_URL || 'http://localhost:4200',
-  'react-vite': process.env.REACT_VITE_BASE_URL || 'http://localhost:5173',
-  vue3: process.env.VUE3_BASE_URL || 'http://localhost:5174',
+  angular: process.env.ANGULAR_BASE_URL,
+  'react-vite': process.env.REACT_VITE_BASE_URL,
+  vue3: process.env.VUE3_BASE_URL,
 };
 
 const getProxyConfig = () => {
@@ -88,6 +88,10 @@ export default defineConfig({
     },
   ],
 
-  webServer: undefined,
+  webServer: {
+    command: 'npx http-server -p 4200 ../../',
+    url: 'http://localhost:4200/demo/react-vite/index.html',
+    timeout: 10000,
+  },
 });
 
