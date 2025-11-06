@@ -13,7 +13,7 @@ const RankList: FC<RankListProps> = ({ rankList }) => {
   }
 
   return (
-    <AppList data={rankList as any} render={getChildren} className={styles.RankList} />
+    <AppList data={rankList as any} render={getChildren} className={styles.RankList} test-id="page-rank-list" />
   )
 }
 

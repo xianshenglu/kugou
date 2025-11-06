@@ -35,7 +35,7 @@ test.describe('nav', () => {
   test('should the fourth nav navigate correctly', async ({ page: playwrightPage }) => {
     const navBtns = playwrightPage.locator('[test-id^="nav-link"]');
     await navBtns.nth(3).click();
-    await expect(playwrightPage).toHaveURL(/\/singer\/category/);
+    await expect(playwrightPage).toHaveURL(/\/singer\/(category|categories)/);
   });
 });
 

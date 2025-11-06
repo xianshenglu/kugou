@@ -12,19 +12,22 @@ interface SingerCategoriesProps {
 const SingerCategories: FC<SingerCategoriesProps> = ({ singerCategories }) => {
   return (
     <Fragment>
-      {singerCategories.map(category => (
+      {singerCategories.map((category, categoryIndex) => (
         <ul
           className={classNames(styles.singerCategories__list, 'main_border')}
           key={category.category}
+          test-id={categoryIndex === 0 ? 'page-singer-category' : undefined}
         >
           {category.data.map(childCategory => (
             <li
               className={classNames(styles.singerCategories__item, 'main_border_bottom')}
               key={childCategory.path}
+              test-class="list"
             >
               <NavLink
                 to={childCategory.path}
                 className={styles.singerCategories__link}
+                test-class="link"
               >
                 <div className={styles.singerCategories__title}>
                   {childCategory.classname}

@@ -36,13 +36,15 @@ const SingerList: FC<SingerListProps> = ({ singersData }) => {
       <ul
         className={styles.SingerList__list}
         onScroll={() => $_xsl__loadImgLazy(lazyImagesRef.current)}
+        test-id="page-singer-list"
       >
         {singers.map((singer) => (
           <li
             className={classNames(styles.SingerList__item, 'main_border_bottom')}
             key={singer.id}
+            test-class="list"
           >
-            <NavLink to={singer.path} className={styles.SingerList__link}>
+            <NavLink to={singer.path} className={styles.SingerList__link} test-class="link">
               <img
                 className={classNames(styles.SingerList__img, 'lazyImage')}
                 src={logo__grey}
