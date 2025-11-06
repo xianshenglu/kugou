@@ -1,0 +1,33 @@
+@import (reference) '../../../shared/css/constant.less';
+.PlayerProgress {
+  font-size: @font_size_mini;
+  padding: 16px @padding_width;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: @white-2;
+  height: .calc_on_app_cont(48) [ @result];
+  width: 100%;
+  box-sizing: border-box;
+}
+.PlayerProgress__songCurTime,
+.PlayerProgress__songDuration {
+  flex: 0 0 auto;
+}
+.PlayerProgress__progressBar {
+  flex: 1 0 auto;
+  height: 4px;
+  margin: 0 10px;
+  background-color: @black-2;
+  position: relative;
+}
+.PlayerProgress__progressBarPointer {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: @theme;
+  height: 13px;
+  width: 13px;
+  border-radius: 50%;
+}

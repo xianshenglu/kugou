@@ -1,9 +1,9 @@
 import { useLocation } from 'react-router-dom'
 import { Fragment } from 'react'
-import useAppNavStore from './stores/useAppNavStore'
-import usePlayerStore from './stores/usePlayerStore'
-import logo__theme from './assets/images/logo__theme.png'
-import { player } from './constants/router'
+import useAppNavStore from './shared/stores/useAppNavStore'
+import usePlayerStore from './shared/player/usePlayerStore'
+import logo__theme from './shared/assets/images/logo__theme.png'
+import { player } from './shared/constants/router'
 import App from './App'
 import { useMount, useUpdateEffect, useUnmount, useMemoizedFn } from 'ahooks'
 

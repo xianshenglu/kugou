@@ -15,8 +15,8 @@ import {
   singerInfo,
   search,
   player
-} from './constants/router'
-import NewSongsContainer from './pages/newSong/NewSongsContainer'
+} from './shared/constants/router'
+import NewSongsContainer from './features/newSong/NewSongsPage'
 import {
   PlayerMedContainer,
   RankListContainer,
@@ -28,14 +28,14 @@ import {
   SingerInfoContainer,
   PlayerMaxContainer,
   SearchContainer
-} from './pages/lazyContainers'
-import { lazyWithPrefetch } from './helpers/lazyWithPrefetch'
-import { Loading } from './components/Loading'
+} from './features/lazyFeatures'
+import { lazyWithPrefetch } from './shared/helpers/lazyWithPrefetch'
+import { Loading } from './shared/components/Loading'
 const AppHeader = lazyWithPrefetch(
-  () => import('./components/AppHeader')
+  () => import('./shared/components/AppHeader')
 )
 const AppNavContainer = lazyWithPrefetch(
-  () => import('./components/AppNavContainer')
+  () => import('./shared/components/AppNavContainer')
 )
 const App: FC<any> = (props) => {
   const { isPlayerMedShow, isAppNavShow } = props as any

@@ -2,13 +2,13 @@ import { StrictMode } from 'react'
 // todo
 // import "@babel/polyfill";
 import { createRoot } from 'react-dom/client'
-import './css/index.less'
+import './shared/css/index.less'
 import * as serviceWorker from './serviceWorker'
 import { HashRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from './queryClient'
-import store from './redux/store'
+import store from './shared/redux/store'
 import AppContainer from './AppContainer'
 import '@shared/mock/index'
 
