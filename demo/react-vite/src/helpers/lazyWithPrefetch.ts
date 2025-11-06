@@ -8,7 +8,7 @@ export function lazyWithPrefetch<T extends ComponentType<any>>(
   const Component = lazy(factory)
 
   if (wantLoadWhenIdle) {
-    requestIdleCallback(() => {
+    window.requestIdleCallback?.(() => {
       factory()
     })
   }
