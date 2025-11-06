@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\codebase\kugou\demo\angular\src\polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! /home/runner/work/kugou/kugou/demo/angular/src/polyfills.ts */"hN/g");
 
 
 /***/ }),
