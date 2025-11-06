@@ -11,18 +11,18 @@ const AppHeader: FC = () => {
 
   return (
     <header className={styles.AppHeader}>
-      <button className={styles.AppHeader__back} onClick={goBack}>
+      <button className={styles.AppHeader__back} onClick={goBack} test-id="go-back-btn">
         <svg className="icon" aria-hidden="true">
           <use xlinkHref="#icon-arrow-left" />
         </svg>
       </button>
-      <NavLink to={root}>
+      <NavLink to={root} test-id="logo-link">
         <img className={styles.AppHeader__logo} src={logo__text} alt="logo" />
       </NavLink>
       <NavLink
         className={styles.AppHeader__searchBtn}
         to={search}
-        // @click.native="bus.$emit('searchBtnClicked')"
+        test-id="search-btn"
       >
         <svg className="icon" aria-hidden="true">
           <use xlinkHref="#icon-search" />

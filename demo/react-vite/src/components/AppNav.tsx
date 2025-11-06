@@ -6,6 +6,7 @@ interface AppNavProps {
   navList: {
     path: string;
     text: string;
+    name: string;
   }[];
   activeIndex: number;
 }
@@ -21,6 +22,7 @@ const AppNav: FC<AppNavProps> = ({ navList, activeIndex }) => {
             className={({ isActive, isPending }) =>
               styles.AppNav__link
             }
+            test-id={`nav-link${nav.name}`}
           >
             {nav.text}
           </NavLink>

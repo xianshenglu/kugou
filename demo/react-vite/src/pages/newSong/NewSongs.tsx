@@ -18,7 +18,7 @@ function NewSongs({ songs, sliderData }: NewSongsProps) {
   return (
     <React.Fragment>
       <NewSongsSlider banners={sliderData} />
-      <AppMusicList data={songs} />
+      <AppMusicList data={songs} test-id="page-new-song" />
     </React.Fragment>
   )
 }

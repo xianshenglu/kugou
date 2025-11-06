@@ -17,7 +17,7 @@ const SingerInfo: FC<SingerInfoData> = ({ info, data }) => {
     <Fragment>
       <InfoHeader {...infoHeaderProps} />
       <InfoDescription description={intro} />
-      <AppMusicList data={data} />
+      <AppMusicList data={data} test-id="page-singer-info" />
     </Fragment>
   )
 }

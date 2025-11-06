@@ -14,12 +14,14 @@ interface AppListProps {
   }[];
   render?(...args: unknown[]): unknown;
   className?: string;
+  'test-id'?: string;
 }
 
 const AppList = ({
   data,
   render,
-  className
+  className,
+  'test-id': testId
 }: AppListProps) => {
   const lazyImageRefs = useRef<Array<HTMLImageElement | null>>([])
   const initLazyImgLoad = () => {
@@ -47,11 +49,12 @@ const AppList = ({
     <ul
       className={classNames(styles.AppList, className)}
       onScroll={() => $_xsl__loadImgLazy(lazyImageRefs.current  as any)}
+      test-id={testId}
     >
       {data.map((item, index) => {
         return (
-          <li className={classNames(styles.AppList__item, 'main_border_bottom')} key={item.path}>
-            <NavLink to={item.path} className={styles.AppList__link}>
+          <li className={classNames(styles.AppList__item, 'main_border_bottom')} key={item.path} test-class="list">
+            <NavLink to={item.path} className={styles.AppList__link} test-class="link">
               <img
                 className={classNames(styles.AppList__img, 'lazyImage')}
                 ref={(el) => setLazyImageElement(index, el)}

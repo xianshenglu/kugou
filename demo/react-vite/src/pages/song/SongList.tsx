@@ -24,7 +24,7 @@ const SongList: FC<SongListProps> = ({ songList }) => {
   }
 
   return (
-    <AppList data={songList as any} render={getChildren} className={styles.SongList} />
+    <AppList data={songList as any} render={getChildren} className={styles.SongList} test-id="page-song-list" />
   )
 }
 

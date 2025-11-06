@@ -51,6 +51,7 @@ const RankInfo: FC<RankInfoProps> = ({ songsData, listInfo }) => {
       <AppMusicList
         data={songsData.list}
         renderMusicSequence={renderMusicSequence}
+        test-id="page-rank-info"
       />
     </Fragment>
   )
