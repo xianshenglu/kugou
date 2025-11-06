@@ -15,8 +15,10 @@ test.describe('header', () => {
   });
 
   test('should go-back button work', async ({ page: playwrightPage }) => {
-    const goBackBtn = playwrightPage.locator('[test-id="go-back-btn"]');
+    const searchBtn = playwrightPage.locator('[test-id="search-btn"]');
+    await searchBtn.click();
     const prevUrl = playwrightPage.url();
+    const goBackBtn = playwrightPage.locator('[test-id="go-back-btn"]');
     await goBackBtn.click();
     const curUrl = playwrightPage.url();
     const baseURL = page.baseUrl;
@@ -52,7 +54,7 @@ test.describe('header', () => {
     const baseURL = page.baseUrl;
     const basePath = baseURL.replace(/\/[^/]*\.(html|htm)$/, '').replace(/\/$/, '');
     const escapedBasePath = basePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    await expect(playwrightPage).toHaveURL(new RegExp(`^${escapedBasePath}/#/?$`));
+    await expect(playwrightPage).toHaveURL(new RegExp(`^${escapedBasePath}/(index.html)?#/?$`));
   });
 
   test.afterEach(async ({ page: playwrightPage }) => {
