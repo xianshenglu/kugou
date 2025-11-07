@@ -69,7 +69,7 @@ const SearchPage: FC = () => {
 
   useEffect(() => {
     historyListener(location)
-  }, [location])
+  }, [location, historyListener])
 
   useEffect(() => {
     if (updateKeywordCallbackRef.current) {
