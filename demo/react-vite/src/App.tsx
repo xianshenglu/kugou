@@ -34,8 +34,8 @@ import { Loading } from './shared/components/Loading'
 const AppHeader = lazyWithPrefetch(
   () => import('./shared/components/AppHeader')
 )
-const AppNavContainer = lazyWithPrefetch(
-  () => import('./shared/components/AppNavContainer')
+const AppNav = lazyWithPrefetch(
+  () => import('./shared/components/AppNav/AppNav')
 )
 const App: FC<any> = (props) => {
   const { isPlayerMedShow, isAppNavShow } = props as any
@@ -45,7 +45,7 @@ const App: FC<any> = (props) => {
   return (
     <div className="App">
       <AppHeader />
-      <AppNavContainer />
+      {isAppNavShow ? <AppNav /> : null}
       {isPlayerMedShow ? <PlayerMedContainer /> : undefined}
       <main className={mainClassName}>
         <ErrorBoundary

@@ -6,6 +6,7 @@ import logo__theme from './shared/assets/images/logo__theme.png'
 import { player } from './shared/constants/router'
 import App from './App'
 import { useMount, useUpdateEffect, useUnmount, useMemoizedFn } from 'ahooks'
+import { useNavLocationSync } from './shared/components/AppNav/useNavLocationSync'
 
 function AppContainer() {
   const { 
@@ -19,6 +20,7 @@ function AppContainer() {
   } = usePlayerStore()
   const isAppNavShow = useAppNavStore((s) => s.isShow)
   const location = useLocation()
+  useNavLocationSync()
 
   const setCssCustomVar = useMemoizedFn(() => {
     document.documentElement.style.setProperty('--vh', window.innerHeight / 100 + 'px')

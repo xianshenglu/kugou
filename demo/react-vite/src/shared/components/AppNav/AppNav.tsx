@@ -1,17 +1,25 @@
 import type { FC } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useNavigate, NavLink } from 'react-router-dom'
+import useAppNavStore from '../../stores/useAppNavStore'
+import { useSwipe } from '../../hooks/useSwipe'
+import { navList } from './navList'
 import styles from './AppNav.module.less'
 
-interface AppNavProps {
-  navList: {
-    path: string;
-    text: string;
-    name: string;
-  }[];
-  activeIndex: number;
-}
+const AppNav: FC = () => {
+  const navigate = useNavigate()
+  const activeIndex = useAppNavStore((s) => s.activeIndex)
 
-const AppNav: FC<AppNavProps> = ({ navList, activeIndex }) => {
+  
+  useSwipe({
+    onSwipe: (direction) => {
+      const nextRouteIndex = direction === 'left' ? activeIndex + 1 : activeIndex - 1
+      const nextRoute = navList[nextRouteIndex]
+      if (nextRoute !== undefined) {
+        navigate(nextRoute.path)
+      }
+    }
+  })
+
   return (
     <section className={styles.AppNav}>
       <nav className={styles.AppNav__box}>
