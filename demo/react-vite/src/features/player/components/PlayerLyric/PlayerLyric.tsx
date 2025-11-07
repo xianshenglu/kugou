@@ -2,16 +2,10 @@ import { useEffect, useRef, type FC } from 'react'
 import classNames from 'classnames'
 import './PlayerLyric.module.less'
 import styles from './PlayerLyric.module.less'
+import { usePlayerLyric } from './usePlayerLyric'
 
-interface PlayerLyricProps {
-  lyrics: {
-    text: string;
-  }[];
-  prevLyricIndex: number;
-  toggleIsTouching(...args: unknown[]): unknown;
-}
-
-const PlayerLyric: FC<PlayerLyricProps> = ({ lyrics, prevLyricIndex, toggleIsTouching }) => {
+const PlayerLyric: FC = () => {
+  const { lyrics, prevLyricIndex, toggleIsTouching } = usePlayerLyric()
   const lyricElementsRef = useRef<(HTMLParagraphElement | null)[]>([]);
   const setLyricElement = (
     index: number,

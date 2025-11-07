@@ -1,10 +1,9 @@
-import type { FC } from 'react'
 import { useState, useEffect } from 'react'
 import { useMemoizedFn } from 'ahooks'
-import PlayerLyric from './PlayerLyric'
-import { getFormattedLyrics } from '../helpers/lyric'
-import usePlayerStore from '../../../shared/player/usePlayerStore'
-const PlayerLyricContainer: FC = () => {
+import { getFormattedLyrics } from '../../helpers/lyric'
+import usePlayerStore from '../../../../shared/player/usePlayerStore'
+
+export function usePlayerLyric() {
   const [prevLyricIndex, setPrevLyricIndex] = useState(0)
   const [isTouching, setIsTouching] = useState(false)
 
@@ -13,6 +12,7 @@ const PlayerLyricContainer: FC = () => {
   const toggleIsTouching = useMemoizedFn((touching: boolean) => {
     setIsTouching(touching)
   })
+
   const timeUpdateCb = useMemoizedFn((event: Event) => {
     if (isTouching) {
       return
@@ -35,16 +35,14 @@ const PlayerLyricContainer: FC = () => {
         audioEl.removeEventListener('timeupdate', timeUpdateCb)
       }
     }
-  }, [audioElRef])
+  }, [audioElRef, timeUpdateCb])
 
   const lyrics = getFormattedLyrics(lyric)
-  const targetProps = {
+
+  return {
     lyrics,
     prevLyricIndex,
     toggleIsTouching
   }
-
-  return <PlayerLyric {...targetProps} />
 }
 
-export default PlayerLyricContainer

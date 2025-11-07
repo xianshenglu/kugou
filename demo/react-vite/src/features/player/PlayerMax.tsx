@@ -6,7 +6,7 @@ import PrevButton from './components/PrevButton'
 import PlayButton from './components/PlayButton'
 import NextButton from './components/NextButton'
 import usePlayerStore from '../../shared/player/usePlayerStore'
-import PlayerLyricContainer from './components/PlayerLyricContainer'
+import PlayerLyric from './components/PlayerLyric/PlayerLyric'
 import PlayerProgressContainer from './components/PlayerProgressContainer'
 
 interface PlayerMaxProps {
@@ -48,7 +48,7 @@ const PlayerMax: FC<PlayerMaxProps> = ({
           })}
           alt={author_name}
         />
-        <PlayerLyricContainer />
+        <PlayerLyric />
         <PlayerProgressContainer />
         <div className={styles.PlayerMax__buttonContainer}>
           <PrevButton className={styles.PlayerMax__prevBtn} prev={prevSong} />
