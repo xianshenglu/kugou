@@ -1,32 +1,20 @@
-import type { FC, RefObject } from 'react'
+import type { FC } from 'react'
 import styles from './PlayerProgress.module.less'
-import { secondToMin } from '../helpers/time';
+import { secondToMin } from '../../helpers/time'
+import { usePlayerProgress } from './usePlayerProgress'
 
-interface PlayerProgressProps {
-  audioElRef: RefObject<HTMLAudioElement>;
-  progressBarRef: RefObject<HTMLDivElement>;
-  currentTime: number;
-  currentProgress: number;
-  loadProgress: number;
-  onTouchStart(...args: unknown[]): unknown;
-}
-
-const PlayerProgress: FC<PlayerProgressProps> = ({
-  audioElRef: { current: audioElRefCur },
-  progressBarRef,
-  currentTime,
-  currentProgress,
-  loadProgress,
-  onTouchStart
-}) => {
-  const audioEl = audioElRefCur === null ? { duration: 0 } : audioElRefCur
+const PlayerProgress: FC = () => {
+  const { audioElRef, progressBarRef, currentTime, currentProgress, loadProgress, onTouchStart } = usePlayerProgress()
+  
+  // eslint-disable-next-line react-hooks/refs
+  const audioEl = audioElRef.current === null ? { duration: 0 } : audioElRef.current
   const progressBarStyle = {
     backgroundImage: `linear-gradient(to right, #2ca2f9 ${currentProgress}%, transparent ${currentProgress}%),linear-gradient(to right, #6c6b70 ${loadProgress}%, transparent ${loadProgress}%)`,
     color: 'red'
   }
 
   return (
-    <div className={styles.PlayerProgress} onTouchStart={onTouchStart}>
+    <div className={styles.PlayerProgress} onTouchStart={onTouchStart as any}>
       <div className={styles.PlayerProgress__songCurTime}>
         {secondToMin(currentTime)}
       </div>
@@ -48,3 +36,4 @@ const PlayerProgress: FC<PlayerProgressProps> = ({
 }
 
 export default PlayerProgress
+

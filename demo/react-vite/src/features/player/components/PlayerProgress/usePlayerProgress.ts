@@ -1,9 +1,8 @@
 import { useState, useRef } from 'react'
 import { useEventListener, useMemoizedFn } from 'ahooks'
-import PlayerProgress from './PlayerProgress'
-import usePlayerStore from '../../../shared/player/usePlayerStore'
+import usePlayerStore from '../../../../shared/player/usePlayerStore'
 
-const PlayerProgressContainer = () => {
+export function usePlayerProgress() {
   const { audioElRef } = usePlayerStore()
   const [currentTime, setCurrentTime] = useState(0)
   const [loadProgress, setLoadProgress] = useState(0)
@@ -19,7 +18,6 @@ const PlayerProgressContainer = () => {
     const percent = offsetX / (progressBarRectRef.current!.width)
     let newCurrentTime!: number
     const audioEl = audioElRef.current!
-    // if (!audioEl) return 0
     
     switch (type) {
       case 0:
@@ -55,7 +53,6 @@ const PlayerProgressContainer = () => {
       return
     }
     const audioEl = audioElRef.current!
-    // if (!audioEl) return
     
     const target = event.target as HTMLAudioElement
     const newCurrentTime = target.currentTime
@@ -68,7 +65,6 @@ const PlayerProgressContainer = () => {
     const clientX = event.touches[0].clientX
     const newCurrentTime = calcCurTime(clientX, touchStartXRef.current, 1)
     const audioEl = audioElRef.current!
-    // if (!audioEl) return
     const newCurrentProgress = Math.floor((100 * newCurrentTime) / audioEl.duration)
     setCurrentTime(newCurrentTime)
     setCurrentProgress(newCurrentProgress)
@@ -77,7 +73,6 @@ const PlayerProgressContainer = () => {
 
   const touchEndCb = useMemoizedFn(() => {
     const audioEl = audioElRef.current!
-    // if (!audioEl) return
     setIsTouching(false)
     if(!Number.isNaN(currentTime)){
       audioEl.currentTime = currentTime
@@ -89,13 +84,12 @@ const PlayerProgressContainer = () => {
 
   const setCurTime = useMemoizedFn((event: TouchEvent) => {
     setIsTouching(true)
-    if (!progressBarRectRef.current/* && progressBarRef.current*/) {
+    if (!progressBarRectRef.current) {
       progressBarRectRef.current = progressBarRef.current!.getBoundingClientRect()
     }
     const clientX = event.touches[0].clientX
     const newCurrentTime = calcCurTime(clientX, progressBarRectRef.current!.left, 0)
     const audioEl = audioElRef.current!
-    // if (!audioEl) return
     const newCurrentProgress = Math.floor((100 * newCurrentTime) / audioEl.duration)
     setCurrentTime(newCurrentTime)
     setCurrentProgress(newCurrentProgress)
@@ -106,17 +100,14 @@ const PlayerProgressContainer = () => {
   
   useEventListener('progress', progressCb, { target: () => audioElRef.current })
   useEventListener('timeupdate', timeUpdateCb, { target: () => audioElRef.current })
-  const props = {
+
+  return {
     audioElRef,
+    progressBarRef,
     currentTime,
     loadProgress,
     currentProgress,
-    isTouching,
-    onTouchStart: setCurTime,
-    progressBarRef
+    onTouchStart: setCurTime
   }
-  
-  return <PlayerProgress {...props} />
 }
 
-export default PlayerProgressContainer
