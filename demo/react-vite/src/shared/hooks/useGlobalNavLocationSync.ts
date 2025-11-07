@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useMemoizedFn } from 'ahooks'
-import useAppNavStore from '../../stores/useAppNavStore'
-import { navList } from './navList'
+import useAppNavStore from '../stores/useAppNavStore'
+import { navList } from '../components/AppNav/navList'
 
-export function useNavLocationSync() {
+export function useGlobalNavLocationSync() {
   const location = useLocation()
   const { setActiveNavIndex, switchNav } = useAppNavStore()
 
