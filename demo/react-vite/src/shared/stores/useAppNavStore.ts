@@ -16,6 +16,10 @@ const createState: StateCreator<AppNavState> = (set) => ({
   switchNav: (isShow: boolean) => set(() => ({ isShow }))
 })
 
-const useAppNavStore = create<AppNavState>()(devtools(createState))
+const useAppNavStore = create<AppNavState>()(
+  // if we use same name for different stores, it will be merged into one store
+  // but redux-devtools will often be stuck, don't know why.
+  devtools(createState, { name: 'zustand-appNav', store: 'appNav' })
+)
 
 export default useAppNavStore

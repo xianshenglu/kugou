@@ -144,6 +144,6 @@ const createState: StateCreator<PlayerState> = (set, get) => ({
   }
 })
 
-const usePlayerStore = create<PlayerState>()(devtools(createState))
+const usePlayerStore = create<PlayerState>()(devtools(createState, { name: 'zustand-player', store: 'player' }))
 
 export default usePlayerStore

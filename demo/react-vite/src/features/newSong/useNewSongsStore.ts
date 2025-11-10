@@ -22,10 +22,10 @@ const createState: StateCreator<NewSongsState> = (set, get) => ({
 
   fetchNewSongs: async () => {
     set({ error: null, status: PENDING })
-    
+
     try {
       const { songs, sliderData } = await getNewSongs()
-      
+
       set({
         songs,
         sliderData,
@@ -48,6 +48,8 @@ const createState: StateCreator<NewSongsState> = (set, get) => ({
   }
 })
 
-const useNewSongsStore = create<NewSongsState>()(devtools(createState))
+const useNewSongsStore = create<NewSongsState>()(
+  devtools(createState, { name: 'zustand-newSongs', store: 'newSongs' })
+)
 
 export default useNewSongsStore
