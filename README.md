@@ -17,7 +17,7 @@
 
 ## 预览
 
-- kugou-music [Vue-version](https://xianshenglu.github.io/kugou/demo/vue@2.x/dist/index.html) [React-version](https://xianshenglu.github.io/kugou/demo/react/build/) [Angular-Version](https://xianshenglu.github.io/kugou/demo/angular/dist/angular/#/) [MicroFrontEnd](https://xianshenglu.github.io/kugou/demo/micro-front-end/dist/)
+- kugou-music [Vue-version](https://xianshenglu.github.io/kugou/demo/vue@2.x/dist/index.html) [React-version](https://xianshenglu.github.io/kugou/demo/react-vite/dist/#/) [Angular-Version](https://xianshenglu.github.io/kugou/demo/angular/dist/angular/#/) [MicroFrontEnd](https://xianshenglu.github.io/kugou/demo/micro-front-end/dist/)
 
 ## 示例
 
