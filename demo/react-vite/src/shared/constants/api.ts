@@ -10,7 +10,7 @@ const api = {
   singerCategories: `${baseApiHost}/singerCategory.json`,
   singerList: `${baseApiHost}/singerList.json`,
   singerInfo: `${baseApiHost}/singerInfo.json`,
-  songInfoHasLyric: `${baseApiHost}/songLyric.json`,
+  songInfoHasLyric: `${baseApiHost}/songLyric.json?`,
   hotSearch: `${baseApiHost}/hotSearch.json`,
   keywordSearch: `${baseApiHost}/searchResult.json?`
 }
