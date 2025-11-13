@@ -10,7 +10,6 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from './queryClient'
 import store from './shared/redux/store'
 import App from './App'
-import '@shared/mock/index'
 
 const root = createRoot(document.getElementById('root')!)
 root.render(
