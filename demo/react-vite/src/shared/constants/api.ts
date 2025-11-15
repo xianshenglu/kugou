@@ -1,5 +1,5 @@
 const baseApiHost =
-  'https://xianshenglu.github.io/kugou/demo/shared/mock/json-en'
+  import.meta.env.VITE_API_BASE_URL + '/demo/shared/mock/json-en'
 
 const api = {
   newSongs: `${baseApiHost}/newSong.json`,
