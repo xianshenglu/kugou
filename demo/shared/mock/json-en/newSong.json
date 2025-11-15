@@ -493,7 +493,7 @@
   ],
   "banner": [
     {
-      "imgurl": "http://imge.kugou.com/mobilebanner/20190226/20190226142003994519.jpg",
+      "imgurl": "https://imge.kugou.com/mobilebanner/20190226/20190226142003994519.jpg",
       "title": "情歌专区",
       "id": 10357,
       "type": 4,
@@ -503,7 +503,7 @@
       }
     },
     {
-      "imgurl": "http://imge.kugou.com/mobilebanner/20190226/20190226142217250492.jpg",
+      "imgurl": "https://imge.kugou.com/mobilebanner/20190226/20190226142217250492.jpg",
       "title": "2019奥斯卡获奖 现场全记录",
       "id": 10365,
       "type": 1,
@@ -518,7 +518,7 @@
         "singername": "",
         "intro": "2019年第91届美国电影学院奖——奥斯卡金像奖在北京时间2月25日举办颁奖典礼！《绿皮书》拿下最佳影片！《波西米亚狂想曲》拿下四奖成最大赢家！《绿皮书》、《罗马》、《黑豹》各拿三奖紧随其后！Lady Gaga拿下最佳原创歌曲首夺小金人！详细获奖名单与现场表演阵容请见歌单！\n\n备注：《假若比尔街能说话》无音乐版权，影片中Regina King拿下最佳女配角奖。",
         "songcount": 15,
-        "imgurl": "http://imge.kugou.com/soft/collection/{size}/20190225/20190225143304172262.jpg",
+        "imgurl": "https://imge.kugou.com/soft/collection/{size}/20190225/20190225143304172262.jpg",
         "suid": 849847890,
         "specialid": 609173,
         "collectcount": 2373,
@@ -527,7 +527,7 @@
       }
     },
     {
-      "imgurl": "http://imge.kugou.com/mobilebanner/20190226/20190226142400472366.jpg",
+      "imgurl": "https://imge.kugou.com/mobilebanner/20190226/20190226142400472366.jpg",
       "title": "古风专区",
       "id": 10367,
       "type": 4,
