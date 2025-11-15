@@ -58,4 +58,4 @@ jobs:
       - name: Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.15.x
-          cd ../../ && lhci collect --collect.staticDistDir=. --collect.url=http://localhost/demo/react-vite/dist --upload.target=filesystem --upload.outputDir=./demo/react-vite/lighthouseci
+          cd ../../ && lhci autorun --collect.staticDistDir=. --collect.url=http://localhost/demo/react-vite/dist/ --upload.target=filesystem --upload.outputDir=./demo/react-vite/lighthouseci
