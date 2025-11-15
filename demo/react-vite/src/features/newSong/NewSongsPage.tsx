@@ -10,8 +10,12 @@ const NewSongsPage: FC = () => {
     fetchNewSongsIfNeeded()
   }, [fetchNewSongsIfNeeded])
 
-  return <NewSongs songs={songs} sliderData={sliderData} />
+  return (
+    <>
+      <link rel="preconnect" href="//imge.kugou.com" />
+      <NewSongs songs={songs} sliderData={sliderData} />
+    </>
+  )
 }
 
 export default NewSongsPage
-
