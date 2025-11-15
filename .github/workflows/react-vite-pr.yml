@@ -24,17 +24,17 @@ jobs:
     defaults:
       run:
         working-directory: demo/react-vite
-    
+
     steps:
       - uses: actions/checkout@v5
-        with: 
+        with:
           fetch-depth: 0
 
       - name: Merge master into current branch
         run: |
           git fetch origin master
           git merge origin/master
-      
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -51,6 +51,11 @@ jobs:
 
       - name: Build
         run: npm run build
-      
+
       - name: EndToEnd Test
-        run: cd ../e2e && npm run test:prepare && npm run test:react-vite 
+        run: cd ../e2e && npm run test:prepare && npm run test:react-vite
+
+      - name: Lighthouse CI
+        run: |
+          cd ../react-vite && npm install -g @lhci/cli@0.15.x
+          lhci collect --collect.staticDistDir=./dist
