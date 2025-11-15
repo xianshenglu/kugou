@@ -6,20 +6,18 @@ import { navList } from '../components/AppNav/navList'
 
 export function useGlobalNavLocationSync() {
   const location = useLocation()
-  const { setActiveNavIndex, switchNav } = useAppNavStore()
+  const { setActiveNavIndex } = useAppNavStore()
 
-  const onLocationChange = useMemoizedFn(({ pathname }: { pathname: string }) => {
-    const activeIndex = navList.findIndex((nav) => nav.path === pathname)
-    if (activeIndex >= 0) {
-      switchNav(true)
-      setActiveNavIndex(activeIndex)
-    } else {
-      switchNav(false)
+  const onLocationChange = useMemoizedFn(
+    ({ pathname }: { pathname: string }) => {
+      const activeIndex = navList.findIndex((nav) => nav.path === pathname)
+      if (activeIndex >= 0) {
+        setActiveNavIndex(activeIndex)
+      }
     }
-  })
+  )
 
   useEffect(() => {
     onLocationChange(location)
   }, [location, onLocationChange])
 }
-

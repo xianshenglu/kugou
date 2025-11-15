@@ -1,3 +1,4 @@
+import type { Location } from 'react-router-dom'
 import {
   newSongs,
   rankList,
@@ -28,3 +29,6 @@ export const navList = [
   }
 ]
 
+export function shouldNavDisplay(location: Location) {
+  return !!navList.find((nav) => nav.path === location.pathname)
+}
