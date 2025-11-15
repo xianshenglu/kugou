@@ -11,10 +11,10 @@
     "intro": "数据来源：酷狗\r\n排序方式：按歌曲搜索播放量的涨幅排序\r\n更新周期：每天",
     "jump_url": "",
     "jump_title": "",
-    "imgurl": "http://imge.kugou.com/mcommon/{size}/20190214/20190214100330763258.jpg",
-    "banner7url": "http://imge.kugou.com/mcommon/{size}/20190214/20190214100332980767.jpg",
+    "imgurl": "https://imge.kugou.com/mcommon/{size}/20190214/20190214100330763258.jpg",
+    "banner7url": "https://imge.kugou.com/mcommon/{size}/20190214/20190214100332980767.jpg",
     "isvol": 1,
-    "bannerurl": "http://imge.kugou.com/mcommonbanner/{size}/20190214/20190214100333414437.jpg",
+    "bannerurl": "https://imge.kugou.com/mcommonbanner/{size}/20190214/20190214100333414437.jpg",
     "custom_type": 0,
     "rankname": "酷狗飙升榜",
     "ranktype": 2
