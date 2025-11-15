@@ -34,7 +34,7 @@
         "isvol": 1,
         "bannerurl": "https://imge.kugou.com/mcommonbanner/{size}/20181019/20181019122517263545.jpg",
         "custom_type": 0,
-        "rankname": "酷狗TOP500",
+        "rankname": "Kugou TOP500",
         "ranktype": 2
       },
       {
@@ -154,7 +154,7 @@
         "isvol": 1,
         "bannerurl": "https://imge.kugou.com/mcommonbanner/{size}/20181019/20181019121807146762.jpg",
         "custom_type": 0,
-        "rankname": "5sing音乐榜",
+        "rankname": "5sing Music Rank",
         "ranktype": 1
       }
     ]
