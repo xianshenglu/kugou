@@ -1,21 +1,10 @@
-import { baseApi } from 'src/shared/redux/baseApi'
+import { useQuery } from '@tanstack/react-query'
 import { getSingerCategories } from './singerCategories.repo'
 import type { SingerCategoryData } from '@shared/domains/singer/model'
 
-export const singerCategoriesApi = baseApi.injectEndpoints({
-  endpoints: (builder) => ({
-    getSingerCategories: builder.query<SingerCategoryData[], void>({
-      queryFn: async () => {
-        try {
-          const data = await getSingerCategories()
-          return { data }
-        } catch (error) {
-          return { error: { status: 'FETCH_ERROR', error: String(error) } }
-        }
-      }
-    })
+export const useGetSingerCategoriesQuery = () => {
+  return useQuery<SingerCategoryData[]>({
+    queryKey: ['singerCategories'],
+    queryFn: getSingerCategories
   })
-})
-
-export const { useGetSingerCategoriesQuery } = singerCategoriesApi
-
+}
