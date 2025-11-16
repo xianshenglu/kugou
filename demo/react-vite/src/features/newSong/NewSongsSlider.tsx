@@ -1,6 +1,9 @@
 import Slider, { type Settings } from 'react-slick'
  
 import styles from './NewSongsSlider.module.less'
+// todo add compnent name-space to it
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 const settings: Settings = {
   dots: true,
   autoplay: true,
