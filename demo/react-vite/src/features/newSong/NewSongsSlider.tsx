@@ -1,11 +1,12 @@
-import Slider from 'react-slick'
- 
+import Slider, { type Settings } from 'react-slick'
+// eslint-disable-next-line css-modules/no-unused-class
 import styles from './NewSongsSlider.module.less'
-const settings = {
+const settings: Settings = {
   dots: true,
   autoplay: true,
   adaptiveHeight: true,
-  dotsClass: 'slick-dots ' + styles.newSongsSlider__pagination
+  dotsClass: 'slick-dots ' + styles.newSongsSlider__pagination,
+  className: styles.newSongsSlider__container
 }
 
 interface NewSongsSliderProps {
