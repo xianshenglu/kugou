@@ -4,6 +4,8 @@
     <script type="module" crossorigin src="./assets/polyfills-1bwFhOP5.js"></script>
 
     <meta charset="UTF-8" />
+    <!-- We assume / is the entry page in the most cases. If not we need to remove it and also lazy load route component -->
+    <link rel="preload" href="../../../demo/shared/mock/json-en/newSong.json" as="fetch" crossorigin="anonymous" />
     <link rel="icon" type="image/svg+xml" href="./vite.svg" />
     <meta
       name="viewport"
