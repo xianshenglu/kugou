@@ -5,7 +5,7 @@ const settings = {
   dots: true,
   autoplay: true,
   adaptiveHeight: true,
-  dotsClass: 'slick-dots newSongsSlider__pagination'
+  dotsClass: 'slick-dots ' + styles.newSongsSlider__pagination
 }
 
 interface NewSongsSliderProps {
