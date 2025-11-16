@@ -6,6 +6,7 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import { analyzer } from 'vite-bundle-analyzer'
 import legacy from '@vitejs/plugin-legacy'
 import browserslist from 'browserslist'
+import { viteInlineCss } from './vite-plugin-inline-css'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // https://vite.dev/config/
@@ -20,13 +21,23 @@ const productionConfig = {
       modernTargets: browserslist(),
       modernPolyfills: true,
     }),
+    viteInlineCss(),
   ]
 }
 const developmentConfig = {
   plugins: []
 }
 const analysisConfig = {
-  plugins: [analyzer({ openAnalyzer: false })]
+  plugins: [
+    legacy({
+      targets: browserslist(),
+      polyfills: true,
+      modernTargets: browserslist(),
+      modernPolyfills: true
+    }),
+    viteInlineCss(),
+    analyzer({ openAnalyzer: false })
+  ]
 }
 function getExtraConfig(mode: string) {
   return (
@@ -45,7 +56,7 @@ export default defineConfig(({mode})=>{
     plugins: [tsconfigPaths(), react(), ...extraConfig.plugins],
     css: {
       modules: {
-        generateScopedName: '[name]__[local]__[hash:base64:5]' 
+        generateScopedName: '[name]__[local]__[hash:base64:5]'
       }
     },
     server: {
