@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useMemoizedFn } from 'ahooks'
-import logo__theme from '../assets/images/logo__theme.png'
+import logo__theme from '../assets/images/logo__theme.png?no-inline'
 
 export function useGlobalImageErrorFallback() {
   const setBackupImg = useMemoizedFn((event: any) => {
