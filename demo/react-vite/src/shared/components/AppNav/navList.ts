@@ -8,22 +8,22 @@ import {
 
 export const navList = [
   {
-    text: '新歌',
+    text: 'New Songs',
     name: 'new',
     path: newSongs
   },
   {
-    text: '排行',
+    text: 'Rank',
     name: 'rank',
     path: rankList
   },
   {
-    text: '歌单',
+    text: 'Song List',
     name: 'song',
     path: songList
   },
   {
-    text: '歌手',
+    text: 'Singer',
     name: 'singer',
     path: singerCategories
   }
