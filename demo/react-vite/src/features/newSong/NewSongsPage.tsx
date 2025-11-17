@@ -1,19 +1,19 @@
 import type { FC } from 'react'
-import { useEffect } from 'react'
 import NewSongs from './NewSongs'
-import useNewSongsStore from './useNewSongsStore'
+import { useNewSongsQuery } from './useNewSongsQuery'
+import { Loading } from 'src/shared/components/Loading'
 
 const NewSongsPage: FC = () => {
-  const { songs, sliderData, fetchNewSongsIfNeeded } = useNewSongsStore()
+  const { data, error, isLoading } = useNewSongsQuery()
 
-  useEffect(() => {
-    fetchNewSongsIfNeeded()
-  }, [fetchNewSongsIfNeeded])
+  if (isLoading) return <Loading />
+  if (error) return <div>Error loading new songs</div>
+  if (!data) return null
 
   return (
     <>
       <link rel="preconnect" href="//imge.kugou.com" />
-      <NewSongs songs={songs} sliderData={sliderData} />
+      <NewSongs songs={data.songs} sliderData={data.sliderData} />
     </>
   )
 }
