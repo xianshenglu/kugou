@@ -16,7 +16,7 @@ const RankInfo: FC<RankInfoProps> = ({ songsData, listInfo }) => {
   const renderUpdatedTime = (updatedTime: string) => {
     return () => (
       <time className={styles.RankInfo__updatedTime}>
-        {'上次更新时间: ' + updatedTime}
+        {'Last updated: ' + updatedTime}
       </time>
     )
   }
