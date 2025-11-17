@@ -1,16 +1,16 @@
 import type { FC } from 'react'
 import RankList from './RankList'
 import { useGetRankListQuery } from './useRankList'
-import { Loading } from 'src/shared/components/Loading'
+import { QueryBoundary } from 'src/shared/components/QueryBoundary'
 
 const RankListPage: FC = () => {
-  const { data, error, isLoading } = useGetRankListQuery()
+  const query = useGetRankListQuery()
 
-  if (isLoading) return <Loading />
-  if (error) return <div>Error loading rank list</div>
-  if (!data) return null
-  return <RankList rankList={data!} />
+  return (
+    <QueryBoundary query={query}>
+      {(data) => <RankList rankList={data} />}
+    </QueryBoundary>
+  )
 }
 
 export default RankListPage
-

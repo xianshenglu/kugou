@@ -1,17 +1,16 @@
 import type { FC } from 'react'
 import SongList from './SongList'
 import { useGetSongListQuery } from './useSongList'
-import { Loading } from 'src/shared/components/Loading'
+import { QueryBoundary } from 'src/shared/components/QueryBoundary'
 
 const SongListPage: FC = () => {
-  const { data, error, isLoading } = useGetSongListQuery()
+  const query = useGetSongListQuery()
 
-  if (isLoading) return <Loading />
-  if (error) return <div>Error loading song list</div>
-  if (!data) return null
-
-  return <SongList songList={data} />
+  return (
+    <QueryBoundary query={query}>
+      {(data) => <SongList songList={data} />}
+    </QueryBoundary>
+  )
 }
 
 export default SongListPage
-
