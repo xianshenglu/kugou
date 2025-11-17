@@ -60,10 +60,10 @@ const AppList = ({
                 ref={(el) => setLazyImageElement(index, el)}
                 src={logo__grey}
                 data-src={item.imgUrl}
-                alt={item.title}
+                alt=""
               />
               {render ? (render(item) as ReactNode) : null}
-              <button className={styles.AppList__btn}>
+              <button className={styles.AppList__btn} aria-label="go to detail">
                 <svg className="icon" aria-hidden="true">
                   <use xlinkHref="#icon-arrow-right" />
                 </svg>

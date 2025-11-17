@@ -48,7 +48,7 @@ const SingerList: FC<SingerListProps> = ({ singersData }) => {
                 className={classNames(styles.SingerList__img, 'lazyImage')}
                 src={logo__grey}
                 data-src={singer.imgUrl}
-                alt={singer.name}
+                alt=""
               />
               <div>{singer.name}</div>
             </NavLink>
