@@ -11,7 +11,7 @@ const AppHeader: FC = () => {
 
   return (
     <header className={styles.AppHeader}>
-      <button className={styles.AppHeader__back} onClick={goBack} test-id="go-back-btn">
+      <button className={styles.AppHeader__back} aria-label="go back" onClick={goBack} test-id="go-back-btn">
         <svg className="icon" aria-hidden="true">
           <use xlinkHref="#icon-arrow-left" />
         </svg>
@@ -23,6 +23,7 @@ const AppHeader: FC = () => {
         className={styles.AppHeader__searchBtn}
         to={search}
         test-id="search-btn"
+        aria-label="search"
       >
         <svg className="icon" aria-hidden="true">
           <use xlinkHref="#icon-search" />

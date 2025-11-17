@@ -28,6 +28,7 @@ const InfoDescription = ({
           hidden: !showMore
         })}
         onClick={toggleShowMore}
+        aria-label="show more"
       >
         <svg className="icon" aria-hidden="true">
           <use xlinkHref="#icon-circle-arrow-up" />
@@ -38,6 +39,7 @@ const InfoDescription = ({
           hidden: showMore
         })}
         onClick={toggleShowMore}
+        aria-label="show less"
       >
         <svg className="icon" aria-hidden="true">
           <use xlinkHref="#icon-circle-arrow-down" />

@@ -32,7 +32,7 @@ const SingerCategories: FC<SingerCategoriesProps> = ({ singerCategories }) => {
                 <div className={styles.singerCategories__title}>
                   {childCategory.classname}
                 </div>
-                <button className={styles.singerCategories_btn}>
+                <button className={styles.singerCategories_btn} aria-label="go to detail">
                   <svg className="icon" aria-hidden="true">
                     <use xlinkHref="#icon-arrow-right" />
                   </svg>
