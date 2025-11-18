@@ -1,20 +1,20 @@
 import type { FC } from 'react'
 import NewSongs from './NewSongs'
 import { useNewSongsQuery } from './useNewSongsQuery'
-import { Loading } from 'src/shared/components/Loading'
+import { QueryBoundary } from 'src/shared/components/QueryBoundary'
 
 const NewSongsPage: FC = () => {
-  const { data, error, isLoading } = useNewSongsQuery()
-
-  if (isLoading) return <Loading />
-  if (error) return <div>Error loading new songs</div>
-  if (!data) return null
+  const query = useNewSongsQuery()
 
   return (
-    <>
-      <link rel="preconnect" href="//imge.kugou.com" />
-      <NewSongs songs={data.songs} sliderData={data.sliderData} />
-    </>
+    <QueryBoundary query={query}>
+      {(data) => (
+        <>
+          <link rel="preconnect" href="//imge.kugou.com" />
+          <NewSongs songs={data.songs} sliderData={data.sliderData} />
+        </>
+      )}
+    </QueryBoundary>
   )
 }
 
