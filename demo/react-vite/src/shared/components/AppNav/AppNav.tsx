@@ -1,4 +1,4 @@
-import { useRef, type FC } from 'react'
+import { memo, useRef, type FC } from 'react'
 import { useNavigate, NavLink } from 'react-router-dom'
 import useAppNavStore from '../../stores/useAppNavStore'
 import { useSwipe } from '../../hooks/useSwipe'
@@ -6,10 +6,10 @@ import { navList } from './navList'
 import styles from './AppNav.module.less'
 import { useOffsetToParent } from './useOffsetToParent'
 
-const AppNav: FC = () => {
+const AppNav: FC = memo((props) => {
   const navigate = useNavigate()
   const activeIndex = useAppNavStore((s) => s.activeIndex)
-
+  
   const navLinksRef = useRef<(HTMLAnchorElement | null)[]>([]);
   const activeNavOffset = useOffsetToParent(() => navLinksRef.current[activeIndex], [activeIndex])
 
@@ -51,6 +51,6 @@ const AppNav: FC = () => {
       />
     </section>
   )
-}
+})
 
 export default AppNav
