@@ -1,5 +1,4 @@
 import type { FC } from 'react'
-import logo__text from '../assets/images/logo__text.png'
 import { NavLink } from 'react-router-dom'
 import styles from './AppHeader.module.less'
 import { root, search } from '../constants/router'
@@ -16,8 +15,9 @@ const AppHeader: FC = () => {
           <use xlinkHref="#icon-arrow-left" />
         </svg>
       </button>
-      <NavLink to={root} test-id="logo-link">
-        <img className={styles.AppHeader__logo} src={logo__text} alt="logo" />
+      <NavLink to={root} test-id="logo-link" className={styles.AppHeader__logo}>
+        <span className={styles.AppHeader__logo_icon}>Kugou</span>
+        <span>Music</span>
       </NavLink>
       <NavLink
         className={styles.AppHeader__searchBtn}
