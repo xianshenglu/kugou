@@ -10,6 +10,7 @@ const NewSongsPage: FC = () => {
     <QueryBoundary query={query}>
       {(data) => (
         <>
+          <link rel="preconnect" href="//music.xianshenglu.xyz" />
           <NewSongs songs={data.songs} sliderData={data.sliderData} />
         </>
       )}
