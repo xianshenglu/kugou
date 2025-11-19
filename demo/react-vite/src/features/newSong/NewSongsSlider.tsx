@@ -1,5 +1,5 @@
 import Slider, { type Settings } from 'react-slick'
-// eslint-disable-next-line css-modules/no-unused-class
+ 
 import styles from './NewSongsSlider.module.less'
 // todo add compnent name-space to it
 import 'slick-carousel/slick/slick.css';

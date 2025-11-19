@@ -1,20 +1,20 @@
 import type { FC } from 'react'
-import { useEffect } from 'react'
 import NewSongs from './NewSongs'
-import useNewSongsStore from './useNewSongsStore'
+import { useNewSongsQuery } from './useNewSongsQuery'
+import { QueryBoundary } from 'src/shared/components/QueryBoundary'
 
 const NewSongsPage: FC = () => {
-  const { songs, sliderData, fetchNewSongsIfNeeded } = useNewSongsStore()
-
-  useEffect(() => {
-    fetchNewSongsIfNeeded()
-  }, [fetchNewSongsIfNeeded])
+  const query = useNewSongsQuery()
 
   return (
-    <>
-      <link rel="preconnect" href="//imge.kugou.com" />
-      <NewSongs songs={songs} sliderData={sliderData} />
-    </>
+    <QueryBoundary query={query}>
+      {(data) => (
+        <>
+          <link rel="preconnect" href="//imge.kugou.com" />
+          <NewSongs songs={data.songs} sliderData={data.sliderData} />
+        </>
+      )}
+    </QueryBoundary>
   )
 }
 

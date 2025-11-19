@@ -1,15 +1,18 @@
-import type { FC } from 'react'
+import { memo, useRef, type FC } from 'react'
 import { useNavigate, NavLink } from 'react-router-dom'
 import useAppNavStore from '../../stores/useAppNavStore'
 import { useSwipe } from '../../hooks/useSwipe'
 import { navList } from './navList'
 import styles from './AppNav.module.less'
+import { useOffsetToParent } from './useOffsetToParent'
 
-const AppNav: FC = () => {
+const AppNav: FC = memo((props) => {
   const navigate = useNavigate()
   const activeIndex = useAppNavStore((s) => s.activeIndex)
-
   
+  const navLinksRef = useRef<(HTMLAnchorElement | null)[]>([]);
+  const activeNavOffset = useOffsetToParent(() => navLinksRef.current[activeIndex], [activeIndex])
+
   useSwipe({
     onSwipe: (direction) => {
       const nextRouteIndex = direction === 'left' ? activeIndex + 1 : activeIndex - 1
@@ -27,6 +30,9 @@ const AppNav: FC = () => {
           <NavLink
             key={nav.path}
             to={nav.path}
+            ref={(el) => {
+              navLinksRef.current[index] = el
+            }}
             className={({ isActive, isPending }) =>
               styles.AppNav__link
             }
@@ -39,11 +45,12 @@ const AppNav: FC = () => {
       <div
         className={styles.AppNav__underline}
         style={{
-          transform: `translateX(${activeIndex * 100}%)`
+          width: activeNavOffset.width+'px',
+          transform: `translateX(${activeNavOffset.left}px)`
         }}
       />
     </section>
   )
-}
+})
 
 export default AppNav

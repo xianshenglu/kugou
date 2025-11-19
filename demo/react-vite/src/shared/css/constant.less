@@ -34,3 +34,18 @@
 .calc_on_app_cont (@num) {
   @result: calc((@app_cont_h--prod) * @num / @app_cont_h_dev);
 }
+.text-ellipsis(@lines: 1) {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  
+  & when (@lines > 1) {
+    display: -webkit-box;
+    -webkit-line-clamp: @lines;
+    line-clamp: @lines;
+    -webkit-box-orient: vertical;
+  }
+  
+  & when (@lines = 1) {
+    white-space: nowrap;
+  }
+}

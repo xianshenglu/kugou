@@ -1,12 +1,16 @@
 import type { FC } from 'react'
 import SongList from './SongList'
 import { useGetSongListQuery } from './useSongList'
+import { QueryBoundary } from 'src/shared/components/QueryBoundary'
 
 const SongListPage: FC = () => {
-  const { data: playlistData = [] } = useGetSongListQuery()
+  const query = useGetSongListQuery()
 
-  return <SongList songList={playlistData} />
+  return (
+    <QueryBoundary query={query}>
+      {(data) => <SongList songList={data} />}
+    </QueryBoundary>
+  )
 }
 
 export default SongListPage
-

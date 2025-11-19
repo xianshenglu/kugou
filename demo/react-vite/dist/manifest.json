@@ -1,6 +1,6 @@
 {
-  "short_name": "酷狗音乐",
-  "name": "Hello, KuGou !",
+  "short_name": "Demo Music",
+  "name": "Hello, Demo !",
   "icons": [
     {
       "src": "kugou.png",

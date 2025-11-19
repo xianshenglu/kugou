@@ -33,12 +33,12 @@ const Search: FC<SearchProps> = ({
 }) => {
   return (
     <Fragment>
-      <h4 className="main_box_shadow module_title">搜索</h4>
+      <h4 className="main_box_shadow module_title">Search</h4>
       <div className={styles.Search__container}>
         <form className={styles.Search__form} onSubmit={e => e.preventDefault()}>
           <input
             type="text"
-            placeholder="歌手/歌名/拼音"
+            placeholder="Singer/Song Name"
             className={styles.Search__keyword}
             value={keyword}
             onChange={e => updateKeyword(e.target.value)}
@@ -51,11 +51,11 @@ const Search: FC<SearchProps> = ({
             type="button"
             onClick={searchKeyword}
           >
-            搜索
+            Search
           </button>
         </form>
         <div className={classNames({ hidden: !isHotSearchShow })}>
-          <h6 className={styles.Search__type}>最近热门</h6>
+          <h6 className={styles.Search__type}>Recently Popular</h6>
           <ul>
             {hotList.map(list => (
               <li
@@ -69,7 +69,7 @@ const Search: FC<SearchProps> = ({
           </ul>
         </div>
         <div className={classNames({ hidden: !isKeywordSearchShow })}>
-          <div className={styles.Search__count}>共有{total}条结果</div>
+          <div className={styles.Search__count}>Total {total} results</div>
           <AppMusicList data={songs} className={styles.Search__resultList} />
         </div>
       </div>
