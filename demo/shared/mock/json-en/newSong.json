@@ -493,7 +493,7 @@
   ],
   "banner": [
     {
-      "imgurl": "https://xianshenglu.github.io/kugou/demo/shared/assets/images/banner0.png",
+      "imgurl": "https://music.xianshenglu.xyz/demo/shared/assets/images/banner0.png",
       "title": "Love Songs Zone",
       "id": 10357,
       "type": 4,
@@ -503,7 +503,7 @@
       }
     },
     {
-      "imgurl": "https://xianshenglu.github.io/kugou/demo/shared/assets/images/banner1.png",
+      "imgurl": "https://music.xianshenglu.xyz/demo/shared/assets/images/banner1.png",
       "title": "2019 Oscar Awards Complete Live Record",
       "id": 10365,
       "type": 1,
@@ -527,7 +527,7 @@
       }
     },
     {
-      "imgurl": "https://xianshenglu.github.io/kugou/demo/shared/assets/images/banner2.png",
+      "imgurl": "https://music.xianshenglu.xyz/demo/shared/assets/images/banner2.png",
       "title": "Ancient Style Zone",
       "id": 10367,
       "type": 4,
