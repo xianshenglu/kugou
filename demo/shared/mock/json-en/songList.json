@@ -24,7 +24,7 @@
           "verified": 0,
           "user_type": 1,
           "user_avatar": "https://imge.kugou.com/kugouicon/165/20181204/20181204123646691625.jpg",
-          "imgurl": "https://xianshenglu.github.io/kugou/demo/shared/assets/images/songlist0.png",
+          "imgurl": "https://music.xianshenglu.xyz/demo/shared/assets/images/songlist0.png",
           "collectcount": 268,
           "specialid": 606207,
           "username": "Neng An Vivienne",
@@ -47,7 +47,7 @@
           "verified": 0,
           "user_type": 1,
           "user_avatar": "https://imge.kugou.com/kugouicon/165/20171116/20171116115109573878.jpg",
-          "imgurl": "https://xianshenglu.github.io/kugou/demo/shared/assets/images/songlist1.png",
+          "imgurl": "https://music.xianshenglu.xyz/demo/shared/assets/images/songlist1.png",
           "collectcount": 222675,
           "specialid": 547134,
           "username": "Kugou Playlist",
@@ -230,7 +230,7 @@
           "suid": 1067759962,
           "specialid": 601854,
           "username": "Xiao Nan",
-          "imgurl": "https://xianshenglu.github.io/kugou/demo/shared/assets/images/songlist2.png",
+          "imgurl": "https://music.xianshenglu.xyz/demo/shared/assets/images/songlist2.png",
           "user_type": 3
         },
         {
@@ -409,7 +409,7 @@
           "suid": 1106406311,
           "specialid": 530870,
           "username": "Miss M",
-          "imgurl": "https://xianshenglu.github.io/kugou/demo/shared/assets/images/songlist3.png",
+          "imgurl": "https://music.xianshenglu.xyz/demo/shared/assets/images/songlist3.png",
           "user_type": 1
         },
         {
@@ -588,7 +588,7 @@
           "suid": 1067759962,
           "specialid": 611774,
           "username": "Xiao Nan",
-          "imgurl": "https://xianshenglu.github.io/kugou/demo/shared/assets/images/songlist4.png",
+          "imgurl": "https://music.xianshenglu.xyz/demo/shared/assets/images/songlist4.png",
           "user_type": 3
         },
         {
@@ -767,7 +767,7 @@
           "suid": 1067759962,
           "specialid": 611779,
           "username": "Xiao Nan",
-          "imgurl": "https://xianshenglu.github.io/kugou/demo/shared/assets/images/songlist5.png",
+          "imgurl": "https://music.xianshenglu.xyz/demo/shared/assets/images/songlist5.png",
           "user_type": 3
         },
         {
@@ -946,7 +946,7 @@
           "suid": 1067759962,
           "specialid": 376699,
           "username": "Xiao Nan",
-          "imgurl": "https://xianshenglu.github.io/kugou/demo/shared/assets/images/songlist6.png",
+          "imgurl": "https://music.xianshenglu.xyz/demo/shared/assets/images/songlist6.png",
           "user_type": 3
         },
         {
@@ -971,7 +971,7 @@
           "suid": 616071309,
           "specialid": 611785,
           "username": "Xie Jingxing Loves Lishi",
-          "imgurl": "https://xianshenglu.github.io/kugou/demo/shared/assets/images/songlist7.png",
+          "imgurl": "https://music.xianshenglu.xyz/demo/shared/assets/images/songlist7.png",
           "user_type": 3
         },
         {
@@ -1150,7 +1150,7 @@
           "suid": 1300030592,
           "specialid": 611653,
           "username": "Huang Xiaoshi",
-          "imgurl": "https://xianshenglu.github.io/kugou/demo/shared/assets/images/songlist8.png",
+          "imgurl": "https://music.xianshenglu.xyz/demo/shared/assets/images/songlist8.png",
           "user_type": 3
         },
         {
@@ -1175,7 +1175,7 @@
           "suid": 622485806,
           "specialid": 612009,
           "username": "Hard to Calm the East Fence",
-          "imgurl": "https://xianshenglu.github.io/kugou/demo/shared/assets/images/songlist9.png",
+          "imgurl": "https://music.xianshenglu.xyz/demo/shared/assets/images/songlist9.png",
           "user_type": 0
         }
       ],
