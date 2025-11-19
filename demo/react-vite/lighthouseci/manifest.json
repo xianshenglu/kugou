@@ -1,21 +1,9 @@
 [
   {
-    "url": "http://localhost:44345/demo/react-vite/dist/",
+    "url": "http://localhost:36901/demo/react-vite/dist/",
     "isRepresentativeRun": false,
-    "htmlPath": "/home/runner/work/kugou/kugou/demo/react-vite/lighthouseci/localhost-demo_react_vite_dist_-2025_11_19_09_41_52.report.html",
-    "jsonPath": "/home/runner/work/kugou/kugou/demo/react-vite/lighthouseci/localhost-demo_react_vite_dist_-2025_11_19_09_41_52.report.json",
-    "summary": {
-      "performance": 0.96,
-      "accessibility": 0.95,
-      "best-practices": 0.82,
-      "seo": 1
-    }
-  },
-  {
-    "url": "http://localhost:44345/demo/react-vite/dist/",
-    "isRepresentativeRun": false,
-    "htmlPath": "/home/runner/work/kugou/kugou/demo/react-vite/lighthouseci/localhost-demo_react_vite_dist_-2025_11_19_09_42_15.report.html",
-    "jsonPath": "/home/runner/work/kugou/kugou/demo/react-vite/lighthouseci/localhost-demo_react_vite_dist_-2025_11_19_09_42_15.report.json",
+    "htmlPath": "/home/runner/work/kugou/kugou/demo/react-vite/lighthouseci/localhost-demo_react_vite_dist_-2025_11_19_10_24_12.report.html",
+    "jsonPath": "/home/runner/work/kugou/kugou/demo/react-vite/lighthouseci/localhost-demo_react_vite_dist_-2025_11_19_10_24_12.report.json",
     "summary": {
       "performance": 0.93,
       "accessibility": 0.95,
@@ -24,12 +12,24 @@
     }
   },
   {
-    "url": "http://localhost:44345/demo/react-vite/dist/",
+    "url": "http://localhost:36901/demo/react-vite/dist/",
+    "isRepresentativeRun": false,
+    "htmlPath": "/home/runner/work/kugou/kugou/demo/react-vite/lighthouseci/localhost-demo_react_vite_dist_-2025_11_19_10_24_24.report.html",
+    "jsonPath": "/home/runner/work/kugou/kugou/demo/react-vite/lighthouseci/localhost-demo_react_vite_dist_-2025_11_19_10_24_24.report.json",
+    "summary": {
+      "performance": 0.9,
+      "accessibility": 0.95,
+      "best-practices": 0.82,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://localhost:36901/demo/react-vite/dist/",
     "isRepresentativeRun": true,
-    "htmlPath": "/home/runner/work/kugou/kugou/demo/react-vite/lighthouseci/localhost-demo_react_vite_dist_-2025_11_19_09_42_04.report.html",
-    "jsonPath": "/home/runner/work/kugou/kugou/demo/react-vite/lighthouseci/localhost-demo_react_vite_dist_-2025_11_19_09_42_04.report.json",
+    "htmlPath": "/home/runner/work/kugou/kugou/demo/react-vite/lighthouseci/localhost-demo_react_vite_dist_-2025_11_19_10_24_00.report.html",
+    "jsonPath": "/home/runner/work/kugou/kugou/demo/react-vite/lighthouseci/localhost-demo_react_vite_dist_-2025_11_19_10_24_00.report.json",
     "summary": {
-      "performance": 0.93,
+      "performance": 0.92,
       "accessibility": 0.95,
       "best-practices": 0.82,
       "seo": 1
