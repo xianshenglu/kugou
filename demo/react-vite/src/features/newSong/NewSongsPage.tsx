@@ -10,7 +10,6 @@ const NewSongsPage: FC = () => {
     <QueryBoundary query={query}>
       {(data) => (
         <>
-          <link rel="preconnect" href="//imge.kugou.com" />
           <NewSongs songs={data.songs} sliderData={data.sliderData} />
         </>
       )}
