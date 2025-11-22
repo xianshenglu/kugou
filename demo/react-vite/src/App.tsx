@@ -70,7 +70,7 @@ const App: FC = () => {
         <main className={mainClassName}>
           <ErrorBoundary
             fallback={
-              <div className="main_error_boundary">请回首页或联系管理员！</div>
+              <div className="main_error_boundary">Please go back to the home page or contact the administrator!</div>
             }
           >
             <Routes>
