@@ -29,7 +29,6 @@ import {
   PlayerMaxContainer,
   SearchContainer
 } from './features/lazyFeatures'
-import { lazyWithPrefetch } from './shared/helpers/lazyWithPrefetch'
 import { Loading } from './shared/components/Loading'
 import { useGlobalNavLocationSync } from './shared/hooks/useGlobalNavLocationSync'
 import { useGlobalPlayerMedVisibility } from './shared/hooks/useGlobalPlayerMedVisibility'
@@ -39,12 +38,8 @@ import { PlayerAudio } from './shared/player/PlayerAudio'
 import usePlayerStore from './shared/player/usePlayerStore'
 import { shouldNavDisplay } from './shared/components/AppNav/navList'
 
-const AppHeader = lazyWithPrefetch(
-  () => import('./shared/components/AppHeader')
-)
-const AppNav = lazyWithPrefetch(
-  () => import('./shared/components/AppNav/AppNav')
-)
+import AppHeader from './shared/components/AppHeader'
+import AppNav from './shared/components/AppNav/AppNav'
 
 const App: FC = () => {
   const location = useLocation()
