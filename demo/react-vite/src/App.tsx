@@ -38,8 +38,8 @@ import { PlayerAudio } from './shared/player/PlayerAudio'
 import usePlayerStore from './shared/player/usePlayerStore'
 import { shouldNavDisplay } from './shared/components/AppNav/navList'
 
-import AppHeader from './shared/components/AppHeader'
-import AppNav from './shared/components/AppNav/AppNav'
+import AppHeaderLazy from './shared/components/AppHeaderLazy'
+import AppNavLazy from './shared/components/AppNav/AppNavLazy'
 
 const App: FC = () => {
   const location = useLocation()
@@ -59,8 +59,8 @@ const App: FC = () => {
     <Fragment>
       <PlayerAudio />
       <div className="App">
-        <AppHeader />
-        {isAppNavShow ? <AppNav /> : null}
+        <AppHeaderLazy />
+        {isAppNavShow ? <AppNavLazy /> : null}
         {isPlayerMedShow ? <PlayerMedContainer /> : undefined}
         <main className={mainClassName}>
           <ErrorBoundary
