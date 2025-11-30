@@ -22,6 +22,7 @@ const productionConfig = {
       modernPolyfills: true,
     }),
     viteInlineCss(),
+    analyzer({ openAnalyzer: false, analyzerMode: 'static' })
   ]
 }
 const developmentConfig = {
