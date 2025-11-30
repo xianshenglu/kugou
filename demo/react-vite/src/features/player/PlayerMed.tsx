@@ -36,10 +36,11 @@ const PlayerMed: FC<PlayerMedProps> = ({
 
   return (
     <Fragment>
-      <div className={styles.PlayerMed}>
+      <div className={styles.PlayerMed} test-id="player-med">
         <NavLink
           to={{ pathname: player, search: '?musicHash=' + hash }}
           className={styles.PlayerMed__link}
+          test-id="player-med-link"
         >
           <img
             src={singerImg ? singerImg : logo__theme}

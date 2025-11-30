@@ -23,6 +23,7 @@ const PlayerLyric: FC = () => {
   return (
     <div
       className={styles.PlayerLyric}
+      test-id="player-max-lyrics"
       onTouchStart={() => toggleIsTouching(true)}
       onTouchEnd={() => toggleIsTouching(false)}
     >

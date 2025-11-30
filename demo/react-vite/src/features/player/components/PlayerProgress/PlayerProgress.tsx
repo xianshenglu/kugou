@@ -14,7 +14,7 @@ const PlayerProgress: FC = () => {
   }
 
   return (
-    <div className={styles.PlayerProgress} onTouchStart={onTouchStart as any}>
+    <div className={styles.PlayerProgress} test-id="player-max-progress" onTouchStart={onTouchStart as any}>
       <div className={styles.PlayerProgress__songCurTime}>
         {secondToMin(currentTime)}
       </div>

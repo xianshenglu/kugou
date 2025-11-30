@@ -39,8 +39,8 @@ const PlayerMax: FC<PlayerMaxProps> = ({
           backgroundImage: `url(${singerImg}),linear-gradient(to right, rgb(48, 67, 82), rgb(215, 210, 204))`
         }}
       />
-      <div className={styles.PlayerMax__container}>
-        <h6 className={styles.PlayerMax__songName}>{song_name}</h6>
+      <div className={styles.PlayerMax__container} test-id="player-max">
+        <h6 className={styles.PlayerMax__songName} test-id="player-max-song-name">{song_name}</h6>
         <img
           src={singerImg}
           className={classNames(styles.PlayerMax__singerImg, {
