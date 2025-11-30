@@ -1,4 +1,4 @@
-import { getHotSearch, getSearchResult } from '@shared/api/search'
+import { getHotSearch, getSearchResult } from '@shared/mock/requestConfig/search'
 import http from './http'
 import type { PaginationQuery } from '@shared/domains/common/model'
 import type { AxiosPromise } from 'axios'

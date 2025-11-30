@@ -1,4 +1,4 @@
-import { getSingerCategory } from '@shared/api/singerCategory'
+import { getSingerCategory } from '@shared/mock/requestConfig/singerCategory'
 import http from './http'
 import type { AxiosPromise } from 'axios'
 import type { SingerCategoryListResponseDto } from '@shared/domains/singer/dto'

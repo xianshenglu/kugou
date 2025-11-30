@@ -1,5 +1,5 @@
 import http from './http'
-import { getSingerList } from '@shared/api/singerList'
+import { getSingerList } from '@shared/mock/requestConfig/singerList'
 import type { AxiosPromise } from 'axios'
 import type { SingerListResponseDto } from '@shared/domains/singer/dto'
 

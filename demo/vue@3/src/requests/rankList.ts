@@ -1,5 +1,5 @@
 import http from './http'
-import { getRankList } from '@shared/api/rankList'
+import { getRankList } from '@shared/mock/requestConfig/rankList'
 import type { AxiosPromise } from 'axios'
 import type { RankListResponseDto } from '@shared/domains/rank/dto'
 
