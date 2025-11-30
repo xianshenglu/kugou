@@ -1,5 +1,5 @@
 <template>
-  <div class="player_lyric" @touchstart="isTouching=true" @touchend="isTouching=false">
+  <div class="player_lyric" test-id="player-max-lyrics" @touchstart="isTouching=true" @touchend="isTouching=false">
     <p
       v-for="(item,index) in lyricItems"
       v-bind="getVBindObj('millisecond-'+item.millisecond)"
