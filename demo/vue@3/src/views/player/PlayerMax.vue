@@ -1,8 +1,8 @@
 <template>
-  <section class="player" v-if="music">
+  <section class="player" v-if="music" test-id="player-max">
     <div class="player__mask" :style="playerBgImg"></div>
     <div class="player__cont">
-      <h6 class="player__song_name">{{songName}}</h6>
+      <h6 class="player__song_name" test-id="player-max-song-name">{{songName}}</h6>
       <img
         :src="singerImg"
         :class="isPlaying?'player__singer_img player__singer_img--active':'player__singer_img'"

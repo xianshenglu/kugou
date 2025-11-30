@@ -1,8 +1,9 @@
 <template>
-  <section class="player" v-if="music">
+  <section class="player" v-if="music" test-id="player-med">
     <router-link
       :to="{name:'PlayerMax',query:{musicHash:music.hash,fromPlayerMed: 1 }}"
       class="player__link"
+      test-id="player-med-link"
     >
       <img
         :src="singerImg?singerImg:logo__theme"

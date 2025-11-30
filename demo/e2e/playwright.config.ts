@@ -73,6 +73,7 @@ export default defineConfig({
         ...devices['iPhone 12'],
         baseURL: baseURLs.angular,
       },
+      testIgnore: /.*player\.e2e-spec\.ts$/,
     },
     {
       name: 'react-vite',

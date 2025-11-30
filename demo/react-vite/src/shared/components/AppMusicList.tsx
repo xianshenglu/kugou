@@ -36,7 +36,7 @@ const AppMusicList: FC<AppMusicListProps> = ({
             switchPlayerMed(pathname !== player)
           }}
         >
-          <div className={styles.AppMusicList__info}>
+          <div className={styles.AppMusicList__info} test-id={`music-item-info-${music.hash}`}>
             {renderMusicSequence(index)}
             <div className={styles.AppMusicList__name}>{music.filename}</div>
           </div>

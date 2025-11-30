@@ -1,5 +1,5 @@
 <template>
-  <div class="player_progress" @touchstart="setCurTime">
+  <div class="player_progress" test-id="player-max-progress" @touchstart="setCurTime">
     <div class="player_progress__song_cur_time">{{secondToMin(currentTime)}}</div>
     <div class="player_progress__progress_bar" ref="progressBar" :style="progressBarStyle">
       <div class="player_progress__progress_bar_pointer" :style="`left:${currentProgress}%;`"></div>
