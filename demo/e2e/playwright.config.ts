@@ -51,7 +51,9 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+  reporter: [
+    ['html', { open: process.env.OPEN_REPORT === 'true' ? 'always' : 'never' }]
+  ],
   expect: {
     timeout: 10000,
   },
@@ -87,11 +89,11 @@ export default defineConfig({
       },
     },
   ],
-
-  webServer: {
+  
+  webServer: process.env.CI==='true' ? {
     command: 'npx http-server -p 4200 ../../',
     url: 'http://localhost:4200/demo/react-vite/index.html',
     timeout: 10000,
-  },
+  } : undefined,
 });
 
