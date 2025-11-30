@@ -1,5 +1,5 @@
 <template>
-  <section class="rank_info">
+  <section class="rank_info" test-id="page-rank-info">
     <PubModuleHead v-if="rankInfo.info" :module-head-info="getModuleHeadInfo">
       <template v-slot:moduleUpdateTime>
         <time class="rank_info__update_time">{{ msg }} {{ formatDate }}</time>

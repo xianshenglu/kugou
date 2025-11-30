@@ -1,13 +1,14 @@
 <template>
   <section class="singer_list">
     <PubModuleTitle :title="singerList.info.name"/>
-    <ul class="singer_list__list" ref="lazyLoadRoot">
+    <ul class="singer_list__list" ref="lazyLoadRoot" test-id="page-singer-list">
       <li
         class="singer_list__item main_border_bottom"
         v-for="(item,index) in singerList.data"
         :key="index"
+        test-class="list"
       >
-        <router-link :to="'/singer/info/' + item.singerid" class="singer_list__link">
+        <router-link :to="'/singer/info/' + item.singerid" class="singer_list__link" test-class="link">
           <img
             class="singer_list__img lazy_image"
             :ref="el => saveImageRef(index, el as HTMLImageElement)"

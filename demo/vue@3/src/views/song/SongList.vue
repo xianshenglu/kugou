@@ -1,6 +1,6 @@
 <template>
   <section class="song_list">
-    <PubList :pub-list="songList" class="song_list__cont">
+    <PubList :pub-list="songList" class="song_list__cont" test-id="page-song-list">
       <template v-slot:cont="props">
         <div class="song_list__info">
           <div class="song_list__title">{{ props.data.title }}</div>

@@ -1,6 +1,6 @@
 <template>
   <section class="rank_list">
-    <PubList :pub-list="rankList" class="rank_list__cont">
+    <PubList :pub-list="rankList" class="rank_list__cont" test-id="page-rank-list">
       <template v-slot:cont="props">
         <div class="rank_list__info">
           {{ props.data.title }}

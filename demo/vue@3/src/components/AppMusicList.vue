@@ -1,6 +1,6 @@
 <template>
   <ul class="music_list">
-    <li class="music_list__item main_border_bottom" v-for="(item,index) in musicList" :key="index">
+    <li class="music_list__item main_border_bottom" v-for="(item,index) in musicList" :key="index" :test-id="`music-item-${item.hash || index}`">
       <div class="music_list__info" @click="wantPlay(item)">
         <slot :data="index" name="index" class="music_list__index" @click="wantPlay(item)"></slot>
         <div class="music_list__name">{{item.filename}}</div>

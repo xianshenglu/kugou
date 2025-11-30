@@ -48,8 +48,8 @@ jobs:
       # - name: Unit Test
       #   run: npm run test
 
-      # - name: EndToEnd Test
-      #   run: npm run e2e:headless
-
       - name: Build
         run: npm run build
+
+      - name: EndToEnd Test
+        run: cd ../e2e && npm run test:prepare && npm run test:vue3

@@ -1,5 +1,5 @@
 <template>
-  <section class="NewSong">
+  <section class="NewSong" test-id="page-new-song">
     <Slider :data="sliderData" class="NewSong__slider"/>
     <AppMusicList :music-list="newSongs" class="NewSong__music_list"/>
   </section>

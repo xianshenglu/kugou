@@ -9,7 +9,7 @@ import legacy from '@vitejs/plugin-legacy'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // https://vitejs.dev/config/
 const productionConfig = {
-  base: 'https://cdn.jsdelivr.net/gh/xianshenglu/kugou@master/demo/vue@3/dist/',
+  base: './',
   plugins: [
     legacy()
     // babel({
