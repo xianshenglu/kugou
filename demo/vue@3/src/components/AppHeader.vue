@@ -1,16 +1,17 @@
 <template>
   <header class="header">
-    <button class="header__back" @click="goBack">
+    <button class="header__back" test-id="go-back-btn" @click="goBack">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-arrow-left"></use>
       </svg>
     </button>
-    <router-link to="/">
+    <router-link to="/" test-id="logo-link">
       <img class="header__logo" :src="logo__text">
     </router-link>
     <router-link
       class="header__search_btn"
       to="/search/index"
+      test-id="search-btn"
       @click="bus.$emit('searchBtnClicked')"
     >
       <svg class="icon" aria-hidden="true">

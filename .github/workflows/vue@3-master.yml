@@ -52,6 +52,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: EndToEnd Test
+        run: cd ../e2e && npm run test:prepare && npm run test:vue3
+        
       - name: Release
         run: |
           git config --local user.email "action@github.com"

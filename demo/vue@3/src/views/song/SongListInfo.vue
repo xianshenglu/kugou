@@ -1,5 +1,5 @@
 <template>
-  <section class="song_list_info">
+  <section class="song_list_info" test-id="page-song-list-info">
     <PubModuleHead v-if="songListInfo.info.list" :module-head-info="getModuleHeadInfo">
       <template v-slot:moduleDes>
         <PubModuleDes :description="getModuleHeadInfo.intro" />

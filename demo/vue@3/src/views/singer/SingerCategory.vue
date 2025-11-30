@@ -4,13 +4,15 @@
       class="singer_category__list main_border"
       v-for="(list,list_index) in singerCategories"
       :key="list_index"
+      :test-id="list_index === 0 ? 'page-singer-category' : undefined"
     >
       <li
         class="singer_category__item main_border_bottom"
         v-for="(item,index) in list.data"
         :key="'1'+index"
+        test-class="list"
       >
-        <router-link :to="(item as any).path" class="singer_category__link">
+        <router-link :to="(item as any).path" class="singer_category__link" test-class="link">
           <div class="singer_category__title">{{item.classname}}</div>
           <button class="singer_category_btn">
             <svg class="icon" aria-hidden="true">

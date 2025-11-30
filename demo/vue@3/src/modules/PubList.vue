@@ -1,11 +1,12 @@
 <template>
-  <ul class="list" ref="lazyLoadRoot">
+  <ul class="list" ref="lazyLoadRoot" :test-id="testId">
     <li
       class="list__item main_border_bottom"
       v-for="(item, index) in pubList"
       :key="index"
+      test-class="list"
     >
-      <router-link :to="item.path" class="list__link">
+      <router-link :to="item.path" class="list__link" test-class="link">
         <img
           class="list__img lazy_image"
           :ref="el => saveImageRef(index, el as HTMLImageElement)"
@@ -30,9 +31,11 @@ import type { RootState } from '@/store';
 import { lazyLoad } from '@/utils';
 interface Props {
   pubList: Array<Item>;
+  testId?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
-  pubList: () => []
+  pubList: () => [],
+  testId: undefined
 });
 
 const store = useStore<RootState>();

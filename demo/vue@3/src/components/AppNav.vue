@@ -6,6 +6,7 @@
         v-for="(item,index) in navs"
         :key="index"
         :to="item.path"
+        :test-id="`nav-link${item.name}`"
         exact-active-class="nav__link--active"
       >{{item.text}}</router-link>
     </nav>
