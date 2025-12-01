@@ -5,13 +5,15 @@ import { fileURLToPath } from 'node:url'
 import magicPreloader from 'vite-plugin-magic-preloader'
 import legacy from '@vitejs/plugin-legacy'
 // import babel from 'vite-plugin-babel'
+import { analyzer } from 'vite-bundle-analyzer'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // https://vitejs.dev/config/
 const productionConfig = {
   base: './',
   plugins: [
-    legacy()
+    legacy(),
+    analyzer({ openAnalyzer: false, analyzerMode: 'static' })
     // babel({
     //   babelConfig: {
     //     presets: [
@@ -26,7 +28,7 @@ const productionConfig = {
     //     ]
     //   }
     // })
-  ]
+  ],
 }
 const developmentConfig = {
   base: './',
