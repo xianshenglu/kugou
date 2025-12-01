@@ -1,0 +1,1 @@
+import{d as l,c as a,t as n,f as c,_}from"./index-AO6twGjP.js";const p=l({__name:"PubModuleTitle",props:{title:{default:""}},emits:["click"],setup(r,{emit:e}){const o=e;return(s,t)=>(c(),a("h4",{class:"module_title main_box_shadow",onClick:t[0]||(t[0]=i=>o("click",i))},n(s.title),1))}}),d=_(p,[["__scopeId","data-v-59856fe4"]]);export{d as P};

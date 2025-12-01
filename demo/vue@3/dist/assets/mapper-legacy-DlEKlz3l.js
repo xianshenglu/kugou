@@ -1,0 +1,1 @@
+System.register(["./mapper-legacy-COhBvpsy.js"],function(n,r){"use strict";var e;return{setters:[n=>{e=n.r}],execute:function(){const r=n=>({...n,imgUrl:e(n.imgurl),path:"/rank/info/"+n.rankid,title:n.rankname}),t=(n("m",n=>n.rank.list.map(n=>r(n))),n=>({...n,...r(n),imgUrl:e(n.banner7url)}));n("a",n=>({info:t(n.info),songs:n.songs}))}}});

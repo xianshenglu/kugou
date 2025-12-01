@@ -1,1 +1,0 @@
-System.register([],function(e,t){"use strict";return{execute:function(){e("r",function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"",r=arguments.length>1&&void 0!==arguments[1]?arguments[1]:t;return e.replace(/\{\s*size\s*\}/,String(r))});var t="400"}}});
