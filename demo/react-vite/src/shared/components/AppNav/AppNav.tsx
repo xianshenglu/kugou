@@ -5,6 +5,7 @@ import { useSwipe } from '../../hooks/useSwipe'
 import { navList } from './navList'
 import styles from './AppNav.module.less'
 import { useOffsetToParent } from './useOffsetToParent'
+const NAV_UNDERLINE_WIDTH = 100;
 
 const AppNav: FC = memo((props) => {
   const navigate = useNavigate()
@@ -22,7 +23,6 @@ const AppNav: FC = memo((props) => {
       }
     }
   })
-
   return (
     <section className={styles.AppNav}>
       <nav className={styles.AppNav__box}>
@@ -45,8 +45,8 @@ const AppNav: FC = memo((props) => {
       <div
         className={styles.AppNav__underline}
         style={{
-          width: activeNavOffset.width+'px',
-          transform: `translateX(${activeNavOffset.left}px)`
+          width: NAV_UNDERLINE_WIDTH + 'px',
+          transform: `translateX(${activeNavOffset.left}px) scaleX(${activeNavOffset.width/NAV_UNDERLINE_WIDTH})`,
         }}
       />
     </section>
