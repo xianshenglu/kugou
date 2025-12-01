@@ -15,21 +15,18 @@ test.describe('header', () => {
   });
 
   test('should go-back button work', async ({ page: playwrightPage }) => {
+    const initialUrl = playwrightPage.url();
     const searchBtn = playwrightPage.locator('[test-id="search-btn"]');
     await searchBtn.click();
+    await playwrightPage.waitForURL(url => {
+      return url.toString() !== initialUrl
+    });
     const prevUrl = playwrightPage.url();
     const goBackBtn = playwrightPage.locator('[test-id="go-back-btn"]');
     await goBackBtn.click();
-    const curUrl = playwrightPage.url();
-    const baseURL = page.baseUrl;
-    const basePath = baseURL.replace(/\/[^/]*\.(html|htm)$/, '').replace(/\/$/, '');
-    const isUrlExpected =
-      prevUrl !== curUrl ||
-      [prevUrl, curUrl].every((v) => {
-        const urlWithoutHash = v.split('#')[0].replace(/\/$/, '');
-        return urlWithoutHash === basePath || urlWithoutHash === basePath + '/';
-      });
-    expect(isUrlExpected).toBe(true);
+    await playwrightPage.waitForURL(url => {
+      return url.toString() !== prevUrl
+    });
   });
 
   test('should display search button', async ({ page: playwrightPage }) => {

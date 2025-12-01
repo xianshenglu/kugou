@@ -1,5 +1,5 @@
 import http from './http'
-import { getNewSong } from '@shared/api/newSong'
+import { getNewSong } from '@shared/mock/requestConfig/newSong'
 import type { NewSongResponseDto } from '@shared/domains/song/dto'
 import type { PaginationQuery } from '@shared/domains/common/model'
 import type { AxiosPromise } from 'axios'

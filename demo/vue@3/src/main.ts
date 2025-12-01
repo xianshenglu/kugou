@@ -6,9 +6,6 @@ import './assets/js/globalEvent'
 // import '../src/assets/js/mobileLayout.js'
 import './styles/index.less'
 
-// use mock instead of real http request when in development
-
-import '@shared/mock/index'
 const app = createApp({
   render: () => h(App)
 })

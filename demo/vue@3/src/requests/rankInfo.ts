@@ -1,5 +1,5 @@
 import http from './http'
-import { getRankInfo } from '@shared/api/rankInfo'
+import { getRankInfo } from '@shared/mock/requestConfig/rankInfo'
 import type { PaginationQuery } from '@shared/domains/common/model'
 import type { AxiosPromise } from 'axios'
 import type { RankInfoResponseDto } from '@shared/domains/rank/dto'

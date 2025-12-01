@@ -1,4 +1,4 @@
-import { getSongLyric } from '@shared/api/player'
+import { getSongLyric } from '@shared/mock/requestConfig/player'
 import type { 
   SongLyricParams, 
 } from '@shared/domains/song/model'
