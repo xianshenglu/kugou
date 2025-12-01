@@ -3,7 +3,7 @@ import { StrictMode } from 'react'
 // import "@babel/polyfill";
 import { createRoot } from 'react-dom/client'
 import './shared/css/index.less'
-import * as serviceWorker from './serviceWorker'
+// import * as serviceWorker from './serviceWorker'
 import { HashRouter } from 'react-router-dom'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from './queryClient'
@@ -21,4 +21,4 @@ root.render(
   </StrictMode>
 )
 
-serviceWorker.unregister()
+// serviceWorker.unregister()
